@@ -837,6 +837,16 @@ img { max-width: 100%; height: auto; }
   <p class="card-addr">📍 1912 Pike Pl, Seattle, WA 98101</p>
 </div>
 
+<div class="card" data-lat="47.580767" data-lng="-122.335918" data-name="Starbucks World Headquarters" data-distance="10">
+  <div class="card-header">
+    <h3 class="card-title">Starbucks World Headquarters</h3>
+    <div class="card-badges"><span class="badge badge-navy">🚗 10 min drive</span>   <span class="price-free">FREE</span></div>
+  </div>
+  <p class="card-desc">The Starbucks Center in SoDo — global headquarters of the world's largest coffeehouse chain, born right here in Seattle in 1971. The historic building houses corporate operations. While not open for public tours, it's a pilgrimage-worthy photo op for coffee lovers.</p>
+  <p class="card-addr">📍 2401 Utah Ave S, Seattle, WA 98134</p>
+  <a href="https://www.starbucks.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
 <div class="card" data-lat="47.613227" data-lng="-122.344667" data-name="Bathtub Gin & Co." data-distance="12">
   <div class="card-header">
     <h3 class="card-title">Bathtub Gin & Co.</h3>
@@ -2023,10 +2033,10 @@ img { max-width: 100%; height: auto; }
   <div class="section-header">
     <h2>📍 All Locations Index</h2>
     <div class="section-line"></div>
-    <p>Every location in this guide — 83 places, searchable and sortable</p>
+    <p>Every location in this guide — 84 places, searchable and sortable</p>
   </div>
   <input type="text" class="index-search" id="indexSearch" placeholder="🔍 Search locations..." autocomplete="off">
-  <div class="index-count" id="indexCount">83 locations</div>
+  <div class="index-count" id="indexCount">84 locations</div>
   <div class="index-table-wrap">
     <table class="index-table" id="indexTable">
       <thead>
@@ -2112,6 +2122,7 @@ img { max-width: 100%; height: auto; }
 <tr><td class="idx-name">Shuckers</td><td><span class="idx-section" data-section="dining">Dining</span></td><td class="idx-dist">9 min walk</td><td class="idx-addr">411 University St, Seattle, WA 98101 (Fairmont Olympic)</td><td><a href="https://www.fairmont.com/seattle/dining/shuckers/" target="_blank">🔗</a></td></tr>
 <tr><td class="idx-name">Snoqualmie Falls</td><td><span class="idx-section" data-section="daytrips">Day Trips</span></td><td class="idx-dist">35 min</td><td class="idx-addr">6501 Railroad Ave SE, Snoqualmie, WA 98065</td><td><a href="https://www.snoqualmiefalls.com/" target="_blank">🔗</a></td></tr>
 <tr><td class="idx-name">Space Needle</td><td><span class="idx-section" data-section="attractions">Attractions</span></td><td class="idx-dist">20 min walk</td><td class="idx-addr">400 Broad St, Seattle, WA 98109</td><td><a href="https://www.spaceneedle.com/" target="_blank">🔗</a></td></tr>
+<tr><td class="idx-name">Starbucks World Headquarters</td><td><span class="idx-section" data-section="coffee">Coffee & Bars</span></td><td class="idx-dist">10 min</td><td class="idx-addr">2401 Utah Ave S, Seattle, WA 98134</td><td><a href="https://www.starbucks.com/" target="_blank">🔗</a></td></tr>
 <tr><td class="idx-name">University Village</td><td><span class="idx-section" data-section="shopping">Shopping</span></td><td class="idx-dist">15 min</td><td class="idx-addr">2623 NE University Village St, Seattle, WA 98105</td><td><a href="https://uvillage.com/" target="_blank">🔗</a></td></tr>
 <tr><td class="idx-name">University of Washington Campus</td><td><span class="idx-section" data-section="attractions">Attractions</span></td><td class="idx-dist">15 min</td><td class="idx-addr">University of Washington, Seattle, WA 98195</td><td><a href="https://www.washington.edu/visit/" target="_blank">🔗</a></td></tr>
 <tr><td class="idx-name">Westlake Center</td><td><span class="idx-section" data-section="shopping">Shopping</span></td><td class="idx-dist">5 min walk</td><td class="idx-addr">400 Pine St, Seattle, WA 98101</td><td><a href="https://www.westlakecenter.com/" target="_blank">🔗</a></td></tr>
@@ -2283,7 +2294,7 @@ const familyMarkers = [{"idx": 0, "name": "Artists at Play Playground", "lat": 4
 const shoppingMarkers = [{"idx": 0, "name": "Pacific Place", "lat": 47.612883, "lng": -122.335289, "walk": 3, "price": "", "cuisine": ""}, {"idx": 1, "name": "Nordstrom Flagship", "lat": 47.611921, "lng": -122.336541, "walk": 4, "price": "", "cuisine": ""}, {"idx": 2, "name": "Westlake Center", "lat": 47.611991, "lng": -122.337391, "walk": 5, "price": "", "cuisine": ""}, {"idx": 3, "name": "Pike Place Market Shops", "lat": 47.608754, "lng": -122.3402, "walk": 10, "price": "", "cuisine": ""}, {"idx": 4, "name": "University Village", "lat": 47.662674, "lng": -122.299114, "walk": "", "price": "", "cuisine": ""}, {"idx": 5, "name": "Elliott Bay Book Company", "lat": 47.614666, "lng": -122.319677, "walk": 15, "price": "", "cuisine": ""}, {"idx": 6, "name": "Bellevue Square", "lat": 47.615655, "lng": -122.203677, "walk": "", "price": "", "cuisine": ""}];
 const entertainmentMarkers = [{"idx": 0, "name": "The Showbox", "lat": 47.608514, "lng": -122.339473, "walk": 8, "price": "", "cuisine": ""}, {"idx": 1, "name": "The 5th Avenue Theatre", "lat": 47.609168, "lng": -122.333984, "walk": 4, "price": "", "cuisine": ""}, {"idx": 2, "name": "Dimitriou's Jazz Alley", "lat": 47.614581, "lng": -122.339152, "walk": 10, "price": "", "cuisine": ""}, {"idx": 3, "name": "Seattle Seahawks at Lumen Field", "lat": 47.595346, "lng": -122.331644, "walk": 25, "price": "", "cuisine": ""}, {"idx": 4, "name": "Seattle Kraken at Climate Pledge Arena", "lat": 47.621901, "lng": -122.35399, "walk": 22, "price": "", "cuisine": ""}, {"idx": 5, "name": "Benaroya Hall", "lat": 47.608117, "lng": -122.33697, "walk": 8, "price": "", "cuisine": ""}, {"idx": 6, "name": "Pacific Northwest Ballet", "lat": 47.624273, "lng": -122.35193, "walk": 22, "price": "", "cuisine": ""}, {"idx": 7, "name": "Seattle Opera", "lat": 47.623977, "lng": -122.350388, "walk": 22, "price": "", "cuisine": ""}];
 const tourMarkers = [{"idx": 0, "name": "Seattle Seaplanes", "lat": 47.631941, "lng": -122.327528, "walk": "", "price": "$$$", "cuisine": ""}, {"idx": 1, "name": "Kenmore Air \u2014 Scenic Flights", "lat": 47.62831, "lng": -122.339185, "walk": "", "price": "$$$", "cuisine": ""}, {"idx": 2, "name": "Savor Seattle Food Tours", "lat": 47.609397, "lng": -122.34141, "walk": 10, "price": "$$", "cuisine": ""}, {"idx": 3, "name": "Argosy Cruises \u2014 Harbor Tour", "lat": 47.604786, "lng": -122.340014, "walk": 12, "price": "$$", "cuisine": ""}, {"idx": 4, "name": "Argosy Cruises \u2014 Locks Cruise", "lat": 47.604786, "lng": -122.340014, "walk": 12, "price": "$$$", "cuisine": ""}, {"idx": 5, "name": "Seattle Ferry Adventures \u2014 Tillicum Excursion", "lat": 47.604786, "lng": -122.340014, "walk": 12, "price": "$$$", "cuisine": ""}, {"idx": 6, "name": "Atomic Helicopters", "lat": 47.529844, "lng": -122.300892, "walk": "", "price": "$$$", "cuisine": ""}, {"idx": 7, "name": "Ride the Ducks of Seattle", "lat": 47.62142, "lng": -122.347037, "walk": 20, "price": "$$", "cuisine": ""}];
-const coffeeMarkers = [{"idx": 0, "name": "Original Starbucks", "lat": 47.610008, "lng": -122.34258, "walk": 10, "price": "$", "cuisine": ""}, {"idx": 1, "name": "Bathtub Gin & Co.", "lat": 47.613227, "lng": -122.344667, "walk": 12, "price": "$$", "cuisine": ""}, {"idx": 2, "name": "Elm Coffee Roasters", "lat": 47.600162, "lng": -122.331341, "walk": 15, "price": "$", "cuisine": ""}, {"idx": 3, "name": "Canon", "lat": 47.611273, "lng": -122.316476, "walk": 20, "price": "$$", "cuisine": ""}];
+const coffeeMarkers = [{"idx": 0, "name": "Original Starbucks", "lat": 47.610008, "lng": -122.34258, "walk": 10, "price": "$", "cuisine": ""}, {"idx": 1, "name": "Starbucks World Headquarters", "lat": 47.580767, "lng": -122.335918, "walk": "", "price": "Free", "cuisine": ""}, {"idx": 2, "name": "Bathtub Gin & Co.", "lat": 47.613227, "lng": -122.344667, "walk": 12, "price": "$$", "cuisine": ""}, {"idx": 3, "name": "Elm Coffee Roasters", "lat": 47.600162, "lng": -122.331341, "walk": 15, "price": "$", "cuisine": ""}, {"idx": 4, "name": "Canon", "lat": 47.611273, "lng": -122.316476, "walk": 20, "price": "$$", "cuisine": ""}];
 
 initMap('attractionsMap', 'attractionsCards', attractionMarkers, '#29B6F6');
 initMap('diningMap', 'diningCards', diningMarkers, '#B5294E');
