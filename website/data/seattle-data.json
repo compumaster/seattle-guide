@@ -1456,6 +1456,92 @@
       "description": "A complex system of deep, glacier-carved saltwater channels connected to the Pacific Ocean. The reason Seattle became a major maritime hub, and home to rich marine life including the region's famous pods of Orca whales."
     }
   ],
+  "photoSpots": [
+    {
+      "name": "Kerry Park",
+      "tip": "THE postcard shot — Space Needle, downtown skyline, and Mount Rainier all in one frame. Best at sunset or blue hour.",
+      "bestTime": "Sunset / Blue Hour",
+      "walkingMinutes": 30,
+      "pro": "Arrive 30 min before sunset to get a good spot. Use a wide-angle lens."
+    },
+    {
+      "name": "Pike Place Market Sign",
+      "tip": "The iconic red neon 'Public Market Center' sign. Shoot from across the street on 1st Ave for the classic angle.",
+      "bestTime": "Early morning (fewer crowds) or dusk (neon glows)",
+      "walkingMinutes": 10,
+      "pro": "Get there before 8 AM for an empty shot. The fish-throwing happens after 9 AM."
+    },
+    {
+      "name": "Gum Wall",
+      "tip": "Weird, colorful, and wildly Instagrammable. The alley is narrow so a wide lens helps.",
+      "bestTime": "Anytime (it's in an alley — no direct sun)",
+      "walkingMinutes": 10,
+      "pro": "Stand back for the full wall, or get close-ups of the most colorful patches."
+    },
+    {
+      "name": "Space Needle from Below",
+      "tip": "Stand directly beneath the Space Needle and shoot straight up for a dramatic perspective shot.",
+      "bestTime": "Overcast (no harsh shadows) or at night (lit up)",
+      "walkingMinutes": 20,
+      "pro": "The rotating glass floor from inside is also incredible for photos."
+    },
+    {
+      "name": "Chihuly Garden (Outdoor)",
+      "tip": "Glass sculptures against the Space Needle backdrop. The outdoor garden is the money shot.",
+      "bestTime": "Overcast days (colors pop without glare) or at night",
+      "walkingMinutes": 20,
+      "pro": "Night photography here is stunning — the glass illuminates beautifully."
+    },
+    {
+      "name": "Seattle Great Wheel",
+      "tip": "Shoot from Pier 62 looking south — you get the wheel with the skyline behind it.",
+      "bestTime": "Blue hour / Night",
+      "walkingMinutes": 12,
+      "pro": "Ride the wheel at sunset for photos from inside the gondola."
+    },
+    {
+      "name": "Olympic Sculpture Park",
+      "tip": "Alexander Calder's 'Eagle' sculpture with Puget Sound and the Olympic Mountains behind it.",
+      "bestTime": "Golden hour",
+      "walkingMinutes": 18,
+      "pro": "Walk the zigzag path for different vantage points. The LOVE sculpture is another great frame."
+    },
+    {
+      "name": "Gas Works Park",
+      "tip": "The rusted industrial gasification towers with the downtown skyline across Lake Union. Unique and moody.",
+      "bestTime": "Sunset / Blue hour",
+      "drivingMinutes": 12,
+      "pro": "Climb to the top of the hill for the best panorama. Also great for 4th of July but Nov works too."
+    },
+    {
+      "name": "Fremont Troll",
+      "tip": "The 18-foot concrete troll under the Aurora Bridge clutching a VW Beetle. Stand next to it for scale.",
+      "bestTime": "Anytime (it's under a bridge)",
+      "drivingMinutes": 10,
+      "pro": "It's under a bridge so lighting is always even. Flash or phone light helps."
+    },
+    {
+      "name": "Pioneer Square Pergola",
+      "tip": "The ornate iron-and-glass pergola at 1st Ave and Yesler — beautiful Victorian-era architecture.",
+      "bestTime": "Morning light",
+      "walkingMinutes": 15,
+      "pro": "The cobblestone streets and brick buildings around it complete the shot."
+    },
+    {
+      "name": "Bainbridge Island Ferry",
+      "tip": "Shoot the Seattle skyline as you pull away from Colman Dock — the view gets better as you go.",
+      "bestTime": "Sunset ferry (golden skyline)",
+      "walkingMinutes": 15,
+      "pro": "Go to the back (stern) deck for the unobstructed skyline shot. Return trip has mountain views."
+    },
+    {
+      "name": "MoPOP Exterior",
+      "tip": "Frank Gehry's undulating metallic building is wildly photogenic. The colorful panels reflect differently in every light.",
+      "bestTime": "Overcast (no harsh reflections) or after rain",
+      "walkingMinutes": 22,
+      "pro": "Shoot from the Monorail track side for the most dramatic curves."
+    }
+  ],
   "trivia": [
     {
       "category": "The Seattle Freeze",

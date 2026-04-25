@@ -145,6 +145,7 @@ sections = [
     ("entertainment", "Entertainment"),
     ("family", "Family"),
     ("seasonal", "Seasonal Events"),
+    ("photospots", "Photo Spots"),
     # Culture & Context
     ("history", "History"),
     ("famous", "Famous Faces"),
@@ -289,6 +290,22 @@ geo_cards = "\n".join(
   <p class="card-desc">{g["description"]}</p>
 </div>'''
     for g in data.get("geography", [])
+)
+
+# Photo spots
+photo_cards = "\n".join(
+    f'''<div class="card" style="border-left:4px solid #E91E63;">
+  <div class="card-header">
+    <h3 class="card-title">📸 {ps["name"]}</h3>
+    <div class="card-badges">
+      <span class="badge badge-blue">🕐 {ps["bestTime"]}</span>
+      {f'<span class="badge badge-blue">🚶 {ps["walkingMinutes"]} min walk</span>' if ps.get("walkingMinutes") else f'<span class="badge badge-navy">🚗 {ps.get("drivingMinutes","")} min drive</span>'}
+    </div>
+  </div>
+  <p class="card-desc">{ps["tip"]}</p>
+  <p class="card-tip">📷 Pro tip: {ps["pro"]}</p>
+</div>'''
+    for ps in data.get("photoSpots", [])
 )
 
 # Local insights
@@ -1119,6 +1136,18 @@ img {{ max-width: 100%; height: auto; }}
   </div>
   <div class="card-grid">
     {seasonal_cards}
+  </div>
+</section>
+
+<!-- ═══ PHOTO SPOTS ═══ -->
+<section class="section" id="photospots">
+  <div class="section-header">
+    <h2>📸 Seattle Photo Spots</h2>
+    <div class="section-line"></div>
+    <p>The most Instagrammable spots in the city — with pro tips on timing and angles</p>
+  </div>
+  <div class="card-grid">
+    {photo_cards}
   </div>
 </section>
 
