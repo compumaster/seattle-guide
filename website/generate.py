@@ -560,7 +560,7 @@ img {{ max-width: 100%; height: auto; }}
 .fade-in.visible {{ opacity: 1; transform: translateY(0); }}
 
 /* ─── Responsive ─── */
-@media (max-width: 1250px) {{
+@media (max-width: 1500px) {{
   .nav-links {{ display: none; position: absolute; top: 64px; left: 0; right: 0;
     background: var(--navy); flex-direction: column; padding: 1rem; z-index: 1001; }}
   .nav-links.active {{ display: flex; }}
