@@ -136,6 +136,7 @@ sections = [
     ("venue", "Venue & Hotel"),
     ("transport", "Weather & Transit"),
     ("practical", "Need to Know"),
+    ("medical", "Medical"),
     ("dining", "Dining"),
     ("coffee", "Coffee & Bars"),
     ("shopping", "Shopping"),
@@ -326,24 +327,6 @@ def practical_section():
     if sf:
         tips_html = "".join(f"<li>{t}</li>" for t in sf.get("tips", []))
         html += f'<div class="card" style="border-left:4px solid #F57F17;"><h3 class="card-title">{sf["title"]}</h3><ul style="padding-left:1.2rem;font-size:0.9rem;color:#555;line-height:1.8;">{tips_html}</ul></div>\n'
-    # Medical
-    med = pinfo.get("medical", {})
-    if med:
-        facilities_html = ""
-        for fac in med.get("facilities", []):
-            facilities_html += f'''<div style="margin-bottom:0.8rem;padding-bottom:0.8rem;border-bottom:1px solid #eee;">
-<strong style="color:var(--navy);">{fac["name"]}</strong> <span class="badge badge-blue">{fac["type"]}</span><br>
-<span style="font-size:0.85rem;color:#555;">📍 {fac["address"]} | 📞 {fac["phone"]}<br>
-🚶 {fac["distance"]}<br>
-{fac.get("note","")}</span></div>'''
-        ph = med.get("pharmacy", {})
-        html += f'''<div class="card" style="border-left:4px solid #E91E63;">
-<h3 class="card-title">{med["title"]}</h3>
-<p style="font-size:0.85rem;color:#E91E63;font-weight:700;margin-bottom:1rem;">🚨 Emergency: Call 911</p>
-{facilities_html}
-<p style="font-weight:700;color:var(--navy);margin:0.5rem 0 0.3rem;">💊 Pharmacy</p>
-<p class="card-desc">Walkable: {ph.get("walkable","")}<br>24-hour: {ph.get("allNight","")}</p>
-<p class="card-tip">💡 {med.get("tip","")}</p></div>\n'''
     # Accessibility
     acc = pinfo.get("accessibility", {})
     if acc:
@@ -357,6 +340,27 @@ def practical_section():
     return html
 
 practical_cards = practical_section()
+
+# Medical facility cards (own section)
+med = pinfo.get("medical", {})
+medical_cards = ""
+for fac in med.get("facilities", []):
+    medical_cards += f'''<div class="card" style="border-left:4px solid #E91E63;">
+  <div class="card-header">
+    <h3 class="card-title">{fac["name"]}</h3>
+    <div class="card-badges"><span class="badge badge-blue">{fac["type"]}</span></div>
+  </div>
+  <p class="card-desc">{fac.get("note","")}</p>
+  <p class="card-addr">📍 {fac["address"]}</p>
+  <p class="card-addr">📞 {fac["phone"]} | 🚶 {fac["distance"]}</p>
+</div>\n'''
+ph = med.get("pharmacy", {})
+medical_cards += f'''<div class="card" style="border-left:4px solid #7B1FA2;">
+  <h3 class="card-title">💊 Pharmacies</h3>
+  <p class="card-desc"><strong>Walkable:</strong> {ph.get("walkable","")}</p>
+  <p class="card-desc"><strong>24-hour:</strong> {ph.get("allNight","")}</p>
+  <p class="card-tip">💡 {med.get("tip","")}</p>
+</div>\n'''
 
 # Photo spots
 photo_cards = "\n".join(
@@ -1084,6 +1088,18 @@ img {{ max-width: 100%; height: auto; }}
   </div>
   <div class="card-grid">
     {practical_cards}
+  </div>
+</section>
+
+<!-- ═══ MEDICAL ═══ -->
+<section class="section" id="medical">
+  <div class="section-header">
+    <h2>🏥 Medical & Emergency</h2>
+    <div class="section-line"></div>
+    <p>🚨 In an emergency, call 911. Five hospitals and urgent care facilities near the convention center.</p>
+  </div>
+  <div class="card-grid">
+    {medical_cards}
   </div>
 </section>
 
