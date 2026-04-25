@@ -525,6 +525,7 @@ img {{ max-width: 100%; height: auto; }}
 }}
 .nav-brand {{
   font-weight: 900; font-size: 1.4rem; color: var(--white); letter-spacing: 1px;
+  flex-shrink: 0; white-space: nowrap;
 }}
 .nav-brand span {{ color: var(--gold); }}
 .nav-links {{ display: none; position: absolute; top: 64px; left: 0; right: 0;
@@ -760,6 +761,11 @@ img {{ max-width: 100%; height: auto; }}
   .hero h1 {{ font-size: 1.7rem; letter-spacing: 2px; }}
   .section {{ padding: 2rem 1rem; }}
   .transport-grid {{ grid-template-columns: 1fr; }}
+  .navbar {{ padding: 0 0.5rem; height: 56px; }}
+  .nav-brand {{ font-size: 1rem; }}
+  .hamburger {{ padding: 0.3rem 0.5rem; font-size: 0.7rem; letter-spacing: 0; }}
+  .fav-nav-btn {{ padding: 0.3rem 0.5rem; font-size: 0.7rem; }}
+  .nav-links {{ top: 56px; }}
 }}
 
 /* ─── Maps ─── */
@@ -957,7 +963,7 @@ img {{ max-width: 100%; height: auto; }}
 <!-- ═══ NAVIGATION ═══ -->
 <nav class="navbar">
   <div class="nav-brand">SEATTLE <span>GUIDE</span></div>
-  <div style="display:flex;gap:0.5rem;align-items:center;">
+  <div style="display:flex;gap:0.3rem;align-items:center;flex-shrink:1;min-width:0;">
     <button class="fav-nav-btn" onclick="toggleFavPanel()" aria-label="Favorites">❤️ <span id="favCount">0</span></button>
     <button class="hamburger" onclick="openLunchPicker()">🎰 LUNCH</button>
     <button class="hamburger" onclick="openTrivia()">🎯 TRIVIA</button>
