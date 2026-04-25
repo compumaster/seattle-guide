@@ -127,16 +127,34 @@ venue = data["venue"]
 hotel = data["headquarterHotel"]
 event = data["event"]
 
-# Navigation items
-nav_items = [
-    ("home", "Home"), ("venue", "Venue"), ("transport", "Weather & Getting Around"),
-    ("dining", "Dining"), ("attractions", "Attractions"), ("daytrips", "Day Trips"),
-    ("lifesciences", "Life Sciences"), ("family", "Family"),
-    ("shopping", "Shopping"), ("entertainment", "Entertainment"),
-    ("coffee", "Coffee & Bars"), ("index", "Index")
+# Section order — single source of truth for nav AND page layout
+# Grouped: Essentials → Explore → Culture & Context → Reference
+sections = [
+    # Essentials
+    ("home", "Home"),
+    ("venue", "Venue & Hotel"),
+    ("transport", "Weather & Transit"),
+    ("dining", "Dining"),
+    ("coffee", "Coffee & Bars"),
+    ("shopping", "Shopping"),
+    # Explore
+    ("attractions", "Attractions"),
+    ("daytrips", "Day Trips"),
+    ("entertainment", "Entertainment"),
+    ("family", "Family"),
+    ("seasonal", "Seasonal Events"),
+    # Culture & Context
+    ("history", "History"),
+    ("famous", "Famous Faces"),
+    ("popculture", "On Screen"),
+    ("geography", "Geography"),
+    ("lifesciences", "Life Sciences"),
+    # Reference
+    ("insights", "Local Tips"),
+    ("index", "Index"),
 ]
 
-nav_links = "\n".join(f'<a href="#{nid}" class="nav-link">{label}</a>' for nid, label in nav_items)
+nav_links = "\n".join(f'<a href="#{sid}" class="nav-link">{label}</a>' for sid, label in sections)
 
 # Dining cards
 dining_cards = "\n".join(
@@ -781,10 +799,14 @@ img {{ max-width: 100%; height: auto; }}
   </div>
 </section>
 
+<!-- ═══════════════════════════════════════════════════════════════════
+     ESSENTIALS — What every visitor needs first
+     ═══════════════════════════════════════════════════════════════════ -->
+
 <!-- ═══ DINING ═══ -->
 <section class="section" id="dining">
   <div class="section-header">
-    <h2>Dining & Drinks</h2>
+    <h2>🍽️ Dining & Drinks</h2>
     <div class="section-line"></div>
     <p>{len(data["dining"])} curated restaurants sorted by distance from the convention center</p>
   </div>
@@ -795,166 +817,6 @@ img {{ max-width: 100%; height: auto; }}
   </div>
   <div class="card-grid" id="diningCards">
     {dining_cards}
-  </div>
-</section>
-
-<!-- ═══ WALKABLE ATTRACTIONS ═══ -->
-<section class="section section-alt" id="attractions">
-  <div class="section-header">
-    <h2>Walkable Attractions</h2>
-    <div class="section-line"></div>
-    <p>{len(data["attractions"]["walkable"])} attractions within walking distance of the convention center</p>
-  </div>
-  <div id="attractionsMap" class="map-wide"></div>
-  <div class="sort-controls" data-target="attractionsCards">
-    <button class="sort-btn active" data-sort="distance">↕ Distance</button>
-    <button class="sort-btn" data-sort="name">A→Z Name</button>
-  </div>
-  <div class="card-grid" id="attractionsCards">
-    {attraction_cards}
-  </div>
-</section>
-
-<!-- ═══ DAY TRIPS ═══ -->
-<section class="section" id="daytrips">
-  <div class="section-header">
-    <h2>Day Trips & Beyond</h2>
-    <div class="section-line"></div>
-    <p>Venture beyond downtown — {len(data["attractions"]["dayTrips"])} destinations within 2 hours</p>
-  </div>
-  <div id="daytripsMap" class="map-wide"></div>
-  <div class="sort-controls" data-target="daytripsCards">
-    <button class="sort-btn active" data-sort="distance">↕ Distance</button>
-    <button class="sort-btn" data-sort="name">A→Z Name</button>
-  </div>
-  <div class="card-grid" id="daytripsCards">
-    {daytrip_cards}
-  </div>
-</section>
-
-<!-- ═══ LIFE SCIENCES HERITAGE ═══ -->
-<section class="section section-navy" id="lifesciences">
-  <div class="section-header">
-    <h2>🧬 Seattle's Life Sciences Legacy</h2>
-    <div class="section-line"></div>
-    <p>Relevant to YOU — Seattle is a global epicenter for molecular pathology, immunology, and precision medicine</p>
-  </div>
-  <div class="card-grid">
-    {lifesci_cards}
-  </div>
-</section>
-
-<!-- ═══ FAMILY ACTIVITIES ═══ -->
-<section class="section section-alt" id="family">
-  <div class="section-header">
-    <h2>👨‍👩‍👧‍👦 Family Activities</h2>
-    <div class="section-line"></div>
-    <p>Rainy-day-proof fun for families — indoor and outdoor options for all ages</p>
-  </div>
-  <div id="familyMap" class="map-wide"></div>
-  <div class="sort-controls" data-target="familyCards">
-    <button class="sort-btn active" data-sort="distance">↕ Distance</button>
-    <button class="sort-btn" data-sort="name">A→Z Name</button>
-  </div>
-  <div class="card-grid" id="familyCards">
-    {family_cards}
-  </div>
-</section>
-
-<!-- ═══ SEASONAL EVENTS ═══ -->
-<section class="section">
-  <div class="section-header">
-    <h2>🎄 Seasonal Events</h2>
-    <div class="section-line"></div>
-    <p>November in Seattle means the start of holiday magic</p>
-  </div>
-  <div class="card-grid">
-    {seasonal_cards}
-  </div>
-</section>
-
-<!-- ═══ FAMOUS FACES ═══ -->
-<section class="section" id="famous">
-  <div class="section-header">
-    <h2>⭐ Seattle's Own: Famous Faces</h2>
-    <div class="section-line"></div>
-    <p>Seattle has been a launchpad for revolutionaries in music, technology, and entertainment</p>
-  </div>
-  <div class="card-grid">
-    {famous_cards}
-  </div>
-</section>
-
-<!-- ═══ POP CULTURE ═══ -->
-<section class="section section-alt" id="popculture">
-  <div class="section-header">
-    <h2>🎬 The Emerald City on Screen</h2>
-    <div class="section-line"></div>
-    <p>Seattle's moody weather, stunning skyline, and surrounding waterways make it an incredibly atmospheric setting</p>
-  </div>
-  <h3 style="text-align:center;color:var(--navy);margin-bottom:1rem;">📺 Television</h3>
-  <div class="card-grid">
-    {pop_tv}
-  </div>
-  <h3 style="text-align:center;color:var(--navy);margin:2rem 0 1rem;">🎬 Film</h3>
-  <div class="card-grid">
-    {pop_film}
-  </div>
-</section>
-
-<!-- ═══ HISTORY ═══ -->
-<section class="section" id="history">
-  <div class="section-header">
-    <h2>📜 From Sawdust to Software</h2>
-    <div class="section-line"></div>
-    <p>Seattle's growth has been defined by massive boom-and-bust cycles, reshaping the landscape — and even the physical elevation — of the city</p>
-  </div>
-  <div class="card-grid" style="grid-template-columns: 1fr;">
-    {history_cards}
-  </div>
-</section>
-
-<!-- ═══ GEOGRAPHY ═══ -->
-<section class="section section-navy" id="geography">
-  <div class="section-header">
-    <h2>🌋 Fire and Ice: Seattle's Geography</h2>
-    <div class="section-line"></div>
-    <p>Nestled between mountain ranges and deep waterways, sitting on the Pacific Ring of Fire</p>
-  </div>
-  <div class="card-grid">
-    {geo_cards}
-  </div>
-</section>
-
-<!-- ═══ SHOPPING ═══ -->
-<section class="section section-alt" id="shopping">
-  <div class="section-header">
-    <h2>🛍️ Shopping</h2>
-    <div class="section-line"></div>
-  </div>
-  <div id="shoppingMap" class="map-wide"></div>
-  <div class="sort-controls" data-target="shoppingCards">
-    <button class="sort-btn active" data-sort="distance">↕ Distance</button>
-    <button class="sort-btn" data-sort="name">A→Z Name</button>
-  </div>
-  <div class="card-grid" id="shoppingCards">
-    {shopping_cards}
-  </div>
-</section>
-
-<!-- ═══ ENTERTAINMENT ═══ -->
-<section class="section" id="entertainment">
-  <div class="section-header">
-    <h2>🎭 Entertainment & Nightlife</h2>
-    <div class="section-line"></div>
-  </div>
-  <div id="entertainmentMap" class="map-wide"></div>
-  <div class="sort-controls" data-target="entertainmentCards">
-    <button class="sort-btn active" data-sort="distance">↕ Distance</button>
-    <button class="sort-btn" data-sort="name">A→Z Name</button>
-  </div>
-  <div class="card-grid" id="entertainmentCards">
-    {entertainment_cards}
   </div>
 </section>
 
@@ -975,8 +837,180 @@ img {{ max-width: 100%; height: auto; }}
   </div>
 </section>
 
+<!-- ═══ SHOPPING ═══ -->
+<section class="section" id="shopping">
+  <div class="section-header">
+    <h2>🛍️ Shopping</h2>
+    <div class="section-line"></div>
+  </div>
+  <div id="shoppingMap" class="map-wide"></div>
+  <div class="sort-controls" data-target="shoppingCards">
+    <button class="sort-btn active" data-sort="distance">↕ Distance</button>
+    <button class="sort-btn" data-sort="name">A→Z Name</button>
+  </div>
+  <div class="card-grid" id="shoppingCards">
+    {shopping_cards}
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     EXPLORE — Things to see and do
+     ═══════════════════════════════════════════════════════════════════ -->
+
+<!-- ═══ WALKABLE ATTRACTIONS ═══ -->
+<section class="section section-alt" id="attractions">
+  <div class="section-header">
+    <h2>🏛️ Walkable Attractions</h2>
+    <div class="section-line"></div>
+    <p>{len(data["attractions"]["walkable"])} attractions within walking distance of the convention center</p>
+  </div>
+  <div id="attractionsMap" class="map-wide"></div>
+  <div class="sort-controls" data-target="attractionsCards">
+    <button class="sort-btn active" data-sort="distance">↕ Distance</button>
+    <button class="sort-btn" data-sort="name">A→Z Name</button>
+  </div>
+  <div class="card-grid" id="attractionsCards">
+    {attraction_cards}
+  </div>
+</section>
+
+<!-- ═══ DAY TRIPS ═══ -->
+<section class="section" id="daytrips">
+  <div class="section-header">
+    <h2>🚗 Day Trips & Beyond</h2>
+    <div class="section-line"></div>
+    <p>Venture beyond downtown — {len(data["attractions"]["dayTrips"])} destinations within 2 hours</p>
+  </div>
+  <div id="daytripsMap" class="map-wide"></div>
+  <div class="sort-controls" data-target="daytripsCards">
+    <button class="sort-btn active" data-sort="distance">↕ Distance</button>
+    <button class="sort-btn" data-sort="name">A→Z Name</button>
+  </div>
+  <div class="card-grid" id="daytripsCards">
+    {daytrip_cards}
+  </div>
+</section>
+
+<!-- ═══ ENTERTAINMENT ═══ -->
+<section class="section section-alt" id="entertainment">
+  <div class="section-header">
+    <h2>🎭 Entertainment & Nightlife</h2>
+    <div class="section-line"></div>
+  </div>
+  <div id="entertainmentMap" class="map-wide"></div>
+  <div class="sort-controls" data-target="entertainmentCards">
+    <button class="sort-btn active" data-sort="distance">↕ Distance</button>
+    <button class="sort-btn" data-sort="name">A→Z Name</button>
+  </div>
+  <div class="card-grid" id="entertainmentCards">
+    {entertainment_cards}
+  </div>
+</section>
+
+<!-- ═══ FAMILY ACTIVITIES ═══ -->
+<section class="section" id="family">
+  <div class="section-header">
+    <h2>👨‍👩‍👧‍👦 Family Activities</h2>
+    <div class="section-line"></div>
+    <p>Rainy-day-proof fun for families — indoor and outdoor options for all ages</p>
+  </div>
+  <div id="familyMap" class="map-wide"></div>
+  <div class="sort-controls" data-target="familyCards">
+    <button class="sort-btn active" data-sort="distance">↕ Distance</button>
+    <button class="sort-btn" data-sort="name">A→Z Name</button>
+  </div>
+  <div class="card-grid" id="familyCards">
+    {family_cards}
+  </div>
+</section>
+
+<!-- ═══ SEASONAL EVENTS ═══ -->
+<section class="section section-alt" id="seasonal">
+  <div class="section-header">
+    <h2>🎄 Seasonal Events</h2>
+    <div class="section-line"></div>
+    <p>November in Seattle means the start of holiday magic</p>
+  </div>
+  <div class="card-grid">
+    {seasonal_cards}
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     CULTURE & CONTEXT — Know the city
+     ═══════════════════════════════════════════════════════════════════ -->
+
+<!-- ═══ HISTORY ═══ -->
+<section class="section" id="history">
+  <div class="section-header">
+    <h2>📜 From Sawdust to Software</h2>
+    <div class="section-line"></div>
+    <p>Seattle's growth has been defined by massive boom-and-bust cycles, reshaping the landscape — and even the physical elevation — of the city</p>
+  </div>
+  <div class="card-grid" style="grid-template-columns: 1fr;">
+    {history_cards}
+  </div>
+</section>
+
+<!-- ═══ FAMOUS FACES ═══ -->
+<section class="section section-alt" id="famous">
+  <div class="section-header">
+    <h2>⭐ Seattle's Own: Famous Faces</h2>
+    <div class="section-line"></div>
+    <p>Seattle has been a launchpad for revolutionaries in music, technology, and entertainment</p>
+  </div>
+  <div class="card-grid">
+    {famous_cards}
+  </div>
+</section>
+
+<!-- ═══ POP CULTURE ═══ -->
+<section class="section" id="popculture">
+  <div class="section-header">
+    <h2>🎬 The Emerald City on Screen</h2>
+    <div class="section-line"></div>
+    <p>Seattle's moody weather, stunning skyline, and surrounding waterways make it an incredibly atmospheric setting</p>
+  </div>
+  <h3 style="text-align:center;color:var(--navy);margin-bottom:1rem;">📺 Television</h3>
+  <div class="card-grid">
+    {pop_tv}
+  </div>
+  <h3 style="text-align:center;color:var(--navy);margin:2rem 0 1rem;">🎬 Film</h3>
+  <div class="card-grid">
+    {pop_film}
+  </div>
+</section>
+
+<!-- ═══ GEOGRAPHY ═══ -->
+<section class="section section-navy" id="geography">
+  <div class="section-header">
+    <h2>🌋 Fire and Ice: Seattle's Geography</h2>
+    <div class="section-line"></div>
+    <p>Nestled between mountain ranges and deep waterways, sitting on the Pacific Ring of Fire</p>
+  </div>
+  <div class="card-grid">
+    {geo_cards}
+  </div>
+</section>
+
+<!-- ═══ LIFE SCIENCES HERITAGE ═══ -->
+<section class="section" id="lifesciences">
+  <div class="section-header">
+    <h2>🧬 Seattle's Life Sciences Legacy</h2>
+    <div class="section-line"></div>
+    <p>Seattle is a global epicenter for molecular pathology, immunology, and precision medicine</p>
+  </div>
+  <div class="card-grid">
+    {lifesci_cards}
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     REFERENCE
+     ═══════════════════════════════════════════════════════════════════ -->
+
 <!-- ═══ LOCAL INSIGHTS ═══ -->
-<section class="section">
+<section class="section section-alt" id="insights">
   <div class="section-header">
     <h2>💡 Local Insights</h2>
     <div class="section-line"></div>

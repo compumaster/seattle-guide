@@ -340,16 +340,22 @@ img { max-width: 100%; height: auto; }
   <div class="nav-brand">SEATTLE <span>GUIDE</span></div>
   <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('active')" aria-label="Menu">☰ MENU</button>
   <div class="nav-links"><a href="#home" class="nav-link">Home</a>
-<a href="#venue" class="nav-link">Venue</a>
-<a href="#transport" class="nav-link">Weather & Getting Around</a>
+<a href="#venue" class="nav-link">Venue & Hotel</a>
+<a href="#transport" class="nav-link">Weather & Transit</a>
 <a href="#dining" class="nav-link">Dining</a>
+<a href="#coffee" class="nav-link">Coffee & Bars</a>
+<a href="#shopping" class="nav-link">Shopping</a>
 <a href="#attractions" class="nav-link">Attractions</a>
 <a href="#daytrips" class="nav-link">Day Trips</a>
-<a href="#lifesciences" class="nav-link">Life Sciences</a>
-<a href="#family" class="nav-link">Family</a>
-<a href="#shopping" class="nav-link">Shopping</a>
 <a href="#entertainment" class="nav-link">Entertainment</a>
-<a href="#coffee" class="nav-link">Coffee & Bars</a>
+<a href="#family" class="nav-link">Family</a>
+<a href="#seasonal" class="nav-link">Seasonal Events</a>
+<a href="#history" class="nav-link">History</a>
+<a href="#famous" class="nav-link">Famous Faces</a>
+<a href="#popculture" class="nav-link">On Screen</a>
+<a href="#geography" class="nav-link">Geography</a>
+<a href="#lifesciences" class="nav-link">Life Sciences</a>
+<a href="#insights" class="nav-link">Local Tips</a>
 <a href="#index" class="nav-link">Index</a></div>
 </nav>
 
@@ -533,10 +539,14 @@ img { max-width: 100%; height: auto; }
   </div>
 </section>
 
+<!-- ═══════════════════════════════════════════════════════════════════
+     ESSENTIALS — What every visitor needs first
+     ═══════════════════════════════════════════════════════════════════ -->
+
 <!-- ═══ DINING ═══ -->
 <section class="section" id="dining">
   <div class="section-header">
-    <h2>Dining & Drinks</h2>
+    <h2>🍽️ Dining & Drinks</h2>
     <div class="section-line"></div>
     <p>17 curated restaurants sorted by distance from the convention center</p>
   </div>
@@ -733,10 +743,151 @@ img { max-width: 100%; height: auto; }
   </div>
 </section>
 
+<!-- ═══ COFFEE & BARS ═══ -->
+<section class="section section-alt" id="coffee">
+  <div class="section-header">
+    <h2>☕ Coffee & Bars</h2>
+    <div class="section-line"></div>
+    <p>Seattle is the birthplace of Starbucks and the epicenter of American specialty coffee culture</p>
+  </div>
+  <div id="coffeeMap" class="map-wide"></div>
+  <div class="sort-controls" data-target="coffeeCards">
+    <button class="sort-btn active" data-sort="distance">↕ Distance</button>
+    <button class="sort-btn" data-sort="name">A→Z Name</button>
+  </div>
+  <div class="card-grid" id="coffeeCards">
+    <div class="card" data-lat="47.610008" data-lng="-122.34258" data-name="Original Starbucks" data-distance="10">
+  <div class="card-header">
+    <h3 class="card-title">Original Starbucks</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 10 min walk</span>   <span class="price-tier">$<span class="price-dim">$$</span></span></div>
+  </div>
+  <p class="card-desc">The first Starbucks store, opened in 1971. Expect a line, but it's a must-visit Seattle experience.</p>
+  <p class="card-addr">📍 1912 Pike Pl, Seattle, WA 98101</p>
+</div>
+
+<div class="card" data-lat="47.613227" data-lng="-122.344667" data-name="Bathtub Gin & Co." data-distance="12">
+  <div class="card-header">
+    <h3 class="card-title">Bathtub Gin & Co.</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 12 min walk</span>   <span class="price-tier">$$<span class="price-dim">$</span></span></div>
+  </div>
+  <p class="card-desc">Cozy speakeasy in Belltown with craft cocktails and a hidden underground vibe.</p>
+  <p class="card-addr">📍 2205 2nd Ave, Seattle, WA 98121</p>
+  <a href="https://bathtubginseattle.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+<div class="card" data-lat="47.600162" data-lng="-122.331341" data-name="Elm Coffee Roasters" data-distance="15">
+  <div class="card-header">
+    <h3 class="card-title">Elm Coffee Roasters</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 15 min walk</span>   <span class="price-tier">$<span class="price-dim">$$</span></span></div>
+  </div>
+  <p class="card-desc">Minimalist specialty coffee shop in Pioneer Square. Excellent pour-overs and espresso drinks.</p>
+  <p class="card-addr">📍 240 2nd Ave S, Seattle, WA 98104</p>
+</div>
+
+<div class="card" data-lat="47.611273" data-lng="-122.316476" data-name="Canon" data-distance="20">
+  <div class="card-header">
+    <h3 class="card-title">Canon</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 20 min walk</span>   <span class="price-tier">$$<span class="price-dim">$</span></span></div>
+  </div>
+  <p class="card-desc">Award-winning cocktail bar on Capitol Hill with over 4,000 bottles of spirits. One of the best bars in America.</p>
+  <p class="card-addr">📍 928 12th Ave, Seattle, WA 98122</p>
+  <a href="https://www.canonseattle.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+  </div>
+</section>
+
+<!-- ═══ SHOPPING ═══ -->
+<section class="section" id="shopping">
+  <div class="section-header">
+    <h2>🛍️ Shopping</h2>
+    <div class="section-line"></div>
+  </div>
+  <div id="shoppingMap" class="map-wide"></div>
+  <div class="sort-controls" data-target="shoppingCards">
+    <button class="sort-btn active" data-sort="distance">↕ Distance</button>
+    <button class="sort-btn" data-sort="name">A→Z Name</button>
+  </div>
+  <div class="card-grid" id="shoppingCards">
+    <div class="card" data-lat="47.612883" data-lng="-122.335289" data-name="Pacific Place" data-distance="3">
+  <div class="card-header">
+    <h3 class="card-title">Pacific Place</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 3 min walk</span>  </div>
+  </div>
+  <p class="card-desc">Upscale downtown mall with dining, cinema, and retail. Connected to the convention center area.</p>
+  <p class="card-addr">📍 600 Pine St, Seattle, WA 98101</p>
+  <a href="https://www.pacificplaceseattle.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+<div class="card" data-lat="47.611921" data-lng="-122.336541" data-name="Nordstrom Flagship" data-distance="4">
+  <div class="card-header">
+    <h3 class="card-title">Nordstrom Flagship</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 4 min walk</span>  </div>
+  </div>
+  <p class="card-desc">Nordstrom's original flagship store — the company was founded in Seattle in 1901. Five stories of fashion, shoes, and cosmetics.</p>
+  <p class="card-addr">📍 500 Pine St, Seattle, WA 98101</p>
+  <a href="https://www.nordstrom.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+<div class="card" data-lat="47.611991" data-lng="-122.337391" data-name="Westlake Center" data-distance="5">
+  <div class="card-header">
+    <h3 class="card-title">Westlake Center</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 5 min walk</span>  </div>
+  </div>
+  <p class="card-desc">Downtown shopping center and Monorail terminal. Retail shops and food options.</p>
+  <p class="card-addr">📍 400 Pine St, Seattle, WA 98101</p>
+  <a href="https://www.westlakecenter.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+<div class="card" data-lat="47.608754" data-lng="-122.3402" data-name="Pike Place Market Shops" data-distance="10">
+  <div class="card-header">
+    <h3 class="card-title">Pike Place Market Shops</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 10 min walk</span>  </div>
+  </div>
+  <p class="card-desc">Handcrafted jewelry, local art, specialty foods, flowers, and unique Seattle souvenirs from independent vendors.</p>
+  <p class="card-addr">📍 85 Pike St, Seattle, WA 98101</p>
+</div>
+
+<div class="card" data-lat="47.662674" data-lng="-122.299114" data-name="University Village" data-distance="15">
+  <div class="card-header">
+    <h3 class="card-title">University Village</h3>
+    <div class="card-badges"><span class="badge badge-navy">🚗 15 min drive</span>  </div>
+  </div>
+  <p class="card-desc">Upscale open-air shopping center with national brands, local boutiques, and excellent dining options.</p>
+  <p class="card-addr">📍 2623 NE University Village St, Seattle, WA 98105</p>
+  <a href="https://uvillage.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+<div class="card" data-lat="47.614666" data-lng="-122.319677" data-name="Elliott Bay Book Company" data-distance="15">
+  <div class="card-header">
+    <h3 class="card-title">Elliott Bay Book Company</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 15 min walk</span>  </div>
+  </div>
+  <p class="card-desc">Massive, multi-level independent bookstore — Capitol Hill's literary soul. A must-visit for book lovers.</p>
+  <p class="card-addr">📍 1521 10th Ave, Seattle, WA 98122</p>
+  <a href="https://www.elliottbaybook.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+<div class="card" data-lat="47.615655" data-lng="-122.203677" data-name="Bellevue Square" data-distance="30">
+  <div class="card-header">
+    <h3 class="card-title">Bellevue Square</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚇 30 min transit</span>  </div>
+  </div>
+  <p class="card-desc">Premium Eastside shopping via the new 2 Line light rail. High-end department stores adjacent to Bellevue Downtown Park.</p>
+  <p class="card-addr">📍 575 Bellevue Square, Bellevue, WA 98004</p>
+</div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     EXPLORE — Things to see and do
+     ═══════════════════════════════════════════════════════════════════ -->
+
 <!-- ═══ WALKABLE ATTRACTIONS ═══ -->
 <section class="section section-alt" id="attractions">
   <div class="section-header">
-    <h2>Walkable Attractions</h2>
+    <h2>🏛️ Walkable Attractions</h2>
     <div class="section-line"></div>
     <p>21 attractions within walking distance of the convention center</p>
   </div>
@@ -986,7 +1137,7 @@ img { max-width: 100%; height: auto; }
 <!-- ═══ DAY TRIPS ═══ -->
 <section class="section" id="daytrips">
   <div class="section-header">
-    <h2>Day Trips & Beyond</h2>
+    <h2>🚗 Day Trips & Beyond</h2>
     <div class="section-line"></div>
     <p>Venture beyond downtown — 12 destinations within 2 hours</p>
   </div>
@@ -1133,445 +1284,8 @@ img { max-width: 100%; height: auto; }
   </div>
 </section>
 
-<!-- ═══ LIFE SCIENCES HERITAGE ═══ -->
-<section class="section section-navy" id="lifesciences">
-  <div class="section-header">
-    <h2>🧬 Seattle's Life Sciences Legacy</h2>
-    <div class="section-line"></div>
-    <p>Relevant to YOU — Seattle is a global epicenter for molecular pathology, immunology, and precision medicine</p>
-  </div>
-  <div class="card-grid">
-    <div class="card card-lifesci">
-  <h3 class="card-title">Fred Hutchinson Cancer Center</h3>
-  <span class="category-tag">Research / Cancer</span>
-  <span class="neighborhood-tag">📍 South Lake Union</span>
-  <p class="card-desc">World-class biomedical research hub for cancer, molecular pathology, and infectious diseases. Following 2022 merger with Seattle Cancer Care Alliance, features state-of-the-art laboratories with sustainable design. Lab tours require months of advance booking.</p>
-  <p class="card-note">🔬 Relevant to medical professionals — molecular pathology research</p>
-  <a href="https://www.fredhutch.org/" target="_blank" class="card-link">Learn More →</a>
-</div>
-<div class="card card-lifesci">
-  <h3 class="card-title">Allen Institute</h3>
-  <span class="category-tag">Research / Neuroscience</span>
-  <span class="neighborhood-tag">📍 South Lake Union</span>
-  <p class="card-desc">Founded by Microsoft co-founder Paul G. Allen. Operates under 'open science' philosophy sharing free data and tools globally. Research in neuroscience, immunology, and cell biology.</p>
-  
-  <a href="https://alleninstitute.org/" target="_blank" class="card-link">Learn More →</a>
-</div>
-<div class="card card-lifesci">
-  <h3 class="card-title">UW Medicine SLU Research Hub</h3>
-  <span class="category-tag">Academic / Research</span>
-  <span class="neighborhood-tag">📍 South Lake Union</span>
-  <p class="card-desc">University of Washington's research hub where scientists focus on molecular imaging, protein design, and translational medicine.</p>
-  
-  <a href="https://www.uwmedicine.org/" target="_blank" class="card-link">Learn More →</a>
-</div>
-<div class="card card-lifesci">
-  <h3 class="card-title">First Hill 'Pill Hill' Medical District</h3>
-  <span class="category-tag">Historic / Medical</span>
-  <span class="neighborhood-tag">📍 First Hill</span>
-  <p class="card-desc">Seattle's historic medical district known as 'Pill Hill.' Home to Swedish Medical Center (founded 1910). Walking tours available via HistoryLink showing the evolution from 1883 timber baron mansions to modern medical facilities.</p>
-  
-  
-</div>
-<div class="card card-lifesci">
-  <h3 class="card-title">South Lake Union Life Sciences Cluster</h3>
-  <span class="category-tag">Biotech Hub</span>
-  <span class="neighborhood-tag">📍 South Lake Union</span>
-  <p class="card-desc">Greater Seattle supports 1,180+ life science companies generating $13.7 billion in gross regional product. The SLU neighborhood houses Amazon HQ alongside Fred Hutch, Allen Institute, and UW Medicine — making it one of the world's most formidable life science clusters.</p>
-  
-  
-</div>
-  </div>
-</section>
-
-<!-- ═══ FAMILY ACTIVITIES ═══ -->
-<section class="section section-alt" id="family">
-  <div class="section-header">
-    <h2>👨‍👩‍👧‍👦 Family Activities</h2>
-    <div class="section-line"></div>
-    <p>Rainy-day-proof fun for families — indoor and outdoor options for all ages</p>
-  </div>
-  <div id="familyMap" class="map-wide"></div>
-  <div class="sort-controls" data-target="familyCards">
-    <button class="sort-btn active" data-sort="distance">↕ Distance</button>
-    <button class="sort-btn" data-sort="name">A→Z Name</button>
-  </div>
-  <div class="card-grid" id="familyCards">
-    <div class="card card-family" data-name="PlayDate SEA" data-distance="10">
-  <div class="card-header">
-    <h3 class="card-title">PlayDate SEA</h3>
-    <div class="card-badges">
-      <span class="badge badge-navy">🚗 10 min drive</span> <span class="price-tier">$<span class="price-dim">$$</span></span>
-      <span class="badge badge-indoor">🏠 Indoor</span>
-      <span class="badge badge-age">Ages: 0–10 years</span>
-    </div>
-  </div>
-  <p class="card-desc">8,000 sq ft multi-level climbing structure with toddler zones. Attached café with pizza and espresso for parents.</p>
-  <a href="https://www.playdatesea.com/" target="_blank" class="card-link">Plan Visit →</a>
-</div>
-<div class="card card-family" data-name="Woodland Park Zoo — Zoomazium" data-distance="15">
-  <div class="card-header">
-    <h3 class="card-title">Woodland Park Zoo — Zoomazium</h3>
-    <div class="card-badges">
-      <span class="badge badge-navy">🚗 15 min drive</span> <span class="price-tier">$$<span class="price-dim">$</span></span>
-      <span class="badge badge-indoor">🏠 Indoor</span>
-      <span class="badge badge-age">Ages: 0–8 years</span>
-    </div>
-  </div>
-  <p class="card-desc">Nature-themed indoor play space with mountain cave, rope bridge, and 20-foot climbing tree. Included with zoo admission.</p>
-  <a href="https://www.zoo.org/" target="_blank" class="card-link">Plan Visit →</a>
-</div>
-<div class="card card-family" data-name="Artists at Play Playground" data-distance="20">
-  <div class="card-header">
-    <h3 class="card-title">Artists at Play Playground</h3>
-    <div class="card-badges">
-      <span class="badge badge-blue">🚶 20 min walk</span> <span class="price-free">FREE</span>
-      <span class="badge badge-outdoor">🌳 Outdoor</span>
-      <span class="badge badge-age">Ages: All ages</span>
-    </div>
-  </div>
-  <p class="card-desc">Expansive outdoor playground at Seattle Center with massive climbing structures, 30-foot climbing tower, tube slides, and interactive musical instruments.</p>
-  
-</div>
-<div class="card card-family" data-name="Seattle Children's Museum" data-distance="20">
-  <div class="card-header">
-    <h3 class="card-title">Seattle Children's Museum</h3>
-    <div class="card-badges">
-      <span class="badge badge-blue">🚶 20 min walk</span> <span class="price-tier">$<span class="price-dim">$$</span></span>
-      <span class="badge badge-indoor">🏠 Indoor</span>
-      <span class="badge badge-age">Ages: 0–8 years</span>
-    </div>
-  </div>
-  <p class="card-desc">Interactive play zones in the Seattle Center Armory. $16–18 admission, under 1 free. 'Museums for All' program ($5 reduced).</p>
-  <a href="https://thechildrensmuseum.org/" target="_blank" class="card-link">Plan Visit →</a>
-</div>
-<div class="card card-family" data-name="Pacific Science Center" data-distance="22">
-  <div class="card-header">
-    <h3 class="card-title">Pacific Science Center</h3>
-    <div class="card-badges">
-      <span class="badge badge-blue">🚶 22 min walk</span> <span class="price-tier">$$<span class="price-dim">$</span></span>
-      <span class="badge badge-indoor">🏠 Indoor</span>
-      <span class="badge badge-age">Ages: All ages</span>
-    </div>
-  </div>
-  <p class="card-desc">Tropical Butterfly House, Tinker Tank makerspace, live science stages, dinosaur exhibits. $32–35 adults, $26–28 children. 'Exploration for All' sensory-friendly sessions.</p>
-  <a href="https://www.pacificsciencecenter.org/" target="_blank" class="card-link">Plan Visit →</a>
-</div>
-<div class="card card-family" data-name="KidsQuest Children's Museum" data-distance="30">
-  <div class="card-header">
-    <h3 class="card-title">KidsQuest Children's Museum</h3>
-    <div class="card-badges">
-      <span class="badge badge-blue">🚇 30 min transit</span> <span class="price-tier">$<span class="price-dim">$$</span></span>
-      <span class="badge badge-indoor">🏠 Indoor</span>
-      <span class="badge badge-age">Ages: 0–10 years</span>
-    </div>
-  </div>
-  <p class="card-desc">STEM-focused exhibits in Bellevue. Take the 2 Line + short walk from Bellevue Downtown Station. $5 parking.</p>
-  <a href="https://www.kidsquestmuseum.org/" target="_blank" class="card-link">Plan Visit →</a>
-</div>
-  </div>
-</section>
-
-<!-- ═══ SEASONAL EVENTS ═══ -->
-<section class="section">
-  <div class="section-header">
-    <h2>🎄 Seasonal Events</h2>
-    <div class="section-line"></div>
-    <p>November in Seattle means the start of holiday magic</p>
-  </div>
-  <div class="card-grid">
-    <div class="card card-seasonal">
-  <h3 class="card-title">🎄 WildLanterns at Woodland Park Zoo</h3>
-  <span class="category-tag">Light Festival</span>
-  <span class="badge badge-blue">📅 Opens mid-November through January 18</span>
-  <span class="price-tier">$$<span class="price-dim">$</span></span>
-  <p class="card-desc">Spectacular evening festival with massive animal and nature-themed lantern displays illuminating the zoo pathways. $39.95 adults, $34.95 children.</p>
-  <p class="card-tip">💡 Look for 'Night Owls' 21+ evenings — explore kid-free with holiday cocktails by fire pits and carousel rides.</p>
-  <a href="https://www.zoo.org/wildlanterns" target="_blank" class="card-link">Details →</a>
-</div>
-<div class="card card-seasonal">
-  <h3 class="card-title">🎄 Leavenworth Christmas Lighting Festival</h3>
-  <span class="category-tag">Holiday Festival</span>
-  <span class="badge badge-blue">📅 Weekends starting late November</span>
-  <span class="price-free">FREE</span>
-  <p class="card-desc">Bavarian village transformed with millions of lights, German food, glühwein, and holiday markets. Lighting ceremony at dusk.</p>
-  
-  <a href="https://leavenworth.org/" target="_blank" class="card-link">Details →</a>
-</div>
-<div class="card card-seasonal">
-  <h3 class="card-title">🎄 Seattle CityPASS</h3>
-  <span class="category-tag">Discount Pass</span>
-  
-  <span class="price-tier">$$<span class="price-dim">$</span></span>
-  <p class="card-desc">Save up to 47% on combined admissions to Space Needle, Seattle Aquarium, and choice of MoPOP, Woodland Park Zoo, or Argosy Cruises.</p>
-  
-  <a href="https://www.citypass.com/seattle" target="_blank" class="card-link">Details →</a>
-</div>
-  </div>
-</section>
-
-<!-- ═══ FAMOUS FACES ═══ -->
-<section class="section" id="famous">
-  <div class="section-header">
-    <h2>⭐ Seattle's Own: Famous Faces</h2>
-    <div class="section-line"></div>
-    <p>Seattle has been a launchpad for revolutionaries in music, technology, and entertainment</p>
-  </div>
-  <div class="card-grid">
-    <div class="card">
-  <div class="card-header">
-    <h3 class="card-title">Jimi Hendrix</h3>
-    <div class="card-badges"><span class="cuisine-tag">Music</span> <span class="badge badge-blue">Born in Seattle</span></div>
-  </div>
-  <p class="card-desc">Born and raised in Seattle, Hendrix is arguably the greatest guitarist in rock history. Visit his memorial in nearby Renton or the extensive exhibits at the Museum of Pop Culture (MoPOP).</p>
-</div>
-<div class="card">
-  <div class="card-header">
-    <h3 class="card-title">Bill Gates</h3>
-    <div class="card-badges"><span class="cuisine-tag">Tech</span> <span class="badge badge-blue">Born in Seattle</span></div>
-  </div>
-  <p class="card-desc">Born in Seattle, Gates co-founded Microsoft and revolutionized personal computing. His philanthropic efforts via the Gates Foundation are deeply rooted in the city.</p>
-</div>
-<div class="card">
-  <div class="card-header">
-    <h3 class="card-title">Bruce Lee</h3>
-    <div class="card-badges"><span class="cuisine-tag">Film / Martial Arts</span> <span class="badge badge-blue">Lived & studied in Seattle</span></div>
-  </div>
-  <p class="card-desc">The martial arts legend moved to Seattle to finish high school and attend the University of Washington. He opened his first martial arts studio here and is buried in Lake View Cemetery alongside his son, Brandon.</p>
-</div>
-<div class="card">
-  <div class="card-header">
-    <h3 class="card-title">Kurt Cobain</h3>
-    <div class="card-badges"><span class="cuisine-tag">Music</span> <span class="badge badge-blue">Seattle grunge scene</span></div>
-  </div>
-  <p class="card-desc">Originally from Aberdeen, WA, Cobain and Nirvana became the global face of Seattle's 1990s grunge movement, transforming the city's cultural identity forever.</p>
-</div>
-<div class="card">
-  <div class="card-header">
-    <h3 class="card-title">Macklemore & Ryan Lewis</h3>
-    <div class="card-badges"><span class="cuisine-tag">Music</span> <span class="badge badge-blue">Born in Seattle</span></div>
-  </div>
-  <p class="card-desc">This hip-hop duo proudly wears their Seattle heritage, frequently filming music videos in local spots like Capitol Hill and Pike Place Market.</p>
-</div>
-<div class="card">
-  <div class="card-header">
-    <h3 class="card-title">Sir Mix-a-Lot</h3>
-    <div class="card-badges"><span class="cuisine-tag">Music</span> <span class="badge badge-blue">Born in Seattle</span></div>
-  </div>
-  <p class="card-desc">Born and raised in the Central District, this hip-hop pioneer put Seattle on the rap map long before the tech boom.</p>
-</div>
-  </div>
-</section>
-
-<!-- ═══ POP CULTURE ═══ -->
-<section class="section section-alt" id="popculture">
-  <div class="section-header">
-    <h2>🎬 The Emerald City on Screen</h2>
-    <div class="section-line"></div>
-    <p>Seattle's moody weather, stunning skyline, and surrounding waterways make it an incredibly atmospheric setting</p>
-  </div>
-  <h3 style="text-align:center;color:var(--navy);margin-bottom:1rem;">📺 Television</h3>
-  <div class="card-grid">
-    <div class="card">
-  <div class="card-header">
-    <h3 class="card-title">📺 Grey's Anatomy</h3>
-    <span class="category-tag">Medical Drama</span>
-  </div>
-  <p class="card-desc">While mostly filmed in Los Angeles, this long-running medical drama is deeply tied to the city. Fans seek out the real-life locations of establishing shots like the Space Needle and the Monorail.</p>
-</div>
-<div class="card">
-  <div class="card-header">
-    <h3 class="card-title">📺 Frasier</h3>
-    <span class="category-tag">Sitcom</span>
-  </div>
-  <p class="card-desc">This classic 90s sitcom defined the upscale, coffee-obsessed Seattle aesthetic. While Frasier's exact apartment view is geographically impossible, Kerry Park on Queen Anne Hill offers the closest real-life equivalent.</p>
-</div>
-<div class="card">
-  <div class="card-header">
-    <h3 class="card-title">📺 The Killing</h3>
-    <span class="category-tag">Crime Drama</span>
-  </div>
-  <p class="card-desc">For fans of darker, grittier Seattle — this crime drama perfectly captured the relentlessly rainy, moody atmosphere of the Pacific Northwest.</p>
-</div>
-  </div>
-  <h3 style="text-align:center;color:var(--navy);margin:2rem 0 1rem;">🎬 Film</h3>
-  <div class="card-grid">
-    <div class="card">
-  <div class="card-header">
-    <h3 class="card-title">🎬 Sleepless in Seattle (1993)</h3>
-  </div>
-  <p class="card-desc">The quintessential Seattle romance. Famously highlighted the city's unique houseboat culture on Lake Union.</p>
-</div>
-<div class="card">
-  <div class="card-header">
-    <h3 class="card-title">🎬 10 Things I Hate About You (1999)</h3>
-  </div>
-  <p class="card-desc">This beloved teen adaptation features iconic scenes filmed around the Seattle area, including a memorable paintball date at Gas Works Park.</p>
-</div>
-<div class="card">
-  <div class="card-header">
-    <h3 class="card-title">🎬 Singles (1992)</h3>
-  </div>
-  <p class="card-desc">Directed by Cameron Crowe, this movie is a love letter to Seattle's early 90s grunge scene, featuring cameos from Pearl Jam, Soundgarden, and Alice in Chains.</p>
-</div>
-  </div>
-</section>
-
-<!-- ═══ HISTORY ═══ -->
-<section class="section" id="history">
-  <div class="section-header">
-    <h2>📜 From Sawdust to Software</h2>
-    <div class="section-line"></div>
-    <p>Seattle's growth has been defined by massive boom-and-bust cycles, reshaping the landscape — and even the physical elevation — of the city</p>
-  </div>
-  <div class="card-grid" style="grid-template-columns: 1fr;">
-    <div class="card" style="border-left:4px solid var(--gold);">
-  <h3 class="card-title">The First Inhabitants</h3>
-  <p class="card-desc">Long before European settlement, the Duwamish and Suquamish tribes inhabited the area. The city is named after Chief Seattle (Sealth), a prominent leader of both tribes.</p>
-</div>
-<div class="card" style="border-left:4px solid var(--gold);">
-  <h3 class="card-title">The Great Seattle Fire (1889)</h3>
-  <p class="card-desc">A glue pot boiled over in a carpentry shop, starting a fire that destroyed the central business district. Residents rebuilt using brick and stone, raising the street level — creating the famous 'Seattle Underground' that tourists can still visit today.</p>
-</div>
-<div class="card" style="border-left:4px solid var(--gold);">
-  <h3 class="card-title">Klondike Gold Rush (1897)</h3>
-  <p class="card-desc">When gold was discovered in the Yukon, Seattle marketed itself as the 'Gateway to Alaska' and became the primary outfitting point for miners. The massive influx of wealth transformed Seattle from a struggling pioneer town into a thriving metropolis overnight.</p>
-</div>
-<div class="card" style="border-left:4px solid var(--gold);">
-  <h3 class="card-title">The World's Fair (1962)</h3>
-  <p class="card-desc">Officially called the Century 21 Exposition, this event left the city with its most iconic landmarks: the Space Needle, the Monorail, and the Seattle Center.</p>
-</div>
-<div class="card" style="border-left:4px solid var(--gold);">
-  <h3 class="card-title">The Tech Boom (1980s–Present)</h3>
-  <p class="card-desc">The rise of Microsoft in the 80s and 90s, followed by the massive expansion of Amazon in the 2010s, created a huge influx of wealth and development, completely transforming neighborhoods like South Lake Union.</p>
-</div>
-  </div>
-</section>
-
-<!-- ═══ GEOGRAPHY ═══ -->
-<section class="section section-navy" id="geography">
-  <div class="section-header">
-    <h2>🌋 Fire and Ice: Seattle's Geography</h2>
-    <div class="section-line"></div>
-    <p>Nestled between mountain ranges and deep waterways, sitting on the Pacific Ring of Fire</p>
-  </div>
-  <div class="card-grid">
-    <div class="card" style="border-left:4px solid var(--teal);">
-  <div class="card-header">
-    <h3 class="card-title">Mount Rainier</h3>
-    <span class="category-tag">Volcano / Mountain</span>
-  </div>
-  <p class="card-desc">Towering at 14,411 feet, Mount Rainier is an active stratovolcano that dominates the Seattle skyline on clear days. The most heavily glaciated peak in the contiguous US and a crown jewel for hikers and climbers. About 60 miles southeast of the city.</p>
-</div>
-<div class="card" style="border-left:4px solid var(--teal);">
-  <div class="card-header">
-    <h3 class="card-title">Mount St. Helens</h3>
-    <span class="category-tag">Volcano</span>
-  </div>
-  <p class="card-desc">On May 18, 1980, Mount St. Helens experienced a catastrophic eruption — the most destructive volcanic event in US history, reducing its height by 1,300 feet. Today, visitors can drive to the Johnston Ridge Observatory to look directly into the crater. About 175 miles south of Seattle.</p>
-</div>
-<div class="card" style="border-left:4px solid var(--teal);">
-  <div class="card-header">
-    <h3 class="card-title">The Cascade Range</h3>
-    <span class="category-tag">Mountain Range</span>
-  </div>
-  <p class="card-desc">A major mountain range stretching from British Columbia to Northern California. Acts as a massive wall east of Seattle, trapping moisture from the Pacific Ocean and contributing to the region's famously green, rainy climate.</p>
-</div>
-<div class="card" style="border-left:4px solid var(--teal);">
-  <div class="card-header">
-    <h3 class="card-title">Puget Sound</h3>
-    <span class="category-tag">Waterway</span>
-  </div>
-  <p class="card-desc">A complex system of deep, glacier-carved saltwater channels connected to the Pacific Ocean. The reason Seattle became a major maritime hub, and home to rich marine life including the region's famous pods of Orca whales.</p>
-</div>
-  </div>
-</section>
-
-<!-- ═══ SHOPPING ═══ -->
-<section class="section section-alt" id="shopping">
-  <div class="section-header">
-    <h2>🛍️ Shopping</h2>
-    <div class="section-line"></div>
-  </div>
-  <div id="shoppingMap" class="map-wide"></div>
-  <div class="sort-controls" data-target="shoppingCards">
-    <button class="sort-btn active" data-sort="distance">↕ Distance</button>
-    <button class="sort-btn" data-sort="name">A→Z Name</button>
-  </div>
-  <div class="card-grid" id="shoppingCards">
-    <div class="card" data-lat="47.612883" data-lng="-122.335289" data-name="Pacific Place" data-distance="3">
-  <div class="card-header">
-    <h3 class="card-title">Pacific Place</h3>
-    <div class="card-badges"><span class="badge badge-blue">🚶 3 min walk</span>  </div>
-  </div>
-  <p class="card-desc">Upscale downtown mall with dining, cinema, and retail. Connected to the convention center area.</p>
-  <p class="card-addr">📍 600 Pine St, Seattle, WA 98101</p>
-  <a href="https://www.pacificplaceseattle.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
-</div>
-
-<div class="card" data-lat="47.611921" data-lng="-122.336541" data-name="Nordstrom Flagship" data-distance="4">
-  <div class="card-header">
-    <h3 class="card-title">Nordstrom Flagship</h3>
-    <div class="card-badges"><span class="badge badge-blue">🚶 4 min walk</span>  </div>
-  </div>
-  <p class="card-desc">Nordstrom's original flagship store — the company was founded in Seattle in 1901. Five stories of fashion, shoes, and cosmetics.</p>
-  <p class="card-addr">📍 500 Pine St, Seattle, WA 98101</p>
-  <a href="https://www.nordstrom.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
-</div>
-
-<div class="card" data-lat="47.611991" data-lng="-122.337391" data-name="Westlake Center" data-distance="5">
-  <div class="card-header">
-    <h3 class="card-title">Westlake Center</h3>
-    <div class="card-badges"><span class="badge badge-blue">🚶 5 min walk</span>  </div>
-  </div>
-  <p class="card-desc">Downtown shopping center and Monorail terminal. Retail shops and food options.</p>
-  <p class="card-addr">📍 400 Pine St, Seattle, WA 98101</p>
-  <a href="https://www.westlakecenter.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
-</div>
-
-<div class="card" data-lat="47.608754" data-lng="-122.3402" data-name="Pike Place Market Shops" data-distance="10">
-  <div class="card-header">
-    <h3 class="card-title">Pike Place Market Shops</h3>
-    <div class="card-badges"><span class="badge badge-blue">🚶 10 min walk</span>  </div>
-  </div>
-  <p class="card-desc">Handcrafted jewelry, local art, specialty foods, flowers, and unique Seattle souvenirs from independent vendors.</p>
-  <p class="card-addr">📍 85 Pike St, Seattle, WA 98101</p>
-</div>
-
-<div class="card" data-lat="47.662674" data-lng="-122.299114" data-name="University Village" data-distance="15">
-  <div class="card-header">
-    <h3 class="card-title">University Village</h3>
-    <div class="card-badges"><span class="badge badge-navy">🚗 15 min drive</span>  </div>
-  </div>
-  <p class="card-desc">Upscale open-air shopping center with national brands, local boutiques, and excellent dining options.</p>
-  <p class="card-addr">📍 2623 NE University Village St, Seattle, WA 98105</p>
-  <a href="https://uvillage.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
-</div>
-
-<div class="card" data-lat="47.614666" data-lng="-122.319677" data-name="Elliott Bay Book Company" data-distance="15">
-  <div class="card-header">
-    <h3 class="card-title">Elliott Bay Book Company</h3>
-    <div class="card-badges"><span class="badge badge-blue">🚶 15 min walk</span>  </div>
-  </div>
-  <p class="card-desc">Massive, multi-level independent bookstore — Capitol Hill's literary soul. A must-visit for book lovers.</p>
-  <p class="card-addr">📍 1521 10th Ave, Seattle, WA 98122</p>
-  <a href="https://www.elliottbaybook.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
-</div>
-
-<div class="card" data-lat="47.615655" data-lng="-122.203677" data-name="Bellevue Square" data-distance="30">
-  <div class="card-header">
-    <h3 class="card-title">Bellevue Square</h3>
-    <div class="card-badges"><span class="badge badge-blue">🚇 30 min transit</span>  </div>
-  </div>
-  <p class="card-desc">Premium Eastside shopping via the new 2 Line light rail. High-end department stores adjacent to Bellevue Downtown Park.</p>
-  <p class="card-addr">📍 575 Bellevue Square, Bellevue, WA 98004</p>
-</div>
-
-  </div>
-</section>
-
 <!-- ═══ ENTERTAINMENT ═══ -->
-<section class="section" id="entertainment">
+<section class="section section-alt" id="entertainment">
   <div class="section-header">
     <h2>🎭 Entertainment & Nightlife</h2>
     <div class="section-line"></div>
@@ -1667,62 +1381,370 @@ img { max-width: 100%; height: auto; }
   </div>
 </section>
 
-<!-- ═══ COFFEE & BARS ═══ -->
-<section class="section section-alt" id="coffee">
+<!-- ═══ FAMILY ACTIVITIES ═══ -->
+<section class="section" id="family">
   <div class="section-header">
-    <h2>☕ Coffee & Bars</h2>
+    <h2>👨‍👩‍👧‍👦 Family Activities</h2>
     <div class="section-line"></div>
-    <p>Seattle is the birthplace of Starbucks and the epicenter of American specialty coffee culture</p>
+    <p>Rainy-day-proof fun for families — indoor and outdoor options for all ages</p>
   </div>
-  <div id="coffeeMap" class="map-wide"></div>
-  <div class="sort-controls" data-target="coffeeCards">
+  <div id="familyMap" class="map-wide"></div>
+  <div class="sort-controls" data-target="familyCards">
     <button class="sort-btn active" data-sort="distance">↕ Distance</button>
     <button class="sort-btn" data-sort="name">A→Z Name</button>
   </div>
-  <div class="card-grid" id="coffeeCards">
-    <div class="card" data-lat="47.610008" data-lng="-122.34258" data-name="Original Starbucks" data-distance="10">
+  <div class="card-grid" id="familyCards">
+    <div class="card card-family" data-name="PlayDate SEA" data-distance="10">
   <div class="card-header">
-    <h3 class="card-title">Original Starbucks</h3>
-    <div class="card-badges"><span class="badge badge-blue">🚶 10 min walk</span>   <span class="price-tier">$<span class="price-dim">$$</span></span></div>
+    <h3 class="card-title">PlayDate SEA</h3>
+    <div class="card-badges">
+      <span class="badge badge-navy">🚗 10 min drive</span> <span class="price-tier">$<span class="price-dim">$$</span></span>
+      <span class="badge badge-indoor">🏠 Indoor</span>
+      <span class="badge badge-age">Ages: 0–10 years</span>
+    </div>
   </div>
-  <p class="card-desc">The first Starbucks store, opened in 1971. Expect a line, but it's a must-visit Seattle experience.</p>
-  <p class="card-addr">📍 1912 Pike Pl, Seattle, WA 98101</p>
+  <p class="card-desc">8,000 sq ft multi-level climbing structure with toddler zones. Attached café with pizza and espresso for parents.</p>
+  <a href="https://www.playdatesea.com/" target="_blank" class="card-link">Plan Visit →</a>
 </div>
-
-<div class="card" data-lat="47.613227" data-lng="-122.344667" data-name="Bathtub Gin & Co." data-distance="12">
+<div class="card card-family" data-name="Woodland Park Zoo — Zoomazium" data-distance="15">
   <div class="card-header">
-    <h3 class="card-title">Bathtub Gin & Co.</h3>
-    <div class="card-badges"><span class="badge badge-blue">🚶 12 min walk</span>   <span class="price-tier">$$<span class="price-dim">$</span></span></div>
+    <h3 class="card-title">Woodland Park Zoo — Zoomazium</h3>
+    <div class="card-badges">
+      <span class="badge badge-navy">🚗 15 min drive</span> <span class="price-tier">$$<span class="price-dim">$</span></span>
+      <span class="badge badge-indoor">🏠 Indoor</span>
+      <span class="badge badge-age">Ages: 0–8 years</span>
+    </div>
   </div>
-  <p class="card-desc">Cozy speakeasy in Belltown with craft cocktails and a hidden underground vibe.</p>
-  <p class="card-addr">📍 2205 2nd Ave, Seattle, WA 98121</p>
-  <a href="https://bathtubginseattle.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+  <p class="card-desc">Nature-themed indoor play space with mountain cave, rope bridge, and 20-foot climbing tree. Included with zoo admission.</p>
+  <a href="https://www.zoo.org/" target="_blank" class="card-link">Plan Visit →</a>
 </div>
-
-<div class="card" data-lat="47.600162" data-lng="-122.331341" data-name="Elm Coffee Roasters" data-distance="15">
+<div class="card card-family" data-name="Artists at Play Playground" data-distance="20">
   <div class="card-header">
-    <h3 class="card-title">Elm Coffee Roasters</h3>
-    <div class="card-badges"><span class="badge badge-blue">🚶 15 min walk</span>   <span class="price-tier">$<span class="price-dim">$$</span></span></div>
+    <h3 class="card-title">Artists at Play Playground</h3>
+    <div class="card-badges">
+      <span class="badge badge-blue">🚶 20 min walk</span> <span class="price-free">FREE</span>
+      <span class="badge badge-outdoor">🌳 Outdoor</span>
+      <span class="badge badge-age">Ages: All ages</span>
+    </div>
   </div>
-  <p class="card-desc">Minimalist specialty coffee shop in Pioneer Square. Excellent pour-overs and espresso drinks.</p>
-  <p class="card-addr">📍 240 2nd Ave S, Seattle, WA 98104</p>
+  <p class="card-desc">Expansive outdoor playground at Seattle Center with massive climbing structures, 30-foot climbing tower, tube slides, and interactive musical instruments.</p>
+  
 </div>
-
-<div class="card" data-lat="47.611273" data-lng="-122.316476" data-name="Canon" data-distance="20">
+<div class="card card-family" data-name="Seattle Children's Museum" data-distance="20">
   <div class="card-header">
-    <h3 class="card-title">Canon</h3>
-    <div class="card-badges"><span class="badge badge-blue">🚶 20 min walk</span>   <span class="price-tier">$$<span class="price-dim">$</span></span></div>
+    <h3 class="card-title">Seattle Children's Museum</h3>
+    <div class="card-badges">
+      <span class="badge badge-blue">🚶 20 min walk</span> <span class="price-tier">$<span class="price-dim">$$</span></span>
+      <span class="badge badge-indoor">🏠 Indoor</span>
+      <span class="badge badge-age">Ages: 0–8 years</span>
+    </div>
   </div>
-  <p class="card-desc">Award-winning cocktail bar on Capitol Hill with over 4,000 bottles of spirits. One of the best bars in America.</p>
-  <p class="card-addr">📍 928 12th Ave, Seattle, WA 98122</p>
-  <a href="https://www.canonseattle.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+  <p class="card-desc">Interactive play zones in the Seattle Center Armory. $16–18 admission, under 1 free. 'Museums for All' program ($5 reduced).</p>
+  <a href="https://thechildrensmuseum.org/" target="_blank" class="card-link">Plan Visit →</a>
 </div>
-
+<div class="card card-family" data-name="Pacific Science Center" data-distance="22">
+  <div class="card-header">
+    <h3 class="card-title">Pacific Science Center</h3>
+    <div class="card-badges">
+      <span class="badge badge-blue">🚶 22 min walk</span> <span class="price-tier">$$<span class="price-dim">$</span></span>
+      <span class="badge badge-indoor">🏠 Indoor</span>
+      <span class="badge badge-age">Ages: All ages</span>
+    </div>
+  </div>
+  <p class="card-desc">Tropical Butterfly House, Tinker Tank makerspace, live science stages, dinosaur exhibits. $32–35 adults, $26–28 children. 'Exploration for All' sensory-friendly sessions.</p>
+  <a href="https://www.pacificsciencecenter.org/" target="_blank" class="card-link">Plan Visit →</a>
+</div>
+<div class="card card-family" data-name="KidsQuest Children's Museum" data-distance="30">
+  <div class="card-header">
+    <h3 class="card-title">KidsQuest Children's Museum</h3>
+    <div class="card-badges">
+      <span class="badge badge-blue">🚇 30 min transit</span> <span class="price-tier">$<span class="price-dim">$$</span></span>
+      <span class="badge badge-indoor">🏠 Indoor</span>
+      <span class="badge badge-age">Ages: 0–10 years</span>
+    </div>
+  </div>
+  <p class="card-desc">STEM-focused exhibits in Bellevue. Take the 2 Line + short walk from Bellevue Downtown Station. $5 parking.</p>
+  <a href="https://www.kidsquestmuseum.org/" target="_blank" class="card-link">Plan Visit →</a>
+</div>
   </div>
 </section>
 
+<!-- ═══ SEASONAL EVENTS ═══ -->
+<section class="section section-alt" id="seasonal">
+  <div class="section-header">
+    <h2>🎄 Seasonal Events</h2>
+    <div class="section-line"></div>
+    <p>November in Seattle means the start of holiday magic</p>
+  </div>
+  <div class="card-grid">
+    <div class="card card-seasonal">
+  <h3 class="card-title">🎄 WildLanterns at Woodland Park Zoo</h3>
+  <span class="category-tag">Light Festival</span>
+  <span class="badge badge-blue">📅 Opens mid-November through January 18</span>
+  <span class="price-tier">$$<span class="price-dim">$</span></span>
+  <p class="card-desc">Spectacular evening festival with massive animal and nature-themed lantern displays illuminating the zoo pathways. $39.95 adults, $34.95 children.</p>
+  <p class="card-tip">💡 Look for 'Night Owls' 21+ evenings — explore kid-free with holiday cocktails by fire pits and carousel rides.</p>
+  <a href="https://www.zoo.org/wildlanterns" target="_blank" class="card-link">Details →</a>
+</div>
+<div class="card card-seasonal">
+  <h3 class="card-title">🎄 Leavenworth Christmas Lighting Festival</h3>
+  <span class="category-tag">Holiday Festival</span>
+  <span class="badge badge-blue">📅 Weekends starting late November</span>
+  <span class="price-free">FREE</span>
+  <p class="card-desc">Bavarian village transformed with millions of lights, German food, glühwein, and holiday markets. Lighting ceremony at dusk.</p>
+  
+  <a href="https://leavenworth.org/" target="_blank" class="card-link">Details →</a>
+</div>
+<div class="card card-seasonal">
+  <h3 class="card-title">🎄 Seattle CityPASS</h3>
+  <span class="category-tag">Discount Pass</span>
+  
+  <span class="price-tier">$$<span class="price-dim">$</span></span>
+  <p class="card-desc">Save up to 47% on combined admissions to Space Needle, Seattle Aquarium, and choice of MoPOP, Woodland Park Zoo, or Argosy Cruises.</p>
+  
+  <a href="https://www.citypass.com/seattle" target="_blank" class="card-link">Details →</a>
+</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     CULTURE & CONTEXT — Know the city
+     ═══════════════════════════════════════════════════════════════════ -->
+
+<!-- ═══ HISTORY ═══ -->
+<section class="section" id="history">
+  <div class="section-header">
+    <h2>📜 From Sawdust to Software</h2>
+    <div class="section-line"></div>
+    <p>Seattle's growth has been defined by massive boom-and-bust cycles, reshaping the landscape — and even the physical elevation — of the city</p>
+  </div>
+  <div class="card-grid" style="grid-template-columns: 1fr;">
+    <div class="card" style="border-left:4px solid var(--gold);">
+  <h3 class="card-title">The First Inhabitants</h3>
+  <p class="card-desc">Long before European settlement, the Duwamish and Suquamish tribes inhabited the area. The city is named after Chief Seattle (Sealth), a prominent leader of both tribes.</p>
+</div>
+<div class="card" style="border-left:4px solid var(--gold);">
+  <h3 class="card-title">The Great Seattle Fire (1889)</h3>
+  <p class="card-desc">A glue pot boiled over in a carpentry shop, starting a fire that destroyed the central business district. Residents rebuilt using brick and stone, raising the street level — creating the famous 'Seattle Underground' that tourists can still visit today.</p>
+</div>
+<div class="card" style="border-left:4px solid var(--gold);">
+  <h3 class="card-title">Klondike Gold Rush (1897)</h3>
+  <p class="card-desc">When gold was discovered in the Yukon, Seattle marketed itself as the 'Gateway to Alaska' and became the primary outfitting point for miners. The massive influx of wealth transformed Seattle from a struggling pioneer town into a thriving metropolis overnight.</p>
+</div>
+<div class="card" style="border-left:4px solid var(--gold);">
+  <h3 class="card-title">The World's Fair (1962)</h3>
+  <p class="card-desc">Officially called the Century 21 Exposition, this event left the city with its most iconic landmarks: the Space Needle, the Monorail, and the Seattle Center.</p>
+</div>
+<div class="card" style="border-left:4px solid var(--gold);">
+  <h3 class="card-title">The Tech Boom (1980s–Present)</h3>
+  <p class="card-desc">The rise of Microsoft in the 80s and 90s, followed by the massive expansion of Amazon in the 2010s, created a huge influx of wealth and development, completely transforming neighborhoods like South Lake Union.</p>
+</div>
+  </div>
+</section>
+
+<!-- ═══ FAMOUS FACES ═══ -->
+<section class="section section-alt" id="famous">
+  <div class="section-header">
+    <h2>⭐ Seattle's Own: Famous Faces</h2>
+    <div class="section-line"></div>
+    <p>Seattle has been a launchpad for revolutionaries in music, technology, and entertainment</p>
+  </div>
+  <div class="card-grid">
+    <div class="card">
+  <div class="card-header">
+    <h3 class="card-title">Jimi Hendrix</h3>
+    <div class="card-badges"><span class="cuisine-tag">Music</span> <span class="badge badge-blue">Born in Seattle</span></div>
+  </div>
+  <p class="card-desc">Born and raised in Seattle, Hendrix is arguably the greatest guitarist in rock history. Visit his memorial in nearby Renton or the extensive exhibits at the Museum of Pop Culture (MoPOP).</p>
+</div>
+<div class="card">
+  <div class="card-header">
+    <h3 class="card-title">Bill Gates</h3>
+    <div class="card-badges"><span class="cuisine-tag">Tech</span> <span class="badge badge-blue">Born in Seattle</span></div>
+  </div>
+  <p class="card-desc">Born in Seattle, Gates co-founded Microsoft and revolutionized personal computing. His philanthropic efforts via the Gates Foundation are deeply rooted in the city.</p>
+</div>
+<div class="card">
+  <div class="card-header">
+    <h3 class="card-title">Bruce Lee</h3>
+    <div class="card-badges"><span class="cuisine-tag">Film / Martial Arts</span> <span class="badge badge-blue">Lived & studied in Seattle</span></div>
+  </div>
+  <p class="card-desc">The martial arts legend moved to Seattle to finish high school and attend the University of Washington. He opened his first martial arts studio here and is buried in Lake View Cemetery alongside his son, Brandon.</p>
+</div>
+<div class="card">
+  <div class="card-header">
+    <h3 class="card-title">Kurt Cobain</h3>
+    <div class="card-badges"><span class="cuisine-tag">Music</span> <span class="badge badge-blue">Seattle grunge scene</span></div>
+  </div>
+  <p class="card-desc">Originally from Aberdeen, WA, Cobain and Nirvana became the global face of Seattle's 1990s grunge movement, transforming the city's cultural identity forever.</p>
+</div>
+<div class="card">
+  <div class="card-header">
+    <h3 class="card-title">Macklemore & Ryan Lewis</h3>
+    <div class="card-badges"><span class="cuisine-tag">Music</span> <span class="badge badge-blue">Born in Seattle</span></div>
+  </div>
+  <p class="card-desc">This hip-hop duo proudly wears their Seattle heritage, frequently filming music videos in local spots like Capitol Hill and Pike Place Market.</p>
+</div>
+<div class="card">
+  <div class="card-header">
+    <h3 class="card-title">Sir Mix-a-Lot</h3>
+    <div class="card-badges"><span class="cuisine-tag">Music</span> <span class="badge badge-blue">Born in Seattle</span></div>
+  </div>
+  <p class="card-desc">Born and raised in the Central District, this hip-hop pioneer put Seattle on the rap map long before the tech boom.</p>
+</div>
+  </div>
+</section>
+
+<!-- ═══ POP CULTURE ═══ -->
+<section class="section" id="popculture">
+  <div class="section-header">
+    <h2>🎬 The Emerald City on Screen</h2>
+    <div class="section-line"></div>
+    <p>Seattle's moody weather, stunning skyline, and surrounding waterways make it an incredibly atmospheric setting</p>
+  </div>
+  <h3 style="text-align:center;color:var(--navy);margin-bottom:1rem;">📺 Television</h3>
+  <div class="card-grid">
+    <div class="card">
+  <div class="card-header">
+    <h3 class="card-title">📺 Grey's Anatomy</h3>
+    <span class="category-tag">Medical Drama</span>
+  </div>
+  <p class="card-desc">While mostly filmed in Los Angeles, this long-running medical drama is deeply tied to the city. Fans seek out the real-life locations of establishing shots like the Space Needle and the Monorail.</p>
+</div>
+<div class="card">
+  <div class="card-header">
+    <h3 class="card-title">📺 Frasier</h3>
+    <span class="category-tag">Sitcom</span>
+  </div>
+  <p class="card-desc">This classic 90s sitcom defined the upscale, coffee-obsessed Seattle aesthetic. While Frasier's exact apartment view is geographically impossible, Kerry Park on Queen Anne Hill offers the closest real-life equivalent.</p>
+</div>
+<div class="card">
+  <div class="card-header">
+    <h3 class="card-title">📺 The Killing</h3>
+    <span class="category-tag">Crime Drama</span>
+  </div>
+  <p class="card-desc">For fans of darker, grittier Seattle — this crime drama perfectly captured the relentlessly rainy, moody atmosphere of the Pacific Northwest.</p>
+</div>
+  </div>
+  <h3 style="text-align:center;color:var(--navy);margin:2rem 0 1rem;">🎬 Film</h3>
+  <div class="card-grid">
+    <div class="card">
+  <div class="card-header">
+    <h3 class="card-title">🎬 Sleepless in Seattle (1993)</h3>
+  </div>
+  <p class="card-desc">The quintessential Seattle romance. Famously highlighted the city's unique houseboat culture on Lake Union.</p>
+</div>
+<div class="card">
+  <div class="card-header">
+    <h3 class="card-title">🎬 10 Things I Hate About You (1999)</h3>
+  </div>
+  <p class="card-desc">This beloved teen adaptation features iconic scenes filmed around the Seattle area, including a memorable paintball date at Gas Works Park.</p>
+</div>
+<div class="card">
+  <div class="card-header">
+    <h3 class="card-title">🎬 Singles (1992)</h3>
+  </div>
+  <p class="card-desc">Directed by Cameron Crowe, this movie is a love letter to Seattle's early 90s grunge scene, featuring cameos from Pearl Jam, Soundgarden, and Alice in Chains.</p>
+</div>
+  </div>
+</section>
+
+<!-- ═══ GEOGRAPHY ═══ -->
+<section class="section section-navy" id="geography">
+  <div class="section-header">
+    <h2>🌋 Fire and Ice: Seattle's Geography</h2>
+    <div class="section-line"></div>
+    <p>Nestled between mountain ranges and deep waterways, sitting on the Pacific Ring of Fire</p>
+  </div>
+  <div class="card-grid">
+    <div class="card" style="border-left:4px solid var(--teal);">
+  <div class="card-header">
+    <h3 class="card-title">Mount Rainier</h3>
+    <span class="category-tag">Volcano / Mountain</span>
+  </div>
+  <p class="card-desc">Towering at 14,411 feet, Mount Rainier is an active stratovolcano that dominates the Seattle skyline on clear days. The most heavily glaciated peak in the contiguous US and a crown jewel for hikers and climbers. About 60 miles southeast of the city.</p>
+</div>
+<div class="card" style="border-left:4px solid var(--teal);">
+  <div class="card-header">
+    <h3 class="card-title">Mount St. Helens</h3>
+    <span class="category-tag">Volcano</span>
+  </div>
+  <p class="card-desc">On May 18, 1980, Mount St. Helens experienced a catastrophic eruption — the most destructive volcanic event in US history, reducing its height by 1,300 feet. Today, visitors can drive to the Johnston Ridge Observatory to look directly into the crater. About 175 miles south of Seattle.</p>
+</div>
+<div class="card" style="border-left:4px solid var(--teal);">
+  <div class="card-header">
+    <h3 class="card-title">The Cascade Range</h3>
+    <span class="category-tag">Mountain Range</span>
+  </div>
+  <p class="card-desc">A major mountain range stretching from British Columbia to Northern California. Acts as a massive wall east of Seattle, trapping moisture from the Pacific Ocean and contributing to the region's famously green, rainy climate.</p>
+</div>
+<div class="card" style="border-left:4px solid var(--teal);">
+  <div class="card-header">
+    <h3 class="card-title">Puget Sound</h3>
+    <span class="category-tag">Waterway</span>
+  </div>
+  <p class="card-desc">A complex system of deep, glacier-carved saltwater channels connected to the Pacific Ocean. The reason Seattle became a major maritime hub, and home to rich marine life including the region's famous pods of Orca whales.</p>
+</div>
+  </div>
+</section>
+
+<!-- ═══ LIFE SCIENCES HERITAGE ═══ -->
+<section class="section" id="lifesciences">
+  <div class="section-header">
+    <h2>🧬 Seattle's Life Sciences Legacy</h2>
+    <div class="section-line"></div>
+    <p>Seattle is a global epicenter for molecular pathology, immunology, and precision medicine</p>
+  </div>
+  <div class="card-grid">
+    <div class="card card-lifesci">
+  <h3 class="card-title">Fred Hutchinson Cancer Center</h3>
+  <span class="category-tag">Research / Cancer</span>
+  <span class="neighborhood-tag">📍 South Lake Union</span>
+  <p class="card-desc">World-class biomedical research hub for cancer, molecular pathology, and infectious diseases. Following 2022 merger with Seattle Cancer Care Alliance, features state-of-the-art laboratories with sustainable design. Lab tours require months of advance booking.</p>
+  <p class="card-note">🔬 Relevant to medical professionals — molecular pathology research</p>
+  <a href="https://www.fredhutch.org/" target="_blank" class="card-link">Learn More →</a>
+</div>
+<div class="card card-lifesci">
+  <h3 class="card-title">Allen Institute</h3>
+  <span class="category-tag">Research / Neuroscience</span>
+  <span class="neighborhood-tag">📍 South Lake Union</span>
+  <p class="card-desc">Founded by Microsoft co-founder Paul G. Allen. Operates under 'open science' philosophy sharing free data and tools globally. Research in neuroscience, immunology, and cell biology.</p>
+  
+  <a href="https://alleninstitute.org/" target="_blank" class="card-link">Learn More →</a>
+</div>
+<div class="card card-lifesci">
+  <h3 class="card-title">UW Medicine SLU Research Hub</h3>
+  <span class="category-tag">Academic / Research</span>
+  <span class="neighborhood-tag">📍 South Lake Union</span>
+  <p class="card-desc">University of Washington's research hub where scientists focus on molecular imaging, protein design, and translational medicine.</p>
+  
+  <a href="https://www.uwmedicine.org/" target="_blank" class="card-link">Learn More →</a>
+</div>
+<div class="card card-lifesci">
+  <h3 class="card-title">First Hill 'Pill Hill' Medical District</h3>
+  <span class="category-tag">Historic / Medical</span>
+  <span class="neighborhood-tag">📍 First Hill</span>
+  <p class="card-desc">Seattle's historic medical district known as 'Pill Hill.' Home to Swedish Medical Center (founded 1910). Walking tours available via HistoryLink showing the evolution from 1883 timber baron mansions to modern medical facilities.</p>
+  
+  
+</div>
+<div class="card card-lifesci">
+  <h3 class="card-title">South Lake Union Life Sciences Cluster</h3>
+  <span class="category-tag">Biotech Hub</span>
+  <span class="neighborhood-tag">📍 South Lake Union</span>
+  <p class="card-desc">Greater Seattle supports 1,180+ life science companies generating $13.7 billion in gross regional product. The SLU neighborhood houses Amazon HQ alongside Fred Hutch, Allen Institute, and UW Medicine — making it one of the world's most formidable life science clusters.</p>
+  
+  
+</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     REFERENCE
+     ═══════════════════════════════════════════════════════════════════ -->
+
 <!-- ═══ LOCAL INSIGHTS ═══ -->
-<section class="section">
+<section class="section section-alt" id="insights">
   <div class="section-header">
     <h2>💡 Local Insights</h2>
     <div class="section-line"></div>
