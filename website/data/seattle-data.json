@@ -334,6 +334,91 @@
       "description": "Seattle's legendary fine dining destination since 1950. Stunning lake views, impeccable service, and a world-class tasting menu. Reservations essential.",
       "latitude": 47.643053,
       "longitude": -122.346736
+    },
+    {
+      "name": "The Pink Door",
+      "cuisine": "Italian / Cabaret",
+      "address": "1919 Post Alley, Seattle, WA 98101",
+      "website": "https://www.thepinkdoor.net/",
+      "walkingMinutes": 10,
+      "distanceMiles": 0.5,
+      "priceTier": "$$$",
+      "description": "Hidden behind an unmarked pink door in Post Alley at Pike Place Market. Excellent Italian food, stunning Elliott Bay views from the patio, and a truly unique atmosphere with live cabaret, trapeze, and burlesque performances. Reservations essential.",
+      "latitude": 47.610388,
+      "longitude": -122.342531
+    },
+    {
+      "name": "Sushi Kashiba",
+      "cuisine": "Japanese / Omakase",
+      "address": "86 Pine St #1, Seattle, WA 98101",
+      "website": "https://sushikashiba.com/",
+      "walkingMinutes": 10,
+      "distanceMiles": 0.5,
+      "priceTier": "$$$",
+      "description": "Master chef Shiro Kashiba's omakase temple at Pike Place Market. Widely considered the best traditional Edomae-style sushi in the Pacific Northwest. The 10-seat sushi bar is a bucket-list experience. Reservations required.",
+      "latitude": 47.609774,
+      "longitude": -122.341426
+    },
+    {
+      "name": "Shiro's Sushi",
+      "cuisine": "Japanese / Sushi",
+      "address": "2401 2nd Ave, Seattle, WA 98121",
+      "website": "https://www.shiros.com/",
+      "walkingMinutes": 12,
+      "distanceMiles": 0.6,
+      "priceTier": "$$$",
+      "description": "Belltown institution founded by master sushi chef Shiro Kashiba in 1994. Traditional Japanese nigiri and omakase in an intimate setting. One of the most respected sushi restaurants on the West Coast.",
+      "latitude": 47.614797,
+      "longitude": -122.347296
+    },
+    {
+      "name": "Ray's Boathouse",
+      "cuisine": "Seafood / Pacific Northwest",
+      "address": "6049 Seaview Ave NW, Seattle, WA 98107",
+      "website": "https://www.rays.com/",
+      "drivingMinutes": 15,
+      "distanceMiles": 6.0,
+      "priceTier": "$$$",
+      "requiresTransport": true,
+      "description": "Legendary waterfront seafood institution in Ballard since 1973. Stunning views of Puget Sound and the Olympic Mountains. Wild salmon, Dungeness crab, and an award-winning wine list. The upstairs Café is more casual. Defines Pacific Northwest dining.",
+      "latitude": 47.673377,
+      "longitude": -122.407572
+    },
+    {
+      "name": "Ba Bar",
+      "cuisine": "Vietnamese",
+      "address": "550 12th Ave, Seattle, WA 98122",
+      "website": "https://www.babarseattle.com/",
+      "walkingMinutes": 18,
+      "distanceMiles": 0.9,
+      "priceTier": "$$",
+      "description": "Capitol Hill favorite for Vietnamese street food — exceptional pho, banh mi, rice plates, and creative cocktails. Late-night hours make it perfect for post-conference dining. Seattle has one of the best Vietnamese food scenes in the US.",
+      "latitude": 47.607011,
+      "longitude": -122.316503
+    },
+    {
+      "name": "Pho Bac Súp Shop",
+      "cuisine": "Vietnamese / Pho",
+      "address": "1240 S Jackson St, Seattle, WA 98144",
+      "website": "https://www.phobacseattle.com/",
+      "drivingMinutes": 10,
+      "distanceMiles": 1.5,
+      "priceTier": "$",
+      "requiresTransport": true,
+      "description": "A Seattle institution since 1982 in the International District / Little Saigon. Widely considered the city's best pho. Simple, authentic, no-frills — just outstanding Vietnamese soup. Open 10 AM–9 PM daily.",
+      "latitude": 47.599479,
+      "longitude": -122.315383
+    },
+    {
+      "name": "Mamnoon Street",
+      "cuisine": "Levantine / Middle Eastern",
+      "address": "1526 6th Ave, Seattle, WA 98101",
+      "walkingMinutes": 6,
+      "distanceMiles": 0.3,
+      "priceTier": "$$",
+      "description": "Modern Syrian and Lebanese street food in a quick-casual format downtown. Vibrant spices, fresh flatbreads, shawarma, and falafel. From the team behind the acclaimed Mamnoon restaurant (Capitol Hill location closed 2025, but this downtown spot carries the torch).",
+      "latitude": 47.611484,
+      "longitude": -122.334637
     }
   ],
   "attractions": {

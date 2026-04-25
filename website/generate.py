@@ -1014,6 +1014,9 @@ img {{ max-width: 100%; height: auto; }}
       <div class="transport-grid">
         {transport_cards}
       </div>
+      <div style="text-align:center;margin-top:1.5rem;">
+        <a href="https://www.soundtransit.org/ride-with-us/schedules-maps" target="_blank" class="btn btn-primary" style="display:inline-block;">🗺️ Sound Transit Maps & Schedules</a>
+      </div>
     </div>
   </div>
 </section>
