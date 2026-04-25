@@ -511,10 +511,9 @@ img { max-width: 100%; height: auto; }
     <div class="section-line"></div>
     <p>17 curated restaurants sorted by distance from the convention center</p>
   </div>
-  <div class="map-section-layout">
-    <div id="diningMap" class="map-container"></div>
-    <div class="card-grid" id="diningCards">
-      <div class="card" data-lat="47.611338" data-lng="-122.333459">
+  <div id="diningMap" class="map-wide"></div>
+  <div class="card-grid" id="diningCards">
+    <div class="card" data-lat="47.611338" data-lng="-122.333459">
   <div class="card-header">
     <h3 class="card-title">Alder & Ash</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 2 min walk</span>   <span class="price-tier">$$<span class="price-dim">$</span></span></div>
@@ -698,7 +697,6 @@ img { max-width: 100%; height: auto; }
   <p class="card-addr">📍 1600 9th Ave, Seattle, WA 98101</p>
 </div>
 
-    </div>
   </div>
 </section>
 
@@ -707,12 +705,11 @@ img { max-width: 100%; height: auto; }
   <div class="section-header">
     <h2>Walkable Attractions</h2>
     <div class="section-line"></div>
-    <p>16 attractions within walking distance of the convention center</p>
+    <p>18 attractions within walking distance of the convention center</p>
   </div>
-  <div class="map-section-layout">
-    <div id="attractionsMap" class="map-container"></div>
-    <div class="card-grid" id="attractionsCards">
-      <div class="card" data-lat="47.609164" data-lng="-122.330511">
+  <div id="attractionsMap" class="map-wide"></div>
+  <div class="card-grid" id="attractionsCards">
+    <div class="card" data-lat="47.609164" data-lng="-122.330511">
   <div class="card-header">
     <h3 class="card-title">Freeway Park</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 3 min walk</span>   <span class="price-free">FREE</span></div>
@@ -742,6 +739,17 @@ img { max-width: 100%; height: auto; }
   <p class="card-desc">Iconic public market since 1907. Watch fishmongers throw fish, visit the original Starbucks, browse local crafts, and sample artisan foods.</p>
   <p class="card-addr">📍 85 Pike St, Seattle, WA 98101</p>
   <a href="https://www.pikeplacemarket.org/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+<div class="card" data-lat="47.606714" data-lng="-122.332698">
+  <div class="card-header">
+    <h3 class="card-title">Seattle Central Library</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 10 min walk</span>   <span class="price-free">FREE</span></div>
+    <span class="category-tag">Architecture / Library</span>
+  </div>
+  <p class="card-desc">Rem Koolhaas-designed architectural masterpiece with a striking glass and steel exterior. 11 stories, breathtaking reading rooms, and a continuous book spiral. Free to visit.</p>
+  <p class="card-addr">📍 1000 4th Ave, Seattle, WA 98104</p>
+  <a href="https://www.spl.org/hours-and-locations/central-library" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
 </div>
 
 <div class="card" data-lat="47.606043" data-lng="-122.342167">
@@ -846,12 +854,12 @@ img { max-width: 100%; height: auto; }
 
 <div class="card" data-lat="47.623591" data-lng="-122.34737">
   <div class="card-header">
-    <h3 class="card-title">Bill & Melinda Gates Foundation Discovery Center</h3>
+    <h3 class="card-title">Gates Foundation Discovery Center</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 20 min walk</span> <span class="badge badge-gold">⭐ Must See</span>  <span class="price-free">FREE</span></div>
     <span class="category-tag">Science / Global Health</span>
   </div>
-  <p class="card-desc">Free interactive exhibition on global health initiatives including efforts to eradicate polio and tackle tuberculosis. Highly relevant for medical professionals.</p>
-  <p class="card-tip">💡 Book tour reservations at least 2 weeks in advance — free but reservation required.</p>
+  <p class="card-desc">Explore innovations and powerful stories about global health progress. Open for guided group tours and student workshops by appointment only (groups of 15+). Always free.</p>
+  <p class="card-tip">💡 Tours by appointment only for groups of 15+. Book well in advance at discovergates.org.</p>
   <p class="card-addr">📍 440 5th Ave N, Seattle, WA 98109</p>
   <a href="https://www.discovergates.org/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
 </div>
@@ -890,7 +898,18 @@ img { max-width: 100%; height: auto; }
   <a href="https://www.seattle.gov/parks/allparks/kerry-park" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
 </div>
 
-    </div>
+<div class="card" data-lat="47.65543" data-lng="-122.300169">
+  <div class="card-header">
+    <h3 class="card-title">University of Washington Campus</h3>
+    <div class="card-badges"><span class="badge badge-navy">🚗 15 min drive</span>   <span class="price-free">FREE</span></div>
+    <span class="category-tag">University / Architecture</span>
+  </div>
+  <p class="card-desc">One of America's most beautiful campuses. Gothic Suzzallo Library ('the Harry Potter library'), cherry tree-lined Quad (stunning even in November), Burke Museum of natural history, and the Henry Art Gallery. Take the 1 Line to U District Station.</p>
+  <p class="card-tip">💡 Take the Link 1 Line to U District Station — 10 min ride from Westlake.</p>
+  <p class="card-addr">📍 University of Washington, Seattle, WA 98195</p>
+  <a href="https://www.washington.edu/visit/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
   </div>
 </section>
 
@@ -1546,7 +1565,7 @@ function initMap(mapId, cardsId, markersData, color) {
 
 // Initialize all maps
 const diningMarkers = [{"idx": 0, "name": "Alder & Ash", "lat": 47.611338, "lng": -122.333459, "walk": 2, "price": "$$", "cuisine": "PNW New American"}, {"idx": 1, "name": "Daawat Indian Grill & Bar", "lat": 47.6128, "lng": -122.3288, "walk": 2, "price": "$$", "cuisine": "Traditional Indian"}, {"idx": 2, "name": "Wild Ginger", "lat": 47.608782, "lng": -122.337196, "walk": 3, "price": "$$", "cuisine": "Pan-Asian"}, {"idx": 3, "name": "The Capital Grille", "lat": 47.608325, "lng": -122.335367, "walk": 4, "price": "$$$", "cuisine": "Steakhouse"}, {"idx": 4, "name": "Din Tai Fung", "lat": 47.6125, "lng": -122.3363, "walk": 5, "price": "$$", "cuisine": "Taiwanese / Dumplings"}, {"idx": 5, "name": "Purple Cafe and Wine Bar", "lat": 47.607951, "lng": -122.33506, "walk": 5, "price": "$$", "cuisine": "American / Wine Bar"}, {"idx": 6, "name": "T\u00e9rra Plata", "lat": 47.614387, "lng": -122.32808, "walk": 7, "price": "$$$", "cuisine": "Farm-to-Table / Pacific NW"}, {"idx": 7, "name": "Japonessa Sushi Cocina", "lat": 47.608052, "lng": -122.339037, "walk": 8, "price": "$$$", "cuisine": "Japanese / Sushi"}, {"idx": 8, "name": "Serious Pie", "lat": 47.612903, "lng": -122.340495, "walk": 8, "price": "$$", "cuisine": "Pizza / Italian"}, {"idx": 9, "name": "Shuckers", "lat": 47.6065, "lng": -122.335, "walk": 9, "price": "$$", "cuisine": "Seafood / Oyster Bar"}, {"idx": 10, "name": "Beecher's Handmade Cheese", "lat": 47.609582, "lng": -122.341816, "walk": 10, "price": "$", "cuisine": "Cheese / American"}, {"idx": 11, "name": "Pike Place Chowder", "lat": 47.609466, "lng": -122.34107, "walk": 10, "price": "$", "cuisine": "Seafood / Chowder"}, {"idx": 12, "name": "Matt's in the Market", "lat": 47.608856, "lng": -122.340566, "walk": 10, "price": "$$$", "cuisine": "Pacific Northwest / Seafood"}, {"idx": 13, "name": "Metropolitan Grill", "lat": 47.604426, "lng": -122.334189, "walk": 10, "price": "$$$", "cuisine": "Steakhouse"}, {"idx": 14, "name": "Canlis", "lat": 47.643053, "lng": -122.346736, "walk": null, "price": "$$$", "cuisine": "Fine Dining / Pacific Northwest"}, {"idx": 15, "name": "Taylor Shellfish Oyster Bar", "lat": 47.623437, "lng": -122.354405, "walk": 18, "price": "$$", "cuisine": "Seafood"}, {"idx": 16, "name": "Bombo Italian Kitchen", "lat": 47.614614, "lng": -122.331332, "walk": 0, "price": "$$", "cuisine": "Italian"}];
-const attractionMarkers = [{"idx": 0, "name": "Freeway Park", "lat": 47.609164, "lng": -122.330511, "walk": 3, "price": "Free", "cuisine": "Park"}, {"idx": 1, "name": "Seattle Art Museum (SAM)", "lat": 47.607701, "lng": -122.338557, "walk": 8, "price": "$$", "cuisine": "Museum"}, {"idx": 2, "name": "Pike Place Market", "lat": 47.608754, "lng": -122.3402, "walk": 10, "price": "Free", "cuisine": "Market / Landmark"}, {"idx": 3, "name": "Seattle Waterfront & Pier 57", "lat": 47.606043, "lng": -122.342167, "walk": 12, "price": "Free", "cuisine": "Waterfront / Entertainment"}, {"idx": 4, "name": "Seattle Great Wheel", "lat": 47.606043, "lng": -122.342167, "walk": 12, "price": "$$", "cuisine": "Attraction"}, {"idx": 5, "name": "Seattle Aquarium", "lat": 47.607625, "lng": -122.34322, "walk": 14, "price": "$$", "cuisine": "Aquarium"}, {"idx": 6, "name": "Pioneer Square", "lat": 47.602722, "lng": -122.331354, "walk": 15, "price": "Free", "cuisine": "Historic District"}, {"idx": 7, "name": "Bill Speidel's Underground Tour", "lat": 47.602335, "lng": -122.333779, "walk": 15, "price": "$$", "cuisine": "Tour / History"}, {"idx": 8, "name": "Capitol Hill", "lat": 47.623831, "lng": -122.318368, "walk": 15, "price": "Free", "cuisine": "Neighborhood"}, {"idx": 9, "name": "Olympic Sculpture Park", "lat": 47.616272, "lng": -122.353583, "walk": 18, "price": "Free", "cuisine": "Park / Art"}, {"idx": 10, "name": "Space Needle", "lat": 47.620513, "lng": -122.349304, "walk": 20, "price": "$$$", "cuisine": "Landmark / Observation"}, {"idx": 11, "name": "Chihuly Garden and Glass", "lat": 47.621462, "lng": -122.350989, "walk": 20, "price": "$$$", "cuisine": "Museum / Art"}, {"idx": 12, "name": "Bill & Melinda Gates Foundation Discovery Center", "lat": 47.623591, "lng": -122.34737, "walk": 20, "price": "Free", "cuisine": "Science / Global Health"}, {"idx": 13, "name": "Pacific Science Center", "lat": 47.619406, "lng": -122.350778, "walk": 22, "price": "$$", "cuisine": "Museum / Science"}, {"idx": 14, "name": "Museum of Pop Culture (MoPOP)", "lat": 47.621493, "lng": -122.348225, "walk": 22, "price": "$$$", "cuisine": "Museum"}, {"idx": 15, "name": "Kerry Park", "lat": 47.629477, "lng": -122.359935, "walk": 30, "price": "Free", "cuisine": "Viewpoint"}];
+const attractionMarkers = [{"idx": 0, "name": "Freeway Park", "lat": 47.609164, "lng": -122.330511, "walk": 3, "price": "Free", "cuisine": "Park"}, {"idx": 1, "name": "Seattle Art Museum (SAM)", "lat": 47.607701, "lng": -122.338557, "walk": 8, "price": "$$", "cuisine": "Museum"}, {"idx": 2, "name": "Pike Place Market", "lat": 47.608754, "lng": -122.3402, "walk": 10, "price": "Free", "cuisine": "Market / Landmark"}, {"idx": 3, "name": "Seattle Central Library", "lat": 47.606714, "lng": -122.332698, "walk": 10, "price": "Free", "cuisine": "Architecture / Library"}, {"idx": 4, "name": "Seattle Waterfront & Pier 57", "lat": 47.606043, "lng": -122.342167, "walk": 12, "price": "Free", "cuisine": "Waterfront / Entertainment"}, {"idx": 5, "name": "Seattle Great Wheel", "lat": 47.606043, "lng": -122.342167, "walk": 12, "price": "$$", "cuisine": "Attraction"}, {"idx": 6, "name": "Seattle Aquarium", "lat": 47.607625, "lng": -122.34322, "walk": 14, "price": "$$", "cuisine": "Aquarium"}, {"idx": 7, "name": "Pioneer Square", "lat": 47.602722, "lng": -122.331354, "walk": 15, "price": "Free", "cuisine": "Historic District"}, {"idx": 8, "name": "Bill Speidel's Underground Tour", "lat": 47.602335, "lng": -122.333779, "walk": 15, "price": "$$", "cuisine": "Tour / History"}, {"idx": 9, "name": "Capitol Hill", "lat": 47.623831, "lng": -122.318368, "walk": 15, "price": "Free", "cuisine": "Neighborhood"}, {"idx": 10, "name": "Olympic Sculpture Park", "lat": 47.616272, "lng": -122.353583, "walk": 18, "price": "Free", "cuisine": "Park / Art"}, {"idx": 11, "name": "Space Needle", "lat": 47.620513, "lng": -122.349304, "walk": 20, "price": "$$$", "cuisine": "Landmark / Observation"}, {"idx": 12, "name": "Chihuly Garden and Glass", "lat": 47.621462, "lng": -122.350989, "walk": 20, "price": "$$$", "cuisine": "Museum / Art"}, {"idx": 13, "name": "Gates Foundation Discovery Center", "lat": 47.623591, "lng": -122.34737, "walk": 20, "price": "Free", "cuisine": "Science / Global Health"}, {"idx": 14, "name": "Pacific Science Center", "lat": 47.619406, "lng": -122.350778, "walk": 22, "price": "$$", "cuisine": "Museum / Science"}, {"idx": 15, "name": "Museum of Pop Culture (MoPOP)", "lat": 47.621493, "lng": -122.348225, "walk": 22, "price": "$$$", "cuisine": "Museum"}, {"idx": 16, "name": "Kerry Park", "lat": 47.629477, "lng": -122.359935, "walk": 30, "price": "Free", "cuisine": "Viewpoint"}, {"idx": 17, "name": "University of Washington Campus", "lat": 47.65543, "lng": -122.300169, "walk": null, "price": "Free", "cuisine": "University / Architecture"}];
 const daytripsMarkers = [{"idx": 0, "name": "Hiram M. Chittenden Locks (Ballard Locks)", "lat": 47.664662, "lng": -122.39746, "walk": "", "price": "Free", "cuisine": "Engineering / Nature"}, {"idx": 1, "name": "Woodland Park Zoo", "lat": 47.666312, "lng": -122.349302, "walk": "", "price": "$$", "cuisine": "Zoo"}, {"idx": 2, "name": "Museum of Flight", "lat": 47.518359, "lng": -122.296496, "walk": "", "price": "$$", "cuisine": "Museum"}, {"idx": 3, "name": "Kirkland Waterfront", "lat": 47.675448, "lng": -122.209257, "walk": "", "price": "Free", "cuisine": "Waterfront / Town"}, {"idx": 4, "name": "Microsoft Visitor Center", "lat": 47.642492, "lng": -122.136927, "walk": "", "price": "Free", "cuisine": "Tech / Corporate Campus"}, {"idx": 5, "name": "Bellevue via 2 Line Light Rail", "lat": 47.614422, "lng": -122.192337, "walk": "", "price": "Free", "cuisine": "City / Shopping / Family"}, {"idx": 6, "name": "Woodinville Wine Country", "lat": 47.754583, "lng": -122.15889, "walk": "", "price": "$$", "cuisine": "Wine / Tasting"}, {"idx": 7, "name": "Bainbridge Island", "lat": 47.6027, "lng": -122.3389, "walk": "", "price": "$", "cuisine": "Island / Day Trip"}, {"idx": 8, "name": "Snoqualmie Falls", "lat": 47.542155, "lng": -121.836632, "walk": "", "price": "Free", "cuisine": "Nature / Waterfall"}, {"idx": 9, "name": "Future of Flight Aviation Center & Boeing Tour", "lat": 47.918494, "lng": -122.292439, "walk": "", "price": "$$", "cuisine": "Museum / Factory Tour"}, {"idx": 10, "name": "Whidbey Island", "lat": 47.95022, "lng": -122.297075, "walk": "", "price": "$", "cuisine": "Island / Nature"}, {"idx": 11, "name": "Leavenworth Bavarian Village", "lat": 47.606028, "lng": -120.64324, "walk": "", "price": "Free", "cuisine": "Town / Culture"}];
 const familyMarkers = [{"idx": 0, "name": "Artists at Play Playground", "lat": 47.621255, "lng": -122.349741, "walk": 20, "price": "Free", "cuisine": "Playground"}, {"idx": 1, "name": "Pacific Science Center", "lat": 47.619406, "lng": -122.350778, "walk": 22, "price": "$$", "cuisine": "Science Museum"}, {"idx": 2, "name": "Seattle Children's Museum", "lat": 47.621462, "lng": -122.350989, "walk": 20, "price": "$", "cuisine": "Children's Museum"}, {"idx": 3, "name": "Woodland Park Zoo \u2014 Zoomazium", "lat": 47.666312, "lng": -122.349302, "walk": "", "price": "$$", "cuisine": "Indoor Play / Zoo"}, {"idx": 4, "name": "PlayDate SEA", "lat": 47.623161, "lng": -122.338382, "walk": "", "price": "$", "cuisine": "Indoor Playground"}, {"idx": 5, "name": "KidsQuest Children's Museum", "lat": 47.620866, "lng": -122.195904, "walk": "", "price": "$", "cuisine": "Children's Museum"}];
 const shoppingMarkers = [{"idx": 0, "name": "Pacific Place", "lat": 47.612883, "lng": -122.335289, "walk": 3, "price": "", "cuisine": ""}, {"idx": 1, "name": "Nordstrom Flagship", "lat": 47.611921, "lng": -122.336541, "walk": 4, "price": "", "cuisine": ""}, {"idx": 2, "name": "Westlake Center", "lat": 47.611991, "lng": -122.337391, "walk": 5, "price": "", "cuisine": ""}, {"idx": 3, "name": "Pike Place Market Shops", "lat": 47.608754, "lng": -122.3402, "walk": 10, "price": "", "cuisine": ""}, {"idx": 4, "name": "University Village", "lat": 47.662674, "lng": -122.299114, "walk": "", "price": "", "cuisine": ""}, {"idx": 5, "name": "Elliott Bay Book Company", "lat": 47.614666, "lng": -122.319677, "walk": 15, "price": "", "cuisine": ""}, {"idx": 6, "name": "Bellevue Square", "lat": 47.615655, "lng": -122.203677, "walk": "", "price": "", "cuisine": ""}];

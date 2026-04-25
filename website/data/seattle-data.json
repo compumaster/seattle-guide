@@ -474,16 +474,16 @@
         "longitude": -122.330511
       },
       {
-        "name": "Bill & Melinda Gates Foundation Discovery Center",
+        "name": "Gates Foundation Discovery Center",
         "category": "Science / Global Health",
         "address": "440 5th Ave N, Seattle, WA 98109",
         "website": "https://www.discovergates.org/",
         "walkingMinutes": 20,
         "distanceMiles": 1.0,
         "priceTier": "Free",
-        "description": "Free interactive exhibition on global health initiatives including efforts to eradicate polio and tackle tuberculosis. Highly relevant for medical professionals.",
+        "description": "Explore innovations and powerful stories about global health progress. Open for guided group tours and student workshops by appointment only (groups of 15+). Always free.",
         "mustSee": true,
-        "tip": "Book tour reservations at least 2 weeks in advance — free but reservation required.",
+        "tip": "Tours by appointment only for groups of 15+. Book well in advance at discovergates.org.",
         "requiresReservation": true,
         "latitude": 47.623591,
         "longitude": -122.34737
@@ -536,6 +536,33 @@
         "tip": "Rideshare recommended. 7-minute drive from convention center.",
         "latitude": 47.629477,
         "longitude": -122.359935
+      },
+      {
+        "name": "Seattle Central Library",
+        "category": "Architecture / Library",
+        "address": "1000 4th Ave, Seattle, WA 98104",
+        "website": "https://www.spl.org/hours-and-locations/central-library",
+        "walkingMinutes": 10,
+        "distanceMiles": 0.5,
+        "priceTier": "Free",
+        "description": "Rem Koolhaas-designed architectural masterpiece with a striking glass and steel exterior. 11 stories, breathtaking reading rooms, and a continuous book spiral. Free to visit.",
+        "latitude": 47.606714,
+        "longitude": -122.332698
+      },
+      {
+        "name": "University of Washington Campus",
+        "category": "University / Architecture",
+        "address": "University of Washington, Seattle, WA 98195",
+        "website": "https://www.washington.edu/visit/",
+        "walkingMinutes": null,
+        "drivingMinutes": 15,
+        "distanceMiles": 4.0,
+        "priceTier": "Free",
+        "requiresTransport": true,
+        "description": "One of America's most beautiful campuses. Gothic Suzzallo Library ('the Harry Potter library'), cherry tree-lined Quad (stunning even in November), Burke Museum of natural history, and the Henry Art Gallery. Take the 1 Line to U District Station.",
+        "tip": "Take the Link 1 Line to U District Station — 10 min ride from Westlake.",
+        "latitude": 47.65543,
+        "longitude": -122.300169
       }
     ],
     "dayTrips": [

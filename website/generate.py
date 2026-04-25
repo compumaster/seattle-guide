@@ -5,8 +5,8 @@ Reads data from seattle-data.json and produces index.html.
 """
 import json, os
 
-DATA_PATH = r"D:\prj\amp2026\website\data\seattle-data.json"
-OUTPUT_PATH = r"D:\prj\amp2026\website\index.html"
+DATA_PATH = r"D:\prj\seattle-guide\website\data\seattle-data.json"
+OUTPUT_PATH = r"D:\prj\seattle-guide\docs\index.html"
 
 with open(DATA_PATH, "r", encoding="utf-8") as f:
     data = json.load(f)
@@ -664,11 +664,9 @@ img {{ max-width: 100%; height: auto; }}
     <div class="section-line"></div>
     <p>{len(data["dining"])} curated restaurants sorted by distance from the convention center</p>
   </div>
-  <div class="map-section-layout">
-    <div id="diningMap" class="map-container"></div>
-    <div class="card-grid" id="diningCards">
-      {dining_cards}
-    </div>
+  <div id="diningMap" class="map-wide"></div>
+  <div class="card-grid" id="diningCards">
+    {dining_cards}
   </div>
 </section>
 
@@ -679,11 +677,9 @@ img {{ max-width: 100%; height: auto; }}
     <div class="section-line"></div>
     <p>{len(data["attractions"]["walkable"])} attractions within walking distance of the convention center</p>
   </div>
-  <div class="map-section-layout">
-    <div id="attractionsMap" class="map-container"></div>
-    <div class="card-grid" id="attractionsCards">
-      {attraction_cards}
-    </div>
+  <div id="attractionsMap" class="map-wide"></div>
+  <div class="card-grid" id="attractionsCards">
+    {attraction_cards}
   </div>
 </section>
 
