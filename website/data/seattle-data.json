@@ -659,19 +659,6 @@
         "longitude": -122.3389
       },
       {
-        "name": "Microsoft Store (Redmond Campus)",
-        "category": "Tech / Retail",
-        "address": "15010 NE 36th St, Redmond, WA 98052",
-        "website": "https://www.microsoft.com/en-us/store/locations/redmond",
-        "drivingMinutes": 25,
-        "distanceMiles": 15.0,
-        "priceTier": "Free",
-        "requiresTransport": true,
-        "description": "The Microsoft Visitor Center permanently closed in early 2026, but the standalone Microsoft Store in Building 92 on the Redmond campus remains open. Browse the latest Surface, Xbox, and AI products.",
-        "latitude": 47.642492,
-        "longitude": -122.136927
-      },
-      {
         "name": "Future of Flight Aviation Center & Boeing Tour",
         "category": "Museum / Factory Tour",
         "address": "8415 Paine Field Blvd, Mukilteo, WA 98275",
