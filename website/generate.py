@@ -1290,6 +1290,10 @@ img {{ max-width: 100%; height: auto; }}
     <a href="https://visitseattle.org" target="_blank">Visit Seattle</a> |
     <a href="https://seattleconventioncenter.com" target="_blank">Convention Center</a>
   </p>
+  <div style="margin-top:2rem;display:flex;flex-direction:column;align-items:center;gap:0.5rem;">
+    <img src="cigdem.jpg" alt="Çiğdem Uşşaklı" style="width:64px;height:64px;border-radius:50%;object-fit:cover;border:2px solid var(--gold);">
+    <p style="font-size:0.8rem;color:rgba(255,255,255,0.7);margin:0;">Executive Producer <strong style="color:var(--gold);">Çiğdem Uşşaklı</strong></p>
+  </div>
   <p style="margin-top:1rem;font-size:0.75rem;opacity:0.5;">Seattle Guide 2026 — Your curated city companion</p>
 </footer>
 
