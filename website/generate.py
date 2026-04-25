@@ -157,7 +157,7 @@ transport_cards = "\n".join(transport_card(t) for t in data["transportation"])
 shopping_cards = "\n".join(card_html(s) for s in sorted(data["shopping"], key=lambda x: x.get("walkingMinutes") or x.get("drivingMinutes") or x.get("transitMinutes") or 99))
 
 # Entertainment cards
-entertainment_cards = "\n".join(card_html(e) for e in data["entertainment"])
+entertainment_cards = "\n".join(card_html(e) for e in sorted(data["entertainment"], key=lambda x: x.get("walkingMinutes") or x.get("drivingMinutes") or 99))
 
 # Coffee cards
 coffee_cards = "\n".join(card_html(c) for c in sorted(data["coffeeAndBars"], key=lambda x: x.get("walkingMinutes") or 99))
@@ -177,7 +177,7 @@ lifesci_cards = "\n".join(
 
 # Family activity cards
 family_cards = "\n".join(
-    f'''<div class="card card-family">
+    f'''<div class="card card-family" data-name="{fa["name"]}" data-distance="{fa.get("walkingMinutes") or fa.get("drivingMinutes") or fa.get("transitMinutes") or 999}">
   <div class="card-header">
     <h3 class="card-title">{fa["name"]}</h3>
     <div class="card-badges">
@@ -189,7 +189,7 @@ family_cards = "\n".join(
   <p class="card-desc">{fa["description"]}</p>
   {f'<a href="{fa["website"]}" target="_blank" class="card-link">Plan Visit →</a>' if fa.get("website") else ""}
 </div>'''
-    for fa in data["familyActivities"]
+    for fa in sorted(data["familyActivities"], key=lambda x: x.get("walkingMinutes") or x.get("drivingMinutes") or x.get("transitMinutes") or 99)
 )
 
 # Seasonal events
@@ -552,11 +552,13 @@ img {{ max-width: 100%; height: auto; }}
 .fade-in.visible {{ opacity: 1; transform: translateY(0); }}
 
 /* ─── Responsive ─── */
-@media (max-width: 900px) {{
+@media (max-width: 1250px) {{
   .nav-links {{ display: none; position: absolute; top: 64px; left: 0; right: 0;
-    background: var(--navy); flex-direction: column; padding: 1rem; }}
+    background: var(--navy); flex-direction: column; padding: 1rem; z-index: 1001; }}
   .nav-links.active {{ display: flex; }}
   .hamburger {{ display: block; }}
+}}
+@media (max-width: 900px) {{
   .hero h1 {{ font-size: 2.2rem; }}
   .card-grid {{ grid-template-columns: 1fr; }}
   .weather-transport {{ grid-template-columns: 1fr; }}

@@ -264,11 +264,13 @@ img { max-width: 100%; height: auto; }
 .fade-in.visible { opacity: 1; transform: translateY(0); }
 
 /* ─── Responsive ─── */
-@media (max-width: 900px) {
+@media (max-width: 1250px) {
   .nav-links { display: none; position: absolute; top: 64px; left: 0; right: 0;
-    background: var(--navy); flex-direction: column; padding: 1rem; }
+    background: var(--navy); flex-direction: column; padding: 1rem; z-index: 1001; }
   .nav-links.active { display: flex; }
   .hamburger { display: block; }
+}
+@media (max-width: 900px) {
   .hero h1 { font-size: 2.2rem; }
   .card-grid { grid-template-columns: 1fr; }
   .weather-transport { grid-template-columns: 1fr; }
@@ -1173,55 +1175,7 @@ img { max-width: 100%; height: auto; }
     <button class="sort-btn" data-sort="name">A→Z Name</button>
   </div>
   <div class="card-grid" id="familyCards">
-    <div class="card card-family">
-  <div class="card-header">
-    <h3 class="card-title">Artists at Play Playground</h3>
-    <div class="card-badges">
-      <span class="badge badge-blue">🚶 20 min walk</span> <span class="price-free">FREE</span>
-      <span class="badge badge-outdoor">🌳 Outdoor</span>
-      <span class="badge badge-age">Ages: All ages</span>
-    </div>
-  </div>
-  <p class="card-desc">Expansive outdoor playground at Seattle Center with massive climbing structures, 30-foot climbing tower, tube slides, and interactive musical instruments.</p>
-  
-</div>
-<div class="card card-family">
-  <div class="card-header">
-    <h3 class="card-title">Pacific Science Center</h3>
-    <div class="card-badges">
-      <span class="badge badge-blue">🚶 22 min walk</span> <span class="price-tier">$$<span class="price-dim">$</span></span>
-      <span class="badge badge-indoor">🏠 Indoor</span>
-      <span class="badge badge-age">Ages: All ages</span>
-    </div>
-  </div>
-  <p class="card-desc">Tropical Butterfly House, Tinker Tank makerspace, live science stages, dinosaur exhibits. $32–35 adults, $26–28 children. 'Exploration for All' sensory-friendly sessions.</p>
-  <a href="https://www.pacificsciencecenter.org/" target="_blank" class="card-link">Plan Visit →</a>
-</div>
-<div class="card card-family">
-  <div class="card-header">
-    <h3 class="card-title">Seattle Children's Museum</h3>
-    <div class="card-badges">
-      <span class="badge badge-blue">🚶 20 min walk</span> <span class="price-tier">$<span class="price-dim">$$</span></span>
-      <span class="badge badge-indoor">🏠 Indoor</span>
-      <span class="badge badge-age">Ages: 0–8 years</span>
-    </div>
-  </div>
-  <p class="card-desc">Interactive play zones in the Seattle Center Armory. $16–18 admission, under 1 free. 'Museums for All' program ($5 reduced).</p>
-  <a href="https://thechildrensmuseum.org/" target="_blank" class="card-link">Plan Visit →</a>
-</div>
-<div class="card card-family">
-  <div class="card-header">
-    <h3 class="card-title">Woodland Park Zoo — Zoomazium</h3>
-    <div class="card-badges">
-      <span class="badge badge-navy">🚗 15 min drive</span> <span class="price-tier">$$<span class="price-dim">$</span></span>
-      <span class="badge badge-indoor">🏠 Indoor</span>
-      <span class="badge badge-age">Ages: 0–8 years</span>
-    </div>
-  </div>
-  <p class="card-desc">Nature-themed indoor play space with mountain cave, rope bridge, and 20-foot climbing tree. Included with zoo admission.</p>
-  <a href="https://www.zoo.org/" target="_blank" class="card-link">Plan Visit →</a>
-</div>
-<div class="card card-family">
+    <div class="card card-family" data-name="PlayDate SEA" data-distance="10">
   <div class="card-header">
     <h3 class="card-title">PlayDate SEA</h3>
     <div class="card-badges">
@@ -1233,7 +1187,55 @@ img { max-width: 100%; height: auto; }
   <p class="card-desc">8,000 sq ft multi-level climbing structure with toddler zones. Attached café with pizza and espresso for parents.</p>
   <a href="https://www.playdatesea.com/" target="_blank" class="card-link">Plan Visit →</a>
 </div>
-<div class="card card-family">
+<div class="card card-family" data-name="Woodland Park Zoo — Zoomazium" data-distance="15">
+  <div class="card-header">
+    <h3 class="card-title">Woodland Park Zoo — Zoomazium</h3>
+    <div class="card-badges">
+      <span class="badge badge-navy">🚗 15 min drive</span> <span class="price-tier">$$<span class="price-dim">$</span></span>
+      <span class="badge badge-indoor">🏠 Indoor</span>
+      <span class="badge badge-age">Ages: 0–8 years</span>
+    </div>
+  </div>
+  <p class="card-desc">Nature-themed indoor play space with mountain cave, rope bridge, and 20-foot climbing tree. Included with zoo admission.</p>
+  <a href="https://www.zoo.org/" target="_blank" class="card-link">Plan Visit →</a>
+</div>
+<div class="card card-family" data-name="Artists at Play Playground" data-distance="20">
+  <div class="card-header">
+    <h3 class="card-title">Artists at Play Playground</h3>
+    <div class="card-badges">
+      <span class="badge badge-blue">🚶 20 min walk</span> <span class="price-free">FREE</span>
+      <span class="badge badge-outdoor">🌳 Outdoor</span>
+      <span class="badge badge-age">Ages: All ages</span>
+    </div>
+  </div>
+  <p class="card-desc">Expansive outdoor playground at Seattle Center with massive climbing structures, 30-foot climbing tower, tube slides, and interactive musical instruments.</p>
+  
+</div>
+<div class="card card-family" data-name="Seattle Children's Museum" data-distance="20">
+  <div class="card-header">
+    <h3 class="card-title">Seattle Children's Museum</h3>
+    <div class="card-badges">
+      <span class="badge badge-blue">🚶 20 min walk</span> <span class="price-tier">$<span class="price-dim">$$</span></span>
+      <span class="badge badge-indoor">🏠 Indoor</span>
+      <span class="badge badge-age">Ages: 0–8 years</span>
+    </div>
+  </div>
+  <p class="card-desc">Interactive play zones in the Seattle Center Armory. $16–18 admission, under 1 free. 'Museums for All' program ($5 reduced).</p>
+  <a href="https://thechildrensmuseum.org/" target="_blank" class="card-link">Plan Visit →</a>
+</div>
+<div class="card card-family" data-name="Pacific Science Center" data-distance="22">
+  <div class="card-header">
+    <h3 class="card-title">Pacific Science Center</h3>
+    <div class="card-badges">
+      <span class="badge badge-blue">🚶 22 min walk</span> <span class="price-tier">$$<span class="price-dim">$</span></span>
+      <span class="badge badge-indoor">🏠 Indoor</span>
+      <span class="badge badge-age">Ages: All ages</span>
+    </div>
+  </div>
+  <p class="card-desc">Tropical Butterfly House, Tinker Tank makerspace, live science stages, dinosaur exhibits. $32–35 adults, $26–28 children. 'Exploration for All' sensory-friendly sessions.</p>
+  <a href="https://www.pacificsciencecenter.org/" target="_blank" class="card-link">Plan Visit →</a>
+</div>
+<div class="card card-family" data-name="KidsQuest Children's Museum" data-distance="30">
   <div class="card-header">
     <h3 class="card-title">KidsQuest Children's Museum</h3>
     <div class="card-badges">
@@ -1381,7 +1383,17 @@ img { max-width: 100%; height: auto; }
     <button class="sort-btn" data-sort="name">A→Z Name</button>
   </div>
   <div class="card-grid" id="entertainmentCards">
-    <div class="card" data-lat="47.608514" data-lng="-122.339473" data-name="The Showbox" data-distance="8">
+    <div class="card" data-lat="47.609168" data-lng="-122.333984" data-name="The 5th Avenue Theatre" data-distance="4">
+  <div class="card-header">
+    <h3 class="card-title">The 5th Avenue Theatre</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 4 min walk</span>  </div>
+  </div>
+  <p class="card-desc">Historic theater featuring Broadway-quality musicals and plays in a stunning Imperial Chinese-inspired interior.</p>
+  <p class="card-addr">📍 1308 5th Ave, Seattle, WA 98101</p>
+  <a href="https://www.5thavenue.org/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+<div class="card" data-lat="47.608514" data-lng="-122.339473" data-name="The Showbox" data-distance="8">
   <div class="card-header">
     <h3 class="card-title">The Showbox</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 8 min walk</span>  </div>
@@ -1391,14 +1403,14 @@ img { max-width: 100%; height: auto; }
   <a href="https://www.showboxpresents.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
 </div>
 
-<div class="card" data-lat="47.609168" data-lng="-122.333984" data-name="The 5th Avenue Theatre" data-distance="4">
+<div class="card" data-lat="47.608117" data-lng="-122.33697" data-name="Benaroya Hall" data-distance="8">
   <div class="card-header">
-    <h3 class="card-title">The 5th Avenue Theatre</h3>
-    <div class="card-badges"><span class="badge badge-blue">🚶 4 min walk</span>  </div>
+    <h3 class="card-title">Benaroya Hall</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 8 min walk</span>  </div>
   </div>
-  <p class="card-desc">Historic theater featuring Broadway-quality musicals and plays in a stunning Imperial Chinese-inspired interior.</p>
-  <p class="card-addr">📍 1308 5th Ave, Seattle, WA 98101</p>
-  <a href="https://www.5thavenue.org/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+  <p class="card-desc">Home of the Seattle Symphony. World-class acoustics in a stunning downtown venue. Check for November concerts and special performances.</p>
+  <p class="card-addr">📍 200 University St, Seattle, WA 98101</p>
+  <a href="https://www.seattlesymphony.org/benaroya" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
 </div>
 
 <div class="card" data-lat="47.614581" data-lng="-122.339152" data-name="Dimitriou's Jazz Alley" data-distance="10">
@@ -1411,17 +1423,6 @@ img { max-width: 100%; height: auto; }
   <a href="https://www.jazzalley.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
 </div>
 
-<div class="card" data-lat="47.595346" data-lng="-122.331644" data-name="Seattle Seahawks at Lumen Field" data-distance="25">
-  <div class="card-header">
-    <h3 class="card-title">Seattle Seahawks at Lumen Field</h3>
-    <div class="card-badges"><span class="badge badge-blue">🚶 25 min walk</span>  </div>
-  </div>
-  <p class="card-desc">NFL games during the conference dates — check the schedule! The stadium is a 25-minute walk or short rideshare from the convention center.</p>
-  <p class="card-note">📌 Check schedule for November home games</p>
-  <p class="card-addr">📍 800 Occidental Ave S, Seattle, WA 98134</p>
-  <a href="https://www.seahawks.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
-</div>
-
 <div class="card" data-lat="47.621901" data-lng="-122.35399" data-name="Seattle Kraken at Climate Pledge Arena" data-distance="22">
   <div class="card-header">
     <h3 class="card-title">Seattle Kraken at Climate Pledge Arena</h3>
@@ -1431,16 +1432,6 @@ img { max-width: 100%; height: auto; }
   <p class="card-note">📌 Check schedule for November home games</p>
   <p class="card-addr">📍 334 1st Ave N, Seattle, WA 98109</p>
   <a href="https://www.nhl.com/kraken/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
-</div>
-
-<div class="card" data-lat="47.608117" data-lng="-122.33697" data-name="Benaroya Hall" data-distance="8">
-  <div class="card-header">
-    <h3 class="card-title">Benaroya Hall</h3>
-    <div class="card-badges"><span class="badge badge-blue">🚶 8 min walk</span>  </div>
-  </div>
-  <p class="card-desc">Home of the Seattle Symphony. World-class acoustics in a stunning downtown venue. Check for November concerts and special performances.</p>
-  <p class="card-addr">📍 200 University St, Seattle, WA 98101</p>
-  <a href="https://www.seattlesymphony.org/benaroya" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
 </div>
 
 <div class="card" data-lat="47.624273" data-lng="-122.35193" data-name="Pacific Northwest Ballet" data-distance="22">
@@ -1461,6 +1452,17 @@ img { max-width: 100%; height: auto; }
   <p class="card-desc">Internationally recognized opera company performing at McCaw Hall. Known for adventurous programming and stunning productions at Seattle Center.</p>
   <p class="card-addr">📍 321 Mercer St, Seattle, WA 98109</p>
   <a href="https://www.seattleopera.org/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+<div class="card" data-lat="47.595346" data-lng="-122.331644" data-name="Seattle Seahawks at Lumen Field" data-distance="25">
+  <div class="card-header">
+    <h3 class="card-title">Seattle Seahawks at Lumen Field</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 25 min walk</span>  </div>
+  </div>
+  <p class="card-desc">NFL games during the conference dates — check the schedule! The stadium is a 25-minute walk or short rideshare from the convention center.</p>
+  <p class="card-note">📌 Check schedule for November home games</p>
+  <p class="card-addr">📍 800 Occidental Ave S, Seattle, WA 98134</p>
+  <a href="https://www.seahawks.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
 </div>
 
   </div>
