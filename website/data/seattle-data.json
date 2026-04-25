@@ -1656,7 +1656,17 @@
       "category": "History & Geography",
       "question": "What percentage of clear days does Seattle actually get per year?",
       "answer": "About 152 days of sun per year — more than Houston. But Seattle's reputation comes from the 226 overcast days, even though total rainfall is less than New York, Miami, or Atlanta."
-    }
+    },
+    {"category": "Seattle Medicine", "question": "Grey Sloan Memorial Hospital in Grey's Anatomy was inspired by what real-life Seattle institution?", "answer": "Harborview Medical Center — the only Level I adult and pediatric trauma and burn center in Washington State, also serving Alaska, Idaho, and Montana."},
+    {"category": "Seattle Medicine", "question": "Exterior rooftop helipad shots in Grey's Anatomy feature what real Seattle landmark, actually a news station HQ?", "answer": "KOMO Plaza (formerly Fisher Plaza, located right next to the Space Needle)."},
+    {"category": "Seattle Medicine", "question": "Fred Hutchinson Cancer Center is named after Fred Hutchinson, a Seattle native. Before cancer cut his life short at 45, what was his profession?", "answer": "A Major League Baseball pitcher and manager — he managed the Cincinnati Reds to the 1961 World Series."},
+    {"category": "Seattle Medicine", "question": "Dr. E. Donnall Thomas at Fred Hutch won the 1990 Nobel Prize for pioneering what life-saving leukemia treatment?", "answer": "Bone marrow transplantation."},
+    {"category": "Seattle Medicine", "question": "In 1998, the Seattle Cancer Care Alliance united three institutions. Besides Fred Hutch and UW Medicine, what was the third?", "answer": "Seattle Children's Hospital."},
+    {"category": "Seattle Medicine", "question": "In 2022, the Seattle Cancer Care Alliance dissolved when it merged with what organization?", "answer": "Fred Hutchinson Cancer Center — the clinical and research sides merged under the 'Fred Hutch' name."},
+    {"category": "Seattle Medicine", "question": "In 1960, UW physician Dr. Belding Scribner invented the 'Scribner shunt.' What treatment did it enable for long-term patients?", "answer": "Outpatient kidney dialysis — the shunt allowed regular, long-term dialysis without permanently destroying veins."},
+    {"category": "Seattle Medicine", "question": "The UW School of Medicine's 'WWAMI' program serves five states. What does WWAMI stand for?", "answer": "Washington, Wyoming, Alaska, Montana, and Idaho."},
+    {"category": "Seattle Medicine", "question": "What pioneering emergency service launched by UW and Harborview in 1970 made Seattle one of the best places to survive cardiac arrest?", "answer": "Medic One — one of the first programs in the world to train paramedics in advanced cardiac life support in the field."},
+    {"category": "Seattle Medicine", "question": "What UW global health center, funded by the Gates Foundation, became world-famous during COVID-19 for its predictive disease models?", "answer": "The Institute for Health Metrics and Evaluation (IHME)."}
   ],
   "localInsights": {
     "lifeSciences": "Greater Seattle supports 1,180+ life science companies generating $13.7 billion GDP. The South Lake Union neighborhood houses Fred Hutch Cancer Center, Allen Institute, and UW Medicine alongside Amazon HQ.",
