@@ -574,6 +574,33 @@
         "tip": "Take the Link 1 Line to U District Station — 10 min ride from Westlake.",
         "latitude": 47.65543,
         "longitude": -122.300169
+      },
+      {
+        "name": "Burke Museum of Natural History and Culture",
+        "category": "Museum / Science",
+        "address": "4300 15th Ave NE, Seattle, WA 98105",
+        "website": "https://www.burkemuseum.org/",
+        "drivingMinutes": 15,
+        "distanceMiles": 4.0,
+        "priceTier": "$$",
+        "requiresTransport": true,
+        "description": "Washington State's oldest museum, reopened in 2019 with a stunning new building on the UW campus. Dinosaur fossils, Pacific Northwest Native art, and live research labs you can watch through glass walls.",
+        "tip": "On UW campus — combine with a campus visit. Take the 1 Line to U District Station.",
+        "latitude": 47.663218,
+        "longitude": -122.311967
+      },
+      {
+        "name": "Lake View Cemetery",
+        "category": "Historic / Landmark",
+        "address": "1554 15th Ave E, Seattle, WA 98112",
+        "website": "https://lakeviewcemeteryassociation.com/",
+        "drivingMinutes": 10,
+        "distanceMiles": 2.0,
+        "priceTier": "Free",
+        "requiresTransport": true,
+        "description": "Final resting place of Bruce Lee and his son Brandon Lee. Also offers stunning views of the Cascades, Lake Washington, and the city. On Capitol Hill.",
+        "latitude": 47.633918,
+        "longitude": -122.312207
       }
     ],
     "dayTrips": [
@@ -1119,6 +1146,124 @@
       "website": "https://www.citypass.com/seattle",
       "priceTier": "$$",
       "description": "Save up to 47% on combined admissions to Space Needle, Seattle Aquarium, and choice of MoPOP, Woodland Park Zoo, or Argosy Cruises."
+    }
+  ],
+  "famousFaces": [
+    {
+      "name": "Jimi Hendrix",
+      "industry": "Music",
+      "description": "Born and raised in Seattle, Hendrix is arguably the greatest guitarist in rock history. Visit his memorial in nearby Renton or the extensive exhibits at the Museum of Pop Culture (MoPOP).",
+      "connection": "Born in Seattle"
+    },
+    {
+      "name": "Bill Gates",
+      "industry": "Tech",
+      "description": "Born in Seattle, Gates co-founded Microsoft and revolutionized personal computing. His philanthropic efforts via the Gates Foundation are deeply rooted in the city.",
+      "connection": "Born in Seattle"
+    },
+    {
+      "name": "Bruce Lee",
+      "industry": "Film / Martial Arts",
+      "description": "The martial arts legend moved to Seattle to finish high school and attend the University of Washington. He opened his first martial arts studio here and is buried in Lake View Cemetery alongside his son, Brandon.",
+      "connection": "Lived & studied in Seattle"
+    },
+    {
+      "name": "Kurt Cobain",
+      "industry": "Music",
+      "description": "Originally from Aberdeen, WA, Cobain and Nirvana became the global face of Seattle's 1990s grunge movement, transforming the city's cultural identity forever.",
+      "connection": "Seattle grunge scene"
+    },
+    {
+      "name": "Macklemore & Ryan Lewis",
+      "industry": "Music",
+      "description": "This hip-hop duo proudly wears their Seattle heritage, frequently filming music videos in local spots like Capitol Hill and Pike Place Market.",
+      "connection": "Born in Seattle"
+    },
+    {
+      "name": "Sir Mix-a-Lot",
+      "industry": "Music",
+      "description": "Born and raised in the Central District, this hip-hop pioneer put Seattle on the rap map long before the tech boom.",
+      "connection": "Born in Seattle"
+    }
+  ],
+  "popCulture": {
+    "television": [
+      {
+        "title": "Grey's Anatomy",
+        "type": "Medical Drama",
+        "description": "While mostly filmed in Los Angeles, this long-running medical drama is deeply tied to the city. Fans seek out the real-life locations of establishing shots like the Space Needle and the Monorail."
+      },
+      {
+        "title": "Frasier",
+        "type": "Sitcom",
+        "description": "This classic 90s sitcom defined the upscale, coffee-obsessed Seattle aesthetic. While Frasier's exact apartment view is geographically impossible, Kerry Park on Queen Anne Hill offers the closest real-life equivalent."
+      },
+      {
+        "title": "The Killing",
+        "type": "Crime Drama",
+        "description": "For fans of darker, grittier Seattle — this crime drama perfectly captured the relentlessly rainy, moody atmosphere of the Pacific Northwest."
+      }
+    ],
+    "film": [
+      {
+        "title": "Sleepless in Seattle",
+        "year": 1993,
+        "description": "The quintessential Seattle romance. Famously highlighted the city's unique houseboat culture on Lake Union."
+      },
+      {
+        "title": "10 Things I Hate About You",
+        "year": 1999,
+        "description": "This beloved teen adaptation features iconic scenes filmed around the Seattle area, including a memorable paintball date at Gas Works Park."
+      },
+      {
+        "title": "Singles",
+        "year": 1992,
+        "description": "Directed by Cameron Crowe, this movie is a love letter to Seattle's early 90s grunge scene, featuring cameos from Pearl Jam, Soundgarden, and Alice in Chains."
+      }
+    ]
+  },
+  "history": [
+    {
+      "era": "The First Inhabitants",
+      "description": "Long before European settlement, the Duwamish and Suquamish tribes inhabited the area. The city is named after Chief Seattle (Sealth), a prominent leader of both tribes."
+    },
+    {
+      "era": "The Great Seattle Fire (1889)",
+      "description": "A glue pot boiled over in a carpentry shop, starting a fire that destroyed the central business district. Residents rebuilt using brick and stone, raising the street level — creating the famous 'Seattle Underground' that tourists can still visit today."
+    },
+    {
+      "era": "Klondike Gold Rush (1897)",
+      "description": "When gold was discovered in the Yukon, Seattle marketed itself as the 'Gateway to Alaska' and became the primary outfitting point for miners. The massive influx of wealth transformed Seattle from a struggling pioneer town into a thriving metropolis overnight."
+    },
+    {
+      "era": "The World's Fair (1962)",
+      "description": "Officially called the Century 21 Exposition, this event left the city with its most iconic landmarks: the Space Needle, the Monorail, and the Seattle Center."
+    },
+    {
+      "era": "The Tech Boom (1980s–Present)",
+      "description": "The rise of Microsoft in the 80s and 90s, followed by the massive expansion of Amazon in the 2010s, created a huge influx of wealth and development, completely transforming neighborhoods like South Lake Union."
+    }
+  ],
+  "geography": [
+    {
+      "name": "Mount Rainier",
+      "type": "Volcano / Mountain",
+      "description": "Towering at 14,411 feet, Mount Rainier is an active stratovolcano that dominates the Seattle skyline on clear days. The most heavily glaciated peak in the contiguous US and a crown jewel for hikers and climbers. About 60 miles southeast of the city."
+    },
+    {
+      "name": "Mount St. Helens",
+      "type": "Volcano",
+      "description": "On May 18, 1980, Mount St. Helens experienced a catastrophic eruption — the most destructive volcanic event in US history, reducing its height by 1,300 feet. Today, visitors can drive to the Johnston Ridge Observatory to look directly into the crater. About 175 miles south of Seattle."
+    },
+    {
+      "name": "The Cascade Range",
+      "type": "Mountain Range",
+      "description": "A major mountain range stretching from British Columbia to Northern California. Acts as a massive wall east of Seattle, trapping moisture from the Pacific Ocean and contributing to the region's famously green, rainy climate."
+    },
+    {
+      "name": "Puget Sound",
+      "type": "Waterway",
+      "description": "A complex system of deep, glacier-carved saltwater channels connected to the Pacific Ocean. The reason Seattle became a major maritime hub, and home to rich marine life including the region's famous pods of Orca whales."
     }
   ],
   "localInsights": {

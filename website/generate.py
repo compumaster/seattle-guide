@@ -214,6 +214,60 @@ seasonal_cards = "\n".join(
     for se in data["seasonalEvents"]
 )
 
+# Famous Faces
+famous_cards = "\n".join(
+    f'''<div class="card">
+  <div class="card-header">
+    <h3 class="card-title">{ff["name"]}</h3>
+    <div class="card-badges"><span class="cuisine-tag">{ff["industry"]}</span> <span class="badge badge-blue">{ff["connection"]}</span></div>
+  </div>
+  <p class="card-desc">{ff["description"]}</p>
+</div>'''
+    for ff in data.get("famousFaces", [])
+)
+
+# Pop Culture
+pop_tv = "\n".join(
+    f'''<div class="card">
+  <div class="card-header">
+    <h3 class="card-title">📺 {p["title"]}</h3>
+    <span class="category-tag">{p["type"]}</span>
+  </div>
+  <p class="card-desc">{p["description"]}</p>
+</div>'''
+    for p in data.get("popCulture", {}).get("television", [])
+)
+pop_film = "\n".join(
+    f'''<div class="card">
+  <div class="card-header">
+    <h3 class="card-title">🎬 {p["title"]} ({p["year"]})</h3>
+  </div>
+  <p class="card-desc">{p["description"]}</p>
+</div>'''
+    for p in data.get("popCulture", {}).get("film", [])
+)
+
+# History
+history_cards = "\n".join(
+    f'''<div class="card" style="border-left:4px solid var(--gold);">
+  <h3 class="card-title">{h["era"]}</h3>
+  <p class="card-desc">{h["description"]}</p>
+</div>'''
+    for h in data.get("history", [])
+)
+
+# Geography
+geo_cards = "\n".join(
+    f'''<div class="card" style="border-left:4px solid var(--teal);">
+  <div class="card-header">
+    <h3 class="card-title">{g["name"]}</h3>
+    <span class="category-tag">{g["type"]}</span>
+  </div>
+  <p class="card-desc">{g["description"]}</p>
+</div>'''
+    for g in data.get("geography", [])
+)
+
 # Local insights
 insights = data.get("localInsights", {})
 insight_boxes = "\n".join(
@@ -817,6 +871,59 @@ img {{ max-width: 100%; height: auto; }}
   </div>
   <div class="card-grid">
     {seasonal_cards}
+  </div>
+</section>
+
+<!-- ═══ FAMOUS FACES ═══ -->
+<section class="section" id="famous">
+  <div class="section-header">
+    <h2>⭐ Seattle's Own: Famous Faces</h2>
+    <div class="section-line"></div>
+    <p>Seattle has been a launchpad for revolutionaries in music, technology, and entertainment</p>
+  </div>
+  <div class="card-grid">
+    {famous_cards}
+  </div>
+</section>
+
+<!-- ═══ POP CULTURE ═══ -->
+<section class="section section-alt" id="popculture">
+  <div class="section-header">
+    <h2>🎬 The Emerald City on Screen</h2>
+    <div class="section-line"></div>
+    <p>Seattle's moody weather, stunning skyline, and surrounding waterways make it an incredibly atmospheric setting</p>
+  </div>
+  <h3 style="text-align:center;color:var(--navy);margin-bottom:1rem;">📺 Television</h3>
+  <div class="card-grid">
+    {pop_tv}
+  </div>
+  <h3 style="text-align:center;color:var(--navy);margin:2rem 0 1rem;">🎬 Film</h3>
+  <div class="card-grid">
+    {pop_film}
+  </div>
+</section>
+
+<!-- ═══ HISTORY ═══ -->
+<section class="section" id="history">
+  <div class="section-header">
+    <h2>📜 From Sawdust to Software</h2>
+    <div class="section-line"></div>
+    <p>Seattle's growth has been defined by massive boom-and-bust cycles, reshaping the landscape — and even the physical elevation — of the city</p>
+  </div>
+  <div class="card-grid" style="grid-template-columns: 1fr;">
+    {history_cards}
+  </div>
+</section>
+
+<!-- ═══ GEOGRAPHY ═══ -->
+<section class="section section-navy" id="geography">
+  <div class="section-header">
+    <h2>🌋 Fire and Ice: Seattle's Geography</h2>
+    <div class="section-line"></div>
+    <p>Nestled between mountain ranges and deep waterways, sitting on the Pacific Ring of Fire</p>
+  </div>
+  <div class="card-grid">
+    {geo_cards}
   </div>
 </section>
 
