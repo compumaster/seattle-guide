@@ -1285,6 +1285,30 @@
       "industry": "Music",
       "description": "Born and raised in the Central District, this hip-hop pioneer put Seattle on the rap map long before the tech boom.",
       "connection": "Born in Seattle"
+    },
+    {
+      "name": "Jeff Bezos",
+      "industry": "Tech",
+      "description": "Founded Amazon in his Bellevue garage in 1994 as an online bookstore. It grew into the world's largest e-commerce company, with its headquarters transforming Seattle's South Lake Union neighborhood into a gleaming tech campus. Bezos became one of the wealthiest people in history.",
+      "connection": "Founded Amazon in Seattle"
+    },
+    {
+      "name": "Rick Steves",
+      "industry": "Travel / Media",
+      "description": "America's most beloved travel writer and TV host grew up in Edmonds, just north of Seattle, and still runs his travel empire from nearby. His PBS show, guidebooks, and philosophy of 'travel as a political act' have inspired millions. His European travel center is in Edmonds.",
+      "connection": "Based near Seattle"
+    },
+    {
+      "name": "David Baker",
+      "industry": "Science",
+      "description": "UW Professor of Biochemistry and Director of the Institute for Protein Design. Won the 2024 Nobel Prize in Chemistry for computational protein design — work that has spawned biotech startups and novel therapeutics right here in Seattle.",
+      "connection": "UW Seattle — 2024 Nobel Chemistry"
+    },
+    {
+      "name": "Mary Brunkow",
+      "industry": "Science",
+      "description": "UW alum (Class of '83) working at Seattle's Institute for Systems Biology. Won the 2025 Nobel Prize in Physiology or Medicine for discoveries about regulatory T cells and autoimmune disease — part of three Seattle Nobel winners in just two years.",
+      "connection": "UW Alum — 2025 Nobel Medicine"
     }
   ],
   "popCulture": {
@@ -1355,6 +1379,11 @@
         "title": "Chronicle",
         "year": 2012,
         "description": "This found-footage sci-fi thriller about teens with telekinetic powers features the Space Needle prominently in its climactic sequence. Partially filmed in Seattle with the skyline as backdrop."
+      },
+      {
+        "title": "Twilight Saga",
+        "year": 2008,
+        "description": "Set in the fictional town of Forks on Washington's Olympic Peninsula (a real town, 3.5 hours from Seattle), this global phenomenon put the moody, rain-soaked Pacific Northwest on the map for a generation. While filmed mostly in Oregon, fans still flock to Forks and the surrounding temperate rainforests."
       }
     ]
   },
