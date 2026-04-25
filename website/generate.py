@@ -329,16 +329,20 @@ def practical_section():
     # Medical
     med = pinfo.get("medical", {})
     if med:
-        uc = med.get("urgentCare", {})
+        facilities_html = ""
+        for fac in med.get("facilities", []):
+            facilities_html += f'''<div style="margin-bottom:0.8rem;padding-bottom:0.8rem;border-bottom:1px solid #eee;">
+<strong style="color:var(--navy);">{fac["name"]}</strong> <span class="badge badge-blue">{fac["type"]}</span><br>
+<span style="font-size:0.85rem;color:#555;">📍 {fac["address"]} | 📞 {fac["phone"]}<br>
+🚶 {fac["distance"]}<br>
+{fac.get("note","")}</span></div>'''
         ph = med.get("pharmacy", {})
         html += f'''<div class="card" style="border-left:4px solid #E91E63;">
 <h3 class="card-title">{med["title"]}</h3>
-<p style="font-weight:700;color:var(--navy);margin-bottom:0.3rem;">Urgent Care (5-min walk)</p>
-<p class="card-desc">{uc["name"]} — {uc["address"]}<br>📞 {uc["phone"]} | {uc["hours"]}<br>{uc.get("note","")}</p>
-<p style="font-weight:700;color:var(--navy);margin:0.5rem 0 0.3rem;">Pharmacy</p>
-<p class="card-desc">Closest: {ph.get("walgreens","")}<br>24-hour: {ph.get("allNight","")}</p>
-<p style="font-weight:700;color:var(--navy);margin:0.5rem 0 0.3rem;">Emergency</p>
-<p class="card-desc">{med.get("emergency","")}</p>
+<p style="font-size:0.85rem;color:#E91E63;font-weight:700;margin-bottom:1rem;">🚨 Emergency: Call 911</p>
+{facilities_html}
+<p style="font-weight:700;color:var(--navy);margin:0.5rem 0 0.3rem;">💊 Pharmacy</p>
+<p class="card-desc">Walkable: {ph.get("walkable","")}<br>24-hour: {ph.get("allNight","")}</p>
 <p class="card-tip">💡 {med.get("tip","")}</p></div>\n'''
     # Accessibility
     acc = pinfo.get("accessibility", {})

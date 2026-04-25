@@ -1914,21 +1914,53 @@
     },
     "medical": {
       "title": "🏥 Medical & Emergency",
-      "urgentCare": {
-        "name": "ZoomCare Downtown Seattle",
-        "address": "517 Union St, Seattle, WA 98101",
-        "phone": "(844) 966-6777",
-        "hours": "Mon–Fri 9 AM–7 PM, Sat–Sun 9 AM–6 PM",
-        "note": "5-minute walk from convention center. Walk-ins welcome."
-      },
+      "facilities": [
+        {
+          "name": "Virginia Mason Medical Center",
+          "type": "Emergency Room (24/7)",
+          "address": "1100 9th Ave, Seattle, WA 98101",
+          "phone": "(206) 223-6600",
+          "distance": "10-min walk from convention center",
+          "note": "Closest ER to the convention center. Full emergency department with typically lower wait times than regional average."
+        },
+        {
+          "name": "Harborview Medical Center",
+          "type": "Level I Trauma Center (24/7)",
+          "address": "325 9th Ave, Seattle, WA 98104",
+          "phone": "(206) 520-5000",
+          "distance": "15-min walk or 5-min rideshare",
+          "note": "The region's only Level I adult and pediatric trauma center. If it's serious — this is where you want to be. Also serves Alaska, Idaho, and Montana."
+        },
+        {
+          "name": "Swedish First Hill Campus",
+          "type": "Emergency Room (24/7)",
+          "address": "747 Broadway, Seattle, WA 98122",
+          "phone": "(206) 386-6000",
+          "distance": "15-min walk or 5-min rideshare",
+          "note": "Major hospital with comprehensive ER. The largest non-profit health provider in the Greater Seattle area."
+        },
+        {
+          "name": "Kaiser Permanente Capitol Hill",
+          "type": "Urgent Care (24/7)",
+          "address": "201 16th Ave E, Seattle, WA 98112",
+          "phone": "(206) 326-3223",
+          "distance": "20-min walk or 8-min rideshare",
+          "note": "24-hour urgent care — great for non-emergency issues at night (flu, sprains, minor injuries). No Kaiser membership required for urgent visits."
+        },
+        {
+          "name": "Seattle Children's Hospital",
+          "type": "Pediatric Emergency (24/7)",
+          "address": "4500 40th Ave NE, Seattle, WA 98105",
+          "phone": "(206) 987-8811",
+          "distance": "15-min drive (rideshare recommended)",
+          "note": "For children — the region's premier pediatric hospital. If your child needs emergency care, this is the best facility. Take the 1 Line to U District Station + short rideshare."
+        }
+      ],
       "pharmacy": {
-        "name": "Bartell Drugs (closest) / CVS 24-hour",
-        "closest": "600 1st Ave N, Seattle, WA 98109 (Bartell Drugs, closes 8 PM)",
-        "allNight": "2345 Rainier Ave S, Seattle, WA 98144 (CVS, open 24 hours, ~1.8 miles — rideshare recommended)",
-        "walgreens": "222 Pike St, Seattle, WA 98101 (closes 10 PM, 5-min walk)"
+        "walkable": "Walgreens, 222 Pike St (closes 10 PM, 5-min walk from convention center)",
+        "allNight": "CVS, 2345 Rainier Ave S (open 24 hours, ~1.8 miles — rideshare needed)"
       },
-      "emergency": "Call 911. Nearest ER: Virginia Mason Medical Center, 1100 9th Ave (~10 min walk from convention center).",
-      "tip": "Bring any prescription medications with you — don't check them in luggage. If traveling with children, know your pediatrician's after-hours phone number."
+      "tip": "Bring prescription medications in your carry-on — never check them. If traveling with children, save your pediatrician's after-hours number in your phone before the trip."
     },
     "accessibility": {
       "title": "♿ Navigating Seattle's Hills",
