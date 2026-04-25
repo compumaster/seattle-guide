@@ -283,10 +283,13 @@ history_cards = "\n".join(
 # Geography — with images
 geo_images = {
     "Mount Rainier": "https://images.unsplash.com/photo-1570302603871-0db6a1ee37c3?w=600&q=80",
+    "Mount St. Helens": "https://images.unsplash.com/photo-1661833599314-098858d9507d?w=600&q=80",
     "The Cascade Range": "https://images.unsplash.com/photo-1640920205006-fdeade482d38?w=600&q=80",
     "Puget Sound": "https://images.unsplash.com/photo-1593985549158-90bf9d1f9ec2?w=600&q=80",
     "Olympic Mountains": "https://images.unsplash.com/photo-1660409343000-41911ec6525e?w=600&q=80",
     "Lake Washington & Lake Union": "https://images.unsplash.com/photo-1613417113853-1544a43eee7b?w=600&q=80",
+    "Elliott Bay": "https://images.unsplash.com/photo-1573144279658-e2c26b572605?w=600&q=80",
+    "The Ring of Fire": "https://images.unsplash.com/photo-1735744605821-e241a794f0a3?w=600&q=80",
 }
 
 def geo_card(g):
