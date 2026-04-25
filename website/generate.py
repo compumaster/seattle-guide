@@ -135,6 +135,7 @@ sections = [
     ("home", "Home"),
     ("venue", "Venue & Hotel"),
     ("transport", "Weather & Transit"),
+    ("practical", "Need to Know"),
     ("dining", "Dining"),
     ("coffee", "Coffee & Bars"),
     ("shopping", "Shopping"),
@@ -307,6 +308,51 @@ def geo_card(g):
 </div>'''
 
 geo_cards = "\n".join(geo_card(g) for g in data.get("geography", []))
+
+# Practical info
+pinfo = data.get("practicalInfo", {})
+
+def practical_section():
+    html = ""
+    # Veterans Day
+    vd = pinfo.get("veteransDay", {})
+    if vd:
+        html += f'<div class="card" style="border-left:4px solid #1565C0;"><h3 class="card-title">{vd["title"]}</h3><p class="card-desc">{vd["content"]}</p>'
+        if vd.get("link"):
+            html += f'<a href="{vd["link"]}" target="_blank" class="card-link">Holiday Transit Schedule →</a>'
+        html += '</div>\n'
+    # Safety
+    sf = pinfo.get("safety", {})
+    if sf:
+        tips_html = "".join(f"<li>{t}</li>" for t in sf.get("tips", []))
+        html += f'<div class="card" style="border-left:4px solid #F57F17;"><h3 class="card-title">{sf["title"]}</h3><ul style="padding-left:1.2rem;font-size:0.9rem;color:#555;line-height:1.8;">{tips_html}</ul></div>\n'
+    # Medical
+    med = pinfo.get("medical", {})
+    if med:
+        uc = med.get("urgentCare", {})
+        ph = med.get("pharmacy", {})
+        html += f'''<div class="card" style="border-left:4px solid #E91E63;">
+<h3 class="card-title">{med["title"]}</h3>
+<p style="font-weight:700;color:var(--navy);margin-bottom:0.3rem;">Urgent Care (5-min walk)</p>
+<p class="card-desc">{uc["name"]} — {uc["address"]}<br>📞 {uc["phone"]} | {uc["hours"]}<br>{uc.get("note","")}</p>
+<p style="font-weight:700;color:var(--navy);margin:0.5rem 0 0.3rem;">Pharmacy</p>
+<p class="card-desc">Closest: {ph.get("walgreens","")}<br>24-hour: {ph.get("allNight","")}</p>
+<p style="font-weight:700;color:var(--navy);margin:0.5rem 0 0.3rem;">Emergency</p>
+<p class="card-desc">{med.get("emergency","")}</p>
+<p class="card-tip">💡 {med.get("tip","")}</p></div>\n'''
+    # Accessibility
+    acc = pinfo.get("accessibility", {})
+    if acc:
+        tips_html = "".join(f"<li>{t}</li>" for t in acc.get("tips", []))
+        html += f'<div class="card" style="border-left:4px solid var(--teal);"><h3 class="card-title">{acc["title"]}</h3><p class="card-desc">{acc["content"]}</p><ul style="padding-left:1.2rem;font-size:0.9rem;color:#555;line-height:1.8;">{tips_html}</ul></div>\n'
+    # Childcare
+    cc = pinfo.get("childcare", {})
+    if cc:
+        svcs = "".join(f'<li><strong>{s["name"]}</strong> — {s["note"]} <a href="{s["website"]}" target="_blank">Website →</a></li>' for s in cc.get("services", []))
+        html += f'<div class="card" style="border-left:4px solid #7B1FA2;"><h3 class="card-title">{cc["title"]}</h3><p class="card-desc">{cc["content"]}</p><ul style="padding-left:1.2rem;font-size:0.9rem;color:#555;line-height:1.8;">{svcs}</ul><p class="card-tip">💡 {cc.get("tip","")}</p></div>\n'
+    return html
+
+practical_cards = practical_section()
 
 # Photo spots
 photo_cards = "\n".join(
@@ -1024,6 +1070,18 @@ img {{ max-width: 100%; height: auto; }}
 <!-- ═══════════════════════════════════════════════════════════════════
      ESSENTIALS — What every visitor needs first
      ═══════════════════════════════════════════════════════════════════ -->
+
+<!-- ═══ PRACTICAL INFO ═══ -->
+<section class="section section-alt" id="practical">
+  <div class="section-header">
+    <h2>⚠️ Need to Know</h2>
+    <div class="section-line"></div>
+    <p>Veterans Day impacts, safety tips, medical resources, accessibility, and childcare</p>
+  </div>
+  <div class="card-grid">
+    {practical_cards}
+  </div>
+</section>
 
 <!-- ═══ DINING ═══ -->
 <section class="section" id="dining">

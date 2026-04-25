@@ -1895,6 +1895,65 @@
       "answer": "The Institute for Health Metrics and Evaluation (IHME)."
     }
   ],
+  "practicalInfo": {
+    "veteransDay": {
+      "title": "🇺🇸 Veterans Day — November 11",
+      "content": "The conference overlaps with Veterans Day (Wed, Nov 11). Key impacts: Link Light Rail and Metro buses run on regular weekday schedules. Banks, post offices, and federal buildings will be closed. Some restaurants may have modified hours. Check for potential downtown parades or road closures near Westlake Park area.",
+      "link": "https://kingcounty.gov/en/dept/metro/routes-and-service/holiday-service"
+    },
+    "safety": {
+      "title": "🛡️ Downtown Safety Tips",
+      "tips": [
+        "Downtown Seattle and tourist areas are generally safe during daytime. Use standard urban awareness.",
+        "At night, stick to well-lit main avenues (4th, 5th, 6th Ave) when walking to hotels. Avoid 3rd Avenue between Pine and Yesler after 10 PM.",
+        "The Pike/Pine corridor on Capitol Hill is vibrant but can get rowdy late on weekends — fine for dinner, use rideshare for late-night returns.",
+        "Pioneer Square has great restaurants and bars but use rideshare rather than walking back to the convention center area after dark.",
+        "Keep valuables out of sight. Petty theft (phone snatching, car break-ins) is the primary concern, not violent crime.",
+        "If you feel unsafe, duck into any hotel lobby — front desk staff will help you get a rideshare."
+      ]
+    },
+    "medical": {
+      "title": "🏥 Medical & Emergency",
+      "urgentCare": {
+        "name": "ZoomCare Downtown Seattle",
+        "address": "517 Union St, Seattle, WA 98101",
+        "phone": "(844) 966-6777",
+        "hours": "Mon–Fri 9 AM–7 PM, Sat–Sun 9 AM–6 PM",
+        "note": "5-minute walk from convention center. Walk-ins welcome."
+      },
+      "pharmacy": {
+        "name": "Bartell Drugs (closest) / CVS 24-hour",
+        "closest": "600 1st Ave N, Seattle, WA 98109 (Bartell Drugs, closes 8 PM)",
+        "allNight": "2345 Rainier Ave S, Seattle, WA 98144 (CVS, open 24 hours, ~1.8 miles — rideshare recommended)",
+        "walgreens": "222 Pike St, Seattle, WA 98101 (closes 10 PM, 5-min walk)"
+      },
+      "emergency": "Call 911. Nearest ER: Virginia Mason Medical Center, 1100 9th Ave (~10 min walk from convention center).",
+      "tip": "Bring any prescription medications with you — don't check them in luggage. If traveling with children, know your pediatrician's after-hours phone number."
+    },
+    "accessibility": {
+      "title": "♿ Navigating Seattle's Hills",
+      "content": "Seattle is HILLY. The convention center sits at the top of a significant grade, and Pike Place Market / the waterfront are at sea level. Key tips for strollers, wheelchairs, or mobility challenges:",
+      "tips": [
+        "Pike Place Market has public elevators near the main entrance (85 Pike St, by the Information Booth) and at the MarketFront expansion on Western Avenue.",
+        "The new Overlook Walk (opened 2025) provides a gradual, accessible ramp connecting Pike Place Market directly to the waterfront — no steep climbs needed.",
+        "The Pike Street Hillclimb (stairs) between the Market and waterfront is steep — use the elevator or Overlook Walk instead.",
+        "Going from the convention center to Pioneer Square, walk DOWN the hill on 1st or 2nd Avenue. Take a rideshare or bus BACK uphill.",
+        "The Monorail and Link Light Rail are both fully ADA accessible with elevators at every station.",
+        "Seattle Center (Space Needle area) is flat once you arrive — take the Monorail from Westlake to avoid the uphill walk."
+      ]
+    },
+    "childcare": {
+      "title": "👶 Childcare & Companion Services",
+      "content": "When the primary attendee is busy at the conference, these vetted services provide in-hotel babysitting and nanny care for traveling families:",
+      "services": [
+        {"name": "Destination Sitters", "website": "https://www.destinationsitters.com/babysitters/seattle-wa/", "note": "Hotel room babysitting, background-checked, CPR certified. Book online."},
+        {"name": "Loving Care Collective", "website": "https://www.lovingcarecollective.com/destinationcareinseattle", "note": "Premium hotel-based childcare for convention families. Adventure outings available."},
+        {"name": "TLC Family Care", "website": "https://tlcforkids.com/hotel-babysitting-service/", "note": "Vacation/hotel babysitting with vetted nannies. Last-minute bookings possible."},
+        {"name": "Annie's Nannies", "website": "https://aniseattle.com/", "note": "Seattle's original agency since 1984. Full-service placements and on-call care."}
+      ],
+      "tip": "Book at least 1–2 weeks ahead for convention dates. Rates typically $30–45/hour with 3–4 hour minimums. Ask your hotel concierge for their recommended services too."
+    }
+  },
   "localInsights": {
     "lifeSciences": "Greater Seattle supports 1,180+ life science companies generating $13.7 billion GDP. The South Lake Union neighborhood houses Fred Hutch Cancer Center, Allen Institute, and UW Medicine alongside Amazon HQ.",
     "coffeeCapital": "Seattle is the birthplace of Starbucks (1971) and the epicenter of America's specialty coffee culture. Don't miss the original Starbucks at Pike Place Market.",
