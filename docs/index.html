@@ -47,7 +47,10 @@ img { max-width: 100%; height: auto; }
   font-weight: 900; font-size: 1.4rem; color: var(--white); letter-spacing: 1px;
 }
 .nav-brand span { color: var(--gold); }
-.nav-links { display: flex; gap: 0.2rem; }
+.nav-links { display: none; position: absolute; top: 64px; left: 0; right: 0;
+  background: var(--navy); flex-direction: column; padding: 1rem; z-index: 1100;
+  max-height: 80vh; overflow-y: auto; box-shadow: 0 8px 30px rgba(0,0,0,0.4); }
+.nav-links.active { display: flex; }
 .nav-link {
   color: rgba(255,255,255,0.85); padding: 0.5rem 0.8rem; font-size: 0.82rem;
   font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
@@ -55,8 +58,10 @@ img { max-width: 100%; height: auto; }
 }
 .nav-link:hover { color: var(--white); background: rgba(255,255,255,0.1); }
 .hamburger {
-  display: none; background: none; border: none; color: var(--white);
-  font-size: 1.5rem; cursor: pointer;
+  display: block; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3);
+  color: var(--gold); padding: 0.4rem 1rem; border-radius: 4px;
+  font-size: 0.85rem; font-weight: 700; cursor: pointer; letter-spacing: 1px;
+  font-family: 'Roboto', sans-serif; text-transform: uppercase;
 }
 
 /* ─── Hero ─── */
@@ -264,12 +269,6 @@ img { max-width: 100%; height: auto; }
 .fade-in.visible { opacity: 1; transform: translateY(0); }
 
 /* ─── Responsive ─── */
-@media (max-width: 1500px) {
-  .nav-links { display: none; position: absolute; top: 64px; left: 0; right: 0;
-    background: var(--navy); flex-direction: column; padding: 1rem; z-index: 1001; }
-  .nav-links.active { display: flex; }
-  .hamburger { display: block; }
-}
 @media (max-width: 900px) {
   .hero h1 { font-size: 2.2rem; }
   .card-grid { grid-template-columns: 1fr; }
@@ -339,7 +338,7 @@ img { max-width: 100%; height: auto; }
 <!-- ═══ NAVIGATION ═══ -->
 <nav class="navbar">
   <div class="nav-brand">SEATTLE <span>GUIDE</span></div>
-  <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('active')" aria-label="Menu">☰</button>
+  <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('active')" aria-label="Menu">☰ MENU</button>
   <div class="nav-links"><a href="#home" class="nav-link">Home</a>
 <a href="#venue" class="nav-link">Venue</a>
 <a href="#transport" class="nav-link">Weather & Getting Around</a>
@@ -1863,6 +1862,13 @@ img { max-width: 100%; height: auto; }
 <button class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
 
 <script>
+// Close menu on link click
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', () => {
+    document.querySelector('.nav-links').classList.remove('active');
+  });
+});
+
 // Back-to-top visibility
 const btn = document.querySelector('.back-to-top');
 window.addEventListener('scroll', () => {
