@@ -1292,57 +1292,104 @@
       {
         "title": "Grey's Anatomy",
         "type": "Medical Drama",
-        "description": "While mostly filmed in Los Angeles, this long-running medical drama is deeply tied to the city. Fans seek out the real-life locations of establishing shots like the Space Needle and the Monorail."
+        "description": "While mostly filmed in Los Angeles, this long-running medical drama (2005–present) is deeply tied to Seattle. Set at the fictional Grey Sloan Memorial Hospital, fans seek out real-life establishing shots like the Space Needle and the Monorail. The show has introduced millions to Seattle's moody charm."
       },
       {
         "title": "Frasier",
         "type": "Sitcom",
-        "description": "This classic 90s sitcom defined the upscale, coffee-obsessed Seattle aesthetic. While Frasier's exact apartment view is geographically impossible, Kerry Park on Queen Anne Hill offers the closest real-life equivalent."
+        "description": "This classic NBC sitcom (1993–2004, rebooted 2023) defined the upscale, coffee-obsessed Seattle aesthetic. Frasier Crane's apartment view is geographically impossible, but Kerry Park on Queen Anne Hill offers the closest real-life equivalent. The show cemented Seattle's reputation as a sophisticated, cultured city."
       },
       {
         "title": "The Killing",
         "type": "Crime Drama",
-        "description": "For fans of darker, grittier Seattle — this crime drama perfectly captured the relentlessly rainy, moody atmosphere of the Pacific Northwest."
+        "description": "AMC's atmospheric crime drama (2011–2014) perfectly captured the relentlessly rainy, moody Pacific Northwest. Filmed extensively on location in Seattle and Vancouver, it showcased the city's grittier side — waterfront docks, rain-slicked streets, and dense evergreen forests."
+      },
+      {
+        "title": "iCarly",
+        "type": "Kids / Comedy",
+        "description": "Nickelodeon's hit show (2007–2012, rebooted 2021) is set in Seattle, with the Space Needle frequently visible from Carly's apartment. While filmed in LA, it introduced a generation of kids to the idea of Seattle as a cool, creative city."
+      },
+      {
+        "title": "Station 19",
+        "type": "Drama",
+        "description": "Grey's Anatomy spinoff (2018–2024) following Seattle firefighters. Set in the same fictional Seattle universe, it features frequent establishing shots of the city skyline and real Seattle landmarks."
+      },
+      {
+        "title": "Twin Peaks",
+        "type": "Mystery / Surreal",
+        "description": "David Lynch's groundbreaking series (1990–1991, revived 2017) was filmed in the towns and forests east of Seattle. The iconic Snoqualmie Falls and the Salish Lodge (the 'Great Northern Hotel') are popular pilgrimage sites for fans, just 35 minutes from downtown."
       }
     ],
     "film": [
       {
         "title": "Sleepless in Seattle",
         "year": 1993,
-        "description": "The quintessential Seattle romance. Famously highlighted the city's unique houseboat culture on Lake Union."
+        "description": "The quintessential Seattle romance starring Tom Hanks and Meg Ryan. Famously highlighted the city's unique houseboat culture on Lake Union. The houseboat from the film (2460 Westlake Ave N) is still there and privately owned."
       },
       {
         "title": "10 Things I Hate About You",
         "year": 1999,
-        "description": "This beloved teen adaptation features iconic scenes filmed around the Seattle area, including a memorable paintball date at Gas Works Park."
+        "description": "This beloved teen adaptation of Shakespeare's Taming of the Shrew, starring Heath Ledger and Julia Stiles, features iconic scenes filmed around Seattle — including a paintball date at Gas Works Park and the Stadium High School in nearby Tacoma."
       },
       {
         "title": "Singles",
         "year": 1992,
-        "description": "Directed by Cameron Crowe, this movie is a love letter to Seattle's early 90s grunge scene, featuring cameos from Pearl Jam, Soundgarden, and Alice in Chains."
+        "description": "Directed by Cameron Crowe, this movie is a love letter to Seattle's early 90s grunge scene. Set in a Capitol Hill apartment building, it features cameos from Pearl Jam, Soundgarden, and Alice in Chains. The real apartment building is at 1820 E Thomas St."
+      },
+      {
+        "title": "Say Anything...",
+        "year": 1989,
+        "description": "Cameron Crowe's iconic romantic comedy starring John Cusack was filmed throughout Seattle. The famous boombox scene ('In Your Eyes') is one of cinema's most recognizable moments. Filming locations include the Seattle Center and Gas Works Park."
+      },
+      {
+        "title": "An Officer and a Gentleman",
+        "year": 1982,
+        "description": "Starring Richard Gere and Debra Winger, this Oscar-winning film was shot at locations around the Puget Sound region, including Port Townsend and the now-closed paper mill. The iconic final scene was filmed at the mill."
+      },
+      {
+        "title": "The Ring",
+        "year": 2002,
+        "description": "This Hollywood remake of the Japanese horror classic was set and partially filmed in Seattle, using the city's perpetually overcast skies and dark waters as a naturally eerie backdrop."
+      },
+      {
+        "title": "Chronicle",
+        "year": 2012,
+        "description": "This found-footage sci-fi thriller about teens with telekinetic powers features the Space Needle prominently in its climactic sequence. Partially filmed in Seattle with the skyline as backdrop."
       }
     ]
   },
   "history": [
     {
-      "era": "The First Inhabitants",
-      "description": "Long before European settlement, the Duwamish and Suquamish tribes inhabited the area. The city is named after Chief Seattle (Sealth), a prominent leader of both tribes."
+      "era": "The First Inhabitants (12,000+ years ago)",
+      "description": "The Puget Sound region has been home to indigenous peoples for over 12,000 years. The Duwamish and Suquamish tribes were the primary inhabitants of what is now Seattle. The city is named after Chief Seattle (Si'ahl), a prominent leader of both tribes who was known for his eloquence and diplomacy. His famous speech about environmental stewardship is still quoted today. The Duwamish Longhouse in West Seattle is the only Native-owned urban cultural facility in the region."
+    },
+    {
+      "era": "Founding & The Timber Era (1851–1880s)",
+      "description": "Seattle was founded in 1851 by Arthur Denny's party at Alki Point, then relocated to the current Pioneer Square area. The city was built on logging — massive old-growth forests were clear-cut to fuel construction up and down the West Coast. Henry Yesler built the first steam-powered sawmill, and logs were skidded down what is now Yesler Way (the original 'Skid Road,' which gave English the phrase 'skid row')."
     },
     {
       "era": "The Great Seattle Fire (1889)",
-      "description": "A glue pot boiled over in a carpentry shop, starting a fire that destroyed the central business district. Residents rebuilt using brick and stone, raising the street level — creating the famous 'Seattle Underground' that tourists can still visit today."
+      "description": "On June 6, 1889, a glue pot boiled over in a carpentry shop at 1st Avenue and Madison Street, starting a fire that raged for 12 hours and destroyed 25 blocks — the entire central business district. Instead of abandoning the city, residents saw it as an opportunity. They rebuilt using brick and stone instead of wood, and raised the street level one to two stories above the original muddy ground. This created the famous 'Seattle Underground' — the buried original sidewalks and storefronts that tourists can still walk through today on Bill Speidel's Underground Tour."
     },
     {
       "era": "Klondike Gold Rush (1897)",
-      "description": "When gold was discovered in the Yukon, Seattle marketed itself as the 'Gateway to Alaska' and became the primary outfitting point for miners. The massive influx of wealth transformed Seattle from a struggling pioneer town into a thriving metropolis overnight."
+      "description": "When the steamship Portland docked in Seattle on July 17, 1897, carrying 'a ton of gold' from the Yukon, it triggered a stampede. Seattle's mayor quit his job on the spot to join the rush. The city brilliantly marketed itself as the 'Gateway to Alaska' — the last stop to buy supplies before heading north. Merchants made fortunes outfitting prospectors. The massive influx of wealth and population transformed Seattle from a struggling pioneer town of 42,000 into a booming metropolis almost overnight. The Klondike Gold Rush National Historical Park in Pioneer Square tells this story."
+    },
+    {
+      "era": "Boeing & The Aviation Era (1916–1970s)",
+      "description": "William Boeing built his first seaplane in a boathouse on Lake Union in 1916, launching what would become the world's largest aerospace company. Boeing's massive presence defined Seattle for decades — at its peak, the company employed over 100,000 people in the region. The phrase 'Will the last person leaving Seattle turn out the lights?' appeared on a billboard during the 1970 Boeing Bust, when the company laid off 60,000 workers and the city nearly collapsed. The Museum of Flight near Boeing Field tells this incredible story."
     },
     {
       "era": "The World's Fair (1962)",
-      "description": "Officially called the Century 21 Exposition, this event left the city with its most iconic landmarks: the Space Needle, the Monorail, and the Seattle Center."
+      "description": "Officially called the Century 21 Exposition, Seattle's World's Fair drew nearly 10 million visitors and transformed the city's identity. Built during the Space Race, it was themed around science and the future. The fair left Seattle with its most iconic landmarks: the 605-foot Space Needle (built in just 13 months), the Monorail, and the 74-acre Seattle Center campus that now houses MoPOP, Pacific Science Center, and Chihuly Garden and Glass."
+    },
+    {
+      "era": "The Grunge Revolution (1990s)",
+      "description": "In the early 1990s, Seattle became the center of the musical universe. Bands like Nirvana, Pearl Jam, Soundgarden, and Alice in Chains defined the 'grunge' sound — a raw fusion of punk and heavy metal born in Seattle's small clubs. Nirvana's 'Nevermind' (1991) knocked Michael Jackson off the #1 spot and changed popular music forever. The scene was centered around venues in Capitol Hill and Pioneer Square, record label Sub Pop, and the city's fiercely independent DIY culture."
     },
     {
       "era": "The Tech Boom (1980s–Present)",
-      "description": "The rise of Microsoft in the 80s and 90s, followed by the massive expansion of Amazon in the 2010s, created a huge influx of wealth and development, completely transforming neighborhoods like South Lake Union."
+      "description": "Microsoft's founding by Bill Gates and Paul Allen in 1975 (moving to Bellevue in 1979) planted the seed. But it was the explosive growth of Amazon — founded by Jeff Bezos in his Bellevue garage in 1994 and later headquartered in South Lake Union — that fundamentally reshaped modern Seattle. Amazon's campus transformed SLU from decaying warehouses into a gleaming tech hub. Combined with major presences from Google, Meta, and thousands of startups, Seattle became the fastest-growing major city in the US through the 2010s."
     }
   ],
   "geography": [
