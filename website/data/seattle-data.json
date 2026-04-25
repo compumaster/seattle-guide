@@ -538,6 +538,17 @@
         "longitude": -122.359935
       },
       {
+        "name": "Gum Wall",
+        "category": "Landmark / Quirky",
+        "address": "1428 Post Alley, Seattle, WA 98101",
+        "walkingMinutes": 10,
+        "distanceMiles": 0.5,
+        "priceTier": "Free",
+        "description": "A bizarre and beloved Seattle landmark — an entire brick wall covered in chewed bubblegum. Located in Post Alley beneath Pike Place Market. Weird, wonderful, and very Instagram-worthy.",
+        "latitude": 47.607968,
+        "longitude": -122.339856
+      },
+      {
         "name": "Seattle Central Library",
         "category": "Architecture / Library",
         "address": "1000 4th Ave, Seattle, WA 98104",

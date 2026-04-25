@@ -56,6 +56,8 @@ def card_html(item, extra_badges="", show_cuisine=False, show_category=False):
     lng = item.get("longitude", "")
     
     data_attrs = f' data-lat="{lat}" data-lng="{lng}"' if lat and lng else ''
+    dist = item.get("walkingMinutes") or item.get("drivingMinutes") or item.get("ferryMinutes") or item.get("transitMinutes") or 999
+    data_attrs += f' data-name="{name}" data-distance="{dist}"'
     html = f'<div class="card"{data_attrs}>\n'
     html += f'  <div class="card-header">\n'
     html += f'    <h3 class="card-title">{name}</h3>\n'
@@ -552,6 +554,11 @@ img {{ max-width: 100%; height: auto; }}
 .map-section-layout .card-grid::-webkit-scrollbar-thumb {{ background: var(--gold); border-radius: 3px; }}
 .card.card-active {{ border: 2px solid var(--sky); box-shadow: 0 0 15px rgba(41,182,246,0.3); transform: translateY(-2px); }}
 .map-wide {{ width: 100%; height: 350px; border-radius: 12px; overflow: hidden; border: 2px solid var(--gold); margin-bottom: 2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }}
+.sort-controls {{ display: flex; gap: 0.5rem; justify-content: center; margin-bottom: 1.5rem; flex-wrap: wrap; }}
+.sort-btn {{ padding: 0.4rem 1rem; border: 2px solid var(--navy); background: var(--white); color: var(--navy); font-weight: 700; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; border-radius: 20px; cursor: pointer; transition: all 0.2s; }}
+.sort-btn:hover {{ background: var(--navy); color: var(--white); }}
+.sort-btn.active {{ background: var(--navy); color: var(--gold); }}
+@keyframes fadeSlideIn {{ from {{ opacity: 0; transform: translateY(10px); }} to {{ opacity: 1; transform: translateY(0); }} }}
 @media (max-width: 900px) {{
   .map-section-layout {{ grid-template-columns: 1fr; }}
   .map-container {{ height: 300px; }}
@@ -665,6 +672,10 @@ img {{ max-width: 100%; height: auto; }}
     <p>{len(data["dining"])} curated restaurants sorted by distance from the convention center</p>
   </div>
   <div id="diningMap" class="map-wide"></div>
+  <div class="sort-controls" data-target="diningCards">
+    <button class="sort-btn active" data-sort="distance">↕ Distance</button>
+    <button class="sort-btn" data-sort="name">A→Z Name</button>
+  </div>
   <div class="card-grid" id="diningCards">
     {dining_cards}
   </div>
@@ -678,6 +689,10 @@ img {{ max-width: 100%; height: auto; }}
     <p>{len(data["attractions"]["walkable"])} attractions within walking distance of the convention center</p>
   </div>
   <div id="attractionsMap" class="map-wide"></div>
+  <div class="sort-controls" data-target="attractionsCards">
+    <button class="sort-btn active" data-sort="distance">↕ Distance</button>
+    <button class="sort-btn" data-sort="name">A→Z Name</button>
+  </div>
   <div class="card-grid" id="attractionsCards">
     {attraction_cards}
   </div>
@@ -691,6 +706,10 @@ img {{ max-width: 100%; height: auto; }}
     <p>Venture beyond downtown — {len(data["attractions"]["dayTrips"])} destinations within 2 hours</p>
   </div>
   <div id="daytripsMap" class="map-wide"></div>
+  <div class="sort-controls" data-target="daytripsCards">
+    <button class="sort-btn active" data-sort="distance">↕ Distance</button>
+    <button class="sort-btn" data-sort="name">A→Z Name</button>
+  </div>
   <div class="card-grid" id="daytripsCards">
     {daytrip_cards}
   </div>
@@ -716,6 +735,10 @@ img {{ max-width: 100%; height: auto; }}
     <p>Rainy-day-proof fun for families — indoor and outdoor options for all ages</p>
   </div>
   <div id="familyMap" class="map-wide"></div>
+  <div class="sort-controls" data-target="familyCards">
+    <button class="sort-btn active" data-sort="distance">↕ Distance</button>
+    <button class="sort-btn" data-sort="name">A→Z Name</button>
+  </div>
   <div class="card-grid" id="familyCards">
     {family_cards}
   </div>
@@ -740,6 +763,10 @@ img {{ max-width: 100%; height: auto; }}
     <div class="section-line"></div>
   </div>
   <div id="shoppingMap" class="map-wide"></div>
+  <div class="sort-controls" data-target="shoppingCards">
+    <button class="sort-btn active" data-sort="distance">↕ Distance</button>
+    <button class="sort-btn" data-sort="name">A→Z Name</button>
+  </div>
   <div class="card-grid" id="shoppingCards">
     {shopping_cards}
   </div>
@@ -752,6 +779,10 @@ img {{ max-width: 100%; height: auto; }}
     <div class="section-line"></div>
   </div>
   <div id="entertainmentMap" class="map-wide"></div>
+  <div class="sort-controls" data-target="entertainmentCards">
+    <button class="sort-btn active" data-sort="distance">↕ Distance</button>
+    <button class="sort-btn" data-sort="name">A→Z Name</button>
+  </div>
   <div class="card-grid" id="entertainmentCards">
     {entertainment_cards}
   </div>
@@ -765,6 +796,10 @@ img {{ max-width: 100%; height: auto; }}
     <p>Seattle is the birthplace of Starbucks and the epicenter of American specialty coffee culture</p>
   </div>
   <div id="coffeeMap" class="map-wide"></div>
+  <div class="sort-controls" data-target="coffeeCards">
+    <button class="sort-btn active" data-sort="distance">↕ Distance</button>
+    <button class="sort-btn" data-sort="name">A→Z Name</button>
+  </div>
   <div class="card-grid" id="coffeeCards">
     {coffee_cards}
   </div>
@@ -920,6 +955,38 @@ initMap('familyMap', 'familyCards', familyMarkers, '#7B1FA2');
 initMap('shoppingMap', 'shoppingCards', shoppingMarkers, '#FF6F00');
 initMap('entertainmentMap', 'entertainmentCards', entertainmentMarkers, '#E91E63');
 initMap('coffeeMap', 'coffeeCards', coffeeMarkers, '#795548');
+
+// ─── SORTING ───
+document.querySelectorAll('.sort-controls').forEach(controls => {{
+  const targetId = controls.dataset.target;
+  const grid = document.getElementById(targetId);
+  if (!grid) return;
+
+  controls.querySelectorAll('.sort-btn').forEach(btn => {{
+    btn.addEventListener('click', () => {{
+      controls.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const cards = [...grid.querySelectorAll('.card')];
+      const sortBy = btn.dataset.sort;
+
+      cards.sort((a, b) => {{
+        if (sortBy === 'name') {{
+          return (a.dataset.name || '').localeCompare(b.dataset.name || '');
+        }} else {{
+          return (parseFloat(a.dataset.distance) || 999) - (parseFloat(b.dataset.distance) || 999);
+        }}
+      }});
+
+      cards.forEach(card => {{
+        card.style.animation = 'none';
+        card.offsetHeight;
+        grid.appendChild(card);
+        card.style.animation = 'fadeSlideIn 0.3s ease-out forwards';
+      }});
+    }});
+  }});
+}});
 </script>
 </body>
 </html>

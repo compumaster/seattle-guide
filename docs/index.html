@@ -298,6 +298,11 @@ img { max-width: 100%; height: auto; }
 .map-section-layout .card-grid::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
 .card.card-active { border: 2px solid var(--sky); box-shadow: 0 0 15px rgba(41,182,246,0.3); transform: translateY(-2px); }
 .map-wide { width: 100%; height: 350px; border-radius: 12px; overflow: hidden; border: 2px solid var(--gold); margin-bottom: 2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+.sort-controls { display: flex; gap: 0.5rem; justify-content: center; margin-bottom: 1.5rem; flex-wrap: wrap; }
+.sort-btn { padding: 0.4rem 1rem; border: 2px solid var(--navy); background: var(--white); color: var(--navy); font-weight: 700; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; border-radius: 20px; cursor: pointer; transition: all 0.2s; }
+.sort-btn:hover { background: var(--navy); color: var(--white); }
+.sort-btn.active { background: var(--navy); color: var(--gold); }
+@keyframes fadeSlideIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 @media (max-width: 900px) {
   .map-section-layout { grid-template-columns: 1fr; }
   .map-container { height: 300px; }
@@ -512,8 +517,12 @@ img { max-width: 100%; height: auto; }
     <p>17 curated restaurants sorted by distance from the convention center</p>
   </div>
   <div id="diningMap" class="map-wide"></div>
+  <div class="sort-controls" data-target="diningCards">
+    <button class="sort-btn active" data-sort="distance">↕ Distance</button>
+    <button class="sort-btn" data-sort="name">A→Z Name</button>
+  </div>
   <div class="card-grid" id="diningCards">
-    <div class="card" data-lat="47.611338" data-lng="-122.333459">
+    <div class="card" data-lat="47.611338" data-lng="-122.333459" data-name="Alder & Ash" data-distance="2">
   <div class="card-header">
     <h3 class="card-title">Alder & Ash</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 2 min walk</span>   <span class="price-tier">$$<span class="price-dim">$</span></span></div>
@@ -523,7 +532,7 @@ img { max-width: 100%; height: auto; }
   <p class="card-addr">📍 629 Pike St, Seattle, WA 98101</p>
 </div>
 
-<div class="card" data-lat="47.6128" data-lng="-122.3288">
+<div class="card" data-lat="47.6128" data-lng="-122.3288" data-name="Daawat Indian Grill & Bar" data-distance="2">
   <div class="card-header">
     <h3 class="card-title">Daawat Indian Grill & Bar</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 2 min walk</span>   <span class="price-tier">$$<span class="price-dim">$</span></span></div>
@@ -533,7 +542,7 @@ img { max-width: 100%; height: auto; }
   <p class="card-addr">📍 Corner of 9th Ave & Pike St, Seattle, WA 98101</p>
 </div>
 
-<div class="card" data-lat="47.608782" data-lng="-122.337196">
+<div class="card" data-lat="47.608782" data-lng="-122.337196" data-name="Wild Ginger" data-distance="3">
   <div class="card-header">
     <h3 class="card-title">Wild Ginger</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 3 min walk</span>   <span class="price-tier">$$<span class="price-dim">$</span></span></div>
@@ -544,7 +553,7 @@ img { max-width: 100%; height: auto; }
   <a href="https://www.wildginger.net/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
 </div>
 
-<div class="card" data-lat="47.608325" data-lng="-122.335367">
+<div class="card" data-lat="47.608325" data-lng="-122.335367" data-name="The Capital Grille" data-distance="4">
   <div class="card-header">
     <h3 class="card-title">The Capital Grille</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 4 min walk</span>   <span class="price-tier">$$$<span class="price-dim"></span></span></div>
@@ -555,7 +564,7 @@ img { max-width: 100%; height: auto; }
   <a href="https://www.thecapitalgrille.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
 </div>
 
-<div class="card" data-lat="47.6125" data-lng="-122.3363">
+<div class="card" data-lat="47.6125" data-lng="-122.3363" data-name="Din Tai Fung" data-distance="5">
   <div class="card-header">
     <h3 class="card-title">Din Tai Fung</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 5 min walk</span>   <span class="price-tier">$$<span class="price-dim">$</span></span></div>
@@ -566,7 +575,7 @@ img { max-width: 100%; height: auto; }
   <a href="https://dintaifungusa.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
 </div>
 
-<div class="card" data-lat="47.607951" data-lng="-122.33506">
+<div class="card" data-lat="47.607951" data-lng="-122.33506" data-name="Purple Cafe and Wine Bar" data-distance="5">
   <div class="card-header">
     <h3 class="card-title">Purple Cafe and Wine Bar</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 5 min walk</span>   <span class="price-tier">$$<span class="price-dim">$</span></span></div>
@@ -577,7 +586,7 @@ img { max-width: 100%; height: auto; }
   <a href="https://www.purplecafe.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
 </div>
 
-<div class="card" data-lat="47.614387" data-lng="-122.32808">
+<div class="card" data-lat="47.614387" data-lng="-122.32808" data-name="Térra Plata" data-distance="7">
   <div class="card-header">
     <h3 class="card-title">Térra Plata</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 7 min walk</span>   <span class="price-tier">$$$<span class="price-dim"></span></span></div>
@@ -587,7 +596,7 @@ img { max-width: 100%; height: auto; }
   <p class="card-addr">📍 1501 Melrose Ave, Seattle, WA 98101</p>
 </div>
 
-<div class="card" data-lat="47.608052" data-lng="-122.339037">
+<div class="card" data-lat="47.608052" data-lng="-122.339037" data-name="Japonessa Sushi Cocina" data-distance="8">
   <div class="card-header">
     <h3 class="card-title">Japonessa Sushi Cocina</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 8 min walk</span>   <span class="price-tier">$$$<span class="price-dim"></span></span></div>
@@ -598,7 +607,7 @@ img { max-width: 100%; height: auto; }
   <a href="https://japonessa.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
 </div>
 
-<div class="card" data-lat="47.612903" data-lng="-122.340495">
+<div class="card" data-lat="47.612903" data-lng="-122.340495" data-name="Serious Pie" data-distance="8">
   <div class="card-header">
     <h3 class="card-title">Serious Pie</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 8 min walk</span>   <span class="price-tier">$$<span class="price-dim">$</span></span></div>
@@ -609,7 +618,7 @@ img { max-width: 100%; height: auto; }
   <a href="https://www.seriouspieseattle.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
 </div>
 
-<div class="card" data-lat="47.6065" data-lng="-122.335">
+<div class="card" data-lat="47.6065" data-lng="-122.335" data-name="Shuckers" data-distance="9">
   <div class="card-header">
     <h3 class="card-title">Shuckers</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 9 min walk</span>   <span class="price-tier">$$<span class="price-dim">$</span></span></div>
@@ -620,7 +629,7 @@ img { max-width: 100%; height: auto; }
   <a href="https://www.fairmont.com/seattle/dining/shuckers/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
 </div>
 
-<div class="card" data-lat="47.609582" data-lng="-122.341816">
+<div class="card" data-lat="47.609582" data-lng="-122.341816" data-name="Beecher's Handmade Cheese" data-distance="10">
   <div class="card-header">
     <h3 class="card-title">Beecher's Handmade Cheese</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 10 min walk</span>   <span class="price-tier">$<span class="price-dim">$$</span></span></div>
@@ -631,7 +640,7 @@ img { max-width: 100%; height: auto; }
   <a href="https://beechershandmadecheese.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
 </div>
 
-<div class="card" data-lat="47.609466" data-lng="-122.34107">
+<div class="card" data-lat="47.609466" data-lng="-122.34107" data-name="Pike Place Chowder" data-distance="10">
   <div class="card-header">
     <h3 class="card-title">Pike Place Chowder</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 10 min walk</span>   <span class="price-tier">$<span class="price-dim">$$</span></span></div>
@@ -642,7 +651,7 @@ img { max-width: 100%; height: auto; }
   <a href="https://pikeplacechowder.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
 </div>
 
-<div class="card" data-lat="47.608856" data-lng="-122.340566">
+<div class="card" data-lat="47.608856" data-lng="-122.340566" data-name="Matt's in the Market" data-distance="10">
   <div class="card-header">
     <h3 class="card-title">Matt's in the Market</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 10 min walk</span>   <span class="price-tier">$$$<span class="price-dim"></span></span></div>
@@ -653,7 +662,7 @@ img { max-width: 100%; height: auto; }
   <a href="https://www.mattsinthemarket.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
 </div>
 
-<div class="card" data-lat="47.604426" data-lng="-122.334189">
+<div class="card" data-lat="47.604426" data-lng="-122.334189" data-name="Metropolitan Grill" data-distance="10">
   <div class="card-header">
     <h3 class="card-title">Metropolitan Grill</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 10 min walk</span>   <span class="price-tier">$$$<span class="price-dim"></span></span></div>
@@ -664,7 +673,7 @@ img { max-width: 100%; height: auto; }
   <a href="https://www.themetropolitangrill.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
 </div>
 
-<div class="card" data-lat="47.643053" data-lng="-122.346736">
+<div class="card" data-lat="47.643053" data-lng="-122.346736" data-name="Canlis" data-distance="10">
   <div class="card-header">
     <h3 class="card-title">Canlis</h3>
     <div class="card-badges"><span class="badge badge-navy">🚗 10 min drive</span>   <span class="price-tier">$$$<span class="price-dim"></span></span></div>
@@ -675,7 +684,7 @@ img { max-width: 100%; height: auto; }
   <a href="https://canlis.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
 </div>
 
-<div class="card" data-lat="47.623437" data-lng="-122.354405">
+<div class="card" data-lat="47.623437" data-lng="-122.354405" data-name="Taylor Shellfish Oyster Bar" data-distance="18">
   <div class="card-header">
     <h3 class="card-title">Taylor Shellfish Oyster Bar</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 18 min walk</span>   <span class="price-tier">$$<span class="price-dim">$</span></span></div>
@@ -686,7 +695,7 @@ img { max-width: 100%; height: auto; }
   <a href="https://www.taylorshellfishfarms.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
 </div>
 
-<div class="card" data-lat="47.614614" data-lng="-122.331332">
+<div class="card" data-lat="47.614614" data-lng="-122.331332" data-name="Bombo Italian Kitchen" data-distance="999">
   <div class="card-header">
     <h3 class="card-title">Bombo Italian Kitchen</h3>
     <div class="card-badges"><span class="badge badge-gold">📍 On-Site</span>  <span class="badge badge-gold">📍 ON-SITE</span> <span class="price-tier">$$<span class="price-dim">$</span></span></div>
@@ -705,11 +714,15 @@ img { max-width: 100%; height: auto; }
   <div class="section-header">
     <h2>Walkable Attractions</h2>
     <div class="section-line"></div>
-    <p>18 attractions within walking distance of the convention center</p>
+    <p>19 attractions within walking distance of the convention center</p>
   </div>
   <div id="attractionsMap" class="map-wide"></div>
+  <div class="sort-controls" data-target="attractionsCards">
+    <button class="sort-btn active" data-sort="distance">↕ Distance</button>
+    <button class="sort-btn" data-sort="name">A→Z Name</button>
+  </div>
   <div class="card-grid" id="attractionsCards">
-    <div class="card" data-lat="47.609164" data-lng="-122.330511">
+    <div class="card" data-lat="47.609164" data-lng="-122.330511" data-name="Freeway Park" data-distance="3">
   <div class="card-header">
     <h3 class="card-title">Freeway Park</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 3 min walk</span>   <span class="price-free">FREE</span></div>
@@ -719,7 +732,7 @@ img { max-width: 100%; height: auto; }
   <p class="card-addr">📍 700 Seneca St, Seattle, WA 98101</p>
 </div>
 
-<div class="card" data-lat="47.607701" data-lng="-122.338557">
+<div class="card" data-lat="47.607701" data-lng="-122.338557" data-name="Seattle Art Museum (SAM)" data-distance="8">
   <div class="card-header">
     <h3 class="card-title">Seattle Art Museum (SAM)</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 8 min walk</span>   <span class="price-tier">$$<span class="price-dim">$</span></span></div>
@@ -730,7 +743,7 @@ img { max-width: 100%; height: auto; }
   <a href="https://www.seattleartmuseum.org/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
 </div>
 
-<div class="card" data-lat="47.608754" data-lng="-122.3402">
+<div class="card" data-lat="47.608754" data-lng="-122.3402" data-name="Pike Place Market" data-distance="10">
   <div class="card-header">
     <h3 class="card-title">Pike Place Market</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 10 min walk</span> <span class="badge badge-gold">⭐ Must See</span>  <span class="price-free">FREE</span></div>
@@ -741,7 +754,17 @@ img { max-width: 100%; height: auto; }
   <a href="https://www.pikeplacemarket.org/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
 </div>
 
-<div class="card" data-lat="47.606714" data-lng="-122.332698">
+<div class="card" data-lat="47.607968" data-lng="-122.339856" data-name="Gum Wall" data-distance="10">
+  <div class="card-header">
+    <h3 class="card-title">Gum Wall</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 10 min walk</span>   <span class="price-free">FREE</span></div>
+    <span class="category-tag">Landmark / Quirky</span>
+  </div>
+  <p class="card-desc">A bizarre and beloved Seattle landmark — an entire brick wall covered in chewed bubblegum. Located in Post Alley beneath Pike Place Market. Weird, wonderful, and very Instagram-worthy.</p>
+  <p class="card-addr">📍 1428 Post Alley, Seattle, WA 98101</p>
+</div>
+
+<div class="card" data-lat="47.606714" data-lng="-122.332698" data-name="Seattle Central Library" data-distance="10">
   <div class="card-header">
     <h3 class="card-title">Seattle Central Library</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 10 min walk</span>   <span class="price-free">FREE</span></div>
@@ -752,7 +775,7 @@ img { max-width: 100%; height: auto; }
   <a href="https://www.spl.org/hours-and-locations/central-library" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
 </div>
 
-<div class="card" data-lat="47.606043" data-lng="-122.342167">
+<div class="card" data-lat="47.606043" data-lng="-122.342167" data-name="Seattle Waterfront & Pier 57" data-distance="12">
   <div class="card-header">
     <h3 class="card-title">Seattle Waterfront & Pier 57</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 12 min walk</span>   <span class="price-free">FREE</span></div>
@@ -763,7 +786,7 @@ img { max-width: 100%; height: auto; }
   <a href="https://www.waterfrontseattle.org/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
 </div>
 
-<div class="card" data-lat="47.606043" data-lng="-122.342167">
+<div class="card" data-lat="47.606043" data-lng="-122.342167" data-name="Seattle Great Wheel" data-distance="12">
   <div class="card-header">
     <h3 class="card-title">Seattle Great Wheel</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 12 min walk</span>   <span class="price-tier">$$<span class="price-dim">$</span></span></div>
@@ -774,7 +797,7 @@ img { max-width: 100%; height: auto; }
   <a href="https://seattlegreatwheel.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
 </div>
 
-<div class="card" data-lat="47.607625" data-lng="-122.34322">
+<div class="card" data-lat="47.607625" data-lng="-122.34322" data-name="Seattle Aquarium" data-distance="14">
   <div class="card-header">
     <h3 class="card-title">Seattle Aquarium</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 14 min walk</span>   <span class="price-tier">$$<span class="price-dim">$</span></span></div>
@@ -785,7 +808,7 @@ img { max-width: 100%; height: auto; }
   <a href="https://www.seattleaquarium.org/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
 </div>
 
-<div class="card" data-lat="47.602722" data-lng="-122.331354">
+<div class="card" data-lat="47.602722" data-lng="-122.331354" data-name="Pioneer Square" data-distance="15">
   <div class="card-header">
     <h3 class="card-title">Pioneer Square</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 15 min walk</span>   <span class="price-free">FREE</span></div>
@@ -796,7 +819,7 @@ img { max-width: 100%; height: auto; }
   <a href="https://www.pioneersquare.org/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
 </div>
 
-<div class="card" data-lat="47.602335" data-lng="-122.333779">
+<div class="card" data-lat="47.602335" data-lng="-122.333779" data-name="Bill Speidel's Underground Tour" data-distance="15">
   <div class="card-header">
     <h3 class="card-title">Bill Speidel's Underground Tour</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 15 min walk</span>   <span class="price-tier">$$<span class="price-dim">$</span></span></div>
@@ -807,7 +830,7 @@ img { max-width: 100%; height: auto; }
   <a href="https://www.undergroundtour.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
 </div>
 
-<div class="card" data-lat="47.623831" data-lng="-122.318368">
+<div class="card" data-lat="47.623831" data-lng="-122.318368" data-name="Capitol Hill" data-distance="15">
   <div class="card-header">
     <h3 class="card-title">Capitol Hill</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 15 min walk</span>   <span class="price-free">FREE</span></div>
@@ -818,7 +841,7 @@ img { max-width: 100%; height: auto; }
   <a href="https://visitseattle.org/neighborhoods/capitol-hill/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
 </div>
 
-<div class="card" data-lat="47.616272" data-lng="-122.353583">
+<div class="card" data-lat="47.616272" data-lng="-122.353583" data-name="Olympic Sculpture Park" data-distance="18">
   <div class="card-header">
     <h3 class="card-title">Olympic Sculpture Park</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 18 min walk</span>   <span class="price-free">FREE</span></div>
@@ -829,7 +852,7 @@ img { max-width: 100%; height: auto; }
   <a href="https://www.seattleartmuseum.org/visit/olympic-sculpture-park" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
 </div>
 
-<div class="card" data-lat="47.620513" data-lng="-122.349304">
+<div class="card" data-lat="47.620513" data-lng="-122.349304" data-name="Space Needle" data-distance="20">
   <div class="card-header">
     <h3 class="card-title">Space Needle</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 20 min walk</span> <span class="badge badge-gold">⭐ Must See</span>  <span class="price-tier">$$$<span class="price-dim"></span></span></div>
@@ -841,7 +864,7 @@ img { max-width: 100%; height: auto; }
   <a href="https://www.spaceneedle.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
 </div>
 
-<div class="card" data-lat="47.621462" data-lng="-122.350989">
+<div class="card" data-lat="47.621462" data-lng="-122.350989" data-name="Chihuly Garden and Glass" data-distance="20">
   <div class="card-header">
     <h3 class="card-title">Chihuly Garden and Glass</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 20 min walk</span> <span class="badge badge-gold">⭐ Must See</span>  <span class="price-tier">$$$<span class="price-dim"></span></span></div>
@@ -852,7 +875,7 @@ img { max-width: 100%; height: auto; }
   <a href="https://www.chihulygardenandglass.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
 </div>
 
-<div class="card" data-lat="47.623591" data-lng="-122.34737">
+<div class="card" data-lat="47.623591" data-lng="-122.34737" data-name="Gates Foundation Discovery Center" data-distance="20">
   <div class="card-header">
     <h3 class="card-title">Gates Foundation Discovery Center</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 20 min walk</span> <span class="badge badge-gold">⭐ Must See</span>  <span class="price-free">FREE</span></div>
@@ -864,7 +887,7 @@ img { max-width: 100%; height: auto; }
   <a href="https://www.discovergates.org/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
 </div>
 
-<div class="card" data-lat="47.619406" data-lng="-122.350778">
+<div class="card" data-lat="47.619406" data-lng="-122.350778" data-name="Pacific Science Center" data-distance="22">
   <div class="card-header">
     <h3 class="card-title">Pacific Science Center</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 22 min walk</span>   <span class="price-tier">$$<span class="price-dim">$</span></span></div>
@@ -875,7 +898,7 @@ img { max-width: 100%; height: auto; }
   <a href="https://www.pacificsciencecenter.org/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
 </div>
 
-<div class="card" data-lat="47.621493" data-lng="-122.348225">
+<div class="card" data-lat="47.621493" data-lng="-122.348225" data-name="Museum of Pop Culture (MoPOP)" data-distance="22">
   <div class="card-header">
     <h3 class="card-title">Museum of Pop Culture (MoPOP)</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 22 min walk</span>   <span class="price-tier">$$$<span class="price-dim"></span></span></div>
@@ -886,7 +909,7 @@ img { max-width: 100%; height: auto; }
   <a href="https://www.mopop.org/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
 </div>
 
-<div class="card" data-lat="47.629477" data-lng="-122.359935">
+<div class="card" data-lat="47.629477" data-lng="-122.359935" data-name="Kerry Park" data-distance="30">
   <div class="card-header">
     <h3 class="card-title">Kerry Park</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 30 min walk</span>   <span class="price-free">FREE</span></div>
@@ -898,7 +921,7 @@ img { max-width: 100%; height: auto; }
   <a href="https://www.seattle.gov/parks/allparks/kerry-park" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
 </div>
 
-<div class="card" data-lat="47.65543" data-lng="-122.300169">
+<div class="card" data-lat="47.65543" data-lng="-122.300169" data-name="University of Washington Campus" data-distance="15">
   <div class="card-header">
     <h3 class="card-title">University of Washington Campus</h3>
     <div class="card-badges"><span class="badge badge-navy">🚗 15 min drive</span>   <span class="price-free">FREE</span></div>
@@ -921,8 +944,12 @@ img { max-width: 100%; height: auto; }
     <p>Venture beyond downtown — 12 destinations within 2 hours</p>
   </div>
   <div id="daytripsMap" class="map-wide"></div>
+  <div class="sort-controls" data-target="daytripsCards">
+    <button class="sort-btn active" data-sort="distance">↕ Distance</button>
+    <button class="sort-btn" data-sort="name">A→Z Name</button>
+  </div>
   <div class="card-grid" id="daytripsCards">
-    <div class="card" data-lat="47.664662" data-lng="-122.39746">
+    <div class="card" data-lat="47.664662" data-lng="-122.39746" data-name="Hiram M. Chittenden Locks (Ballard Locks)" data-distance="15">
   <div class="card-header">
     <h3 class="card-title">Hiram M. Chittenden Locks (Ballard Locks)</h3>
     <div class="card-badges"><span class="badge badge-navy">🚗 15 min drive</span>  <span class="badge badge-navy">🚗 Requires transport</span> <span class="price-free">FREE</span></div>
@@ -933,7 +960,7 @@ img { max-width: 100%; height: auto; }
   <a href="https://www.ballardlocks.org/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
 </div>
 
-<div class="card" data-lat="47.666312" data-lng="-122.349302">
+<div class="card" data-lat="47.666312" data-lng="-122.349302" data-name="Woodland Park Zoo" data-distance="15">
   <div class="card-header">
     <h3 class="card-title">Woodland Park Zoo</h3>
     <div class="card-badges"><span class="badge badge-navy">🚗 15 min drive</span>  <span class="badge badge-navy">🚗 Requires transport</span> <span class="price-tier">$$<span class="price-dim">$</span></span></div>
@@ -944,7 +971,7 @@ img { max-width: 100%; height: auto; }
   <a href="https://www.zoo.org/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
 </div>
 
-<div class="card" data-lat="47.518359" data-lng="-122.296496">
+<div class="card" data-lat="47.518359" data-lng="-122.296496" data-name="Museum of Flight" data-distance="20">
   <div class="card-header">
     <h3 class="card-title">Museum of Flight</h3>
     <div class="card-badges"><span class="badge badge-navy">🚗 20 min drive</span>  <span class="badge badge-navy">🚗 Requires transport</span> <span class="price-tier">$$<span class="price-dim">$</span></span></div>
@@ -955,7 +982,7 @@ img { max-width: 100%; height: auto; }
   <a href="https://www.museumofflight.org/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
 </div>
 
-<div class="card" data-lat="47.675448" data-lng="-122.209257">
+<div class="card" data-lat="47.675448" data-lng="-122.209257" data-name="Kirkland Waterfront" data-distance="20">
   <div class="card-header">
     <h3 class="card-title">Kirkland Waterfront</h3>
     <div class="card-badges"><span class="badge badge-navy">🚗 20 min drive</span>  <span class="badge badge-navy">🚗 Requires transport</span> <span class="price-free">FREE</span></div>
@@ -966,7 +993,7 @@ img { max-width: 100%; height: auto; }
   <a href="https://www.explorekirkland.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
 </div>
 
-<div class="card" data-lat="47.642492" data-lng="-122.136927">
+<div class="card" data-lat="47.642492" data-lng="-122.136927" data-name="Microsoft Visitor Center" data-distance="25">
   <div class="card-header">
     <h3 class="card-title">Microsoft Visitor Center</h3>
     <div class="card-badges"><span class="badge badge-navy">🚗 25 min drive</span>  <span class="badge badge-navy">🚗 Requires transport</span> <span class="price-free">FREE</span></div>
@@ -977,7 +1004,7 @@ img { max-width: 100%; height: auto; }
   <a href="https://www.microsoft.com/en-us/visitorcenter" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
 </div>
 
-<div class="card" data-lat="47.614422" data-lng="-122.192337">
+<div class="card" data-lat="47.614422" data-lng="-122.192337" data-name="Bellevue via 2 Line Light Rail" data-distance="26">
   <div class="card-header">
     <h3 class="card-title">Bellevue via 2 Line Light Rail</h3>
     <div class="card-badges"><span class="badge badge-blue">🚇 26 min transit</span>  <span class="badge badge-navy">🚗 Requires transport</span> <span class="price-free">FREE</span></div>
@@ -988,7 +1015,7 @@ img { max-width: 100%; height: auto; }
   <p class="card-addr">📍 Bellevue, WA 98004</p>
 </div>
 
-<div class="card" data-lat="47.754583" data-lng="-122.15889">
+<div class="card" data-lat="47.754583" data-lng="-122.15889" data-name="Woodinville Wine Country" data-distance="30">
   <div class="card-header">
     <h3 class="card-title">Woodinville Wine Country</h3>
     <div class="card-badges"><span class="badge badge-navy">🚗 30 min drive</span>  <span class="badge badge-navy">🚗 Requires transport</span> <span class="price-tier">$$<span class="price-dim">$</span></span></div>
@@ -1000,7 +1027,7 @@ img { max-width: 100%; height: auto; }
   <a href="https://woodinvillewinecountry.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
 </div>
 
-<div class="card" data-lat="47.6027" data-lng="-122.3389">
+<div class="card" data-lat="47.6027" data-lng="-122.3389" data-name="Bainbridge Island" data-distance="35">
   <div class="card-header">
     <h3 class="card-title">Bainbridge Island</h3>
     <div class="card-badges"><span class="badge badge-navy">⛴️ 35 min ferry</span>  <span class="badge badge-navy">🚗 Requires transport</span> <span class="price-tier">$<span class="price-dim">$$</span></span></div>
@@ -1012,7 +1039,7 @@ img { max-width: 100%; height: auto; }
   <a href="https://www.bainbridgeisland.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
 </div>
 
-<div class="card" data-lat="47.542155" data-lng="-121.836632">
+<div class="card" data-lat="47.542155" data-lng="-121.836632" data-name="Snoqualmie Falls" data-distance="35">
   <div class="card-header">
     <h3 class="card-title">Snoqualmie Falls</h3>
     <div class="card-badges"><span class="badge badge-navy">🚗 35 min drive</span>  <span class="badge badge-navy">🚗 Requires transport</span> <span class="price-free">FREE</span></div>
@@ -1023,7 +1050,7 @@ img { max-width: 100%; height: auto; }
   <a href="https://www.snoqualmiefalls.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
 </div>
 
-<div class="card" data-lat="47.918494" data-lng="-122.292439">
+<div class="card" data-lat="47.918494" data-lng="-122.292439" data-name="Future of Flight Aviation Center & Boeing Tour" data-distance="40">
   <div class="card-header">
     <h3 class="card-title">Future of Flight Aviation Center & Boeing Tour</h3>
     <div class="card-badges"><span class="badge badge-navy">🚗 40 min drive</span>  <span class="badge badge-navy">🚗 Requires transport</span> <span class="price-tier">$$<span class="price-dim">$</span></span></div>
@@ -1034,7 +1061,7 @@ img { max-width: 100%; height: auto; }
   <a href="https://www.futureofflight.org/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
 </div>
 
-<div class="card" data-lat="47.95022" data-lng="-122.297075">
+<div class="card" data-lat="47.95022" data-lng="-122.297075" data-name="Whidbey Island" data-distance="50">
   <div class="card-header">
     <h3 class="card-title">Whidbey Island</h3>
     <div class="card-badges"><span class="badge badge-navy">🚗 50 min drive</span>  <span class="badge badge-navy">🚗 Requires transport</span> <span class="price-tier">$<span class="price-dim">$$</span></span></div>
@@ -1045,7 +1072,7 @@ img { max-width: 100%; height: auto; }
   <a href="https://www.whidbeycamanoislands.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
 </div>
 
-<div class="card" data-lat="47.606028" data-lng="-120.64324">
+<div class="card" data-lat="47.606028" data-lng="-120.64324" data-name="Leavenworth Bavarian Village" data-distance="120">
   <div class="card-header">
     <h3 class="card-title">Leavenworth Bavarian Village</h3>
     <div class="card-badges"><span class="badge badge-navy">🚗 120 min drive</span>  <span class="badge badge-navy">🚗 Requires transport</span> <span class="price-free">FREE</span></div>
@@ -1118,6 +1145,10 @@ img { max-width: 100%; height: auto; }
     <p>Rainy-day-proof fun for families — indoor and outdoor options for all ages</p>
   </div>
   <div id="familyMap" class="map-wide"></div>
+  <div class="sort-controls" data-target="familyCards">
+    <button class="sort-btn active" data-sort="distance">↕ Distance</button>
+    <button class="sort-btn" data-sort="name">A→Z Name</button>
+  </div>
   <div class="card-grid" id="familyCards">
     <div class="card card-family">
   <div class="card-header">
@@ -1239,8 +1270,12 @@ img { max-width: 100%; height: auto; }
     <div class="section-line"></div>
   </div>
   <div id="shoppingMap" class="map-wide"></div>
+  <div class="sort-controls" data-target="shoppingCards">
+    <button class="sort-btn active" data-sort="distance">↕ Distance</button>
+    <button class="sort-btn" data-sort="name">A→Z Name</button>
+  </div>
   <div class="card-grid" id="shoppingCards">
-    <div class="card" data-lat="47.612883" data-lng="-122.335289">
+    <div class="card" data-lat="47.612883" data-lng="-122.335289" data-name="Pacific Place" data-distance="3">
   <div class="card-header">
     <h3 class="card-title">Pacific Place</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 3 min walk</span>  </div>
@@ -1250,7 +1285,7 @@ img { max-width: 100%; height: auto; }
   <a href="https://www.pacificplaceseattle.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
 </div>
 
-<div class="card" data-lat="47.611921" data-lng="-122.336541">
+<div class="card" data-lat="47.611921" data-lng="-122.336541" data-name="Nordstrom Flagship" data-distance="4">
   <div class="card-header">
     <h3 class="card-title">Nordstrom Flagship</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 4 min walk</span>  </div>
@@ -1260,7 +1295,7 @@ img { max-width: 100%; height: auto; }
   <a href="https://www.nordstrom.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
 </div>
 
-<div class="card" data-lat="47.611991" data-lng="-122.337391">
+<div class="card" data-lat="47.611991" data-lng="-122.337391" data-name="Westlake Center" data-distance="5">
   <div class="card-header">
     <h3 class="card-title">Westlake Center</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 5 min walk</span>  </div>
@@ -1270,7 +1305,7 @@ img { max-width: 100%; height: auto; }
   <a href="https://www.westlakecenter.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
 </div>
 
-<div class="card" data-lat="47.608754" data-lng="-122.3402">
+<div class="card" data-lat="47.608754" data-lng="-122.3402" data-name="Pike Place Market Shops" data-distance="10">
   <div class="card-header">
     <h3 class="card-title">Pike Place Market Shops</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 10 min walk</span>  </div>
@@ -1279,7 +1314,7 @@ img { max-width: 100%; height: auto; }
   <p class="card-addr">📍 85 Pike St, Seattle, WA 98101</p>
 </div>
 
-<div class="card" data-lat="47.662674" data-lng="-122.299114">
+<div class="card" data-lat="47.662674" data-lng="-122.299114" data-name="University Village" data-distance="15">
   <div class="card-header">
     <h3 class="card-title">University Village</h3>
     <div class="card-badges"><span class="badge badge-navy">🚗 15 min drive</span>  </div>
@@ -1289,7 +1324,7 @@ img { max-width: 100%; height: auto; }
   <a href="https://uvillage.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
 </div>
 
-<div class="card" data-lat="47.614666" data-lng="-122.319677">
+<div class="card" data-lat="47.614666" data-lng="-122.319677" data-name="Elliott Bay Book Company" data-distance="15">
   <div class="card-header">
     <h3 class="card-title">Elliott Bay Book Company</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 15 min walk</span>  </div>
@@ -1299,7 +1334,7 @@ img { max-width: 100%; height: auto; }
   <a href="https://www.elliottbaybook.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
 </div>
 
-<div class="card" data-lat="47.615655" data-lng="-122.203677">
+<div class="card" data-lat="47.615655" data-lng="-122.203677" data-name="Bellevue Square" data-distance="30">
   <div class="card-header">
     <h3 class="card-title">Bellevue Square</h3>
     <div class="card-badges"><span class="badge badge-blue">🚇 30 min transit</span>  </div>
@@ -1318,8 +1353,12 @@ img { max-width: 100%; height: auto; }
     <div class="section-line"></div>
   </div>
   <div id="entertainmentMap" class="map-wide"></div>
+  <div class="sort-controls" data-target="entertainmentCards">
+    <button class="sort-btn active" data-sort="distance">↕ Distance</button>
+    <button class="sort-btn" data-sort="name">A→Z Name</button>
+  </div>
   <div class="card-grid" id="entertainmentCards">
-    <div class="card" data-lat="47.608514" data-lng="-122.339473">
+    <div class="card" data-lat="47.608514" data-lng="-122.339473" data-name="The Showbox" data-distance="8">
   <div class="card-header">
     <h3 class="card-title">The Showbox</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 8 min walk</span>  </div>
@@ -1329,7 +1368,7 @@ img { max-width: 100%; height: auto; }
   <a href="https://www.showboxpresents.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
 </div>
 
-<div class="card" data-lat="47.609168" data-lng="-122.333984">
+<div class="card" data-lat="47.609168" data-lng="-122.333984" data-name="The 5th Avenue Theatre" data-distance="4">
   <div class="card-header">
     <h3 class="card-title">The 5th Avenue Theatre</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 4 min walk</span>  </div>
@@ -1339,7 +1378,7 @@ img { max-width: 100%; height: auto; }
   <a href="https://www.5thavenue.org/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
 </div>
 
-<div class="card" data-lat="47.614581" data-lng="-122.339152">
+<div class="card" data-lat="47.614581" data-lng="-122.339152" data-name="Dimitriou's Jazz Alley" data-distance="10">
   <div class="card-header">
     <h3 class="card-title">Dimitriou's Jazz Alley</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 10 min walk</span>  </div>
@@ -1349,7 +1388,7 @@ img { max-width: 100%; height: auto; }
   <a href="https://www.jazzalley.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
 </div>
 
-<div class="card" data-lat="47.595346" data-lng="-122.331644">
+<div class="card" data-lat="47.595346" data-lng="-122.331644" data-name="Seattle Seahawks at Lumen Field" data-distance="25">
   <div class="card-header">
     <h3 class="card-title">Seattle Seahawks at Lumen Field</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 25 min walk</span>  </div>
@@ -1360,7 +1399,7 @@ img { max-width: 100%; height: auto; }
   <a href="https://www.seahawks.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
 </div>
 
-<div class="card" data-lat="47.621901" data-lng="-122.35399">
+<div class="card" data-lat="47.621901" data-lng="-122.35399" data-name="Seattle Kraken at Climate Pledge Arena" data-distance="22">
   <div class="card-header">
     <h3 class="card-title">Seattle Kraken at Climate Pledge Arena</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 22 min walk</span>  </div>
@@ -1382,8 +1421,12 @@ img { max-width: 100%; height: auto; }
     <p>Seattle is the birthplace of Starbucks and the epicenter of American specialty coffee culture</p>
   </div>
   <div id="coffeeMap" class="map-wide"></div>
+  <div class="sort-controls" data-target="coffeeCards">
+    <button class="sort-btn active" data-sort="distance">↕ Distance</button>
+    <button class="sort-btn" data-sort="name">A→Z Name</button>
+  </div>
   <div class="card-grid" id="coffeeCards">
-    <div class="card" data-lat="47.610008" data-lng="-122.34258">
+    <div class="card" data-lat="47.610008" data-lng="-122.34258" data-name="Original Starbucks" data-distance="10">
   <div class="card-header">
     <h3 class="card-title">Original Starbucks</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 10 min walk</span>   <span class="price-tier">$<span class="price-dim">$$</span></span></div>
@@ -1392,7 +1435,7 @@ img { max-width: 100%; height: auto; }
   <p class="card-addr">📍 1912 Pike Pl, Seattle, WA 98101</p>
 </div>
 
-<div class="card" data-lat="47.613227" data-lng="-122.344667">
+<div class="card" data-lat="47.613227" data-lng="-122.344667" data-name="Bathtub Gin & Co." data-distance="12">
   <div class="card-header">
     <h3 class="card-title">Bathtub Gin & Co.</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 12 min walk</span>   <span class="price-tier">$$<span class="price-dim">$</span></span></div>
@@ -1402,7 +1445,7 @@ img { max-width: 100%; height: auto; }
   <a href="https://bathtubginseattle.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
 </div>
 
-<div class="card" data-lat="47.600162" data-lng="-122.331341">
+<div class="card" data-lat="47.600162" data-lng="-122.331341" data-name="Elm Coffee Roasters" data-distance="15">
   <div class="card-header">
     <h3 class="card-title">Elm Coffee Roasters</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 15 min walk</span>   <span class="price-tier">$<span class="price-dim">$$</span></span></div>
@@ -1411,7 +1454,7 @@ img { max-width: 100%; height: auto; }
   <p class="card-addr">📍 240 2nd Ave S, Seattle, WA 98104</p>
 </div>
 
-<div class="card" data-lat="47.611273" data-lng="-122.316476">
+<div class="card" data-lat="47.611273" data-lng="-122.316476" data-name="Canon" data-distance="20">
   <div class="card-header">
     <h3 class="card-title">Canon</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 20 min walk</span>   <span class="price-tier">$$<span class="price-dim">$</span></span></div>
@@ -1565,7 +1608,7 @@ function initMap(mapId, cardsId, markersData, color) {
 
 // Initialize all maps
 const diningMarkers = [{"idx": 0, "name": "Alder & Ash", "lat": 47.611338, "lng": -122.333459, "walk": 2, "price": "$$", "cuisine": "PNW New American"}, {"idx": 1, "name": "Daawat Indian Grill & Bar", "lat": 47.6128, "lng": -122.3288, "walk": 2, "price": "$$", "cuisine": "Traditional Indian"}, {"idx": 2, "name": "Wild Ginger", "lat": 47.608782, "lng": -122.337196, "walk": 3, "price": "$$", "cuisine": "Pan-Asian"}, {"idx": 3, "name": "The Capital Grille", "lat": 47.608325, "lng": -122.335367, "walk": 4, "price": "$$$", "cuisine": "Steakhouse"}, {"idx": 4, "name": "Din Tai Fung", "lat": 47.6125, "lng": -122.3363, "walk": 5, "price": "$$", "cuisine": "Taiwanese / Dumplings"}, {"idx": 5, "name": "Purple Cafe and Wine Bar", "lat": 47.607951, "lng": -122.33506, "walk": 5, "price": "$$", "cuisine": "American / Wine Bar"}, {"idx": 6, "name": "T\u00e9rra Plata", "lat": 47.614387, "lng": -122.32808, "walk": 7, "price": "$$$", "cuisine": "Farm-to-Table / Pacific NW"}, {"idx": 7, "name": "Japonessa Sushi Cocina", "lat": 47.608052, "lng": -122.339037, "walk": 8, "price": "$$$", "cuisine": "Japanese / Sushi"}, {"idx": 8, "name": "Serious Pie", "lat": 47.612903, "lng": -122.340495, "walk": 8, "price": "$$", "cuisine": "Pizza / Italian"}, {"idx": 9, "name": "Shuckers", "lat": 47.6065, "lng": -122.335, "walk": 9, "price": "$$", "cuisine": "Seafood / Oyster Bar"}, {"idx": 10, "name": "Beecher's Handmade Cheese", "lat": 47.609582, "lng": -122.341816, "walk": 10, "price": "$", "cuisine": "Cheese / American"}, {"idx": 11, "name": "Pike Place Chowder", "lat": 47.609466, "lng": -122.34107, "walk": 10, "price": "$", "cuisine": "Seafood / Chowder"}, {"idx": 12, "name": "Matt's in the Market", "lat": 47.608856, "lng": -122.340566, "walk": 10, "price": "$$$", "cuisine": "Pacific Northwest / Seafood"}, {"idx": 13, "name": "Metropolitan Grill", "lat": 47.604426, "lng": -122.334189, "walk": 10, "price": "$$$", "cuisine": "Steakhouse"}, {"idx": 14, "name": "Canlis", "lat": 47.643053, "lng": -122.346736, "walk": null, "price": "$$$", "cuisine": "Fine Dining / Pacific Northwest"}, {"idx": 15, "name": "Taylor Shellfish Oyster Bar", "lat": 47.623437, "lng": -122.354405, "walk": 18, "price": "$$", "cuisine": "Seafood"}, {"idx": 16, "name": "Bombo Italian Kitchen", "lat": 47.614614, "lng": -122.331332, "walk": 0, "price": "$$", "cuisine": "Italian"}];
-const attractionMarkers = [{"idx": 0, "name": "Freeway Park", "lat": 47.609164, "lng": -122.330511, "walk": 3, "price": "Free", "cuisine": "Park"}, {"idx": 1, "name": "Seattle Art Museum (SAM)", "lat": 47.607701, "lng": -122.338557, "walk": 8, "price": "$$", "cuisine": "Museum"}, {"idx": 2, "name": "Pike Place Market", "lat": 47.608754, "lng": -122.3402, "walk": 10, "price": "Free", "cuisine": "Market / Landmark"}, {"idx": 3, "name": "Seattle Central Library", "lat": 47.606714, "lng": -122.332698, "walk": 10, "price": "Free", "cuisine": "Architecture / Library"}, {"idx": 4, "name": "Seattle Waterfront & Pier 57", "lat": 47.606043, "lng": -122.342167, "walk": 12, "price": "Free", "cuisine": "Waterfront / Entertainment"}, {"idx": 5, "name": "Seattle Great Wheel", "lat": 47.606043, "lng": -122.342167, "walk": 12, "price": "$$", "cuisine": "Attraction"}, {"idx": 6, "name": "Seattle Aquarium", "lat": 47.607625, "lng": -122.34322, "walk": 14, "price": "$$", "cuisine": "Aquarium"}, {"idx": 7, "name": "Pioneer Square", "lat": 47.602722, "lng": -122.331354, "walk": 15, "price": "Free", "cuisine": "Historic District"}, {"idx": 8, "name": "Bill Speidel's Underground Tour", "lat": 47.602335, "lng": -122.333779, "walk": 15, "price": "$$", "cuisine": "Tour / History"}, {"idx": 9, "name": "Capitol Hill", "lat": 47.623831, "lng": -122.318368, "walk": 15, "price": "Free", "cuisine": "Neighborhood"}, {"idx": 10, "name": "Olympic Sculpture Park", "lat": 47.616272, "lng": -122.353583, "walk": 18, "price": "Free", "cuisine": "Park / Art"}, {"idx": 11, "name": "Space Needle", "lat": 47.620513, "lng": -122.349304, "walk": 20, "price": "$$$", "cuisine": "Landmark / Observation"}, {"idx": 12, "name": "Chihuly Garden and Glass", "lat": 47.621462, "lng": -122.350989, "walk": 20, "price": "$$$", "cuisine": "Museum / Art"}, {"idx": 13, "name": "Gates Foundation Discovery Center", "lat": 47.623591, "lng": -122.34737, "walk": 20, "price": "Free", "cuisine": "Science / Global Health"}, {"idx": 14, "name": "Pacific Science Center", "lat": 47.619406, "lng": -122.350778, "walk": 22, "price": "$$", "cuisine": "Museum / Science"}, {"idx": 15, "name": "Museum of Pop Culture (MoPOP)", "lat": 47.621493, "lng": -122.348225, "walk": 22, "price": "$$$", "cuisine": "Museum"}, {"idx": 16, "name": "Kerry Park", "lat": 47.629477, "lng": -122.359935, "walk": 30, "price": "Free", "cuisine": "Viewpoint"}, {"idx": 17, "name": "University of Washington Campus", "lat": 47.65543, "lng": -122.300169, "walk": null, "price": "Free", "cuisine": "University / Architecture"}];
+const attractionMarkers = [{"idx": 0, "name": "Freeway Park", "lat": 47.609164, "lng": -122.330511, "walk": 3, "price": "Free", "cuisine": "Park"}, {"idx": 1, "name": "Seattle Art Museum (SAM)", "lat": 47.607701, "lng": -122.338557, "walk": 8, "price": "$$", "cuisine": "Museum"}, {"idx": 2, "name": "Pike Place Market", "lat": 47.608754, "lng": -122.3402, "walk": 10, "price": "Free", "cuisine": "Market / Landmark"}, {"idx": 3, "name": "Gum Wall", "lat": 47.607968, "lng": -122.339856, "walk": 10, "price": "Free", "cuisine": "Landmark / Quirky"}, {"idx": 4, "name": "Seattle Central Library", "lat": 47.606714, "lng": -122.332698, "walk": 10, "price": "Free", "cuisine": "Architecture / Library"}, {"idx": 5, "name": "Seattle Waterfront & Pier 57", "lat": 47.606043, "lng": -122.342167, "walk": 12, "price": "Free", "cuisine": "Waterfront / Entertainment"}, {"idx": 6, "name": "Seattle Great Wheel", "lat": 47.606043, "lng": -122.342167, "walk": 12, "price": "$$", "cuisine": "Attraction"}, {"idx": 7, "name": "Seattle Aquarium", "lat": 47.607625, "lng": -122.34322, "walk": 14, "price": "$$", "cuisine": "Aquarium"}, {"idx": 8, "name": "Pioneer Square", "lat": 47.602722, "lng": -122.331354, "walk": 15, "price": "Free", "cuisine": "Historic District"}, {"idx": 9, "name": "Bill Speidel's Underground Tour", "lat": 47.602335, "lng": -122.333779, "walk": 15, "price": "$$", "cuisine": "Tour / History"}, {"idx": 10, "name": "Capitol Hill", "lat": 47.623831, "lng": -122.318368, "walk": 15, "price": "Free", "cuisine": "Neighborhood"}, {"idx": 11, "name": "Olympic Sculpture Park", "lat": 47.616272, "lng": -122.353583, "walk": 18, "price": "Free", "cuisine": "Park / Art"}, {"idx": 12, "name": "Space Needle", "lat": 47.620513, "lng": -122.349304, "walk": 20, "price": "$$$", "cuisine": "Landmark / Observation"}, {"idx": 13, "name": "Chihuly Garden and Glass", "lat": 47.621462, "lng": -122.350989, "walk": 20, "price": "$$$", "cuisine": "Museum / Art"}, {"idx": 14, "name": "Gates Foundation Discovery Center", "lat": 47.623591, "lng": -122.34737, "walk": 20, "price": "Free", "cuisine": "Science / Global Health"}, {"idx": 15, "name": "Pacific Science Center", "lat": 47.619406, "lng": -122.350778, "walk": 22, "price": "$$", "cuisine": "Museum / Science"}, {"idx": 16, "name": "Museum of Pop Culture (MoPOP)", "lat": 47.621493, "lng": -122.348225, "walk": 22, "price": "$$$", "cuisine": "Museum"}, {"idx": 17, "name": "Kerry Park", "lat": 47.629477, "lng": -122.359935, "walk": 30, "price": "Free", "cuisine": "Viewpoint"}, {"idx": 18, "name": "University of Washington Campus", "lat": 47.65543, "lng": -122.300169, "walk": null, "price": "Free", "cuisine": "University / Architecture"}];
 const daytripsMarkers = [{"idx": 0, "name": "Hiram M. Chittenden Locks (Ballard Locks)", "lat": 47.664662, "lng": -122.39746, "walk": "", "price": "Free", "cuisine": "Engineering / Nature"}, {"idx": 1, "name": "Woodland Park Zoo", "lat": 47.666312, "lng": -122.349302, "walk": "", "price": "$$", "cuisine": "Zoo"}, {"idx": 2, "name": "Museum of Flight", "lat": 47.518359, "lng": -122.296496, "walk": "", "price": "$$", "cuisine": "Museum"}, {"idx": 3, "name": "Kirkland Waterfront", "lat": 47.675448, "lng": -122.209257, "walk": "", "price": "Free", "cuisine": "Waterfront / Town"}, {"idx": 4, "name": "Microsoft Visitor Center", "lat": 47.642492, "lng": -122.136927, "walk": "", "price": "Free", "cuisine": "Tech / Corporate Campus"}, {"idx": 5, "name": "Bellevue via 2 Line Light Rail", "lat": 47.614422, "lng": -122.192337, "walk": "", "price": "Free", "cuisine": "City / Shopping / Family"}, {"idx": 6, "name": "Woodinville Wine Country", "lat": 47.754583, "lng": -122.15889, "walk": "", "price": "$$", "cuisine": "Wine / Tasting"}, {"idx": 7, "name": "Bainbridge Island", "lat": 47.6027, "lng": -122.3389, "walk": "", "price": "$", "cuisine": "Island / Day Trip"}, {"idx": 8, "name": "Snoqualmie Falls", "lat": 47.542155, "lng": -121.836632, "walk": "", "price": "Free", "cuisine": "Nature / Waterfall"}, {"idx": 9, "name": "Future of Flight Aviation Center & Boeing Tour", "lat": 47.918494, "lng": -122.292439, "walk": "", "price": "$$", "cuisine": "Museum / Factory Tour"}, {"idx": 10, "name": "Whidbey Island", "lat": 47.95022, "lng": -122.297075, "walk": "", "price": "$", "cuisine": "Island / Nature"}, {"idx": 11, "name": "Leavenworth Bavarian Village", "lat": 47.606028, "lng": -120.64324, "walk": "", "price": "Free", "cuisine": "Town / Culture"}];
 const familyMarkers = [{"idx": 0, "name": "Artists at Play Playground", "lat": 47.621255, "lng": -122.349741, "walk": 20, "price": "Free", "cuisine": "Playground"}, {"idx": 1, "name": "Pacific Science Center", "lat": 47.619406, "lng": -122.350778, "walk": 22, "price": "$$", "cuisine": "Science Museum"}, {"idx": 2, "name": "Seattle Children's Museum", "lat": 47.621462, "lng": -122.350989, "walk": 20, "price": "$", "cuisine": "Children's Museum"}, {"idx": 3, "name": "Woodland Park Zoo \u2014 Zoomazium", "lat": 47.666312, "lng": -122.349302, "walk": "", "price": "$$", "cuisine": "Indoor Play / Zoo"}, {"idx": 4, "name": "PlayDate SEA", "lat": 47.623161, "lng": -122.338382, "walk": "", "price": "$", "cuisine": "Indoor Playground"}, {"idx": 5, "name": "KidsQuest Children's Museum", "lat": 47.620866, "lng": -122.195904, "walk": "", "price": "$", "cuisine": "Children's Museum"}];
 const shoppingMarkers = [{"idx": 0, "name": "Pacific Place", "lat": 47.612883, "lng": -122.335289, "walk": 3, "price": "", "cuisine": ""}, {"idx": 1, "name": "Nordstrom Flagship", "lat": 47.611921, "lng": -122.336541, "walk": 4, "price": "", "cuisine": ""}, {"idx": 2, "name": "Westlake Center", "lat": 47.611991, "lng": -122.337391, "walk": 5, "price": "", "cuisine": ""}, {"idx": 3, "name": "Pike Place Market Shops", "lat": 47.608754, "lng": -122.3402, "walk": 10, "price": "", "cuisine": ""}, {"idx": 4, "name": "University Village", "lat": 47.662674, "lng": -122.299114, "walk": "", "price": "", "cuisine": ""}, {"idx": 5, "name": "Elliott Bay Book Company", "lat": 47.614666, "lng": -122.319677, "walk": 15, "price": "", "cuisine": ""}, {"idx": 6, "name": "Bellevue Square", "lat": 47.615655, "lng": -122.203677, "walk": "", "price": "", "cuisine": ""}];
@@ -1579,6 +1622,38 @@ initMap('familyMap', 'familyCards', familyMarkers, '#7B1FA2');
 initMap('shoppingMap', 'shoppingCards', shoppingMarkers, '#FF6F00');
 initMap('entertainmentMap', 'entertainmentCards', entertainmentMarkers, '#E91E63');
 initMap('coffeeMap', 'coffeeCards', coffeeMarkers, '#795548');
+
+// ─── SORTING ───
+document.querySelectorAll('.sort-controls').forEach(controls => {
+  const targetId = controls.dataset.target;
+  const grid = document.getElementById(targetId);
+  if (!grid) return;
+
+  controls.querySelectorAll('.sort-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      controls.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const cards = [...grid.querySelectorAll('.card')];
+      const sortBy = btn.dataset.sort;
+
+      cards.sort((a, b) => {
+        if (sortBy === 'name') {
+          return (a.dataset.name || '').localeCompare(b.dataset.name || '');
+        } else {
+          return (parseFloat(a.dataset.distance) || 999) - (parseFloat(b.dataset.distance) || 999);
+        }
+      });
+
+      cards.forEach(card => {
+        card.style.animation = 'none';
+        card.offsetHeight;
+        grid.appendChild(card);
+        card.style.animation = 'fadeSlideIn 0.3s ease-out forwards';
+      });
+    });
+  });
+});
 </script>
 </body>
 </html>
