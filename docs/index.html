@@ -572,7 +572,23 @@ img { max-width: 100%; height: auto; }
     <!-- TEMPLATE: Update weather and transport for new city -->
   </div>
   <div class="weather-transport">
-    <div class="weather-card">
+    <div>
+      <!-- Live weather widget -->
+      <div class="weather-live" id="weatherLive" style="margin-bottom:1rem;">
+        <div style="background:linear-gradient(135deg,#29B6F6,#0288D1);border-radius:12px;padding:1.5rem;color:white;text-align:center;">
+          <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:1px;opacity:0.8;margin-bottom:0.3rem;">📡 Right Now in Seattle</div>
+          <div id="liveTemp" style="font-size:2.5rem;font-weight:900;">--°F</div>
+          <div id="liveDesc" style="font-size:0.9rem;opacity:0.9;">Loading...</div>
+          <div style="display:flex;justify-content:center;gap:1rem;margin-top:0.8rem;font-size:0.8rem;">
+            <span id="liveWind">💨 --</span>
+            <span id="liveHumidity">💧 --</span>
+            <span id="liveRain">🌧️ --</span>
+          </div>
+          <div id="liveTime" style="font-size:0.7rem;opacity:0.5;margin-top:0.5rem;"></div>
+        </div>
+      </div>
+      <!-- November averages card -->
+      <div class="weather-card">
       <div style="font-size:3rem;">🌧️</div>
       <div class="temp">51°<span class="temp-small">/40°F</span></div>
       <p style="opacity:0.8;margin:0.5rem 0;">November in Seattle</p>
@@ -585,6 +601,7 @@ img { max-width: 100%; height: auto; }
         <div class="weather-detail">🌧️ 6.31–6.54 inches average (wettest month)</div>
       </div>
       <div class="weather-tip">💡 Layer up: waterproof hooded jacket, insulated layers, waterproof footwear. Skip the umbrella — wind makes them useless here.</div>
+    </div>
     </div>
     <div>
       <div class="transport-grid">
@@ -2684,6 +2701,30 @@ if (indexSearch && indexTable) {
     });
   });
 }
+
+// ─── LIVE WEATHER (Open-Meteo, free, no API key) ───
+(function() {
+  const WMO = {0:'☀️ Clear',1:'🌤️ Mostly clear',2:'⛅ Partly cloudy',3:'☁️ Overcast',
+    45:'🌫️ Foggy',48:'🌫️ Rime fog',51:'🌦️ Light drizzle',53:'🌧️ Drizzle',55:'🌧️ Heavy drizzle',
+    61:'🌧️ Light rain',63:'🌧️ Rain',65:'🌧️ Heavy rain',71:'🌨️ Light snow',73:'🌨️ Snow',
+    75:'🌨️ Heavy snow',80:'🌧️ Rain showers',81:'🌧️ Heavy showers',82:'⛈️ Violent showers',
+    95:'⛈️ Thunderstorm',96:'⛈️ Hail storm',99:'⛈️ Heavy hail storm'};
+  fetch('https://api.open-meteo.com/v1/forecast?latitude=47.6117&longitude=-122.3321&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m,precipitation&temperature_unit=fahrenheit&wind_speed_unit=mph&timezone=America%2FLos_Angeles')
+    .then(r => r.json())
+    .then(d => {
+      const c = d.current;
+      document.getElementById('liveTemp').textContent = Math.round(c.temperature_2m) + '°F';
+      document.getElementById('liveDesc').textContent = WMO[c.weather_code] || 'Weather data';
+      document.getElementById('liveWind').textContent = '💨 ' + Math.round(c.wind_speed_10m) + ' mph';
+      document.getElementById('liveHumidity').textContent = '💧 ' + c.relative_humidity_2m + '%';
+      document.getElementById('liveRain').textContent = '🌧️ ' + c.precipitation + ' in';
+      const t = new Date(c.time);
+      document.getElementById('liveTime').textContent = 'Updated: ' + t.toLocaleString('en-US', {timeZone:'America/Los_Angeles', hour:'numeric', minute:'2-digit', hour12:true}) + ' Seattle time';
+    })
+    .catch(() => {
+      document.getElementById('liveDesc').textContent = 'Unable to load live weather';
+    });
+})();
 
 // ─── FAVORITES ───
 let favs = JSON.parse(localStorage.getItem('seattleFavs') || '[]');
