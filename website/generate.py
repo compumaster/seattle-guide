@@ -140,6 +140,7 @@ sections = [
     # Explore
     ("attractions", "Attractions"),
     ("daytrips", "Day Trips"),
+    ("tours", "Tours"),
     ("entertainment", "Entertainment"),
     ("family", "Family"),
     ("seasonal", "Seasonal Events"),
@@ -168,6 +169,9 @@ attraction_cards = "\n".join(
     card_html(a, show_category=True)
     for a in sorted(data["attractions"]["walkable"], key=sort_key_dist)
 )
+
+# Tour cards
+tour_cards = "\n".join(card_html(t) for t in sorted(data.get("tours", []), key=sort_key_dist))
 
 # Day trip cards
 daytrip_cards = "\n".join(
@@ -330,6 +334,8 @@ family_markers_json = markers_json(data["familyActivities"])
 shopping_sorted = sorted(data["shopping"], key=sort_key_dist)
 shopping_markers_json = markers_json(shopping_sorted)
 entertainment_markers_json = markers_json(data["entertainment"])
+tours_sorted = sorted(data.get("tours", []), key=sort_key_dist)
+tour_markers_json = markers_json(tours_sorted)
 coffee_sorted = sorted(data["coffeeAndBars"], key=sort_key_dist)
 coffee_markers_json = markers_json(coffee_sorted)
 
@@ -351,6 +357,7 @@ add_to_index(daytrips_sorted, "Day Trips", "daytrips")
 add_to_index(data["familyActivities"], "Family", "family")
 add_to_index(shopping_sorted, "Shopping", "shopping")
 add_to_index(data["entertainment"], "Entertainment", "entertainment")
+add_to_index(tours_sorted, "Tours", "tours")
 add_to_index(coffee_sorted, "Coffee & Bars", "coffee")
 
 all_locations.sort(key=lambda x: x[0].lstrip("The "))
@@ -891,6 +898,23 @@ img {{ max-width: 100%; height: auto; }}
   </div>
 </section>
 
+<!-- ═══ TOURS ═══ -->
+<section class="section section-alt" id="tours">
+  <div class="section-header">
+    <h2>🚢 Tours & Excursions</h2>
+    <div class="section-line"></div>
+    <p>Boat cruises, seaplane flights, helicopter tours, and walking food tours</p>
+  </div>
+  <div id="toursMap" class="map-wide"></div>
+  <div class="sort-controls" data-target="toursCards">
+    <button class="sort-btn active" data-sort="distance">↕ Distance</button>
+    <button class="sort-btn" data-sort="name">A→Z Name</button>
+  </div>
+  <div class="card-grid" id="toursCards">
+    {tour_cards}
+  </div>
+</section>
+
 <!-- ═══ ENTERTAINMENT ═══ -->
 <section class="section section-alt" id="entertainment">
   <div class="section-header">
@@ -1184,6 +1208,7 @@ const daytripsMarkers = {daytrip_markers_json};
 const familyMarkers = {family_markers_json};
 const shoppingMarkers = {shopping_markers_json};
 const entertainmentMarkers = {entertainment_markers_json};
+const tourMarkers = {tour_markers_json};
 const coffeeMarkers = {coffee_markers_json};
 
 initMap('attractionsMap', 'attractionsCards', attractionMarkers, '#29B6F6');
@@ -1192,6 +1217,7 @@ initMap('daytripsMap', 'daytripsCards', daytripsMarkers, '#4CAF50');
 initMap('familyMap', 'familyCards', familyMarkers, '#7B1FA2');
 initMap('shoppingMap', 'shoppingCards', shoppingMarkers, '#FF6F00');
 initMap('entertainmentMap', 'entertainmentCards', entertainmentMarkers, '#E91E63');
+initMap('toursMap', 'toursCards', tourMarkers, '#00897B');
 initMap('coffeeMap', 'coffeeCards', coffeeMarkers, '#795548');
 
 // ─── SORTING ───

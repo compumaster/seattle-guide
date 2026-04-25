@@ -844,6 +844,107 @@
       "longitude": -122.203677
     }
   ],
+  "tours": [
+    {
+      "name": "Argosy Cruises — Harbor Tour",
+      "type": "Boat Tour",
+      "address": "Pier 55, 1101 Alaskan Way, Seattle, WA 98101",
+      "website": "https://www.argosycruises.com/",
+      "walkingMinutes": 12,
+      "distanceMiles": 0.6,
+      "priceTier": "$$",
+      "description": "The classic Seattle harbor cruise. One-hour narrated tour of Elliott Bay with views of the skyline, Mount Rainier, and the Olympic Mountains. Also offers Locks Cruise and Lake Union tours.",
+      "latitude": 47.604786,
+      "longitude": -122.340014
+    },
+    {
+      "name": "Argosy Cruises — Locks Cruise",
+      "type": "Boat Tour",
+      "address": "Pier 55, 1101 Alaskan Way, Seattle, WA 98101",
+      "website": "https://www.argosycruises.com/seattle-locks-cruise/",
+      "walkingMinutes": 12,
+      "distanceMiles": 0.6,
+      "priceTier": "$$$",
+      "description": "2.5-hour narrated cruise through the Ballard Locks, Lake Union, and the Ship Canal. Pass houseboats (including the Sleepless in Seattle houseboat), Gas Works Park, and the Fremont Bridge.",
+      "latitude": 47.604786,
+      "longitude": -122.340014
+    },
+    {
+      "name": "Ride the Ducks of Seattle",
+      "type": "Amphibious Tour",
+      "address": "516 Broad St, Seattle, WA 98109",
+      "website": "https://www.ridetheducksofseattle.com/",
+      "walkingMinutes": 20,
+      "distanceMiles": 1.0,
+      "priceTier": "$$",
+      "description": "Amphibious vehicle tour — drive through downtown then splash into Lake Union. Fun, quirky, and family-friendly. Departs from Seattle Center.",
+      "latitude": 47.62142,
+      "longitude": -122.347037
+    },
+    {
+      "name": "Seattle Seaplanes",
+      "type": "Seaplane Tour",
+      "address": "1325 Fairview Ave E, Seattle, WA 98102",
+      "website": "https://www.seattleseaplanes.com/",
+      "drivingMinutes": 10,
+      "distanceMiles": 2.0,
+      "priceTier": "$$$",
+      "requiresTransport": true,
+      "description": "Scenic seaplane flights departing from Lake Union. 20-minute flight over the Seattle skyline, Puget Sound, and the Cascade volcanoes. A truly unforgettable perspective.",
+      "latitude": 47.631941,
+      "longitude": -122.327528
+    },
+    {
+      "name": "Kenmore Air — Scenic Flights",
+      "type": "Seaplane Tour",
+      "address": "950 Westlake Ave N, Seattle, WA 98109",
+      "website": "https://www.kenmoreair.com/",
+      "drivingMinutes": 10,
+      "distanceMiles": 1.5,
+      "priceTier": "$$$",
+      "requiresTransport": true,
+      "description": "Iconic Pacific Northwest seaplane operator since 1946. Scenic flights from Lake Union, plus scheduled service to San Juan Islands and Victoria, BC.",
+      "latitude": 47.62831,
+      "longitude": -122.339185
+    },
+    {
+      "name": "Atomic Helicopters",
+      "type": "Helicopter Tour",
+      "address": "Boeing Field, Seattle, WA 98108",
+      "website": "https://atomichelicopters.com/",
+      "drivingMinutes": 15,
+      "distanceMiles": 6.0,
+      "priceTier": "$$$",
+      "requiresTransport": true,
+      "description": "Helicopter tours from Boeing Field offering panoramic views of downtown Seattle, Mount Rainier, the Space Needle, and Puget Sound. Tours from 15 to 60 minutes.",
+      "latitude": 47.529844,
+      "longitude": -122.300892
+    },
+    {
+      "name": "Seattle Ferry Adventures — Tillicum Excursion",
+      "type": "Boat Tour / Cultural",
+      "address": "Pier 55, 1101 Alaskan Way, Seattle, WA 98101",
+      "website": "https://www.argosycruises.com/tillicum-excursion/",
+      "walkingMinutes": 12,
+      "distanceMiles": 0.6,
+      "priceTier": "$$$",
+      "description": "Cruise to Blake Island State Park for a Native American-style salmon bake and cultural performance. A unique 4-hour excursion combining a boat ride, nature, and indigenous heritage.",
+      "latitude": 47.604786,
+      "longitude": -122.340014
+    },
+    {
+      "name": "Savor Seattle Food Tours",
+      "type": "Walking Food Tour",
+      "address": "Pike Place Market, Seattle, WA 98101",
+      "website": "https://www.savorseattletours.com/",
+      "walkingMinutes": 10,
+      "distanceMiles": 0.5,
+      "priceTier": "$$",
+      "description": "Guided walking food tours through Pike Place Market and Capitol Hill. Sample chowder, artisan cheese, chocolate, and more from local vendors. 2–3 hour tours.",
+      "latitude": 47.609397,
+      "longitude": -122.34141
+    }
+  ],
   "entertainment": [
     {
       "name": "The Showbox",

@@ -347,6 +347,7 @@ img { max-width: 100%; height: auto; }
 <a href="#shopping" class="nav-link">Shopping</a>
 <a href="#attractions" class="nav-link">Attractions</a>
 <a href="#daytrips" class="nav-link">Day Trips</a>
+<a href="#tours" class="nav-link">Tours</a>
 <a href="#entertainment" class="nav-link">Entertainment</a>
 <a href="#family" class="nav-link">Family</a>
 <a href="#seasonal" class="nav-link">Seasonal Events</a>
@@ -1284,6 +1285,102 @@ img { max-width: 100%; height: auto; }
   </div>
 </section>
 
+<!-- ═══ TOURS ═══ -->
+<section class="section section-alt" id="tours">
+  <div class="section-header">
+    <h2>🚢 Tours & Excursions</h2>
+    <div class="section-line"></div>
+    <p>Boat cruises, seaplane flights, helicopter tours, and walking food tours</p>
+  </div>
+  <div id="toursMap" class="map-wide"></div>
+  <div class="sort-controls" data-target="toursCards">
+    <button class="sort-btn active" data-sort="distance">↕ Distance</button>
+    <button class="sort-btn" data-sort="name">A→Z Name</button>
+  </div>
+  <div class="card-grid" id="toursCards">
+    <div class="card" data-lat="47.631941" data-lng="-122.327528" data-name="Seattle Seaplanes" data-distance="10">
+  <div class="card-header">
+    <h3 class="card-title">Seattle Seaplanes</h3>
+    <div class="card-badges"><span class="badge badge-navy">🚗 10 min drive</span>   <span class="price-tier">$$$<span class="price-dim"></span></span></div>
+  </div>
+  <p class="card-desc">Scenic seaplane flights departing from Lake Union. 20-minute flight over the Seattle skyline, Puget Sound, and the Cascade volcanoes. A truly unforgettable perspective.</p>
+  <p class="card-addr">📍 1325 Fairview Ave E, Seattle, WA 98102</p>
+  <a href="https://www.seattleseaplanes.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+<div class="card" data-lat="47.62831" data-lng="-122.339185" data-name="Kenmore Air — Scenic Flights" data-distance="10">
+  <div class="card-header">
+    <h3 class="card-title">Kenmore Air — Scenic Flights</h3>
+    <div class="card-badges"><span class="badge badge-navy">🚗 10 min drive</span>   <span class="price-tier">$$$<span class="price-dim"></span></span></div>
+  </div>
+  <p class="card-desc">Iconic Pacific Northwest seaplane operator since 1946. Scenic flights from Lake Union, plus scheduled service to San Juan Islands and Victoria, BC.</p>
+  <p class="card-addr">📍 950 Westlake Ave N, Seattle, WA 98109</p>
+  <a href="https://www.kenmoreair.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+<div class="card" data-lat="47.609397" data-lng="-122.34141" data-name="Savor Seattle Food Tours" data-distance="10">
+  <div class="card-header">
+    <h3 class="card-title">Savor Seattle Food Tours</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 10 min walk</span>   <span class="price-tier">$$<span class="price-dim">$</span></span></div>
+  </div>
+  <p class="card-desc">Guided walking food tours through Pike Place Market and Capitol Hill. Sample chowder, artisan cheese, chocolate, and more from local vendors. 2–3 hour tours.</p>
+  <p class="card-addr">📍 Pike Place Market, Seattle, WA 98101</p>
+  <a href="https://www.savorseattletours.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+<div class="card" data-lat="47.604786" data-lng="-122.340014" data-name="Argosy Cruises — Harbor Tour" data-distance="12">
+  <div class="card-header">
+    <h3 class="card-title">Argosy Cruises — Harbor Tour</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 12 min walk</span>   <span class="price-tier">$$<span class="price-dim">$</span></span></div>
+  </div>
+  <p class="card-desc">The classic Seattle harbor cruise. One-hour narrated tour of Elliott Bay with views of the skyline, Mount Rainier, and the Olympic Mountains. Also offers Locks Cruise and Lake Union tours.</p>
+  <p class="card-addr">📍 Pier 55, 1101 Alaskan Way, Seattle, WA 98101</p>
+  <a href="https://www.argosycruises.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+<div class="card" data-lat="47.604786" data-lng="-122.340014" data-name="Argosy Cruises — Locks Cruise" data-distance="12">
+  <div class="card-header">
+    <h3 class="card-title">Argosy Cruises — Locks Cruise</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 12 min walk</span>   <span class="price-tier">$$$<span class="price-dim"></span></span></div>
+  </div>
+  <p class="card-desc">2.5-hour narrated cruise through the Ballard Locks, Lake Union, and the Ship Canal. Pass houseboats (including the Sleepless in Seattle houseboat), Gas Works Park, and the Fremont Bridge.</p>
+  <p class="card-addr">📍 Pier 55, 1101 Alaskan Way, Seattle, WA 98101</p>
+  <a href="https://www.argosycruises.com/seattle-locks-cruise/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+<div class="card" data-lat="47.604786" data-lng="-122.340014" data-name="Seattle Ferry Adventures — Tillicum Excursion" data-distance="12">
+  <div class="card-header">
+    <h3 class="card-title">Seattle Ferry Adventures — Tillicum Excursion</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 12 min walk</span>   <span class="price-tier">$$$<span class="price-dim"></span></span></div>
+  </div>
+  <p class="card-desc">Cruise to Blake Island State Park for a Native American-style salmon bake and cultural performance. A unique 4-hour excursion combining a boat ride, nature, and indigenous heritage.</p>
+  <p class="card-addr">📍 Pier 55, 1101 Alaskan Way, Seattle, WA 98101</p>
+  <a href="https://www.argosycruises.com/tillicum-excursion/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+<div class="card" data-lat="47.529844" data-lng="-122.300892" data-name="Atomic Helicopters" data-distance="15">
+  <div class="card-header">
+    <h3 class="card-title">Atomic Helicopters</h3>
+    <div class="card-badges"><span class="badge badge-navy">🚗 15 min drive</span>   <span class="price-tier">$$$<span class="price-dim"></span></span></div>
+  </div>
+  <p class="card-desc">Helicopter tours from Boeing Field offering panoramic views of downtown Seattle, Mount Rainier, the Space Needle, and Puget Sound. Tours from 15 to 60 minutes.</p>
+  <p class="card-addr">📍 Boeing Field, Seattle, WA 98108</p>
+  <a href="https://atomichelicopters.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+<div class="card" data-lat="47.62142" data-lng="-122.347037" data-name="Ride the Ducks of Seattle" data-distance="20">
+  <div class="card-header">
+    <h3 class="card-title">Ride the Ducks of Seattle</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 20 min walk</span>   <span class="price-tier">$$<span class="price-dim">$</span></span></div>
+  </div>
+  <p class="card-desc">Amphibious vehicle tour — drive through downtown then splash into Lake Union. Fun, quirky, and family-friendly. Departs from Seattle Center.</p>
+  <p class="card-addr">📍 516 Broad St, Seattle, WA 98109</p>
+  <a href="https://www.ridetheducksofseattle.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+  </div>
+</section>
+
 <!-- ═══ ENTERTAINMENT ═══ -->
 <section class="section section-alt" id="entertainment">
   <div class="section-header">
@@ -1764,10 +1861,10 @@ img { max-width: 100%; height: auto; }
   <div class="section-header">
     <h2>📍 All Locations Index</h2>
     <div class="section-line"></div>
-    <p>Every location in this guide — 75 places, searchable and sortable</p>
+    <p>Every location in this guide — 83 places, searchable and sortable</p>
   </div>
   <input type="text" class="index-search" id="indexSearch" placeholder="🔍 Search locations..." autocomplete="off">
-  <div class="index-count" id="indexCount">75 locations</div>
+  <div class="index-count" id="indexCount">83 locations</div>
   <div class="index-table-wrap">
     <table class="index-table" id="indexTable">
       <thead>
@@ -1782,7 +1879,10 @@ img { max-width: 100%; height: auto; }
       <tbody>
         <tr><td class="idx-name">The 5th Avenue Theatre</td><td><span class="idx-section" data-section="entertainment">Entertainment</span></td><td class="idx-dist">4 min walk</td><td class="idx-addr">1308 5th Ave, Seattle, WA 98101</td><td><a href="https://www.5thavenue.org/" target="_blank">🔗</a></td></tr>
 <tr><td class="idx-name">Alder & Ash</td><td><span class="idx-section" data-section="dining">Dining</span></td><td class="idx-dist">2 min walk</td><td class="idx-addr">629 Pike St, Seattle, WA 98101</td><td></td></tr>
+<tr><td class="idx-name">Argosy Cruises — Harbor Tour</td><td><span class="idx-section" data-section="tours">Tours</span></td><td class="idx-dist">12 min walk</td><td class="idx-addr">Pier 55, 1101 Alaskan Way, Seattle, WA 98101</td><td><a href="https://www.argosycruises.com/" target="_blank">🔗</a></td></tr>
+<tr><td class="idx-name">Argosy Cruises — Locks Cruise</td><td><span class="idx-section" data-section="tours">Tours</span></td><td class="idx-dist">12 min walk</td><td class="idx-addr">Pier 55, 1101 Alaskan Way, Seattle, WA 98101</td><td><a href="https://www.argosycruises.com/seattle-locks-cruise/" target="_blank">🔗</a></td></tr>
 <tr><td class="idx-name">Artists at Play Playground</td><td><span class="idx-section" data-section="family">Family</span></td><td class="idx-dist">20 min walk</td><td class="idx-addr">Seattle Center, Seattle, WA 98109</td><td></td></tr>
+<tr><td class="idx-name">Atomic Helicopters</td><td><span class="idx-section" data-section="tours">Tours</span></td><td class="idx-dist">15 min</td><td class="idx-addr">Boeing Field, Seattle, WA 98108</td><td><a href="https://atomichelicopters.com/" target="_blank">🔗</a></td></tr>
 <tr><td class="idx-name">Bainbridge Island</td><td><span class="idx-section" data-section="daytrips">Day Trips</span></td><td class="idx-dist">35 min</td><td class="idx-addr">Colman Dock, Pier 52, Seattle, WA 98104</td><td><a href="https://www.bainbridgeisland.com/" target="_blank">🔗</a></td></tr>
 <tr><td class="idx-name">Bathtub Gin & Co.</td><td><span class="idx-section" data-section="coffee">Coffee & Bars</span></td><td class="idx-dist">12 min walk</td><td class="idx-addr">2205 2nd Ave, Seattle, WA 98121</td><td><a href="https://bathtubginseattle.com/" target="_blank">🔗</a></td></tr>
 <tr><td class="idx-name">Beecher's Handmade Cheese</td><td><span class="idx-section" data-section="dining">Dining</span></td><td class="idx-dist">10 min walk</td><td class="idx-addr">1600 Pike Pl, Seattle, WA 98101</td><td><a href="https://beechershandmadecheese.com/" target="_blank">🔗</a></td></tr>
@@ -1808,6 +1908,7 @@ img { max-width: 100%; height: auto; }
 <tr><td class="idx-name">Gum Wall</td><td><span class="idx-section" data-section="attractions">Attractions</span></td><td class="idx-dist">10 min walk</td><td class="idx-addr">1428 Post Alley, Seattle, WA 98101</td><td></td></tr>
 <tr><td class="idx-name">Hiram M. Chittenden Locks (Ballard Locks)</td><td><span class="idx-section" data-section="daytrips">Day Trips</span></td><td class="idx-dist">15 min</td><td class="idx-addr">3015 NW 54th St, Seattle, WA 98107</td><td><a href="https://www.ballardlocks.org/" target="_blank">🔗</a></td></tr>
 <tr><td class="idx-name">Japonessa Sushi Cocina</td><td><span class="idx-section" data-section="dining">Dining</span></td><td class="idx-dist">8 min walk</td><td class="idx-addr">1400 1st Ave, Seattle, WA 98101</td><td><a href="https://japonessa.com/" target="_blank">🔗</a></td></tr>
+<tr><td class="idx-name">Kenmore Air — Scenic Flights</td><td><span class="idx-section" data-section="tours">Tours</span></td><td class="idx-dist">10 min</td><td class="idx-addr">950 Westlake Ave N, Seattle, WA 98109</td><td><a href="https://www.kenmoreair.com/" target="_blank">🔗</a></td></tr>
 <tr><td class="idx-name">Kerry Park</td><td><span class="idx-section" data-section="attractions">Attractions</span></td><td class="idx-dist">30 min walk</td><td class="idx-addr">211 W Highland Dr, Seattle, WA 98119</td><td><a href="https://www.seattle.gov/parks/allparks/kerry-park" target="_blank">🔗</a></td></tr>
 <tr><td class="idx-name">KidsQuest Children's Museum</td><td><span class="idx-section" data-section="family">Family</span></td><td class="idx-dist">30 min</td><td class="idx-addr">1116 108th Ave NE, Bellevue, WA 98004</td><td><a href="https://www.kidsquestmuseum.org/" target="_blank">🔗</a></td></tr>
 <tr><td class="idx-name">Kirkland Waterfront</td><td><span class="idx-section" data-section="daytrips">Day Trips</span></td><td class="idx-dist">20 min</td><td class="idx-addr">Marina Park, 25 Lakeshore Plaza, Kirkland, WA 98033</td><td><a href="https://www.explorekirkland.com/" target="_blank">🔗</a></td></tr>
@@ -1831,14 +1932,18 @@ img { max-width: 100%; height: auto; }
 <tr><td class="idx-name">Pioneer Square</td><td><span class="idx-section" data-section="attractions">Attractions</span></td><td class="idx-dist">15 min walk</td><td class="idx-addr">Pioneer Square, Seattle, WA 98104</td><td><a href="https://www.pioneersquare.org/" target="_blank">🔗</a></td></tr>
 <tr><td class="idx-name">PlayDate SEA</td><td><span class="idx-section" data-section="family">Family</span></td><td class="idx-dist">10 min</td><td class="idx-addr">South Lake Union, Seattle, WA 98109</td><td><a href="https://www.playdatesea.com/" target="_blank">🔗</a></td></tr>
 <tr><td class="idx-name">Purple Cafe and Wine Bar</td><td><span class="idx-section" data-section="dining">Dining</span></td><td class="idx-dist">5 min walk</td><td class="idx-addr">1225 4th Ave, Seattle, WA 98101</td><td><a href="https://www.purplecafe.com/" target="_blank">🔗</a></td></tr>
+<tr><td class="idx-name">Ride the Ducks of Seattle</td><td><span class="idx-section" data-section="tours">Tours</span></td><td class="idx-dist">20 min walk</td><td class="idx-addr">516 Broad St, Seattle, WA 98109</td><td><a href="https://www.ridetheducksofseattle.com/" target="_blank">🔗</a></td></tr>
+<tr><td class="idx-name">Savor Seattle Food Tours</td><td><span class="idx-section" data-section="tours">Tours</span></td><td class="idx-dist">10 min walk</td><td class="idx-addr">Pike Place Market, Seattle, WA 98101</td><td><a href="https://www.savorseattletours.com/" target="_blank">🔗</a></td></tr>
 <tr><td class="idx-name">Seattle Aquarium</td><td><span class="idx-section" data-section="attractions">Attractions</span></td><td class="idx-dist">14 min walk</td><td class="idx-addr">1483 Alaskan Way, Seattle, WA 98101</td><td><a href="https://www.seattleaquarium.org/" target="_blank">🔗</a></td></tr>
 <tr><td class="idx-name">Seattle Art Museum (SAM)</td><td><span class="idx-section" data-section="attractions">Attractions</span></td><td class="idx-dist">8 min walk</td><td class="idx-addr">1300 1st Ave, Seattle, WA 98101</td><td><a href="https://www.seattleartmuseum.org/" target="_blank">🔗</a></td></tr>
 <tr><td class="idx-name">Seattle Central Library</td><td><span class="idx-section" data-section="attractions">Attractions</span></td><td class="idx-dist">10 min walk</td><td class="idx-addr">1000 4th Ave, Seattle, WA 98104</td><td><a href="https://www.spl.org/hours-and-locations/central-library" target="_blank">🔗</a></td></tr>
 <tr><td class="idx-name">Seattle Children's Museum</td><td><span class="idx-section" data-section="family">Family</span></td><td class="idx-dist">20 min walk</td><td class="idx-addr">305 Harrison St, Seattle, WA 98109 (Armory)</td><td><a href="https://thechildrensmuseum.org/" target="_blank">🔗</a></td></tr>
+<tr><td class="idx-name">Seattle Ferry Adventures — Tillicum Excursion</td><td><span class="idx-section" data-section="tours">Tours</span></td><td class="idx-dist">12 min walk</td><td class="idx-addr">Pier 55, 1101 Alaskan Way, Seattle, WA 98101</td><td><a href="https://www.argosycruises.com/tillicum-excursion/" target="_blank">🔗</a></td></tr>
 <tr><td class="idx-name">Seattle Great Wheel</td><td><span class="idx-section" data-section="attractions">Attractions</span></td><td class="idx-dist">12 min walk</td><td class="idx-addr">1301 Alaskan Way, Seattle, WA 98101</td><td><a href="https://seattlegreatwheel.com/" target="_blank">🔗</a></td></tr>
 <tr><td class="idx-name">Seattle Kraken at Climate Pledge Arena</td><td><span class="idx-section" data-section="entertainment">Entertainment</span></td><td class="idx-dist">22 min walk</td><td class="idx-addr">334 1st Ave N, Seattle, WA 98109</td><td><a href="https://www.nhl.com/kraken/" target="_blank">🔗</a></td></tr>
 <tr><td class="idx-name">Seattle Opera</td><td><span class="idx-section" data-section="entertainment">Entertainment</span></td><td class="idx-dist">22 min walk</td><td class="idx-addr">321 Mercer St, Seattle, WA 98109</td><td><a href="https://www.seattleopera.org/" target="_blank">🔗</a></td></tr>
 <tr><td class="idx-name">Seattle Seahawks at Lumen Field</td><td><span class="idx-section" data-section="entertainment">Entertainment</span></td><td class="idx-dist">25 min walk</td><td class="idx-addr">800 Occidental Ave S, Seattle, WA 98134</td><td><a href="https://www.seahawks.com/" target="_blank">🔗</a></td></tr>
+<tr><td class="idx-name">Seattle Seaplanes</td><td><span class="idx-section" data-section="tours">Tours</span></td><td class="idx-dist">10 min</td><td class="idx-addr">1325 Fairview Ave E, Seattle, WA 98102</td><td><a href="https://www.seattleseaplanes.com/" target="_blank">🔗</a></td></tr>
 <tr><td class="idx-name">Seattle Waterfront & Pier 57</td><td><span class="idx-section" data-section="attractions">Attractions</span></td><td class="idx-dist">12 min walk</td><td class="idx-addr">1301 Alaskan Way, Seattle, WA 98101</td><td><a href="https://www.waterfrontseattle.org/" target="_blank">🔗</a></td></tr>
 <tr><td class="idx-name">Serious Pie</td><td><span class="idx-section" data-section="dining">Dining</span></td><td class="idx-dist">8 min walk</td><td class="idx-addr">316 Virginia St, Seattle, WA 98101</td><td><a href="https://www.seriouspieseattle.com/" target="_blank">🔗</a></td></tr>
 <tr><td class="idx-name">The Showbox</td><td><span class="idx-section" data-section="entertainment">Entertainment</span></td><td class="idx-dist">8 min walk</td><td class="idx-addr">1426 1st Ave, Seattle, WA 98101</td><td><a href="https://www.showboxpresents.com/" target="_blank">🔗</a></td></tr>
@@ -1997,6 +2102,7 @@ const daytripsMarkers = [{"idx": 0, "name": "Hiram M. Chittenden Locks (Ballard 
 const familyMarkers = [{"idx": 0, "name": "Artists at Play Playground", "lat": 47.621255, "lng": -122.349741, "walk": 20, "price": "Free", "cuisine": "Playground"}, {"idx": 1, "name": "Pacific Science Center", "lat": 47.619406, "lng": -122.350778, "walk": 22, "price": "$$", "cuisine": "Science Museum"}, {"idx": 2, "name": "Seattle Children's Museum", "lat": 47.621462, "lng": -122.350989, "walk": 20, "price": "$", "cuisine": "Children's Museum"}, {"idx": 3, "name": "Woodland Park Zoo \u2014 Zoomazium", "lat": 47.666312, "lng": -122.349302, "walk": "", "price": "$$", "cuisine": "Indoor Play / Zoo"}, {"idx": 4, "name": "PlayDate SEA", "lat": 47.623161, "lng": -122.338382, "walk": "", "price": "$", "cuisine": "Indoor Playground"}, {"idx": 5, "name": "KidsQuest Children's Museum", "lat": 47.620866, "lng": -122.195904, "walk": "", "price": "$", "cuisine": "Children's Museum"}];
 const shoppingMarkers = [{"idx": 0, "name": "Pacific Place", "lat": 47.612883, "lng": -122.335289, "walk": 3, "price": "", "cuisine": ""}, {"idx": 1, "name": "Nordstrom Flagship", "lat": 47.611921, "lng": -122.336541, "walk": 4, "price": "", "cuisine": ""}, {"idx": 2, "name": "Westlake Center", "lat": 47.611991, "lng": -122.337391, "walk": 5, "price": "", "cuisine": ""}, {"idx": 3, "name": "Pike Place Market Shops", "lat": 47.608754, "lng": -122.3402, "walk": 10, "price": "", "cuisine": ""}, {"idx": 4, "name": "University Village", "lat": 47.662674, "lng": -122.299114, "walk": "", "price": "", "cuisine": ""}, {"idx": 5, "name": "Elliott Bay Book Company", "lat": 47.614666, "lng": -122.319677, "walk": 15, "price": "", "cuisine": ""}, {"idx": 6, "name": "Bellevue Square", "lat": 47.615655, "lng": -122.203677, "walk": "", "price": "", "cuisine": ""}];
 const entertainmentMarkers = [{"idx": 0, "name": "The Showbox", "lat": 47.608514, "lng": -122.339473, "walk": 8, "price": "", "cuisine": ""}, {"idx": 1, "name": "The 5th Avenue Theatre", "lat": 47.609168, "lng": -122.333984, "walk": 4, "price": "", "cuisine": ""}, {"idx": 2, "name": "Dimitriou's Jazz Alley", "lat": 47.614581, "lng": -122.339152, "walk": 10, "price": "", "cuisine": ""}, {"idx": 3, "name": "Seattle Seahawks at Lumen Field", "lat": 47.595346, "lng": -122.331644, "walk": 25, "price": "", "cuisine": ""}, {"idx": 4, "name": "Seattle Kraken at Climate Pledge Arena", "lat": 47.621901, "lng": -122.35399, "walk": 22, "price": "", "cuisine": ""}, {"idx": 5, "name": "Benaroya Hall", "lat": 47.608117, "lng": -122.33697, "walk": 8, "price": "", "cuisine": ""}, {"idx": 6, "name": "Pacific Northwest Ballet", "lat": 47.624273, "lng": -122.35193, "walk": 22, "price": "", "cuisine": ""}, {"idx": 7, "name": "Seattle Opera", "lat": 47.623977, "lng": -122.350388, "walk": 22, "price": "", "cuisine": ""}];
+const tourMarkers = [{"idx": 0, "name": "Seattle Seaplanes", "lat": 47.631941, "lng": -122.327528, "walk": "", "price": "$$$", "cuisine": ""}, {"idx": 1, "name": "Kenmore Air \u2014 Scenic Flights", "lat": 47.62831, "lng": -122.339185, "walk": "", "price": "$$$", "cuisine": ""}, {"idx": 2, "name": "Savor Seattle Food Tours", "lat": 47.609397, "lng": -122.34141, "walk": 10, "price": "$$", "cuisine": ""}, {"idx": 3, "name": "Argosy Cruises \u2014 Harbor Tour", "lat": 47.604786, "lng": -122.340014, "walk": 12, "price": "$$", "cuisine": ""}, {"idx": 4, "name": "Argosy Cruises \u2014 Locks Cruise", "lat": 47.604786, "lng": -122.340014, "walk": 12, "price": "$$$", "cuisine": ""}, {"idx": 5, "name": "Seattle Ferry Adventures \u2014 Tillicum Excursion", "lat": 47.604786, "lng": -122.340014, "walk": 12, "price": "$$$", "cuisine": ""}, {"idx": 6, "name": "Atomic Helicopters", "lat": 47.529844, "lng": -122.300892, "walk": "", "price": "$$$", "cuisine": ""}, {"idx": 7, "name": "Ride the Ducks of Seattle", "lat": 47.62142, "lng": -122.347037, "walk": 20, "price": "$$", "cuisine": ""}];
 const coffeeMarkers = [{"idx": 0, "name": "Original Starbucks", "lat": 47.610008, "lng": -122.34258, "walk": 10, "price": "$", "cuisine": ""}, {"idx": 1, "name": "Bathtub Gin & Co.", "lat": 47.613227, "lng": -122.344667, "walk": 12, "price": "$$", "cuisine": ""}, {"idx": 2, "name": "Elm Coffee Roasters", "lat": 47.600162, "lng": -122.331341, "walk": 15, "price": "$", "cuisine": ""}, {"idx": 3, "name": "Canon", "lat": 47.611273, "lng": -122.316476, "walk": 20, "price": "$$", "cuisine": ""}];
 
 initMap('attractionsMap', 'attractionsCards', attractionMarkers, '#29B6F6');
@@ -2005,6 +2111,7 @@ initMap('daytripsMap', 'daytripsCards', daytripsMarkers, '#4CAF50');
 initMap('familyMap', 'familyCards', familyMarkers, '#7B1FA2');
 initMap('shoppingMap', 'shoppingCards', shoppingMarkers, '#FF6F00');
 initMap('entertainmentMap', 'entertainmentCards', entertainmentMarkers, '#E91E63');
+initMap('toursMap', 'toursCards', tourMarkers, '#00897B');
 initMap('coffeeMap', 'coffeeCards', coffeeMarkers, '#795548');
 
 // ─── SORTING ───
