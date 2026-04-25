@@ -252,7 +252,7 @@
     {
       "name": "Serious Pie",
       "cuisine": "Pizza / Italian",
-      "address": "316 Virginia St, Seattle, WA 98101",
+      "address": "2001 4th Ave, Seattle, WA 98121",
       "website": "https://www.seriouspieseattle.com/",
       "walkingMinutes": 8,
       "distanceMiles": 0.35,
@@ -908,18 +908,6 @@
       "description": "Helicopter tours from Boeing Field offering panoramic views of downtown Seattle, Mount Rainier, the Space Needle, and Puget Sound. Tours from 15 to 60 minutes.",
       "latitude": 47.529844,
       "longitude": -122.300892
-    },
-    {
-      "name": "Seattle Ferry Adventures — Tillicum Excursion",
-      "type": "Boat Tour / Cultural",
-      "address": "Pier 55, 1101 Alaskan Way, Seattle, WA 98101",
-      "website": "https://www.argosycruises.com/tillicum-excursion/",
-      "walkingMinutes": 12,
-      "distanceMiles": 0.6,
-      "priceTier": "$$$",
-      "description": "Cruise to Blake Island State Park for a Native American-style salmon bake and cultural performance. A unique 4-hour excursion combining a boat ride, nature, and indigenous heritage.",
-      "latitude": 47.604786,
-      "longitude": -122.340014
     },
     {
       "name": "Savor Seattle Food Tours",
