@@ -280,9 +280,19 @@ history_cards = "\n".join(
     for h in data.get("history", [])
 )
 
-# Geography
+# Geography — with images
+geo_images = {
+    "Mount Rainier": "https://images.unsplash.com/photo-1609825488888-3a766db05542?w=600&q=80",
+    "Mount St. Helens": "https://images.unsplash.com/photo-1580655653885-65763b2597d0?w=600&q=80",
+    "Puget Sound": "https://images.unsplash.com/photo-1542223189-67a03fa0f0bd?w=600&q=80",
+    "Olympic Mountains": "https://images.unsplash.com/photo-1516738901171-8eb4fc13bd20?w=600&q=80",
+    "Lake Washington & Lake Union": "https://images.unsplash.com/photo-1502175353174-a7a70e73b362?w=600&q=80",
+    "Elliott Bay": "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=600&q=80",
+}
+
 geo_cards = "\n".join(
-    f'''<div class="card" style="border-left:4px solid var(--teal);">
+    f'''<div class="card geo-card" style="border-left:4px solid var(--teal);overflow:hidden;">
+  {'<div class="geo-img" style="height:180px;overflow:hidden;margin:-1.5rem -1.5rem 1rem -1.5rem;"><img src=&quot;' + geo_images.get(g["name"], "") + '&quot; alt=&quot;' + g["name"] + '&quot; style=&quot;width:100%;height:100%;object-fit:cover;&quot; loading=&quot;lazy&quot;></div>' if g["name"] in geo_images else ''}
   <div class="card-header">
     <h3 class="card-title">{g["name"]}</h3>
     <span class="category-tag">{g["type"]}</span>
