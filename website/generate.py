@@ -67,6 +67,7 @@ def card_html(item, extra_badges="", show_cuisine=False, show_category=False):
     dist = item.get("walkingMinutes") or item.get("drivingMinutes") or item.get("ferryMinutes") or item.get("transitMinutes") or 999
     data_attrs += f' data-name="{name}" data-distance="{dist}"'
     html = f'<div class="card"{data_attrs}>\n'
+    html += f'  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>\n'
     html += f'  <div class="card-header">\n'
     html += f'    <h3 class="card-title">{name}</h3>\n'
     html += f'    <div class="card-badges">{walk_badge(item)} {must_see_badge(item)} {extra_badges}'
@@ -340,6 +341,19 @@ tour_markers_json = markers_json(tours_sorted)
 # Trivia data
 trivia_data = data.get("trivia", [])
 trivia_json = json.dumps(trivia_data)
+
+# Lunch picker data
+lunch_data = []
+for d in dining_sorted:
+    lunch_data.append({
+        "name": d["name"],
+        "cuisine": d.get("cuisine", ""),
+        "walk": d.get("walkingMinutes"),
+        "drive": d.get("drivingMinutes"),
+        "price": d.get("priceTier", ""),
+        "desc": d.get("description", ""),
+    })
+lunch_json = json.dumps(lunch_data)
 coffee_sorted = sorted(data["coffeeAndBars"], key=sort_key_dist)
 coffee_markers_json = markers_json(coffee_sorted)
 
@@ -773,6 +787,76 @@ img {{ max-width: 100%; height: auto; }}
   .trivia-front {{ font-size: 1rem; padding: 1.5rem; }}
   .trivia-back {{ font-size: 0.95rem; padding: 1.5rem; }}
 }}
+
+/* ─── Heart / Favorites ─── */
+.heart-btn {{
+  position: absolute; top: 0.7rem; right: 0.7rem; background: none; border: none;
+  font-size: 1.4rem; cursor: pointer; color: #ccc; transition: all 0.2s; z-index: 5;
+  line-height: 1;
+}}
+.heart-btn:hover {{ color: #E91E63; transform: scale(1.2); }}
+.heart-btn.hearted {{ color: #E91E63; }}
+.card {{ position: relative; }}
+.fav-nav-btn {{
+  background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3);
+  color: white; padding: 0.4rem 0.8rem; border-radius: 4px; font-size: 0.85rem;
+  font-weight: 700; cursor: pointer; font-family: 'Roboto', sans-serif;
+}}
+.fav-nav-btn:hover {{ background: rgba(255,255,255,0.2); }}
+#favCount {{ color: var(--gold); }}
+.fav-panel {{
+  display: none; position: fixed; top: 64px; right: 0; width: 350px; max-width: 90vw;
+  max-height: 80vh; background: var(--white); z-index: 1200;
+  box-shadow: -4px 0 30px rgba(0,0,0,0.3); overflow-y: auto; border-radius: 0 0 0 12px;
+}}
+.fav-panel.active {{ display: block; }}
+.fav-panel-header {{
+  background: var(--navy); color: white; padding: 1rem; display: flex;
+  justify-content: space-between; align-items: center; position: sticky; top: 0;
+}}
+.fav-panel-header h3 {{ font-size: 1rem; margin: 0; }}
+.fav-item {{
+  padding: 0.8rem 1rem; border-bottom: 1px solid #eee; cursor: pointer;
+  display: flex; justify-content: space-between; align-items: center;
+}}
+.fav-item:hover {{ background: #F5F9FF; }}
+.fav-item-name {{ font-weight: 700; color: var(--navy); font-size: 0.9rem; }}
+.fav-item-remove {{ color: #ccc; cursor: pointer; font-size: 1.1rem; }}
+.fav-item-remove:hover {{ color: #E91E63; }}
+.fav-empty {{ padding: 2rem; text-align: center; color: #999; font-size: 0.9rem; }}
+.fav-clear {{ background: none; border: 1px solid rgba(255,255,255,0.5); color: white; padding: 0.3rem 0.8rem; border-radius: 4px; font-size: 0.75rem; cursor: pointer; }}
+
+/* ─── Lunch Picker ─── */
+.lunch-overlay {{
+  display: none; position: fixed; inset: 0; z-index: 2000;
+  background: rgba(0,0,0,0.85); justify-content: center; align-items: center;
+  flex-direction: column; padding: 1rem;
+}}
+.lunch-overlay.active {{ display: flex; }}
+.lunch-close {{
+  position: absolute; top: 1rem; right: 1.5rem; background: none; border: none;
+  color: white; font-size: 2rem; cursor: pointer;
+}}
+.lunch-close:hover {{ color: var(--gold); }}
+.lunch-card {{
+  background: white; border-radius: 16px; padding: 2.5rem; text-align: center;
+  max-width: 450px; width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}}
+.lunch-card h2 {{ color: var(--navy); font-size: 1.5rem; margin-bottom: 0.3rem; }}
+.lunch-card .lunch-cuisine {{ color: #E91E63; font-weight: 700; font-size: 0.9rem; margin-bottom: 0.5rem; }}
+.lunch-card .lunch-detail {{ color: #666; font-size: 0.9rem; margin-bottom: 0.3rem; }}
+.lunch-card .lunch-desc {{ color: #555; font-size: 0.85rem; margin: 1rem 0; line-height: 1.5; }}
+.lunch-spin {{
+  background: #E91E63; color: white; border: none; padding: 0.8rem 2.5rem;
+  border-radius: 30px; font-size: 1.1rem; font-weight: 700; cursor: pointer;
+  margin-top: 1rem; font-family: 'Roboto', sans-serif; letter-spacing: 1px;
+}}
+.lunch-spin:hover {{ background: #C2185B; }}
+.lunch-spinning {{ animation: lunchShake 0.1s infinite; }}
+@keyframes lunchShake {{
+  0% {{ transform: rotate(0deg); }} 25% {{ transform: rotate(2deg); }}
+  50% {{ transform: rotate(0deg); }} 75% {{ transform: rotate(-2deg); }}
+}}
 @media (max-width: 900px) {{
   .map-section-layout {{ grid-template-columns: 1fr; }}
   .map-container {{ height: 300px; }}
@@ -786,6 +870,8 @@ img {{ max-width: 100%; height: auto; }}
 <nav class="navbar">
   <div class="nav-brand">SEATTLE <span>GUIDE</span></div>
   <div style="display:flex;gap:0.5rem;align-items:center;">
+    <button class="fav-nav-btn" onclick="toggleFavPanel()" aria-label="Favorites">❤️ <span id="favCount">0</span></button>
+    <button class="trivia-btn" onclick="openLunchPicker()" style="background:#E91E63;">🎰 LUNCH</button>
     <button class="trivia-btn" onclick="openTrivia()">🎯 TRIVIA</button>
     <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('active')" aria-label="Menu">☰ MENU</button>
   </div>
@@ -1153,6 +1239,29 @@ img {{ max-width: 100%; height: auto; }}
   </div>
 </div>
 
+<!-- ═══ FAVORITES PANEL ═══ -->
+<div class="fav-panel" id="favPanel">
+  <div class="fav-panel-header">
+    <h3>❤️ My Favorites</h3>
+    <button class="fav-clear" onclick="clearFavs()">Clear All</button>
+  </div>
+  <div id="favList"></div>
+</div>
+
+<!-- ═══ LUNCH PICKER OVERLAY ═══ -->
+<div class="lunch-overlay" id="lunchOverlay">
+  <button class="lunch-close" onclick="closeLunchPicker()">✕</button>
+  <h2 style="color:var(--gold);margin-bottom:1rem;font-size:1.2rem;">🎰 Where Should We Eat?</h2>
+  <div class="lunch-card" id="lunchCard">
+    <h2 id="lunchName">Press Spin!</h2>
+    <div class="lunch-cuisine" id="lunchCuisine"></div>
+    <div class="lunch-detail" id="lunchWalk"></div>
+    <div class="lunch-detail" id="lunchPrice"></div>
+    <div class="lunch-desc" id="lunchDesc"></div>
+    <button class="lunch-spin" onclick="spinLunch()">🎰 SPIN!</button>
+  </div>
+</div>
+
 <!-- ═══ TRIVIA OVERLAY ═══ -->
 <div class="trivia-overlay" id="triviaOverlay">
   <button class="trivia-close" onclick="closeTrivia()" aria-label="Close trivia">✕</button>
@@ -1381,6 +1490,121 @@ if (indexSearch && indexTable) {{
       rows.forEach(r => indexTable.querySelector('tbody').appendChild(r));
     }});
   }});
+}}
+
+// ─── FAVORITES ───
+let favs = JSON.parse(localStorage.getItem('seattleFavs') || '[]');
+
+function updateFavUI() {{
+  document.getElementById('favCount').textContent = favs.length;
+  // Sync heart buttons
+  document.querySelectorAll('.heart-btn').forEach(btn => {{
+    const name = btn.closest('.card')?.dataset.name || '';
+    btn.classList.toggle('hearted', favs.includes(name));
+    btn.textContent = favs.includes(name) ? '♥' : '♡';
+  }});
+  // Render panel
+  const list = document.getElementById('favList');
+  if (favs.length === 0) {{
+    list.innerHTML = '<div class="fav-empty">No favorites yet!<br>Tap ♡ on any card to save it.</div>';
+  }} else {{
+    list.innerHTML = favs.map(name =>
+      '<div class="fav-item" onclick="scrollToCard(\'' + name.replace(/'/g, "\\'") + '\')">' +
+      '<span class="fav-item-name">' + name + '</span>' +
+      '<span class="fav-item-remove" onclick="event.stopPropagation();removeFav(\'' + name.replace(/'/g, "\\'") + '\')">✕</span></div>'
+    ).join('');
+  }}
+}}
+
+function toggleFav(btn) {{
+  const name = btn.closest('.card')?.dataset.name || '';
+  if (!name) return;
+  if (favs.includes(name)) {{
+    favs = favs.filter(f => f !== name);
+  }} else {{
+    favs.push(name);
+    btn.style.transform = 'scale(1.5)';
+    setTimeout(() => btn.style.transform = '', 300);
+  }}
+  localStorage.setItem('seattleFavs', JSON.stringify(favs));
+  updateFavUI();
+}}
+
+function removeFav(name) {{
+  favs = favs.filter(f => f !== name);
+  localStorage.setItem('seattleFavs', JSON.stringify(favs));
+  updateFavUI();
+}}
+
+function clearFavs() {{
+  favs = [];
+  localStorage.setItem('seattleFavs', JSON.stringify(favs));
+  updateFavUI();
+}}
+
+function toggleFavPanel() {{
+  document.getElementById('favPanel').classList.toggle('active');
+}}
+
+function scrollToCard(name) {{
+  document.getElementById('favPanel').classList.remove('active');
+  const card = document.querySelector('.card[data-name="' + name + '"]');
+  if (card) {{
+    card.scrollIntoView({{ behavior: 'smooth', block: 'center' }});
+    card.classList.add('card-active');
+    setTimeout(() => card.classList.remove('card-active'), 2000);
+  }}
+}}
+
+// Close fav panel on outside click
+document.addEventListener('click', e => {{
+  const panel = document.getElementById('favPanel');
+  const btn = document.querySelector('.fav-nav-btn');
+  if (panel.classList.contains('active') && !panel.contains(e.target) && !btn.contains(e.target)) {{
+    panel.classList.remove('active');
+  }}
+}});
+
+updateFavUI();
+
+// ─── LUNCH PICKER ───
+const lunchData = {lunch_json};
+
+function openLunchPicker() {{
+  document.getElementById('lunchOverlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+  document.getElementById('lunchName').textContent = 'Press Spin!';
+  document.getElementById('lunchCuisine').textContent = '';
+  document.getElementById('lunchWalk').textContent = '';
+  document.getElementById('lunchPrice').textContent = '';
+  document.getElementById('lunchDesc').textContent = 'Tap the button and we\\'ll pick a restaurant for you!';
+}}
+
+function closeLunchPicker() {{
+  document.getElementById('lunchOverlay').classList.remove('active');
+  document.body.style.overflow = '';
+}}
+
+function spinLunch() {{
+  const card = document.getElementById('lunchCard');
+  card.classList.add('lunch-spinning');
+  let count = 0;
+  const interval = setInterval(() => {{
+    const r = lunchData[Math.floor(Math.random() * lunchData.length)];
+    document.getElementById('lunchName').textContent = r.name;
+    count++;
+    if (count > 15) {{
+      clearInterval(interval);
+      card.classList.remove('lunch-spinning');
+      const pick = lunchData[Math.floor(Math.random() * lunchData.length)];
+      document.getElementById('lunchName').textContent = '🎉 ' + pick.name;
+      document.getElementById('lunchCuisine').textContent = pick.cuisine;
+      const dist = pick.walk != null ? (pick.walk === 0 ? '📍 On-Site!' : '🚶 ' + pick.walk + ' min walk') : '🚗 ' + pick.drive + ' min drive';
+      document.getElementById('lunchWalk').textContent = dist;
+      document.getElementById('lunchPrice').textContent = pick.price;
+      document.getElementById('lunchDesc').textContent = pick.desc;
+    }}
+  }}, 80);
 }}
 
 // ─── TRIVIA ───

@@ -394,6 +394,76 @@ img { max-width: 100%; height: auto; }
   .trivia-front { font-size: 1rem; padding: 1.5rem; }
   .trivia-back { font-size: 0.95rem; padding: 1.5rem; }
 }
+
+/* ─── Heart / Favorites ─── */
+.heart-btn {
+  position: absolute; top: 0.7rem; right: 0.7rem; background: none; border: none;
+  font-size: 1.4rem; cursor: pointer; color: #ccc; transition: all 0.2s; z-index: 5;
+  line-height: 1;
+}
+.heart-btn:hover { color: #E91E63; transform: scale(1.2); }
+.heart-btn.hearted { color: #E91E63; }
+.card { position: relative; }
+.fav-nav-btn {
+  background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3);
+  color: white; padding: 0.4rem 0.8rem; border-radius: 4px; font-size: 0.85rem;
+  font-weight: 700; cursor: pointer; font-family: 'Roboto', sans-serif;
+}
+.fav-nav-btn:hover { background: rgba(255,255,255,0.2); }
+#favCount { color: var(--gold); }
+.fav-panel {
+  display: none; position: fixed; top: 64px; right: 0; width: 350px; max-width: 90vw;
+  max-height: 80vh; background: var(--white); z-index: 1200;
+  box-shadow: -4px 0 30px rgba(0,0,0,0.3); overflow-y: auto; border-radius: 0 0 0 12px;
+}
+.fav-panel.active { display: block; }
+.fav-panel-header {
+  background: var(--navy); color: white; padding: 1rem; display: flex;
+  justify-content: space-between; align-items: center; position: sticky; top: 0;
+}
+.fav-panel-header h3 { font-size: 1rem; margin: 0; }
+.fav-item {
+  padding: 0.8rem 1rem; border-bottom: 1px solid #eee; cursor: pointer;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.fav-item:hover { background: #F5F9FF; }
+.fav-item-name { font-weight: 700; color: var(--navy); font-size: 0.9rem; }
+.fav-item-remove { color: #ccc; cursor: pointer; font-size: 1.1rem; }
+.fav-item-remove:hover { color: #E91E63; }
+.fav-empty { padding: 2rem; text-align: center; color: #999; font-size: 0.9rem; }
+.fav-clear { background: none; border: 1px solid rgba(255,255,255,0.5); color: white; padding: 0.3rem 0.8rem; border-radius: 4px; font-size: 0.75rem; cursor: pointer; }
+
+/* ─── Lunch Picker ─── */
+.lunch-overlay {
+  display: none; position: fixed; inset: 0; z-index: 2000;
+  background: rgba(0,0,0,0.85); justify-content: center; align-items: center;
+  flex-direction: column; padding: 1rem;
+}
+.lunch-overlay.active { display: flex; }
+.lunch-close {
+  position: absolute; top: 1rem; right: 1.5rem; background: none; border: none;
+  color: white; font-size: 2rem; cursor: pointer;
+}
+.lunch-close:hover { color: var(--gold); }
+.lunch-card {
+  background: white; border-radius: 16px; padding: 2.5rem; text-align: center;
+  max-width: 450px; width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+.lunch-card h2 { color: var(--navy); font-size: 1.5rem; margin-bottom: 0.3rem; }
+.lunch-card .lunch-cuisine { color: #E91E63; font-weight: 700; font-size: 0.9rem; margin-bottom: 0.5rem; }
+.lunch-card .lunch-detail { color: #666; font-size: 0.9rem; margin-bottom: 0.3rem; }
+.lunch-card .lunch-desc { color: #555; font-size: 0.85rem; margin: 1rem 0; line-height: 1.5; }
+.lunch-spin {
+  background: #E91E63; color: white; border: none; padding: 0.8rem 2.5rem;
+  border-radius: 30px; font-size: 1.1rem; font-weight: 700; cursor: pointer;
+  margin-top: 1rem; font-family: 'Roboto', sans-serif; letter-spacing: 1px;
+}
+.lunch-spin:hover { background: #C2185B; }
+.lunch-spinning { animation: lunchShake 0.1s infinite; }
+@keyframes lunchShake {
+  0% { transform: rotate(0deg); } 25% { transform: rotate(2deg); }
+  50% { transform: rotate(0deg); } 75% { transform: rotate(-2deg); }
+}
 @media (max-width: 900px) {
   .map-section-layout { grid-template-columns: 1fr; }
   .map-container { height: 300px; }
@@ -407,6 +477,8 @@ img { max-width: 100%; height: auto; }
 <nav class="navbar">
   <div class="nav-brand">SEATTLE <span>GUIDE</span></div>
   <div style="display:flex;gap:0.5rem;align-items:center;">
+    <button class="fav-nav-btn" onclick="toggleFavPanel()" aria-label="Favorites">❤️ <span id="favCount">0</span></button>
+    <button class="trivia-btn" onclick="openLunchPicker()" style="background:#E91E63;">🎰 LUNCH</button>
     <button class="trivia-btn" onclick="openTrivia()">🎯 TRIVIA</button>
     <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('active')" aria-label="Menu">☰ MENU</button>
   </div>
@@ -629,6 +701,7 @@ img { max-width: 100%; height: auto; }
   </div>
   <div class="card-grid" id="diningCards">
     <div class="card" data-lat="47.614614" data-lng="-122.331332" data-name="Bombo Italian Kitchen" data-distance="999">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Bombo Italian Kitchen</h3>
     <div class="card-badges"><span class="badge badge-gold">📍 On-Site</span>  <span class="badge badge-gold">📍 ON-SITE</span> <span class="price-tier">$$<span class="price-dim">$</span></span></div>
@@ -640,6 +713,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.611338" data-lng="-122.333459" data-name="Alder & Ash" data-distance="2">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Alder & Ash</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 2 min walk</span>   <span class="price-tier">$$<span class="price-dim">$</span></span></div>
@@ -650,6 +724,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.6128" data-lng="-122.3288" data-name="Daawat Indian Grill & Bar" data-distance="2">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Daawat Indian Grill & Bar</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 2 min walk</span>   <span class="price-tier">$$<span class="price-dim">$</span></span></div>
@@ -660,6 +735,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.608782" data-lng="-122.337196" data-name="Wild Ginger" data-distance="3">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Wild Ginger</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 3 min walk</span>   <span class="price-tier">$$<span class="price-dim">$</span></span></div>
@@ -671,6 +747,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.608325" data-lng="-122.335367" data-name="The Capital Grille" data-distance="4">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">The Capital Grille</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 4 min walk</span>   <span class="price-tier">$$$<span class="price-dim"></span></span></div>
@@ -682,6 +759,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.6125" data-lng="-122.3363" data-name="Din Tai Fung" data-distance="5">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Din Tai Fung</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 5 min walk</span>   <span class="price-tier">$$<span class="price-dim">$</span></span></div>
@@ -693,6 +771,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.607951" data-lng="-122.33506" data-name="Purple Cafe and Wine Bar" data-distance="5">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Purple Cafe and Wine Bar</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 5 min walk</span>   <span class="price-tier">$$<span class="price-dim">$</span></span></div>
@@ -704,6 +783,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.614387" data-lng="-122.32808" data-name="Térra Plata" data-distance="7">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Térra Plata</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 7 min walk</span>   <span class="price-tier">$$$<span class="price-dim"></span></span></div>
@@ -714,6 +794,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.608052" data-lng="-122.339037" data-name="Japonessa Sushi Cocina" data-distance="8">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Japonessa Sushi Cocina</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 8 min walk</span>   <span class="price-tier">$$$<span class="price-dim"></span></span></div>
@@ -725,6 +806,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.612903" data-lng="-122.340495" data-name="Serious Pie" data-distance="8">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Serious Pie</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 8 min walk</span>   <span class="price-tier">$$<span class="price-dim">$</span></span></div>
@@ -736,6 +818,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.6065" data-lng="-122.335" data-name="Shuckers" data-distance="9">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Shuckers</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 9 min walk</span>   <span class="price-tier">$$<span class="price-dim">$</span></span></div>
@@ -747,6 +830,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.609582" data-lng="-122.341816" data-name="Beecher's Handmade Cheese" data-distance="10">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Beecher's Handmade Cheese</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 10 min walk</span>   <span class="price-tier">$<span class="price-dim">$$</span></span></div>
@@ -758,6 +842,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.609466" data-lng="-122.34107" data-name="Pike Place Chowder" data-distance="10">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Pike Place Chowder</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 10 min walk</span>   <span class="price-tier">$<span class="price-dim">$$</span></span></div>
@@ -769,6 +854,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.608856" data-lng="-122.340566" data-name="Matt's in the Market" data-distance="10">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Matt's in the Market</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 10 min walk</span>   <span class="price-tier">$$$<span class="price-dim"></span></span></div>
@@ -780,6 +866,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.604426" data-lng="-122.334189" data-name="Metropolitan Grill" data-distance="10">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Metropolitan Grill</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 10 min walk</span>   <span class="price-tier">$$$<span class="price-dim"></span></span></div>
@@ -791,6 +878,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.643053" data-lng="-122.346736" data-name="Canlis" data-distance="10">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Canlis</h3>
     <div class="card-badges"><span class="badge badge-navy">🚗 10 min drive</span>   <span class="price-tier">$$$<span class="price-dim"></span></span></div>
@@ -802,6 +890,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.623437" data-lng="-122.354405" data-name="Taylor Shellfish Oyster Bar" data-distance="18">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Taylor Shellfish Oyster Bar</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 18 min walk</span>   <span class="price-tier">$$<span class="price-dim">$</span></span></div>
@@ -829,6 +918,7 @@ img { max-width: 100%; height: auto; }
   </div>
   <div class="card-grid" id="coffeeCards">
     <div class="card" data-lat="47.610008" data-lng="-122.34258" data-name="Original Starbucks" data-distance="10">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Original Starbucks</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 10 min walk</span>   <span class="price-tier">$<span class="price-dim">$$</span></span></div>
@@ -838,6 +928,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.580767" data-lng="-122.335918" data-name="Starbucks World Headquarters" data-distance="10">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Starbucks World Headquarters</h3>
     <div class="card-badges"><span class="badge badge-navy">🚗 10 min drive</span>   <span class="price-free">FREE</span></div>
@@ -848,6 +939,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.613227" data-lng="-122.344667" data-name="Bathtub Gin & Co." data-distance="12">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Bathtub Gin & Co.</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 12 min walk</span>   <span class="price-tier">$$<span class="price-dim">$</span></span></div>
@@ -858,6 +950,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.600162" data-lng="-122.331341" data-name="Elm Coffee Roasters" data-distance="15">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Elm Coffee Roasters</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 15 min walk</span>   <span class="price-tier">$<span class="price-dim">$$</span></span></div>
@@ -867,6 +960,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.611273" data-lng="-122.316476" data-name="Canon" data-distance="20">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Canon</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 20 min walk</span>   <span class="price-tier">$$<span class="price-dim">$</span></span></div>
@@ -892,6 +986,7 @@ img { max-width: 100%; height: auto; }
   </div>
   <div class="card-grid" id="shoppingCards">
     <div class="card" data-lat="47.612883" data-lng="-122.335289" data-name="Pacific Place" data-distance="3">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Pacific Place</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 3 min walk</span>  </div>
@@ -902,6 +997,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.611921" data-lng="-122.336541" data-name="Nordstrom Flagship" data-distance="4">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Nordstrom Flagship</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 4 min walk</span>  </div>
@@ -912,6 +1008,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.611991" data-lng="-122.337391" data-name="Westlake Center" data-distance="5">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Westlake Center</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 5 min walk</span>  </div>
@@ -922,6 +1019,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.608754" data-lng="-122.3402" data-name="Pike Place Market Shops" data-distance="10">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Pike Place Market Shops</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 10 min walk</span>  </div>
@@ -931,6 +1029,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.662674" data-lng="-122.299114" data-name="University Village" data-distance="15">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">University Village</h3>
     <div class="card-badges"><span class="badge badge-navy">🚗 15 min drive</span>  </div>
@@ -941,6 +1040,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.614666" data-lng="-122.319677" data-name="Elliott Bay Book Company" data-distance="15">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Elliott Bay Book Company</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 15 min walk</span>  </div>
@@ -951,6 +1051,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.615655" data-lng="-122.203677" data-name="Bellevue Square" data-distance="30">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Bellevue Square</h3>
     <div class="card-badges"><span class="badge badge-blue">🚇 30 min transit</span>  </div>
@@ -980,6 +1081,7 @@ img { max-width: 100%; height: auto; }
   </div>
   <div class="card-grid" id="attractionsCards">
     <div class="card" data-lat="47.609164" data-lng="-122.330511" data-name="Freeway Park" data-distance="3">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Freeway Park</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 3 min walk</span>   <span class="price-free">FREE</span></div>
@@ -990,6 +1092,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.607701" data-lng="-122.338557" data-name="Seattle Art Museum (SAM)" data-distance="8">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Seattle Art Museum (SAM)</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 8 min walk</span>   <span class="price-tier">$$<span class="price-dim">$</span></span></div>
@@ -1001,6 +1104,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.608754" data-lng="-122.3402" data-name="Pike Place Market" data-distance="10">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Pike Place Market</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 10 min walk</span> <span class="badge badge-gold">⭐ Must See</span>  <span class="price-free">FREE</span></div>
@@ -1012,6 +1116,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.607968" data-lng="-122.339856" data-name="Gum Wall" data-distance="10">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Gum Wall</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 10 min walk</span>   <span class="price-free">FREE</span></div>
@@ -1022,6 +1127,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.606714" data-lng="-122.332698" data-name="Seattle Central Library" data-distance="10">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Seattle Central Library</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 10 min walk</span>   <span class="price-free">FREE</span></div>
@@ -1033,6 +1139,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.633918" data-lng="-122.312207" data-name="Lake View Cemetery" data-distance="10">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Lake View Cemetery</h3>
     <div class="card-badges"><span class="badge badge-navy">🚗 10 min drive</span>   <span class="price-free">FREE</span></div>
@@ -1044,6 +1151,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.606043" data-lng="-122.342167" data-name="Seattle Waterfront & Pier 57" data-distance="12">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Seattle Waterfront & Pier 57</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 12 min walk</span>   <span class="price-free">FREE</span></div>
@@ -1055,6 +1163,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.606043" data-lng="-122.342167" data-name="Seattle Great Wheel" data-distance="12">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Seattle Great Wheel</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 12 min walk</span>   <span class="price-tier">$$<span class="price-dim">$</span></span></div>
@@ -1066,6 +1175,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.607625" data-lng="-122.34322" data-name="Seattle Aquarium" data-distance="14">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Seattle Aquarium</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 14 min walk</span>   <span class="price-tier">$$<span class="price-dim">$</span></span></div>
@@ -1077,6 +1187,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.602722" data-lng="-122.331354" data-name="Pioneer Square" data-distance="15">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Pioneer Square</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 15 min walk</span>   <span class="price-free">FREE</span></div>
@@ -1088,6 +1199,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.602335" data-lng="-122.333779" data-name="Bill Speidel's Underground Tour" data-distance="15">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Bill Speidel's Underground Tour</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 15 min walk</span>   <span class="price-tier">$$<span class="price-dim">$</span></span></div>
@@ -1099,6 +1211,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.623831" data-lng="-122.318368" data-name="Capitol Hill" data-distance="15">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Capitol Hill</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 15 min walk</span>   <span class="price-free">FREE</span></div>
@@ -1110,6 +1223,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.65543" data-lng="-122.300169" data-name="University of Washington Campus" data-distance="15">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">University of Washington Campus</h3>
     <div class="card-badges"><span class="badge badge-navy">🚗 15 min drive</span>   <span class="price-free">FREE</span></div>
@@ -1122,6 +1236,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.663218" data-lng="-122.311967" data-name="Burke Museum of Natural History and Culture" data-distance="15">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Burke Museum of Natural History and Culture</h3>
     <div class="card-badges"><span class="badge badge-navy">🚗 15 min drive</span>   <span class="price-tier">$$<span class="price-dim">$</span></span></div>
@@ -1134,6 +1249,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.616272" data-lng="-122.353583" data-name="Olympic Sculpture Park" data-distance="18">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Olympic Sculpture Park</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 18 min walk</span>   <span class="price-free">FREE</span></div>
@@ -1145,6 +1261,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.620513" data-lng="-122.349304" data-name="Space Needle" data-distance="20">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Space Needle</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 20 min walk</span> <span class="badge badge-gold">⭐ Must See</span>  <span class="price-tier">$$$<span class="price-dim"></span></span></div>
@@ -1157,6 +1274,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.621462" data-lng="-122.350989" data-name="Chihuly Garden and Glass" data-distance="20">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Chihuly Garden and Glass</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 20 min walk</span> <span class="badge badge-gold">⭐ Must See</span>  <span class="price-tier">$$$<span class="price-dim"></span></span></div>
@@ -1168,6 +1286,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.623591" data-lng="-122.34737" data-name="Gates Foundation Discovery Center" data-distance="20">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Gates Foundation Discovery Center</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 20 min walk</span> <span class="badge badge-gold">⭐ Must See</span>  <span class="price-free">FREE</span></div>
@@ -1180,6 +1299,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.619406" data-lng="-122.350778" data-name="Pacific Science Center" data-distance="22">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Pacific Science Center</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 22 min walk</span>   <span class="price-tier">$$<span class="price-dim">$</span></span></div>
@@ -1191,6 +1311,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.621493" data-lng="-122.348225" data-name="Museum of Pop Culture (MoPOP)" data-distance="22">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Museum of Pop Culture (MoPOP)</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 22 min walk</span>   <span class="price-tier">$$$<span class="price-dim"></span></span></div>
@@ -1202,6 +1323,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.629477" data-lng="-122.359935" data-name="Kerry Park" data-distance="30">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Kerry Park</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 30 min walk</span>   <span class="price-free">FREE</span></div>
@@ -1230,6 +1352,7 @@ img { max-width: 100%; height: auto; }
   </div>
   <div class="card-grid" id="daytripsCards">
     <div class="card" data-lat="47.664662" data-lng="-122.39746" data-name="Hiram M. Chittenden Locks (Ballard Locks)" data-distance="15">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Hiram M. Chittenden Locks (Ballard Locks)</h3>
     <div class="card-badges"><span class="badge badge-navy">🚗 15 min drive</span>  <span class="badge badge-navy">🚗 Requires transport</span> <span class="price-free">FREE</span></div>
@@ -1241,6 +1364,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.666312" data-lng="-122.349302" data-name="Woodland Park Zoo" data-distance="15">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Woodland Park Zoo</h3>
     <div class="card-badges"><span class="badge badge-navy">🚗 15 min drive</span>  <span class="badge badge-navy">🚗 Requires transport</span> <span class="price-tier">$$<span class="price-dim">$</span></span></div>
@@ -1252,6 +1376,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.518359" data-lng="-122.296496" data-name="Museum of Flight" data-distance="20">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Museum of Flight</h3>
     <div class="card-badges"><span class="badge badge-navy">🚗 20 min drive</span>  <span class="badge badge-navy">🚗 Requires transport</span> <span class="price-tier">$$<span class="price-dim">$</span></span></div>
@@ -1263,6 +1388,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.675448" data-lng="-122.209257" data-name="Kirkland Waterfront" data-distance="20">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Kirkland Waterfront</h3>
     <div class="card-badges"><span class="badge badge-navy">🚗 20 min drive</span>  <span class="badge badge-navy">🚗 Requires transport</span> <span class="price-free">FREE</span></div>
@@ -1274,6 +1400,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.642492" data-lng="-122.136927" data-name="Microsoft Visitor Center" data-distance="25">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Microsoft Visitor Center</h3>
     <div class="card-badges"><span class="badge badge-navy">🚗 25 min drive</span>  <span class="badge badge-navy">🚗 Requires transport</span> <span class="price-free">FREE</span></div>
@@ -1285,6 +1412,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.614422" data-lng="-122.192337" data-name="Bellevue via 2 Line Light Rail" data-distance="26">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Bellevue via 2 Line Light Rail</h3>
     <div class="card-badges"><span class="badge badge-blue">🚇 26 min transit</span>  <span class="badge badge-navy">🚗 Requires transport</span> <span class="price-free">FREE</span></div>
@@ -1296,6 +1424,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.754583" data-lng="-122.15889" data-name="Woodinville Wine Country" data-distance="30">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Woodinville Wine Country</h3>
     <div class="card-badges"><span class="badge badge-navy">🚗 30 min drive</span>  <span class="badge badge-navy">🚗 Requires transport</span> <span class="price-tier">$$<span class="price-dim">$</span></span></div>
@@ -1308,6 +1437,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.6027" data-lng="-122.3389" data-name="Bainbridge Island" data-distance="35">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Bainbridge Island</h3>
     <div class="card-badges"><span class="badge badge-navy">⛴️ 35 min ferry</span>  <span class="badge badge-navy">🚗 Requires transport</span> <span class="price-tier">$<span class="price-dim">$$</span></span></div>
@@ -1320,6 +1450,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.542155" data-lng="-121.836632" data-name="Snoqualmie Falls" data-distance="35">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Snoqualmie Falls</h3>
     <div class="card-badges"><span class="badge badge-navy">🚗 35 min drive</span>  <span class="badge badge-navy">🚗 Requires transport</span> <span class="price-free">FREE</span></div>
@@ -1331,6 +1462,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.918494" data-lng="-122.292439" data-name="Future of Flight Aviation Center & Boeing Tour" data-distance="40">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Future of Flight Aviation Center & Boeing Tour</h3>
     <div class="card-badges"><span class="badge badge-navy">🚗 40 min drive</span>  <span class="badge badge-navy">🚗 Requires transport</span> <span class="price-tier">$$<span class="price-dim">$</span></span></div>
@@ -1342,6 +1474,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.95022" data-lng="-122.297075" data-name="Whidbey Island" data-distance="50">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Whidbey Island</h3>
     <div class="card-badges"><span class="badge badge-navy">🚗 50 min drive</span>  <span class="badge badge-navy">🚗 Requires transport</span> <span class="price-tier">$<span class="price-dim">$$</span></span></div>
@@ -1353,6 +1486,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.606028" data-lng="-120.64324" data-name="Leavenworth Bavarian Village" data-distance="120">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Leavenworth Bavarian Village</h3>
     <div class="card-badges"><span class="badge badge-navy">🚗 120 min drive</span>  <span class="badge badge-navy">🚗 Requires transport</span> <span class="price-free">FREE</span></div>
@@ -1380,6 +1514,7 @@ img { max-width: 100%; height: auto; }
   </div>
   <div class="card-grid" id="toursCards">
     <div class="card" data-lat="47.631941" data-lng="-122.327528" data-name="Seattle Seaplanes" data-distance="10">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Seattle Seaplanes</h3>
     <div class="card-badges"><span class="badge badge-navy">🚗 10 min drive</span>   <span class="price-tier">$$$<span class="price-dim"></span></span></div>
@@ -1390,6 +1525,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.62831" data-lng="-122.339185" data-name="Kenmore Air — Scenic Flights" data-distance="10">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Kenmore Air — Scenic Flights</h3>
     <div class="card-badges"><span class="badge badge-navy">🚗 10 min drive</span>   <span class="price-tier">$$$<span class="price-dim"></span></span></div>
@@ -1400,6 +1536,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.609397" data-lng="-122.34141" data-name="Savor Seattle Food Tours" data-distance="10">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Savor Seattle Food Tours</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 10 min walk</span>   <span class="price-tier">$$<span class="price-dim">$</span></span></div>
@@ -1410,6 +1547,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.604786" data-lng="-122.340014" data-name="Argosy Cruises — Harbor Tour" data-distance="12">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Argosy Cruises — Harbor Tour</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 12 min walk</span>   <span class="price-tier">$$<span class="price-dim">$</span></span></div>
@@ -1420,6 +1558,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.604786" data-lng="-122.340014" data-name="Argosy Cruises — Locks Cruise" data-distance="12">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Argosy Cruises — Locks Cruise</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 12 min walk</span>   <span class="price-tier">$$$<span class="price-dim"></span></span></div>
@@ -1430,6 +1569,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.604786" data-lng="-122.340014" data-name="Seattle Ferry Adventures — Tillicum Excursion" data-distance="12">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Seattle Ferry Adventures — Tillicum Excursion</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 12 min walk</span>   <span class="price-tier">$$$<span class="price-dim"></span></span></div>
@@ -1440,6 +1580,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.529844" data-lng="-122.300892" data-name="Atomic Helicopters" data-distance="15">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Atomic Helicopters</h3>
     <div class="card-badges"><span class="badge badge-navy">🚗 15 min drive</span>   <span class="price-tier">$$$<span class="price-dim"></span></span></div>
@@ -1450,6 +1591,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.62142" data-lng="-122.347037" data-name="Ride the Ducks of Seattle" data-distance="20">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Ride the Ducks of Seattle</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 20 min walk</span>   <span class="price-tier">$$<span class="price-dim">$</span></span></div>
@@ -1475,6 +1617,7 @@ img { max-width: 100%; height: auto; }
   </div>
   <div class="card-grid" id="entertainmentCards">
     <div class="card" data-lat="47.609168" data-lng="-122.333984" data-name="The 5th Avenue Theatre" data-distance="4">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">The 5th Avenue Theatre</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 4 min walk</span>  </div>
@@ -1485,6 +1628,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.608514" data-lng="-122.339473" data-name="The Showbox" data-distance="8">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">The Showbox</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 8 min walk</span>  </div>
@@ -1495,6 +1639,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.608117" data-lng="-122.33697" data-name="Benaroya Hall" data-distance="8">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Benaroya Hall</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 8 min walk</span>  </div>
@@ -1505,6 +1650,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.614581" data-lng="-122.339152" data-name="Dimitriou's Jazz Alley" data-distance="10">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Dimitriou's Jazz Alley</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 10 min walk</span>  </div>
@@ -1515,6 +1661,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.621901" data-lng="-122.35399" data-name="Seattle Kraken at Climate Pledge Arena" data-distance="22">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Seattle Kraken at Climate Pledge Arena</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 22 min walk</span>  </div>
@@ -1526,6 +1673,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.624273" data-lng="-122.35193" data-name="Pacific Northwest Ballet" data-distance="22">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Pacific Northwest Ballet</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 22 min walk</span>  </div>
@@ -1536,6 +1684,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.623977" data-lng="-122.350388" data-name="Seattle Opera" data-distance="22">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Seattle Opera</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 22 min walk</span>  </div>
@@ -1546,6 +1695,7 @@ img { max-width: 100%; height: auto; }
 </div>
 
 <div class="card" data-lat="47.595346" data-lng="-122.331644" data-name="Seattle Seahawks at Lumen Field" data-distance="25">
+  <button class="heart-btn" onclick="toggleFav(this)" aria-label="Favorite">♡</button>
   <div class="card-header">
     <h3 class="card-title">Seattle Seahawks at Lumen Field</h3>
     <div class="card-badges"><span class="badge badge-blue">🚶 25 min walk</span>  </div>
@@ -2145,6 +2295,29 @@ img { max-width: 100%; height: auto; }
   </div>
 </div>
 
+<!-- ═══ FAVORITES PANEL ═══ -->
+<div class="fav-panel" id="favPanel">
+  <div class="fav-panel-header">
+    <h3>❤️ My Favorites</h3>
+    <button class="fav-clear" onclick="clearFavs()">Clear All</button>
+  </div>
+  <div id="favList"></div>
+</div>
+
+<!-- ═══ LUNCH PICKER OVERLAY ═══ -->
+<div class="lunch-overlay" id="lunchOverlay">
+  <button class="lunch-close" onclick="closeLunchPicker()">✕</button>
+  <h2 style="color:var(--gold);margin-bottom:1rem;font-size:1.2rem;">🎰 Where Should We Eat?</h2>
+  <div class="lunch-card" id="lunchCard">
+    <h2 id="lunchName">Press Spin!</h2>
+    <div class="lunch-cuisine" id="lunchCuisine"></div>
+    <div class="lunch-detail" id="lunchWalk"></div>
+    <div class="lunch-detail" id="lunchPrice"></div>
+    <div class="lunch-desc" id="lunchDesc"></div>
+    <button class="lunch-spin" onclick="spinLunch()">🎰 SPIN!</button>
+  </div>
+</div>
+
 <!-- ═══ TRIVIA OVERLAY ═══ -->
 <div class="trivia-overlay" id="triviaOverlay">
   <button class="trivia-close" onclick="closeTrivia()" aria-label="Close trivia">✕</button>
@@ -2373,6 +2546,121 @@ if (indexSearch && indexTable) {
       rows.forEach(r => indexTable.querySelector('tbody').appendChild(r));
     });
   });
+}
+
+// ─── FAVORITES ───
+let favs = JSON.parse(localStorage.getItem('seattleFavs') || '[]');
+
+function updateFavUI() {
+  document.getElementById('favCount').textContent = favs.length;
+  // Sync heart buttons
+  document.querySelectorAll('.heart-btn').forEach(btn => {
+    const name = btn.closest('.card')?.dataset.name || '';
+    btn.classList.toggle('hearted', favs.includes(name));
+    btn.textContent = favs.includes(name) ? '♥' : '♡';
+  });
+  // Render panel
+  const list = document.getElementById('favList');
+  if (favs.length === 0) {
+    list.innerHTML = '<div class="fav-empty">No favorites yet!<br>Tap ♡ on any card to save it.</div>';
+  } else {
+    list.innerHTML = favs.map(name =>
+      '<div class="fav-item" onclick="scrollToCard('' + name.replace(/'/g, "\'") + '')">' +
+      '<span class="fav-item-name">' + name + '</span>' +
+      '<span class="fav-item-remove" onclick="event.stopPropagation();removeFav('' + name.replace(/'/g, "\'") + '')">✕</span></div>'
+    ).join('');
+  }
+}
+
+function toggleFav(btn) {
+  const name = btn.closest('.card')?.dataset.name || '';
+  if (!name) return;
+  if (favs.includes(name)) {
+    favs = favs.filter(f => f !== name);
+  } else {
+    favs.push(name);
+    btn.style.transform = 'scale(1.5)';
+    setTimeout(() => btn.style.transform = '', 300);
+  }
+  localStorage.setItem('seattleFavs', JSON.stringify(favs));
+  updateFavUI();
+}
+
+function removeFav(name) {
+  favs = favs.filter(f => f !== name);
+  localStorage.setItem('seattleFavs', JSON.stringify(favs));
+  updateFavUI();
+}
+
+function clearFavs() {
+  favs = [];
+  localStorage.setItem('seattleFavs', JSON.stringify(favs));
+  updateFavUI();
+}
+
+function toggleFavPanel() {
+  document.getElementById('favPanel').classList.toggle('active');
+}
+
+function scrollToCard(name) {
+  document.getElementById('favPanel').classList.remove('active');
+  const card = document.querySelector('.card[data-name="' + name + '"]');
+  if (card) {
+    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    card.classList.add('card-active');
+    setTimeout(() => card.classList.remove('card-active'), 2000);
+  }
+}
+
+// Close fav panel on outside click
+document.addEventListener('click', e => {
+  const panel = document.getElementById('favPanel');
+  const btn = document.querySelector('.fav-nav-btn');
+  if (panel.classList.contains('active') && !panel.contains(e.target) && !btn.contains(e.target)) {
+    panel.classList.remove('active');
+  }
+});
+
+updateFavUI();
+
+// ─── LUNCH PICKER ───
+const lunchData = [{"name": "Bombo Italian Kitchen", "cuisine": "Italian", "walk": 0, "drive": null, "price": "$$", "desc": "Located ON the ground floor of the Summit convention center building itself. Pacific Northwest-inspired Italian dishes \u2014 delegates don't need to leave the facility for an excellent meal."}, {"name": "Alder & Ash", "cuisine": "PNW New American", "walk": 2, "drive": null, "price": "$$", "desc": "Stylish New American dining directly across from the Arch building's main entrance at 7th and Pike. Optimal for working lunches, breakfast, or post-conference craft cocktails."}, {"name": "Daawat Indian Grill & Bar", "cuisine": "Traditional Indian", "walk": 2, "drive": null, "price": "$$", "desc": "Expansive lunch buffet and traditional Indian delicacies. Located directly between the Arch and Summit buildings. Classic family recipes."}, {"name": "Wild Ginger", "cuisine": "Pan-Asian", "walk": 3, "drive": null, "price": "$$", "desc": "Acclaimed Pan-Asian restaurant with satay bar, fragrant curries, and craft cocktails. A Seattle institution."}, {"name": "The Capital Grille", "cuisine": "Steakhouse", "walk": 4, "drive": null, "price": "$$$", "desc": "Upscale steakhouse with dry-aged steaks, fresh seafood, and an award-winning wine list."}, {"name": "Din Tai Fung", "cuisine": "Taiwanese / Dumplings", "walk": 5, "drive": null, "price": "$$", "desc": "World-famous soup dumplings (xiao long bao) and Taiwanese specialties. Expect a wait \u2014 it's worth it."}, {"name": "Purple Cafe and Wine Bar", "cuisine": "American / Wine Bar", "walk": 5, "drive": null, "price": "$$", "desc": "Dramatic two-story wine tower, Pacific Northwest cuisine, and an extensive wine list in a stylish setting."}, {"name": "T\u00e9rra Plata", "cuisine": "Farm-to-Table / Pacific NW", "walk": 7, "drive": null, "price": "$$$", "desc": "Premier rooftop farm-to-table dining on Capitol Hill. Sustainably sourced Pacific Northwest ingredients with expertly roasted seasonal vegetables and locally sourced proteins."}, {"name": "Japonessa Sushi Cocina", "cuisine": "Japanese / Sushi", "walk": 8, "drive": null, "price": "$$$", "desc": "Creative sushi with Latin-inspired flavors. Vibrant atmosphere and inventive cocktails."}, {"name": "Serious Pie", "cuisine": "Pizza / Italian", "walk": 8, "drive": null, "price": "$$", "desc": "Tom Douglas' artisan wood-fired pizzas with locally sourced toppings. Casual and beloved."}, {"name": "Shuckers", "cuisine": "Seafood / Oyster Bar", "walk": 9, "drive": null, "price": "$$", "desc": "Iconic oyster bar in the Fairmont Olympic Hotel. Fresh Pacific Northwest seafood and craft cocktails."}, {"name": "Beecher's Handmade Cheese", "cuisine": "Cheese / American", "walk": 10, "drive": null, "price": "$", "desc": "Watch artisan cheese being made through the viewing window at Pike Place Market. Famous for their 'World's Best' mac and cheese."}, {"name": "Pike Place Chowder", "cuisine": "Seafood / Chowder", "walk": 10, "drive": null, "price": "$", "desc": "Award-winning chowders and bisques at Pike Place Market. Try the New England clam chowder."}, {"name": "Matt's in the Market", "cuisine": "Pacific Northwest / Seafood", "walk": 10, "drive": null, "price": "$$$", "desc": "Farm-to-table gem overlooking Pike Place Market. Seasonal seafood and locally sourced ingredients."}, {"name": "Metropolitan Grill", "cuisine": "Steakhouse", "walk": 10, "drive": null, "price": "$$$", "desc": "Seattle's premier steakhouse since 1983. USDA Prime steaks and classic cocktails."}, {"name": "Canlis", "cuisine": "Fine Dining / Pacific Northwest", "walk": null, "drive": 10, "price": "$$$", "desc": "Seattle's legendary fine dining destination since 1950. Stunning lake views, impeccable service, and a world-class tasting menu. Reservations essential."}, {"name": "Taylor Shellfish Oyster Bar", "cuisine": "Seafood", "walk": 18, "drive": null, "price": "$$", "desc": "Farm-direct shellfish from Taylor Shellfish Farms. Oysters, clams, geoduck, and more."}];
+
+function openLunchPicker() {
+  document.getElementById('lunchOverlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+  document.getElementById('lunchName').textContent = 'Press Spin!';
+  document.getElementById('lunchCuisine').textContent = '';
+  document.getElementById('lunchWalk').textContent = '';
+  document.getElementById('lunchPrice').textContent = '';
+  document.getElementById('lunchDesc').textContent = 'Tap the button and we\'ll pick a restaurant for you!';
+}
+
+function closeLunchPicker() {
+  document.getElementById('lunchOverlay').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function spinLunch() {
+  const card = document.getElementById('lunchCard');
+  card.classList.add('lunch-spinning');
+  let count = 0;
+  const interval = setInterval(() => {
+    const r = lunchData[Math.floor(Math.random() * lunchData.length)];
+    document.getElementById('lunchName').textContent = r.name;
+    count++;
+    if (count > 15) {
+      clearInterval(interval);
+      card.classList.remove('lunch-spinning');
+      const pick = lunchData[Math.floor(Math.random() * lunchData.length)];
+      document.getElementById('lunchName').textContent = '🎉 ' + pick.name;
+      document.getElementById('lunchCuisine').textContent = pick.cuisine;
+      const dist = pick.walk != null ? (pick.walk === 0 ? '📍 On-Site!' : '🚶 ' + pick.walk + ' min walk') : '🚗 ' + pick.drive + ' min drive';
+      document.getElementById('lunchWalk').textContent = dist;
+      document.getElementById('lunchPrice').textContent = pick.price;
+      document.getElementById('lunchDesc').textContent = pick.desc;
+    }
+  }, 80);
 }
 
 // ─── TRIVIA ───
