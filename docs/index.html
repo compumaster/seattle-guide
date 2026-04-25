@@ -326,6 +326,74 @@ img { max-width: 100%; height: auto; }
 .index-search { width: 100%; max-width: 400px; padding: 0.6rem 1rem; border: 2px solid var(--navy); border-radius: 8px; font-size: 0.9rem; margin-bottom: 1rem; outline: none; }
 .index-search:focus { border-color: var(--sky); box-shadow: 0 0 0 3px rgba(41,182,246,0.2); }
 .index-count { font-size: 0.85rem; color: #888; margin-bottom: 0.5rem; }
+
+/* ─── Trivia ─── */
+.trivia-btn {
+  background: var(--gold); color: var(--navy); border: none; padding: 0.4rem 1rem;
+  border-radius: 4px; font-size: 0.85rem; font-weight: 700; cursor: pointer;
+  letter-spacing: 1px; font-family: 'Roboto', sans-serif; text-transform: uppercase;
+}
+.trivia-btn:hover { background: #e6b800; }
+.trivia-overlay {
+  display: none; position: fixed; inset: 0; z-index: 2000;
+  background: rgba(0,0,0,0.85); justify-content: center; align-items: center;
+  flex-direction: column; padding: 1rem;
+}
+.trivia-overlay.active { display: flex; }
+.trivia-close {
+  position: absolute; top: 1rem; right: 1.5rem; background: none; border: none;
+  color: white; font-size: 2rem; cursor: pointer; z-index: 2001;
+}
+.trivia-close:hover { color: var(--gold); }
+.trivia-category {
+  color: var(--gold); font-size: 0.8rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 1px; margin-bottom: 1rem;
+}
+.trivia-counter {
+  color: rgba(255,255,255,0.5); font-size: 0.8rem; margin-bottom: 0.5rem;
+}
+.trivia-card-wrap {
+  perspective: 1000px; width: 100%; max-width: 500px; height: 320px;
+  cursor: pointer; margin-bottom: 1.5rem;
+}
+.trivia-card {
+  position: relative; width: 100%; height: 100%;
+  transition: transform 0.6s; transform-style: preserve-3d;
+}
+.trivia-card.flipped { transform: rotateY(180deg); }
+.trivia-face {
+  position: absolute; inset: 0; backface-visibility: hidden;
+  border-radius: 16px; padding: 2rem; display: flex;
+  align-items: center; justify-content: center; text-align: center;
+}
+.trivia-front {
+  background: linear-gradient(135deg, var(--navy), #2a3d66);
+  color: var(--white); font-size: 1.2rem; line-height: 1.5; font-weight: 500;
+  border: 2px solid var(--gold);
+}
+.trivia-front::after {
+  content: '👆 Tap to reveal'; position: absolute; bottom: 1rem;
+  font-size: 0.75rem; color: var(--gold); opacity: 0.7;
+}
+.trivia-back {
+  background: linear-gradient(135deg, #D4A017, #e6c84a);
+  color: var(--navy); font-size: 1.1rem; line-height: 1.5; font-weight: 700;
+  transform: rotateY(180deg); border: 2px solid var(--navy);
+}
+.trivia-nav {
+  display: flex; gap: 1rem; align-items: center;
+}
+.trivia-nav button {
+  background: rgba(255,255,255,0.15); color: white; border: 1px solid rgba(255,255,255,0.3);
+  padding: 0.6rem 1.5rem; border-radius: 8px; font-size: 0.9rem; font-weight: 700;
+  cursor: pointer; font-family: 'Roboto', sans-serif;
+}
+.trivia-nav button:hover { background: rgba(255,255,255,0.25); }
+@media (max-width: 600px) {
+  .trivia-card-wrap { height: 280px; }
+  .trivia-front { font-size: 1rem; padding: 1.5rem; }
+  .trivia-back { font-size: 0.95rem; padding: 1.5rem; }
+}
 @media (max-width: 900px) {
   .map-section-layout { grid-template-columns: 1fr; }
   .map-container { height: 300px; }
@@ -338,7 +406,10 @@ img { max-width: 100%; height: auto; }
 <!-- ═══ NAVIGATION ═══ -->
 <nav class="navbar">
   <div class="nav-brand">SEATTLE <span>GUIDE</span></div>
-  <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('active')" aria-label="Menu">☰ MENU</button>
+  <div style="display:flex;gap:0.5rem;align-items:center;">
+    <button class="trivia-btn" onclick="openTrivia()">🎯 TRIVIA</button>
+    <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('active')" aria-label="Menu">☰ MENU</button>
+  </div>
   <div class="nav-links"><a href="#home" class="nav-link">Home</a>
 <a href="#venue" class="nav-link">Venue & Hotel</a>
 <a href="#transport" class="nav-link">Weather & Transit</a>
@@ -2063,6 +2134,24 @@ img { max-width: 100%; height: auto; }
   </div>
 </div>
 
+<!-- ═══ TRIVIA OVERLAY ═══ -->
+<div class="trivia-overlay" id="triviaOverlay">
+  <button class="trivia-close" onclick="closeTrivia()" aria-label="Close trivia">✕</button>
+  <div class="trivia-category" id="triviaCategory"></div>
+  <div class="trivia-counter" id="triviaCounter"></div>
+  <div class="trivia-card-wrap" onclick="flipTrivia()">
+    <div class="trivia-card" id="triviaCard">
+      <div class="trivia-face trivia-front" id="triviaQ"></div>
+      <div class="trivia-face trivia-back" id="triviaA"></div>
+    </div>
+  </div>
+  <div class="trivia-nav">
+    <button onclick="prevTrivia()">← Prev</button>
+    <button onclick="flipTrivia()">Flip</button>
+    <button onclick="nextTrivia()">Next →</button>
+  </div>
+</div>
+
 <!-- ═══ FOOTER ═══ -->
 <!-- TEMPLATE: Update org info, year, and contact emails -->
 <footer class="footer">
@@ -2274,6 +2363,73 @@ if (indexSearch && indexTable) {
     });
   });
 }
+
+// ─── TRIVIA ───
+const triviaData = [{"category": "The Seattle Freeze", "question": "What exactly is the 'Seattle Freeze'?", "answer": "A widely recognized social phenomenon where Seattle residents are polite and friendly on the surface, but cold, distant, and hesitant to form deep relationships with newcomers."}, {"category": "The Seattle Freeze", "question": "What classic passive-aggressive behavior is the ultimate manifestation of the Seattle Freeze?", "answer": "Making enthusiastic plans to hang out, then flaking, canceling at the last minute, or simply never following up to schedule a time."}, {"category": "The Seattle Freeze", "question": "What group of early PNW immigrants is historically blamed for the reserved culture that started the Freeze?", "answer": "Scandinavian immigrants (particularly Norwegians and Swedes)."}, {"category": "The Seattle Freeze", "question": "What weather phenomenon is blamed as a major environmental contributor to the Seattle Freeze?", "answer": "The 'Big Dark' \u2014 the prolonged months of gray, rainy, sunless days that encourage people to stay indoors and isolate."}, {"category": "The Seattle Freeze", "question": "What massive cultural shift in the 1990s\u20132000s is said to have worsened the Freeze by bringing thousands of busy, introverted workers?", "answer": "The tech boom (driven by Microsoft and Amazon)."}, {"category": "The Seattle Freeze", "question": "What is the 'Seattle Nod'?", "answer": "A symptom of the Freeze where two acquaintances cross paths in public and, instead of stopping to chat, acknowledge each other with a brief, tight-lipped nod before quickly walking away."}, {"category": "The Seattle Freeze", "question": "In what decade did the term 'Seattle Freeze' enter the official local lexicon after a Seattle Times article?", "answer": "The 2000s (specifically, a widely circulated 2005 article)."}, {"category": "More Pets Than Children", "question": "Seattle frequently ranks as having more of what animal than children under 18?", "answer": "Dogs."}, {"category": "More Pets Than Children", "question": "What Seattle-based corporation contributes to the massive dog population by allowing employees to bring pets to the office?", "answer": "Amazon."}, {"category": "More Pets Than Children", "question": "Aside from dogs, what other household pet also outnumbers children in Seattle?", "answer": "Cats."}, {"category": "More Pets Than Children", "question": "What demographic acronym, common in Seattle's tech population, drives the 'more pets than kids' statistic?", "answer": "DINKs (Double Income, No Kids)."}, {"category": "More Pets Than Children", "question": "What type of outdoor space is unusually abundant in Seattle due to its pet-heavy population?", "answer": "Off-leash dog parks."}, {"category": "More Pets Than Children", "question": "Roughly what ratio do dogs outnumber children by in Seattle?", "answer": "Approximately 1.5 to 2 dogs for every child in the city limits."}, {"category": "More Pets Than Children", "question": "What specialized amenity is built into most modern Seattle apartment buildings for the pet population?", "answer": "Pet washing stations (or rooftop dog runs)."}, {"category": "Fremont Nude Bike Ride", "question": "In what famously quirky Seattle neighborhood does the annual nude biking event take place?", "answer": "Fremont."}, {"category": "Fremont Nude Bike Ride", "question": "The nude bike ride is tied to what annual celebration in late June?", "answer": "The Fremont Solstice Parade (celebrating the summer solstice)."}, {"category": "Fremont Nude Bike Ride", "question": "What do most nude cyclists use as their 'clothing' during the ride?", "answer": "Elaborate body paint."}, {"category": "Fremont Nude Bike Ride", "question": "True or False: The nude bike ride is the official opening act of the parade.", "answer": "False. The cyclists are a rogue, unofficial event \u2014 they ride just before the parade starts to bypass the rules."}, {"category": "Fremont Nude Bike Ride", "question": "What is the unofficial motto of Fremont, the neighborhood where the ride takes place?", "answer": "De Libertas Quirkas (Freedom to be Peculiar) \u2014 also known as 'The Center of the Universe.'"}, {"category": "Fremont Nude Bike Ride", "question": "Why does Seattle PD traditionally allow the nude cyclists to ride without mass arrests?", "answer": "It is treated as protected First Amendment expression of art and protest, so police exercise a policy of 'tolerance' for the event."}, {"category": "Seattle Tech Culture", "question": "What outerwear is the unofficial uniform of the Seattle tech worker?", "answer": "The Patagonia fleece vest (the 'tech vest' or 'Midtown uniform')."}, {"category": "Seattle Tech Culture", "question": "What are the three giant glass domes at Amazon's downtown HQ called?", "answer": "The Spheres \u2014 housing thousands of exotic plants and serving as an employee lounge."}, {"category": "Seattle Tech Culture", "question": "In what Eastside suburb is Microsoft's global headquarters located?", "answer": "Redmond."}, {"category": "Seattle Tech Culture", "question": "What quirky free snack has Amazon given away from a downtown kiosk since 2015?", "answer": "Bananas (from the 'Community Banana Stand') \u2014 millions distributed to date."}, {"category": "Seattle Tech Culture", "question": "In tech slang, what does 'rest and vest' mean?", "answer": "Staying at a tech company doing the bare minimum, just waiting for your stock options (RSUs) to fully vest."}, {"category": "Seattle Tech Culture", "question": "At Amazon, new hires get blue badges. What color is awarded at the 5-year anniversary?", "answer": "Yellow. (10 years = red, 15 = purple, 20 = silver.)"}, {"category": "Seattle Tech Culture", "question": "What Seattle museum, originally called EMP and designed like a smashed guitar, was funded by Paul Allen?", "answer": "MoPOP (Museum of Pop Culture)."}, {"category": "Seattle Tech Culture", "question": "Before Microsoft and Amazon, what aerospace company drove Seattle's original mid-century tech boom?", "answer": "Boeing."}, {"category": "Seattle Tech Culture", "question": "What two-word term is used (often pejoratively) for the influx of young, fleece-wearing software engineers?", "answer": "'Tech bros.'"}, {"category": "Seattle Tech Culture", "question": "Which California-based tech giant was the first to build a colossal Seattle footprint in South Lake Union?", "answer": "Google (though Meta and Apple followed with massive presences too)."}, {"category": "Seattle Quirks", "question": "What is the Fremont Troll?", "answer": "A massive 18-foot concrete sculpture of a troll clutching a real Volkswagen Beetle, lurking under the Aurora Bridge in Fremont. Created in 1990, it's one of Seattle's most photographed landmarks."}, {"category": "Seattle Quirks", "question": "What is Seattle's official city motto?", "answer": "The City of Goodwill \u2014 adopted after the 1962 World's Fair."}, {"category": "Seattle Quirks", "question": "What color are Seattle's fire hydrants, and why is it unusual?", "answer": "They come in multiple colors \u2014 the color indicates water flow rate. This color-coding system helps firefighters know water pressure at a glance."}, {"category": "Seattle Quirks", "question": "Why is Seattle called the 'Emerald City'?", "answer": "For its lush, year-round greenery \u2014 a result of the mild, rainy climate that keeps everything green even in winter."}, {"category": "Coffee & Food", "question": "How many coffee shops per capita does Seattle have compared to the national average?", "answer": "Roughly 2.5 times the national average \u2014 more coffee shops per capita than any other major US city."}, {"category": "Coffee & Food", "question": "What famous chain besides Starbucks was born in Seattle?", "answer": "Tully's Coffee (1992), Seattle's Best Coffee (1970), and Ivar's Seafood (1938) \u2014 plus Costco was co-founded nearby in Kirkland."}, {"category": "Coffee & Food", "question": "What is a 'Seattle dog'?", "answer": "A hot dog topped with cream cheese \u2014 a uniquely Seattle street food tradition found at carts throughout the city, especially popular after bar closing time."}, {"category": "Coffee & Food", "question": "What is geoduck, the famous Pacific Northwest delicacy pronounced 'gooey-duck'?", "answer": "The world's largest burrowing clam, native to Puget Sound. It can live over 150 years and its long siphon can extend over 3 feet. Prized in Asian cuisine and exported globally."}, {"category": "History & Geography", "question": "How did the term 'Skid Row' originate in Seattle?", "answer": "Henry Yesler's sawmill logs were skidded down what is now Yesler Way to the waterfront. The rough area around the 'skid road' attracted vagrants and saloons, eventually lending the term 'Skid Row' to the English language."}, {"category": "History & Geography", "question": "What percentage of clear days does Seattle actually get per year?", "answer": "About 152 days of sun per year \u2014 more than Houston. But Seattle's reputation comes from the 226 overcast days, even though total rainfall is less than New York, Miami, or Atlanta."}];
+let triviaIdx = 0;
+let triviaShuffled = [];
+
+function shuffleTrivia() {
+  triviaShuffled = [...triviaData].sort(() => Math.random() - 0.5);
+  triviaIdx = 0;
+}
+
+function showTrivia() {
+  const t = triviaShuffled[triviaIdx];
+  document.getElementById('triviaCategory').textContent = t.category;
+  document.getElementById('triviaCounter').textContent = (triviaIdx + 1) + ' / ' + triviaShuffled.length;
+  document.getElementById('triviaQ').textContent = t.question;
+  document.getElementById('triviaA').textContent = t.answer;
+  document.getElementById('triviaCard').classList.remove('flipped');
+}
+
+function openTrivia() {
+  shuffleTrivia();
+  showTrivia();
+  document.getElementById('triviaOverlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeTrivia() {
+  document.getElementById('triviaOverlay').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function flipTrivia() {
+  document.getElementById('triviaCard').classList.toggle('flipped');
+}
+
+function nextTrivia() {
+  triviaIdx = (triviaIdx + 1) % triviaShuffled.length;
+  showTrivia();
+}
+
+function prevTrivia() {
+  triviaIdx = (triviaIdx - 1 + triviaShuffled.length) % triviaShuffled.length;
+  showTrivia();
+}
+
+// Swipe support
+(function() {
+  let startX = 0;
+  const el = document.getElementById('triviaOverlay');
+  el.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, {passive: true});
+  el.addEventListener('touchend', e => {
+    const diff = e.changedTouches[0].clientX - startX;
+    if (Math.abs(diff) > 60) {
+      if (diff < 0) nextTrivia(); else prevTrivia();
+    }
+  });
+})();
+
+// Keyboard support
+document.addEventListener('keydown', e => {
+  if (!document.getElementById('triviaOverlay').classList.contains('active')) return;
+  if (e.key === 'Escape') closeTrivia();
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); nextTrivia(); }
+  if (e.key === 'ArrowLeft') prevTrivia();
+  if (e.key === 'Enter') flipTrivia();
+});
 </script>
 </body>
 </html>

@@ -336,6 +336,10 @@ shopping_markers_json = markers_json(shopping_sorted)
 entertainment_markers_json = markers_json(data["entertainment"])
 tours_sorted = sorted(data.get("tours", []), key=sort_key_dist)
 tour_markers_json = markers_json(tours_sorted)
+
+# Trivia data
+trivia_data = data.get("trivia", [])
+trivia_json = json.dumps(trivia_data)
 coffee_sorted = sorted(data["coffeeAndBars"], key=sort_key_dist)
 coffee_markers_json = markers_json(coffee_sorted)
 
@@ -701,6 +705,74 @@ img {{ max-width: 100%; height: auto; }}
 .index-search {{ width: 100%; max-width: 400px; padding: 0.6rem 1rem; border: 2px solid var(--navy); border-radius: 8px; font-size: 0.9rem; margin-bottom: 1rem; outline: none; }}
 .index-search:focus {{ border-color: var(--sky); box-shadow: 0 0 0 3px rgba(41,182,246,0.2); }}
 .index-count {{ font-size: 0.85rem; color: #888; margin-bottom: 0.5rem; }}
+
+/* ─── Trivia ─── */
+.trivia-btn {{
+  background: var(--gold); color: var(--navy); border: none; padding: 0.4rem 1rem;
+  border-radius: 4px; font-size: 0.85rem; font-weight: 700; cursor: pointer;
+  letter-spacing: 1px; font-family: 'Roboto', sans-serif; text-transform: uppercase;
+}}
+.trivia-btn:hover {{ background: #e6b800; }}
+.trivia-overlay {{
+  display: none; position: fixed; inset: 0; z-index: 2000;
+  background: rgba(0,0,0,0.85); justify-content: center; align-items: center;
+  flex-direction: column; padding: 1rem;
+}}
+.trivia-overlay.active {{ display: flex; }}
+.trivia-close {{
+  position: absolute; top: 1rem; right: 1.5rem; background: none; border: none;
+  color: white; font-size: 2rem; cursor: pointer; z-index: 2001;
+}}
+.trivia-close:hover {{ color: var(--gold); }}
+.trivia-category {{
+  color: var(--gold); font-size: 0.8rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 1px; margin-bottom: 1rem;
+}}
+.trivia-counter {{
+  color: rgba(255,255,255,0.5); font-size: 0.8rem; margin-bottom: 0.5rem;
+}}
+.trivia-card-wrap {{
+  perspective: 1000px; width: 100%; max-width: 500px; height: 320px;
+  cursor: pointer; margin-bottom: 1.5rem;
+}}
+.trivia-card {{
+  position: relative; width: 100%; height: 100%;
+  transition: transform 0.6s; transform-style: preserve-3d;
+}}
+.trivia-card.flipped {{ transform: rotateY(180deg); }}
+.trivia-face {{
+  position: absolute; inset: 0; backface-visibility: hidden;
+  border-radius: 16px; padding: 2rem; display: flex;
+  align-items: center; justify-content: center; text-align: center;
+}}
+.trivia-front {{
+  background: linear-gradient(135deg, var(--navy), #2a3d66);
+  color: var(--white); font-size: 1.2rem; line-height: 1.5; font-weight: 500;
+  border: 2px solid var(--gold);
+}}
+.trivia-front::after {{
+  content: '👆 Tap to reveal'; position: absolute; bottom: 1rem;
+  font-size: 0.75rem; color: var(--gold); opacity: 0.7;
+}}
+.trivia-back {{
+  background: linear-gradient(135deg, #D4A017, #e6c84a);
+  color: var(--navy); font-size: 1.1rem; line-height: 1.5; font-weight: 700;
+  transform: rotateY(180deg); border: 2px solid var(--navy);
+}}
+.trivia-nav {{
+  display: flex; gap: 1rem; align-items: center;
+}}
+.trivia-nav button {{
+  background: rgba(255,255,255,0.15); color: white; border: 1px solid rgba(255,255,255,0.3);
+  padding: 0.6rem 1.5rem; border-radius: 8px; font-size: 0.9rem; font-weight: 700;
+  cursor: pointer; font-family: 'Roboto', sans-serif;
+}}
+.trivia-nav button:hover {{ background: rgba(255,255,255,0.25); }}
+@media (max-width: 600px) {{
+  .trivia-card-wrap {{ height: 280px; }}
+  .trivia-front {{ font-size: 1rem; padding: 1.5rem; }}
+  .trivia-back {{ font-size: 0.95rem; padding: 1.5rem; }}
+}}
 @media (max-width: 900px) {{
   .map-section-layout {{ grid-template-columns: 1fr; }}
   .map-container {{ height: 300px; }}
@@ -713,7 +785,10 @@ img {{ max-width: 100%; height: auto; }}
 <!-- ═══ NAVIGATION ═══ -->
 <nav class="navbar">
   <div class="nav-brand">SEATTLE <span>GUIDE</span></div>
-  <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('active')" aria-label="Menu">☰ MENU</button>
+  <div style="display:flex;gap:0.5rem;align-items:center;">
+    <button class="trivia-btn" onclick="openTrivia()">🎯 TRIVIA</button>
+    <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('active')" aria-label="Menu">☰ MENU</button>
+  </div>
   <div class="nav-links">{nav_links}</div>
 </nav>
 
@@ -1078,6 +1153,24 @@ img {{ max-width: 100%; height: auto; }}
   </div>
 </div>
 
+<!-- ═══ TRIVIA OVERLAY ═══ -->
+<div class="trivia-overlay" id="triviaOverlay">
+  <button class="trivia-close" onclick="closeTrivia()" aria-label="Close trivia">✕</button>
+  <div class="trivia-category" id="triviaCategory"></div>
+  <div class="trivia-counter" id="triviaCounter"></div>
+  <div class="trivia-card-wrap" onclick="flipTrivia()">
+    <div class="trivia-card" id="triviaCard">
+      <div class="trivia-face trivia-front" id="triviaQ"></div>
+      <div class="trivia-face trivia-back" id="triviaA"></div>
+    </div>
+  </div>
+  <div class="trivia-nav">
+    <button onclick="prevTrivia()">← Prev</button>
+    <button onclick="flipTrivia()">Flip</button>
+    <button onclick="nextTrivia()">Next →</button>
+  </div>
+</div>
+
 <!-- ═══ FOOTER ═══ -->
 <!-- TEMPLATE: Update org info, year, and contact emails -->
 <footer class="footer">
@@ -1289,6 +1382,73 @@ if (indexSearch && indexTable) {{
     }});
   }});
 }}
+
+// ─── TRIVIA ───
+const triviaData = {trivia_json};
+let triviaIdx = 0;
+let triviaShuffled = [];
+
+function shuffleTrivia() {{
+  triviaShuffled = [...triviaData].sort(() => Math.random() - 0.5);
+  triviaIdx = 0;
+}}
+
+function showTrivia() {{
+  const t = triviaShuffled[triviaIdx];
+  document.getElementById('triviaCategory').textContent = t.category;
+  document.getElementById('triviaCounter').textContent = (triviaIdx + 1) + ' / ' + triviaShuffled.length;
+  document.getElementById('triviaQ').textContent = t.question;
+  document.getElementById('triviaA').textContent = t.answer;
+  document.getElementById('triviaCard').classList.remove('flipped');
+}}
+
+function openTrivia() {{
+  shuffleTrivia();
+  showTrivia();
+  document.getElementById('triviaOverlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}}
+
+function closeTrivia() {{
+  document.getElementById('triviaOverlay').classList.remove('active');
+  document.body.style.overflow = '';
+}}
+
+function flipTrivia() {{
+  document.getElementById('triviaCard').classList.toggle('flipped');
+}}
+
+function nextTrivia() {{
+  triviaIdx = (triviaIdx + 1) % triviaShuffled.length;
+  showTrivia();
+}}
+
+function prevTrivia() {{
+  triviaIdx = (triviaIdx - 1 + triviaShuffled.length) % triviaShuffled.length;
+  showTrivia();
+}}
+
+// Swipe support
+(function() {{
+  let startX = 0;
+  const el = document.getElementById('triviaOverlay');
+  el.addEventListener('touchstart', e => {{ startX = e.touches[0].clientX; }}, {{passive: true}});
+  el.addEventListener('touchend', e => {{
+    const diff = e.changedTouches[0].clientX - startX;
+    if (Math.abs(diff) > 60) {{
+      if (diff < 0) nextTrivia(); else prevTrivia();
+    }}
+  }});
+}})();
+
+// Keyboard support
+document.addEventListener('keydown', e => {{
+  if (!document.getElementById('triviaOverlay').classList.contains('active')) return;
+  if (e.key === 'Escape') closeTrivia();
+  if (e.key === 'ArrowRight' || e.key === ' ') {{ e.preventDefault(); nextTrivia(); }}
+  if (e.key === 'ArrowLeft') prevTrivia();
+  if (e.key === 'Enter') flipTrivia();
+}});
 </script>
 </body>
 </html>
