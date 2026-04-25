@@ -125,7 +125,7 @@ nav_items = [
     ("dining", "Dining"), ("attractions", "Attractions"), ("daytrips", "Day Trips"),
     ("lifesciences", "Life Sciences"), ("family", "Family"),
     ("shopping", "Shopping"), ("entertainment", "Entertainment"),
-    ("coffee", "Coffee & Bars")
+    ("coffee", "Coffee & Bars"), ("index", "Index")
 ]
 
 nav_links = "\n".join(f'<a href="#{nid}" class="nav-link">{label}</a>' for nid, label in nav_items)
@@ -252,6 +252,38 @@ shopping_markers_json = markers_json(shopping_sorted)
 entertainment_markers_json = markers_json(data["entertainment"])
 coffee_sorted = sorted(data["coffeeAndBars"], key=lambda x: x.get("walkingMinutes") or 99)
 coffee_markers_json = markers_json(coffee_sorted)
+
+# ─── Build location index ───
+all_locations = []
+def add_to_index(items, section_name, section_id):
+    for item in items:
+        name = item.get("name", "")
+        addr = item.get("address", "")
+        wm = item.get("walkingMinutes")
+        dm = item.get("drivingMinutes") or item.get("ferryMinutes") or item.get("transitMinutes")
+        dist_label = f"{wm} min walk" if wm is not None and wm > 0 else ("On-Site" if wm == 0 else (f"{dm} min" if dm else ""))
+        website = item.get("website", "")
+        all_locations.append((name, section_name, section_id, addr, dist_label, website))
+
+add_to_index(dining_sorted, "Dining", "dining")
+add_to_index(attractions_sorted, "Attractions", "attractions")
+add_to_index(daytrips_sorted, "Day Trips", "daytrips")
+add_to_index(data["familyActivities"], "Family", "family")
+add_to_index(shopping_sorted, "Shopping", "shopping")
+add_to_index(data["entertainment"], "Entertainment", "entertainment")
+add_to_index(coffee_sorted, "Coffee & Bars", "coffee")
+
+all_locations.sort(key=lambda x: x[0].lstrip("The "))
+
+def index_row(loc):
+    link_cell = f'<a href="{loc[5]}" target="_blank">🔗</a>' if loc[5] else ""
+    return (f'<tr><td class="idx-name">{loc[0]}</td>'
+            f'<td><span class="idx-section" data-section="{loc[2]}">{loc[1]}</span></td>'
+            f'<td class="idx-dist">{loc[4]}</td>'
+            f'<td class="idx-addr">{loc[3]}</td>'
+            f'<td>{link_cell}</td></tr>')
+
+index_rows = "\n".join(index_row(loc) for loc in all_locations)
 
 # ─── HTML Template ───
 html = f'''<!DOCTYPE html>
@@ -559,6 +591,28 @@ img {{ max-width: 100%; height: auto; }}
 .sort-btn:hover {{ background: var(--navy); color: var(--white); }}
 .sort-btn.active {{ background: var(--navy); color: var(--gold); }}
 @keyframes fadeSlideIn {{ from {{ opacity: 0; transform: translateY(10px); }} to {{ opacity: 1; transform: translateY(0); }} }}
+
+/* ─── Location Index ─── */
+.index-table-wrap {{ overflow-x: auto; }}
+.index-table {{ width: 100%; border-collapse: collapse; font-size: 0.85rem; }}
+.index-table th {{ background: var(--navy); color: var(--white); padding: 0.7rem 1rem; text-align: left; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; font-size: 0.75rem; position: sticky; top: 0; cursor: pointer; }}
+.index-table th:hover {{ background: #2a3d66; }}
+.index-table td {{ padding: 0.5rem 1rem; border-bottom: 1px solid #E8E8E8; }}
+.index-table tr:hover {{ background: #F5F9FF; }}
+.idx-name {{ font-weight: 700; color: var(--navy); white-space: nowrap; }}
+.idx-addr {{ color: #888; font-size: 0.8rem; }}
+.idx-dist {{ white-space: nowrap; color: var(--teal); font-weight: 600; }}
+.idx-section {{ display: inline-block; padding: 0.15rem 0.5rem; border-radius: 10px; font-size: 0.7rem; font-weight: 700; background: #E3F2FD; color: #1565C0; }}
+.idx-section[data-section="dining"] {{ background: #FCE4EC; color: #B5294E; }}
+.idx-section[data-section="attractions"] {{ background: #E3F2FD; color: #1565C0; }}
+.idx-section[data-section="daytrips"] {{ background: #E8F5E9; color: #2E7D32; }}
+.idx-section[data-section="family"] {{ background: #F3E5F5; color: #7B1FA2; }}
+.idx-section[data-section="shopping"] {{ background: #FFF3E0; color: #E65100; }}
+.idx-section[data-section="entertainment"] {{ background: #FCE4EC; color: #C2185B; }}
+.idx-section[data-section="coffee"] {{ background: #EFEBE9; color: #4E342E; }}
+.index-search {{ width: 100%; max-width: 400px; padding: 0.6rem 1rem; border: 2px solid var(--navy); border-radius: 8px; font-size: 0.9rem; margin-bottom: 1rem; outline: none; }}
+.index-search:focus {{ border-color: var(--sky); box-shadow: 0 0 0 3px rgba(41,182,246,0.2); }}
+.index-count {{ font-size: 0.85rem; color: #888; margin-bottom: 0.5rem; }}
 @media (max-width: 900px) {{
   .map-section-layout {{ grid-template-columns: 1fr; }}
   .map-container {{ height: 300px; }}
@@ -816,6 +870,33 @@ img {{ max-width: 100%; height: auto; }}
   </div>
 </section>
 
+<!-- ═══ LOCATION INDEX ═══ -->
+<section class="section" id="index">
+  <div class="section-header">
+    <h2>📍 All Locations Index</h2>
+    <div class="section-line"></div>
+    <p>Every location in this guide — {len(all_locations)} places, searchable and sortable</p>
+  </div>
+  <input type="text" class="index-search" id="indexSearch" placeholder="🔍 Search locations..." autocomplete="off">
+  <div class="index-count" id="indexCount">{len(all_locations)} locations</div>
+  <div class="index-table-wrap">
+    <table class="index-table" id="indexTable">
+      <thead>
+        <tr>
+          <th data-col="0">Name ↕</th>
+          <th data-col="1">Category ↕</th>
+          <th data-col="2">Distance ↕</th>
+          <th data-col="3">Address</th>
+          <th>Link</th>
+        </tr>
+      </thead>
+      <tbody>
+        {index_rows}
+      </tbody>
+    </table>
+  </div>
+</section>
+
 <!-- ═══ PRICE KEY ═══ -->
 <div class="section">
   <div class="price-legend">
@@ -987,6 +1068,44 @@ document.querySelectorAll('.sort-controls').forEach(controls => {{
     }});
   }});
 }});
+
+// ─── INDEX SEARCH & SORT ───
+const indexSearch = document.getElementById('indexSearch');
+const indexTable = document.getElementById('indexTable');
+const indexCount = document.getElementById('indexCount');
+if (indexSearch && indexTable) {{
+  indexSearch.addEventListener('input', () => {{
+    const q = indexSearch.value.toLowerCase();
+    let visible = 0;
+    indexTable.querySelectorAll('tbody tr').forEach(row => {{
+      const text = row.textContent.toLowerCase();
+      const show = text.includes(q);
+      row.style.display = show ? '' : 'none';
+      if (show) visible++;
+    }});
+    indexCount.textContent = visible + ' locations';
+  }});
+
+  let sortDir = {{}};
+  indexTable.querySelectorAll('thead th[data-col]').forEach(th => {{
+    th.addEventListener('click', () => {{
+      const col = parseInt(th.dataset.col);
+      sortDir[col] = !sortDir[col];
+      const rows = [...indexTable.querySelectorAll('tbody tr')];
+      rows.sort((a, b) => {{
+        let aVal = a.children[col].textContent.trim();
+        let bVal = b.children[col].textContent.trim();
+        if (col === 2) {{
+          aVal = parseInt(aVal) || 9999;
+          bVal = parseInt(bVal) || 9999;
+          return sortDir[col] ? bVal - aVal : aVal - bVal;
+        }}
+        return sortDir[col] ? bVal.localeCompare(aVal) : aVal.localeCompare(bVal);
+      }});
+      rows.forEach(r => indexTable.querySelector('tbody').appendChild(r));
+    }});
+  }});
+}}
 </script>
 </body>
 </html>

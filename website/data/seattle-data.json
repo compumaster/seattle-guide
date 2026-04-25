@@ -874,6 +874,39 @@
       "note": "Check schedule for November home games",
       "latitude": 47.621901,
       "longitude": -122.35399
+    },
+    {
+      "name": "Benaroya Hall",
+      "type": "Concert Hall / Symphony",
+      "address": "200 University St, Seattle, WA 98101",
+      "website": "https://www.seattlesymphony.org/benaroya",
+      "walkingMinutes": 8,
+      "distanceMiles": 0.4,
+      "description": "Home of the Seattle Symphony. World-class acoustics in a stunning downtown venue. Check for November concerts and special performances.",
+      "latitude": 47.608117,
+      "longitude": -122.33697
+    },
+    {
+      "name": "Pacific Northwest Ballet",
+      "type": "Ballet / Dance",
+      "address": "301 Mercer St, Seattle, WA 98109",
+      "website": "https://www.pnb.org/",
+      "walkingMinutes": 22,
+      "distanceMiles": 1.1,
+      "description": "One of the largest and most acclaimed ballet companies in the US. Performs at McCaw Hall at Seattle Center. November often features the beloved Nutcracker season.",
+      "latitude": 47.624273,
+      "longitude": -122.35193
+    },
+    {
+      "name": "Seattle Opera",
+      "type": "Opera",
+      "address": "321 Mercer St, Seattle, WA 98109",
+      "website": "https://www.seattleopera.org/",
+      "walkingMinutes": 22,
+      "distanceMiles": 1.1,
+      "description": "Internationally recognized opera company performing at McCaw Hall. Known for adventurous programming and stunning productions at Seattle Center.",
+      "latitude": 47.623977,
+      "longitude": -122.350388
     }
   ],
   "coffeeAndBars": [
