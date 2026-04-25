@@ -1,0 +1,1565 @@
+<!DOCTYPE html>
+<!-- TEMPLATE: Welcome to [CITY] -->
+<!-- TEMPLATE: Replace seattle-data.json with new city data to regenerate -->
+<!-- Generated from seattle-data.json — all content is data-driven -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Welcome to Seattle — Seattle Guide 2026</title>
+<meta name="description" content="Your guide to Seattle, November 10-14, 2026. Dining, attractions, day trips, and local insights centered on the Seattle Convention Center.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+/* ─── CSS Variables (Design Language) ─── */
+:root {
+  --navy: #1B2A4A;
+  --sky: #29B6F6;
+  --gold: #D4A017;
+  --teal: #00ACC1;
+  --charcoal: #333333;
+  --light-gray: #E8E8E8;
+  --white: #FFFFFF;
+  --rose: #B5294E;
+  --success: #4CAF50;
+  --gradient-hero: linear-gradient(135deg, #FF6B35 0%, #C23B72 30%, #7B2D8E 60%, #1B2A4A 100%);
+}
+
+/* ─── Reset & Base ─── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 70px; }
+body { font-family: 'Roboto', Arial, sans-serif; color: var(--charcoal); line-height: 1.6; background: var(--white); }
+a { color: var(--sky); text-decoration: none; transition: color 0.2s; }
+a:hover { color: var(--teal); }
+img { max-width: 100%; height: auto; }
+
+/* ─── Navigation ─── */
+.navbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: var(--navy); padding: 0 2rem; height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+.nav-brand {
+  font-weight: 900; font-size: 1.4rem; color: var(--white); letter-spacing: 1px;
+}
+.nav-brand span { color: var(--gold); }
+.nav-links { display: flex; gap: 0.2rem; }
+.nav-link {
+  color: rgba(255,255,255,0.85); padding: 0.5rem 0.8rem; font-size: 0.82rem;
+  font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+  border-radius: 4px; transition: all 0.2s;
+}
+.nav-link:hover { color: var(--white); background: rgba(255,255,255,0.1); }
+.hamburger {
+  display: none; background: none; border: none; color: var(--white);
+  font-size: 1.5rem; cursor: pointer;
+}
+
+/* ─── Hero ─── */
+.hero {
+  margin-top: 64px; min-height: 85vh; display: flex; align-items: center;
+  justify-content: center; text-align: center; position: relative; overflow: hidden;
+  background: var(--gradient-hero);
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: url('https://images.unsplash.com/photo-1502175353174-a7a70e73b362?w=1920&q=80') center/cover;
+  opacity: 0.3;
+}
+.hero-content {
+  position: relative; z-index: 2; padding: 2rem; max-width: 900px;
+}
+.hero h1 {
+  font-size: 3.5rem; font-weight: 900; color: var(--white);
+  letter-spacing: 4px; text-transform: uppercase; margin-bottom: 0.5rem;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+}
+.hero .subtitle {
+  font-size: 1.3rem; color: rgba(255,255,255,0.9); margin-bottom: 2rem;
+  font-weight: 400;
+}
+.hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.btn {
+  display: inline-block; padding: 0.9rem 2rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1px; font-size: 0.95rem;
+  border: none; cursor: pointer; transition: all 0.3s; border-radius: 3px;
+}
+.btn-primary { background: var(--sky); color: var(--white); }
+.btn-primary:hover { background: var(--teal); color: var(--white); }
+.btn-outline { background: transparent; color: var(--white); border: 2px solid var(--white); }
+.btn-outline:hover { background: var(--white); color: var(--navy); }
+
+/* ─── Info Bar ─── */
+.info-bar {
+  background: var(--navy); padding: 1rem 2rem; display: flex;
+  justify-content: center; flex-wrap: wrap; gap: 2rem;
+}
+.info-item { color: rgba(255,255,255,0.9); font-size: 0.9rem; white-space: nowrap; }
+.info-item strong { color: var(--gold); }
+
+/* ─── Sections ─── */
+.section {
+  padding: 4rem 2rem; max-width: 1300px; margin: 0 auto;
+}
+.section-header {
+  text-align: center; margin-bottom: 3rem;
+}
+.section-header h2 {
+  font-size: 2rem; font-weight: 900; text-transform: uppercase;
+  letter-spacing: 2px; color: var(--navy); margin-bottom: 0.5rem;
+}
+.section-header .section-line {
+  width: 60px; height: 4px; background: var(--gold); margin: 0.8rem auto;
+}
+.section-header p { color: #666; font-size: 1.05rem; max-width: 700px; margin: 0 auto; }
+
+.section-alt { background: #F8F9FA; }
+.section-navy { background: var(--navy); }
+.section-navy .section-header h2 { color: var(--white); }
+.section-navy .section-header p { color: rgba(255,255,255,0.7); }
+
+/* ─── Card Grid ─── */
+.card-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 1.5rem;
+}
+.card {
+  background: var(--white); border-radius: 8px; padding: 1.5rem;
+  border: 1px solid #E0E0E0; transition: transform 0.2s, box-shadow 0.2s;
+  display: flex; flex-direction: column;
+}
+.card:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
+.card-header { margin-bottom: 0.8rem; }
+.card-title { font-size: 1.15rem; font-weight: 700; color: var(--navy); margin-bottom: 0.4rem; }
+.card-badges { display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; }
+.card-desc { font-size: 0.9rem; color: #555; flex: 1; margin-bottom: 0.6rem; }
+.card-tip { font-size: 0.85rem; color: var(--teal); font-style: italic; margin-bottom: 0.4rem; }
+.card-note { font-size: 0.85rem; color: var(--rose); margin-bottom: 0.4rem; }
+.card-addr { font-size: 0.8rem; color: #888; margin-bottom: 0.5rem; }
+.card-link {
+  font-size: 0.85rem; font-weight: 700; color: var(--sky);
+  text-transform: uppercase; letter-spacing: 0.5px; margin-top: auto;
+}
+
+/* ─── Badges ─── */
+.badge {
+  display: inline-block; padding: 0.2rem 0.6rem; border-radius: 12px;
+  font-size: 0.75rem; font-weight: 700; white-space: nowrap;
+}
+.badge-blue { background: #E3F2FD; color: #1565C0; }
+.badge-navy { background: #E8EAF6; color: var(--navy); }
+.badge-gold { background: #FFF8E1; color: #F57F17; }
+.badge-new { background: var(--rose); color: white; animation: pulse 2s infinite; }
+.badge-indoor { background: #E8F5E9; color: #2E7D32; }
+.badge-outdoor { background: #FFF3E0; color: #E65100; }
+.badge-age { background: #F3E5F5; color: #7B1FA2; }
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.7; } }
+
+.cuisine-tag {
+  display: inline-block; background: var(--sky); color: white;
+  padding: 0.15rem 0.6rem; border-radius: 12px; font-size: 0.75rem; font-weight: 700;
+}
+.category-tag {
+  display: inline-block; background: var(--navy); color: white;
+  padding: 0.15rem 0.6rem; border-radius: 12px; font-size: 0.75rem; font-weight: 700;
+}
+.neighborhood-tag {
+  display: inline-block; background: #E8F5E9; color: #2E7D32;
+  padding: 0.15rem 0.6rem; border-radius: 12px; font-size: 0.75rem;
+}
+
+.price-tier { font-weight: 700; color: var(--gold); font-size: 0.9rem; }
+.price-dim { opacity: 0.25; }
+.price-free { font-weight: 700; color: var(--success); font-size: 0.8rem; }
+
+/* ─── Transport Grid ─── */
+.transport-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem;
+}
+.transport-card {
+  display: flex; gap: 1rem; background: var(--white); border-radius: 8px;
+  padding: 1.2rem; border: 1px solid #E0E0E0; transition: all 0.2s;
+}
+.transport-card:hover { box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+.transport-highlight { border: 2px solid var(--rose); background: #FFF5F5; }
+.transport-icon { font-size: 2rem; flex-shrink: 0; }
+.transport-info h4 { font-size: 0.95rem; color: var(--navy); margin-bottom: 0.3rem; }
+.transport-cost { display: inline-block; background: #E8F5E9; color: #2E7D32; padding: 0.1rem 0.5rem; border-radius: 8px; font-size: 0.8rem; font-weight: 700; margin-right: 0.5rem; }
+.transport-dur { font-size: 0.8rem; color: #888; }
+.transport-info p { font-size: 0.82rem; color: #666; margin-top: 0.3rem; }
+
+/* ─── Venue Cards ─── */
+.venue-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1.5rem; }
+.venue-card {
+  background: var(--white); border-radius: 8px; overflow: hidden;
+  border: 1px solid #E0E0E0;
+}
+.venue-card-header {
+  background: var(--navy); padding: 1rem 1.5rem; color: var(--white);
+}
+.venue-card-header h3 { font-weight: 700; font-size: 1.1rem; }
+.venue-card-body { padding: 1.5rem; }
+.venue-card-body p { font-size: 0.9rem; color: #555; margin-bottom: 0.5rem; }
+.venue-card-body .venue-detail { display: flex; gap: 0.5rem; align-items: baseline; margin-bottom: 0.3rem; }
+.venue-card-body .venue-label { font-weight: 700; color: var(--navy); font-size: 0.85rem; min-width: 80px; }
+
+/* ─── Weather ─── */
+.weather-transport { display: grid; grid-template-columns: 1fr 2fr; gap: 2rem; }
+.weather-card {
+  background: linear-gradient(135deg, #1B2A4A, #2D4A7A); border-radius: 12px;
+  padding: 2rem; color: white; text-align: center;
+}
+.weather-card .temp { font-size: 3rem; font-weight: 900; }
+.weather-card .temp-small { font-size: 1rem; opacity: 0.8; }
+.weather-details { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-top: 1rem; }
+.weather-detail { background: rgba(255,255,255,0.1); padding: 0.5rem; border-radius: 6px; font-size: 0.8rem; }
+.weather-tip { background: rgba(212,160,23,0.2); border: 1px solid var(--gold); padding: 0.8rem; border-radius: 6px; margin-top: 1rem; font-size: 0.85rem; color: var(--gold); }
+
+/* ─── Life Sciences ─── */
+.card-lifesci { border-left: 4px solid var(--gold); }
+.card-family { border-left: 4px solid var(--teal); }
+.card-seasonal { border-left: 4px solid var(--rose); }
+
+/* ─── Insight Boxes ─── */
+.insight-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem; }
+.insight-box {
+  background: var(--white); border-radius: 8px; padding: 1.2rem;
+  border: 1px solid var(--gold); border-top: 3px solid var(--gold);
+}
+.insight-box h4 { font-size: 0.95rem; color: var(--navy); margin-bottom: 0.4rem; }
+.insight-box p { font-size: 0.85rem; color: #555; }
+
+/* ─── Price Legend ─── */
+.price-legend {
+  text-align: center; background: #F8F9FA; padding: 1.5rem;
+  border-radius: 8px; font-size: 0.9rem; color: #666;
+}
+
+/* ─── Footer ─── */
+.footer {
+  background: var(--navy); color: rgba(255,255,255,0.7); text-align: center;
+  padding: 3rem 2rem;
+}
+.footer h3 { color: var(--white); font-size: 1.3rem; margin-bottom: 0.3rem; }
+.footer h3 span { color: var(--gold); }
+.footer p { font-size: 0.85rem; margin-bottom: 0.3rem; }
+.footer a { color: var(--sky); }
+
+/* ─── Back to Top ─── */
+.back-to-top {
+  position: fixed; bottom: 2rem; right: 2rem; width: 48px; height: 48px;
+  background: var(--sky); color: white; border: none; border-radius: 50%;
+  font-size: 1.2rem; cursor: pointer; opacity: 0; transition: all 0.3s;
+  z-index: 999; box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+.back-to-top.visible { opacity: 1; }
+.back-to-top:hover { background: var(--teal); transform: scale(1.1); }
+
+/* ─── Scroll Animations ─── */
+.fade-in { opacity: 0; transform: translateY(20px); transition: all 0.6s ease-out; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* ─── Responsive ─── */
+@media (max-width: 900px) {
+  .nav-links { display: none; position: absolute; top: 64px; left: 0; right: 0;
+    background: var(--navy); flex-direction: column; padding: 1rem; }
+  .nav-links.active { display: flex; }
+  .hamburger { display: block; }
+  .hero h1 { font-size: 2.2rem; }
+  .card-grid { grid-template-columns: 1fr; }
+  .weather-transport { grid-template-columns: 1fr; }
+  .venue-grid { grid-template-columns: 1fr; }
+  .info-bar { flex-direction: column; gap: 0.5rem; align-items: center; }
+}
+@media (max-width: 600px) {
+  .hero h1 { font-size: 1.7rem; letter-spacing: 2px; }
+  .section { padding: 2rem 1rem; }
+  .transport-grid { grid-template-columns: 1fr; }
+}
+
+/* ─── Maps ─── */
+.map-container {
+  width: 100%; height: 420px; border-radius: 12px; overflow: hidden;
+  border: 2px solid var(--gold); margin-bottom: 2rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+.map-section-layout {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
+}
+.map-section-layout .card-grid {
+  max-height: 600px; overflow-y: auto; padding-right: 0.5rem;
+  grid-template-columns: 1fr;
+}
+.map-section-layout .card-grid::-webkit-scrollbar { width: 6px; }
+.map-section-layout .card-grid::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+.card.card-active { border: 2px solid var(--sky); box-shadow: 0 0 15px rgba(41,182,246,0.3); transform: translateY(-2px); }
+.map-wide { width: 100%; height: 350px; border-radius: 12px; overflow: hidden; border: 2px solid var(--gold); margin-bottom: 2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+@media (max-width: 900px) {
+  .map-section-layout { grid-template-columns: 1fr; }
+  .map-container { height: 300px; }
+  .map-section-layout .card-grid { max-height: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ NAVIGATION ═══ -->
+<nav class="navbar">
+  <div class="nav-brand">SEATTLE <span>GUIDE</span></div>
+  <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('active')" aria-label="Menu">☰</button>
+  <div class="nav-links"><a href="#home" class="nav-link">Home</a>
+<a href="#venue" class="nav-link">Venue</a>
+<a href="#transport" class="nav-link">Weather & Getting Around</a>
+<a href="#dining" class="nav-link">Dining</a>
+<a href="#attractions" class="nav-link">Attractions</a>
+<a href="#daytrips" class="nav-link">Day Trips</a>
+<a href="#lifesciences" class="nav-link">Life Sciences</a>
+<a href="#family" class="nav-link">Family</a>
+<a href="#shopping" class="nav-link">Shopping</a>
+<a href="#entertainment" class="nav-link">Entertainment</a>
+<a href="#coffee" class="nav-link">Coffee & Bars</a></div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<!-- TEMPLATE: Replace hero background with [CITY] skyline image -->
+<section class="hero" id="home">
+  <div class="hero-content">
+    <h1>Welcome to Seattle</h1>
+    <p class="subtitle">Seattle Guide 2026 | November 10–14, 2026</p>
+    <div class="hero-buttons">
+      <a href="#attractions" class="btn btn-primary">Explore Attractions</a>
+      <a href="#transport" class="btn btn-outline">Getting Around</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ INFO BAR ═══ -->
+<!-- TEMPLATE: Update venue, dates, weather for new city -->
+<div class="info-bar">
+  <span class="info-item">📍 <strong>Seattle Convention Center</strong> (Arch + Summit)</span>
+  <span class="info-item">📅 <strong>November 10–14, 2026</strong></span>
+  <span class="info-item">🌡️ <strong>51°F / 40°F</strong> (10.5°C / 4°C)</span>
+  <span class="info-item">🌅 Sunrise 7:24 AM / Sunset 4:48 PM</span>
+  <span class="info-item">☔ <strong>Skip the umbrella</strong> — pack a hooded rain jacket!</span>
+</div>
+
+<!-- ═══ VENUE SECTION ═══ -->
+<section class="section" id="venue">
+  <div class="section-header">
+    <h2>Venue & Hotel</h2>
+    <div class="section-line"></div>
+    <p>The convention center campus spans two buildings with over 1 million square feet of event space</p>
+  </div>
+  <div class="venue-grid">
+    <div class="venue-card">
+      <div class="venue-card-header"><h3>🏛️ SCC Arch Building</h3></div>
+      <div class="venue-card-body">
+        <p>The original convention center since 1988. Bright, airy fourth-floor atrium connected to Freeway Park — a unique brutalist urban retreat suspended over Interstate 5. Features 205,700 sq ft of exhibit space with 25-foot ceilings.</p>
+        <div class="venue-detail"><span class="venue-label">Address:</span> 705 Pike St, Seattle, WA 98101</div>
+        <div class="venue-detail"><span class="venue-label">Space:</span> 430,000 sq ft</div>
+      </div>
+    </div>
+    <div class="venue-card">
+      <div class="venue-card-header"><h3>🏢 SCC Summit Building</h3></div>
+      <div class="venue-card-body">
+        <p>The newer facility with expansive window walls and glass-enclosed 'Hillclimb' staircase offering views of Pike Place Market and Puget Sound. Each floor tells the story of PNW industry: timber (1st), maritime (2nd), aviation (3rd), and grunge music (4th).</p>
+        <div class="venue-detail"><span class="venue-label">Address:</span> 900 Pine St, Seattle, WA 98101</div>
+        <div class="venue-detail"><span class="venue-label">Opened:</span> January 2023</div>
+      </div>
+    </div>
+    <div class="venue-card">
+      <div class="venue-card-header"><h3>🏨 Sheraton Grand Seattle (HQ Hotel)</h3></div>
+      <div class="venue-card-body">
+        <div class="venue-detail"><span class="venue-label">Distance:</span> 0.3 blocks (0.14 mi, 3-minute walk)</div>
+        <div class="venue-detail"><span class="venue-label">Rate:</span> $254/night</div>
+        <div class="venue-detail"><span class="venue-label">Amenities:</span> Heated indoor pool, Two-level fitness center, Two onsite restaurants, Coffee shop, Wine bar</div>
+        <a href="https://www.marriott.com/en-us/hotels/seasi-sheraton-grand-seattle/overview/" target="_blank" class="card-link">Book Hotel →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WEATHER & TRANSPORT ═══ -->
+<section class="section section-alt" id="transport">
+  <div class="section-header">
+    <h2>Weather & Getting Around</h2>
+    <div class="section-line"></div>
+    <!-- TEMPLATE: Update weather and transport for new city -->
+  </div>
+  <div class="weather-transport">
+    <div class="weather-card">
+      <div style="font-size:3rem;">🌧️</div>
+      <div class="temp">51°<span class="temp-small">/40°F</span></div>
+      <p style="opacity:0.8;margin:0.5rem 0;">November in Seattle</p>
+      <div class="weather-details">
+        <div class="weather-detail">🌧️ 16.5 rain days</div>
+        <div class="weather-detail">☀️ 9.4 hrs daylight</div>
+        <div class="weather-detail">🌅 Rise 7:24 AM</div>
+        <div class="weather-detail">🌇 Set 4:48 PM</div>
+        <div class="weather-detail">☁️ 32% clear</div>
+        <div class="weather-detail">🌧️ 6.31–6.54 inches average (wettest month)</div>
+      </div>
+      <div class="weather-tip">💡 Layer up: waterproof hooded jacket, insulated layers, waterproof footwear. Skip the umbrella — wind makes them useless here.</div>
+    </div>
+    <div>
+      <div class="transport-grid">
+        <div class="transport-card">
+  <div class="transport-icon">🚇</div>
+  <div class="transport-info">
+    <h4>Link Light Rail</h4>
+    <span class="transport-cost">$3.00 one way from airport</span>
+    <span class="transport-dur">~40 minutes from SEA</span>
+    <p>Sound Transit's 1 Line runs from SEA to downtown. Exit at Westlake Station — 3 blocks from convention center. From baggage claim, proceed to 4th floor parking garage, cross Skybridge 4. Free 'Train-to-Plane' shuttle runs along the 0.4-mile walkway. Trains every 8–15 min. Youth 18 and under ride free. Seniors/disabled $1.00 with RRFP. Pay via ORCA card, Transit GO Ticket app, or station machines.</p>
+  </div>
+</div>
+
+<div class="transport-card">
+  <div class="transport-icon">🚌</div>
+  <div class="transport-info">
+    <h4>King County Metro Bus</h4>
+    <span class="transport-cost">$2.75 per ride</span>
+    <p>Extensive bus network throughout Seattle and surrounding areas. Many routes stop near the convention center.</p>
+  </div>
+</div>
+
+<div class="transport-card">
+  <div class="transport-icon">🚝</div>
+  <div class="transport-info">
+    <h4>Seattle Monorail</h4>
+    <span class="transport-cost">$4.00 one way</span>
+    <p>Connects Westlake Center (near convention center) to Seattle Center (Space Needle area) in 2 minutes. Trains every 10 minutes. Note: As of Jan 2026, no ORCA E-purse transfers — separate fare required. Youth 6–18 and seniors $2.00, under 5 free. Hours: 7:30 AM–9 PM Mon–Thu, extended to 11 PM Fri–Sat.</p>
+  </div>
+</div>
+
+<div class="transport-card  transport-highlight">
+  <div class="transport-icon">🚇</div>
+  <div class="transport-info">
+    <h4>Link 2 Line (Crosslake Connection) <span class="badge badge-new">NEW!</span></h4>
+    <span class="transport-cost">~$3.00 one way</span>
+    <span class="transport-dur">26 min to Bellevue Downtown</span>
+    <p>Opened March 28, 2026. World's first light rail across a floating bridge! Connects Seattle's International District to Mercer Island, Bellevue, and Redmond. Bellevue Downtown to Westlake Station in 26 minutes. Trains every 8 min during peak hours. Combined with the 1 Line, downtown tunnel trains arrive every 4 minutes.</p>
+  </div>
+</div>
+
+<div class="transport-card">
+  <div class="transport-icon">🚐</div>
+  <div class="transport-info">
+    <h4>Shuttle Express</h4>
+    <span class="transport-cost">From $25 shared, $55+ private</span>
+    <p>Shared and private van rides from the Ground Transportation Plaza at SEA airport. Less expensive alternative to taxis with direct hotel drop-offs.</p>
+  </div>
+</div>
+
+<div class="transport-card">
+  <div class="transport-icon">🚗</div>
+  <div class="transport-info">
+    <h4>Rideshare (Uber/Lyft)</h4>
+    <span class="transport-cost">$40–55 from airport</span>
+    <p>Widely available. Airport to downtown typically $40–55. Pick-up from the 3rd floor of SEA airport parking garage.</p>
+  </div>
+</div>
+
+<div class="transport-card">
+  <div class="transport-icon">🚕</div>
+  <div class="transport-info">
+    <h4>Taxis</h4>
+    <span class="transport-cost">$40–55 from airport</span>
+    <p>Available at the airport and throughout downtown. Yellow Cab and Orange Cab are major operators.</p>
+  </div>
+</div>
+
+<div class="transport-card">
+  <div class="transport-icon">🚲</div>
+  <div class="transport-info">
+    <h4>Lime Bikes & Scooters</h4>
+    <span class="transport-cost">$1 to unlock + $0.39/min</span>
+    <p>Electric bikes and scooters available throughout the city via the Lime app. Great for short trips around downtown and nearby neighborhoods.</p>
+  </div>
+</div>
+
+<div class="transport-card">
+  <div class="transport-icon">⛴️</div>
+  <div class="transport-info">
+    <h4>Washington State Ferries</h4>
+    <span class="transport-cost">$11.05 round trip walk-on (youth 18 and under free). Vehicle fares vary by length.</span>
+    <p>Ferries depart from Colman Dock (Pier 52) to Bainbridge Island and Bremerton. A scenic ride with skyline and mountain views.</p>
+  </div>
+</div>
+
+<div class="transport-card">
+  <div class="transport-icon">🚢</div>
+  <div class="transport-info">
+    <h4>Water Taxi</h4>
+    <span class="transport-cost">$5.75 one way</span>
+    <p>King County Water Taxi runs from Pier 50 to West Seattle (Alki Beach) — a fun alternative to driving.</p>
+  </div>
+</div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ DINING ═══ -->
+<section class="section" id="dining">
+  <div class="section-header">
+    <h2>Dining & Drinks</h2>
+    <div class="section-line"></div>
+    <p>17 curated restaurants sorted by distance from the convention center</p>
+  </div>
+  <div class="map-section-layout">
+    <div id="diningMap" class="map-container"></div>
+    <div class="card-grid" id="diningCards">
+      <div class="card" data-lat="47.611338" data-lng="-122.333459">
+  <div class="card-header">
+    <h3 class="card-title">Alder & Ash</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 2 min walk</span>   <span class="price-tier">$$<span class="price-dim">$</span></span></div>
+    <span class="cuisine-tag">PNW New American</span>
+  </div>
+  <p class="card-desc">Stylish New American dining directly across from the Arch building's main entrance at 7th and Pike. Optimal for working lunches, breakfast, or post-conference craft cocktails.</p>
+  <p class="card-addr">📍 629 Pike St, Seattle, WA 98101</p>
+</div>
+
+<div class="card" data-lat="47.6128" data-lng="-122.3288">
+  <div class="card-header">
+    <h3 class="card-title">Daawat Indian Grill & Bar</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 2 min walk</span>   <span class="price-tier">$$<span class="price-dim">$</span></span></div>
+    <span class="cuisine-tag">Traditional Indian</span>
+  </div>
+  <p class="card-desc">Expansive lunch buffet and traditional Indian delicacies. Located directly between the Arch and Summit buildings. Classic family recipes.</p>
+  <p class="card-addr">📍 Corner of 9th Ave & Pike St, Seattle, WA 98101</p>
+</div>
+
+<div class="card" data-lat="47.608782" data-lng="-122.337196">
+  <div class="card-header">
+    <h3 class="card-title">Wild Ginger</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 3 min walk</span>   <span class="price-tier">$$<span class="price-dim">$</span></span></div>
+    <span class="cuisine-tag">Pan-Asian</span>
+  </div>
+  <p class="card-desc">Acclaimed Pan-Asian restaurant with satay bar, fragrant curries, and craft cocktails. A Seattle institution.</p>
+  <p class="card-addr">📍 1401 3rd Ave, Seattle, WA 98101</p>
+  <a href="https://www.wildginger.net/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+<div class="card" data-lat="47.608325" data-lng="-122.335367">
+  <div class="card-header">
+    <h3 class="card-title">The Capital Grille</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 4 min walk</span>   <span class="price-tier">$$$<span class="price-dim"></span></span></div>
+    <span class="cuisine-tag">Steakhouse</span>
+  </div>
+  <p class="card-desc">Upscale steakhouse with dry-aged steaks, fresh seafood, and an award-winning wine list.</p>
+  <p class="card-addr">📍 1301 4th Ave, Seattle, WA 98101</p>
+  <a href="https://www.thecapitalgrille.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+<div class="card" data-lat="47.6125" data-lng="-122.3363">
+  <div class="card-header">
+    <h3 class="card-title">Din Tai Fung</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 5 min walk</span>   <span class="price-tier">$$<span class="price-dim">$</span></span></div>
+    <span class="cuisine-tag">Taiwanese / Dumplings</span>
+  </div>
+  <p class="card-desc">World-famous soup dumplings (xiao long bao) and Taiwanese specialties. Expect a wait — it's worth it.</p>
+  <p class="card-addr">📍 600 Pine St #310, Seattle, WA 98101 (Pacific Place)</p>
+  <a href="https://dintaifungusa.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+<div class="card" data-lat="47.607951" data-lng="-122.33506">
+  <div class="card-header">
+    <h3 class="card-title">Purple Cafe and Wine Bar</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 5 min walk</span>   <span class="price-tier">$$<span class="price-dim">$</span></span></div>
+    <span class="cuisine-tag">American / Wine Bar</span>
+  </div>
+  <p class="card-desc">Dramatic two-story wine tower, Pacific Northwest cuisine, and an extensive wine list in a stylish setting.</p>
+  <p class="card-addr">📍 1225 4th Ave, Seattle, WA 98101</p>
+  <a href="https://www.purplecafe.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+<div class="card" data-lat="47.614387" data-lng="-122.32808">
+  <div class="card-header">
+    <h3 class="card-title">Térra Plata</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 7 min walk</span>   <span class="price-tier">$$$<span class="price-dim"></span></span></div>
+    <span class="cuisine-tag">Farm-to-Table / Pacific NW</span>
+  </div>
+  <p class="card-desc">Premier rooftop farm-to-table dining on Capitol Hill. Sustainably sourced Pacific Northwest ingredients with expertly roasted seasonal vegetables and locally sourced proteins.</p>
+  <p class="card-addr">📍 1501 Melrose Ave, Seattle, WA 98101</p>
+</div>
+
+<div class="card" data-lat="47.608052" data-lng="-122.339037">
+  <div class="card-header">
+    <h3 class="card-title">Japonessa Sushi Cocina</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 8 min walk</span>   <span class="price-tier">$$$<span class="price-dim"></span></span></div>
+    <span class="cuisine-tag">Japanese / Sushi</span>
+  </div>
+  <p class="card-desc">Creative sushi with Latin-inspired flavors. Vibrant atmosphere and inventive cocktails.</p>
+  <p class="card-addr">📍 1400 1st Ave, Seattle, WA 98101</p>
+  <a href="https://japonessa.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+<div class="card" data-lat="47.612903" data-lng="-122.340495">
+  <div class="card-header">
+    <h3 class="card-title">Serious Pie</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 8 min walk</span>   <span class="price-tier">$$<span class="price-dim">$</span></span></div>
+    <span class="cuisine-tag">Pizza / Italian</span>
+  </div>
+  <p class="card-desc">Tom Douglas' artisan wood-fired pizzas with locally sourced toppings. Casual and beloved.</p>
+  <p class="card-addr">📍 316 Virginia St, Seattle, WA 98101</p>
+  <a href="https://www.seriouspieseattle.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+<div class="card" data-lat="47.6065" data-lng="-122.335">
+  <div class="card-header">
+    <h3 class="card-title">Shuckers</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 9 min walk</span>   <span class="price-tier">$$<span class="price-dim">$</span></span></div>
+    <span class="cuisine-tag">Seafood / Oyster Bar</span>
+  </div>
+  <p class="card-desc">Iconic oyster bar in the Fairmont Olympic Hotel. Fresh Pacific Northwest seafood and craft cocktails.</p>
+  <p class="card-addr">📍 411 University St, Seattle, WA 98101 (Fairmont Olympic)</p>
+  <a href="https://www.fairmont.com/seattle/dining/shuckers/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+<div class="card" data-lat="47.609582" data-lng="-122.341816">
+  <div class="card-header">
+    <h3 class="card-title">Beecher's Handmade Cheese</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 10 min walk</span>   <span class="price-tier">$<span class="price-dim">$$</span></span></div>
+    <span class="cuisine-tag">Cheese / American</span>
+  </div>
+  <p class="card-desc">Watch artisan cheese being made through the viewing window at Pike Place Market. Famous for their 'World's Best' mac and cheese.</p>
+  <p class="card-addr">📍 1600 Pike Pl, Seattle, WA 98101</p>
+  <a href="https://beechershandmadecheese.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+<div class="card" data-lat="47.609466" data-lng="-122.34107">
+  <div class="card-header">
+    <h3 class="card-title">Pike Place Chowder</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 10 min walk</span>   <span class="price-tier">$<span class="price-dim">$$</span></span></div>
+    <span class="cuisine-tag">Seafood / Chowder</span>
+  </div>
+  <p class="card-desc">Award-winning chowders and bisques at Pike Place Market. Try the New England clam chowder.</p>
+  <p class="card-addr">📍 1530 Post Alley, Seattle, WA 98101</p>
+  <a href="https://pikeplacechowder.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+<div class="card" data-lat="47.608856" data-lng="-122.340566">
+  <div class="card-header">
+    <h3 class="card-title">Matt's in the Market</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 10 min walk</span>   <span class="price-tier">$$$<span class="price-dim"></span></span></div>
+    <span class="cuisine-tag">Pacific Northwest / Seafood</span>
+  </div>
+  <p class="card-desc">Farm-to-table gem overlooking Pike Place Market. Seasonal seafood and locally sourced ingredients.</p>
+  <p class="card-addr">📍 94 Pike St #32, Seattle, WA 98101</p>
+  <a href="https://www.mattsinthemarket.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+<div class="card" data-lat="47.604426" data-lng="-122.334189">
+  <div class="card-header">
+    <h3 class="card-title">Metropolitan Grill</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 10 min walk</span>   <span class="price-tier">$$$<span class="price-dim"></span></span></div>
+    <span class="cuisine-tag">Steakhouse</span>
+  </div>
+  <p class="card-desc">Seattle's premier steakhouse since 1983. USDA Prime steaks and classic cocktails.</p>
+  <p class="card-addr">📍 820 2nd Ave, Seattle, WA 98104</p>
+  <a href="https://www.themetropolitangrill.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+<div class="card" data-lat="47.643053" data-lng="-122.346736">
+  <div class="card-header">
+    <h3 class="card-title">Canlis</h3>
+    <div class="card-badges"><span class="badge badge-navy">🚗 10 min drive</span>   <span class="price-tier">$$$<span class="price-dim"></span></span></div>
+    <span class="cuisine-tag">Fine Dining / Pacific Northwest</span>
+  </div>
+  <p class="card-desc">Seattle's legendary fine dining destination since 1950. Stunning lake views, impeccable service, and a world-class tasting menu. Reservations essential.</p>
+  <p class="card-addr">📍 2576 Aurora Ave N, Seattle, WA 98109</p>
+  <a href="https://canlis.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+<div class="card" data-lat="47.623437" data-lng="-122.354405">
+  <div class="card-header">
+    <h3 class="card-title">Taylor Shellfish Oyster Bar</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 18 min walk</span>   <span class="price-tier">$$<span class="price-dim">$</span></span></div>
+    <span class="cuisine-tag">Seafood</span>
+  </div>
+  <p class="card-desc">Farm-direct shellfish from Taylor Shellfish Farms. Oysters, clams, geoduck, and more.</p>
+  <p class="card-addr">📍 124 Republican St, Seattle, WA 98109</p>
+  <a href="https://www.taylorshellfishfarms.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+<div class="card" data-lat="47.614614" data-lng="-122.331332">
+  <div class="card-header">
+    <h3 class="card-title">Bombo Italian Kitchen</h3>
+    <div class="card-badges"><span class="badge badge-gold">📍 On-Site</span>  <span class="badge badge-gold">📍 ON-SITE</span> <span class="price-tier">$$<span class="price-dim">$</span></span></div>
+    <span class="cuisine-tag">Italian</span>
+  </div>
+  <p class="card-desc">Located ON the ground floor of the Summit convention center building itself. Pacific Northwest-inspired Italian dishes — delegates don't need to leave the facility for an excellent meal.</p>
+  <p class="card-note">📌 On-site at SCC Summit Building</p>
+  <p class="card-addr">📍 1600 9th Ave, Seattle, WA 98101</p>
+</div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WALKABLE ATTRACTIONS ═══ -->
+<section class="section section-alt" id="attractions">
+  <div class="section-header">
+    <h2>Walkable Attractions</h2>
+    <div class="section-line"></div>
+    <p>16 attractions within walking distance of the convention center</p>
+  </div>
+  <div class="map-section-layout">
+    <div id="attractionsMap" class="map-container"></div>
+    <div class="card-grid" id="attractionsCards">
+      <div class="card" data-lat="47.609164" data-lng="-122.330511">
+  <div class="card-header">
+    <h3 class="card-title">Freeway Park</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 3 min walk</span>   <span class="price-free">FREE</span></div>
+    <span class="category-tag">Park</span>
+  </div>
+  <p class="card-desc">Unique brutalist urban retreat suspended directly over Interstate 5, connected to the Arch convention center. Cascading concrete fountains and evergreen landscaping — a quiet escape between sessions.</p>
+  <p class="card-addr">📍 700 Seneca St, Seattle, WA 98101</p>
+</div>
+
+<div class="card" data-lat="47.607701" data-lng="-122.338557">
+  <div class="card-header">
+    <h3 class="card-title">Seattle Art Museum (SAM)</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 8 min walk</span>   <span class="price-tier">$$<span class="price-dim">$</span></span></div>
+    <span class="category-tag">Museum</span>
+  </div>
+  <p class="card-desc">World-class art museum with collections spanning global cultures. The iconic Hammering Man sculpture marks the entrance.</p>
+  <p class="card-addr">📍 1300 1st Ave, Seattle, WA 98101</p>
+  <a href="https://www.seattleartmuseum.org/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+<div class="card" data-lat="47.608754" data-lng="-122.3402">
+  <div class="card-header">
+    <h3 class="card-title">Pike Place Market</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 10 min walk</span> <span class="badge badge-gold">⭐ Must See</span>  <span class="price-free">FREE</span></div>
+    <span class="category-tag">Market / Landmark</span>
+  </div>
+  <p class="card-desc">Iconic public market since 1907. Watch fishmongers throw fish, visit the original Starbucks, browse local crafts, and sample artisan foods.</p>
+  <p class="card-addr">📍 85 Pike St, Seattle, WA 98101</p>
+  <a href="https://www.pikeplacemarket.org/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+<div class="card" data-lat="47.606043" data-lng="-122.342167">
+  <div class="card-header">
+    <h3 class="card-title">Seattle Waterfront & Pier 57</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 12 min walk</span>   <span class="price-free">FREE</span></div>
+    <span class="category-tag">Waterfront / Entertainment</span>
+  </div>
+  <p class="card-desc">Newly renovated waterfront with the Seattle Great Wheel, shops, restaurants, and stunning Elliott Bay views.</p>
+  <p class="card-addr">📍 1301 Alaskan Way, Seattle, WA 98101</p>
+  <a href="https://www.waterfrontseattle.org/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+<div class="card" data-lat="47.606043" data-lng="-122.342167">
+  <div class="card-header">
+    <h3 class="card-title">Seattle Great Wheel</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 12 min walk</span>   <span class="price-tier">$$<span class="price-dim">$</span></span></div>
+    <span class="category-tag">Attraction</span>
+  </div>
+  <p class="card-desc">175-foot Ferris wheel on Pier 57 with panoramic views of the skyline, Elliott Bay, and the Olympic Mountains.</p>
+  <p class="card-addr">📍 1301 Alaskan Way, Seattle, WA 98101</p>
+  <a href="https://seattlegreatwheel.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+<div class="card" data-lat="47.607625" data-lng="-122.34322">
+  <div class="card-header">
+    <h3 class="card-title">Seattle Aquarium</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 14 min walk</span>   <span class="price-tier">$$<span class="price-dim">$</span></span></div>
+    <span class="category-tag">Aquarium</span>
+  </div>
+  <p class="card-desc">Recently expanded ocean pavilion on the waterfront. Pacific Northwest marine life, touch pools, and underwater dome.</p>
+  <p class="card-addr">📍 1483 Alaskan Way, Seattle, WA 98101</p>
+  <a href="https://www.seattleaquarium.org/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+<div class="card" data-lat="47.602722" data-lng="-122.331354">
+  <div class="card-header">
+    <h3 class="card-title">Pioneer Square</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 15 min walk</span>   <span class="price-free">FREE</span></div>
+    <span class="category-tag">Historic District</span>
+  </div>
+  <p class="card-desc">Seattle's oldest neighborhood. Beautiful Romanesque architecture, art galleries, underground tours, and craft cocktail bars.</p>
+  <p class="card-addr">📍 Pioneer Square, Seattle, WA 98104</p>
+  <a href="https://www.pioneersquare.org/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+<div class="card" data-lat="47.602335" data-lng="-122.333779">
+  <div class="card-header">
+    <h3 class="card-title">Bill Speidel's Underground Tour</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 15 min walk</span>   <span class="price-tier">$$<span class="price-dim">$</span></span></div>
+    <span class="category-tag">Tour / History</span>
+  </div>
+  <p class="card-desc">Walk beneath Seattle's streets to explore the buried city — a fascinating look at Seattle's post-fire rebuilding history.</p>
+  <p class="card-addr">📍 614 1st Ave, Seattle, WA 98104</p>
+  <a href="https://www.undergroundtour.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+<div class="card" data-lat="47.623831" data-lng="-122.318368">
+  <div class="card-header">
+    <h3 class="card-title">Capitol Hill</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 15 min walk</span>   <span class="price-free">FREE</span></div>
+    <span class="category-tag">Neighborhood</span>
+  </div>
+  <p class="card-desc">Seattle's vibrant cultural heart. Eclectic restaurants, live music venues, independent bookstores, and excellent coffee shops.</p>
+  <p class="card-addr">📍 Capitol Hill, Seattle, WA 98102</p>
+  <a href="https://visitseattle.org/neighborhoods/capitol-hill/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+<div class="card" data-lat="47.616272" data-lng="-122.353583">
+  <div class="card-header">
+    <h3 class="card-title">Olympic Sculpture Park</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 18 min walk</span>   <span class="price-free">FREE</span></div>
+    <span class="category-tag">Park / Art</span>
+  </div>
+  <p class="card-desc">Free outdoor sculpture park by the Seattle Art Museum with stunning waterfront views and large-scale contemporary art.</p>
+  <p class="card-addr">📍 2901 Western Ave, Seattle, WA 98121</p>
+  <a href="https://www.seattleartmuseum.org/visit/olympic-sculpture-park" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+<div class="card" data-lat="47.620513" data-lng="-122.349304">
+  <div class="card-header">
+    <h3 class="card-title">Space Needle</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 20 min walk</span> <span class="badge badge-gold">⭐ Must See</span>  <span class="price-tier">$$$<span class="price-dim"></span></span></div>
+    <span class="category-tag">Landmark / Observation</span>
+  </div>
+  <p class="card-desc">Seattle's defining landmark. The renovated observation deck features the world's first revolving glass floor at 520 feet. Purchase a combo ticket ($69) with Chihuly Garden and Glass for best value.</p>
+  <p class="card-tip">💡 Take the Monorail from Westlake Center (2 min ride) to get there quickly.</p>
+  <p class="card-addr">📍 400 Broad St, Seattle, WA 98109</p>
+  <a href="https://www.spaceneedle.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+<div class="card" data-lat="47.621462" data-lng="-122.350989">
+  <div class="card-header">
+    <h3 class="card-title">Chihuly Garden and Glass</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 20 min walk</span> <span class="badge badge-gold">⭐ Must See</span>  <span class="price-tier">$$$<span class="price-dim"></span></span></div>
+    <span class="category-tag">Museum / Art</span>
+  </div>
+  <p class="card-desc">Breathtaking exhibition of Dale Chihuly's glass sculptures in indoor galleries and an outdoor garden. Adjacent to the Space Needle.</p>
+  <p class="card-addr">📍 305 Harrison St, Seattle, WA 98109</p>
+  <a href="https://www.chihulygardenandglass.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+<div class="card" data-lat="47.623591" data-lng="-122.34737">
+  <div class="card-header">
+    <h3 class="card-title">Bill & Melinda Gates Foundation Discovery Center</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 20 min walk</span> <span class="badge badge-gold">⭐ Must See</span>  <span class="price-free">FREE</span></div>
+    <span class="category-tag">Science / Global Health</span>
+  </div>
+  <p class="card-desc">Free interactive exhibition on global health initiatives including efforts to eradicate polio and tackle tuberculosis. Highly relevant for medical professionals.</p>
+  <p class="card-tip">💡 Book tour reservations at least 2 weeks in advance — free but reservation required.</p>
+  <p class="card-addr">📍 440 5th Ave N, Seattle, WA 98109</p>
+  <a href="https://www.discovergates.org/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+<div class="card" data-lat="47.619406" data-lng="-122.350778">
+  <div class="card-header">
+    <h3 class="card-title">Pacific Science Center</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 22 min walk</span>   <span class="price-tier">$$<span class="price-dim">$</span></span></div>
+    <span class="category-tag">Museum / Science</span>
+  </div>
+  <p class="card-desc">Interactive science museum with Tropical Butterfly House, Tinker Tank makerspace, live science stages, and dinosaur exhibits. $32–35 adults, $26–28 children. Offers sensory-friendly 'Exploration for All' sessions.</p>
+  <p class="card-addr">📍 200 2nd Ave N, Seattle, WA 98109</p>
+  <a href="https://www.pacificsciencecenter.org/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+<div class="card" data-lat="47.621493" data-lng="-122.348225">
+  <div class="card-header">
+    <h3 class="card-title">Museum of Pop Culture (MoPOP)</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 22 min walk</span>   <span class="price-tier">$$$<span class="price-dim"></span></span></div>
+    <span class="category-tag">Museum</span>
+  </div>
+  <p class="card-desc">Interactive museum celebrating music, science fiction, and pop culture. Designed by Frank Gehry. Guitar collections, Nirvana exhibits, and more.</p>
+  <p class="card-addr">📍 325 5th Ave N, Seattle, WA 98109</p>
+  <a href="https://www.mopop.org/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+<div class="card" data-lat="47.629477" data-lng="-122.359935">
+  <div class="card-header">
+    <h3 class="card-title">Kerry Park</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 30 min walk</span>   <span class="price-free">FREE</span></div>
+    <span class="category-tag">Viewpoint</span>
+  </div>
+  <p class="card-desc">The postcard-perfect viewpoint of the Seattle skyline with Mount Rainier in the background. Best at sunset.</p>
+  <p class="card-tip">💡 Rideshare recommended. 7-minute drive from convention center.</p>
+  <p class="card-addr">📍 211 W Highland Dr, Seattle, WA 98119</p>
+  <a href="https://www.seattle.gov/parks/allparks/kerry-park" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ DAY TRIPS ═══ -->
+<section class="section" id="daytrips">
+  <div class="section-header">
+    <h2>Day Trips & Beyond</h2>
+    <div class="section-line"></div>
+    <p>Venture beyond downtown — 12 destinations within 2 hours</p>
+  </div>
+  <div id="daytripsMap" class="map-wide"></div>
+  <div class="card-grid" id="daytripsCards">
+    <div class="card" data-lat="47.664662" data-lng="-122.39746">
+  <div class="card-header">
+    <h3 class="card-title">Hiram M. Chittenden Locks (Ballard Locks)</h3>
+    <div class="card-badges"><span class="badge badge-navy">🚗 15 min drive</span>  <span class="badge badge-navy">🚗 Requires transport</span> <span class="price-free">FREE</span></div>
+    <span class="category-tag">Engineering / Nature</span>
+  </div>
+  <p class="card-desc">Watch boats transit between Puget Sound and Lake Union. See salmon climbing the fish ladder (seasonal) and stroll the botanical gardens.</p>
+  <p class="card-addr">📍 3015 NW 54th St, Seattle, WA 98107</p>
+  <a href="https://www.ballardlocks.org/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+<div class="card" data-lat="47.666312" data-lng="-122.349302">
+  <div class="card-header">
+    <h3 class="card-title">Woodland Park Zoo</h3>
+    <div class="card-badges"><span class="badge badge-navy">🚗 15 min drive</span>  <span class="badge badge-navy">🚗 Requires transport</span> <span class="price-tier">$$<span class="price-dim">$</span></span></div>
+    <span class="category-tag">Zoo</span>
+  </div>
+  <p class="card-desc">Award-winning zoo with naturalistic habitats. Home to grizzly bears, penguins, gorillas, and more.</p>
+  <p class="card-addr">📍 5500 Phinney Ave N, Seattle, WA 98103</p>
+  <a href="https://www.zoo.org/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+<div class="card" data-lat="47.518359" data-lng="-122.296496">
+  <div class="card-header">
+    <h3 class="card-title">Museum of Flight</h3>
+    <div class="card-badges"><span class="badge badge-navy">🚗 20 min drive</span>  <span class="badge badge-navy">🚗 Requires transport</span> <span class="price-tier">$$<span class="price-dim">$</span></span></div>
+    <span class="category-tag">Museum</span>
+  </div>
+  <p class="card-desc">World's largest private air and space museum. See the first Air Force One, a Concorde, space shuttle trainer, and 175+ aircraft.</p>
+  <p class="card-addr">📍 9404 E Marginal Way S, Seattle, WA 98108</p>
+  <a href="https://www.museumofflight.org/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+<div class="card" data-lat="47.675448" data-lng="-122.209257">
+  <div class="card-header">
+    <h3 class="card-title">Kirkland Waterfront</h3>
+    <div class="card-badges"><span class="badge badge-navy">🚗 20 min drive</span>  <span class="badge badge-navy">🚗 Requires transport</span> <span class="price-free">FREE</span></div>
+    <span class="category-tag">Waterfront / Town</span>
+  </div>
+  <p class="card-desc">Charming lakeside town with waterfront parks, public art, boutique shopping, and excellent restaurants along Lake Washington.</p>
+  <p class="card-addr">📍 Marina Park, 25 Lakeshore Plaza, Kirkland, WA 98033</p>
+  <a href="https://www.explorekirkland.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+<div class="card" data-lat="47.642492" data-lng="-122.136927">
+  <div class="card-header">
+    <h3 class="card-title">Microsoft Visitor Center</h3>
+    <div class="card-badges"><span class="badge badge-navy">🚗 25 min drive</span>  <span class="badge badge-navy">🚗 Requires transport</span> <span class="price-free">FREE</span></div>
+    <span class="category-tag">Tech / Corporate Campus</span>
+  </div>
+  <p class="card-desc">Interactive exhibits showcasing Microsoft's latest technology, from HoloLens to Xbox. Located on the Redmond campus.</p>
+  <p class="card-addr">📍 15010 NE 36th St, Redmond, WA 98052</p>
+  <a href="https://www.microsoft.com/en-us/visitorcenter" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+<div class="card" data-lat="47.614422" data-lng="-122.192337">
+  <div class="card-header">
+    <h3 class="card-title">Bellevue via 2 Line Light Rail</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚇 26 min transit</span>  <span class="badge badge-navy">🚗 Requires transport</span> <span class="price-free">FREE</span></div>
+    <span class="category-tag">City / Shopping / Family</span>
+  </div>
+  <p class="card-desc">Take the brand-new 2 Line across the floating bridge to the Eastside. Bellevue Square shopping, Bellevue Downtown Park, KidsQuest Children's Museum, and the Crossroads food court with 15+ international kiosks, jumbo chess, and a public library.</p>
+  <p class="card-tip">💡 The 2 Line opened March 2026 — first light rail across a floating bridge in the world. No car needed!</p>
+  <p class="card-addr">📍 Bellevue, WA 98004</p>
+</div>
+
+<div class="card" data-lat="47.754583" data-lng="-122.15889">
+  <div class="card-header">
+    <h3 class="card-title">Woodinville Wine Country</h3>
+    <div class="card-badges"><span class="badge badge-navy">🚗 30 min drive</span>  <span class="badge badge-navy">🚗 Requires transport</span> <span class="price-tier">$$<span class="price-dim">$</span></span></div>
+    <span class="category-tag">Wine / Tasting</span>
+  </div>
+  <p class="card-desc">Washington State's premier wine tasting hub — 130+ tasting rooms in 5.6 square miles. Visit Chateau Ste. Michelle (oldest winery), Novelty Hill-Januik (artisan pizzas), DeLille Cellars (90-min winery tour), or Two Vintners (family-friendly with kids' play area). Washington is the 2nd largest US wine producer.</p>
+  <p class="card-tip">💡 Use rideshare or book a guided tour from Seattle to avoid driving between the Hollywood and Warehouse districts.</p>
+  <p class="card-addr">📍 Woodinville, WA 98072</p>
+  <a href="https://woodinvillewinecountry.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+<div class="card" data-lat="47.6027" data-lng="-122.3389">
+  <div class="card-header">
+    <h3 class="card-title">Bainbridge Island</h3>
+    <div class="card-badges"><span class="badge badge-navy">⛴️ 35 min ferry</span>  <span class="badge badge-navy">🚗 Requires transport</span> <span class="price-tier">$<span class="price-dim">$$</span></span></div>
+    <span class="category-tag">Island / Day Trip</span>
+  </div>
+  <p class="card-desc">Take the Washington State Ferry for a scenic 35-minute ride. Charming downtown Winslow has boutiques, wineries, and waterfront restaurants.</p>
+  <p class="card-tip">💡 Walk-on the ferry from Colman Dock — no car needed for downtown Winslow.</p>
+  <p class="card-addr">📍 Colman Dock, Pier 52, Seattle, WA 98104</p>
+  <a href="https://www.bainbridgeisland.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+<div class="card" data-lat="47.542155" data-lng="-121.836632">
+  <div class="card-header">
+    <h3 class="card-title">Snoqualmie Falls</h3>
+    <div class="card-badges"><span class="badge badge-navy">🚗 35 min drive</span>  <span class="badge badge-navy">🚗 Requires transport</span> <span class="price-free">FREE</span></div>
+    <span class="category-tag">Nature / Waterfall</span>
+  </div>
+  <p class="card-desc">Stunning 268-foot waterfall — 100 feet taller than Niagara Falls. Easy viewpoint access from the parking area. Famous from Twin Peaks.</p>
+  <p class="card-addr">📍 6501 Railroad Ave SE, Snoqualmie, WA 98065</p>
+  <a href="https://www.snoqualmiefalls.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+<div class="card" data-lat="47.918494" data-lng="-122.292439">
+  <div class="card-header">
+    <h3 class="card-title">Future of Flight Aviation Center & Boeing Tour</h3>
+    <div class="card-badges"><span class="badge badge-navy">🚗 40 min drive</span>  <span class="badge badge-navy">🚗 Requires transport</span> <span class="price-tier">$$<span class="price-dim">$</span></span></div>
+    <span class="category-tag">Museum / Factory Tour</span>
+  </div>
+  <p class="card-desc">Tour the world's largest building by volume where Boeing 747s, 767s, 777s, and 787 Dreamliners are assembled. Advance booking required.</p>
+  <p class="card-addr">📍 8415 Paine Field Blvd, Mukilteo, WA 98275</p>
+  <a href="https://www.futureofflight.org/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+<div class="card" data-lat="47.95022" data-lng="-122.297075">
+  <div class="card-header">
+    <h3 class="card-title">Whidbey Island</h3>
+    <div class="card-badges"><span class="badge badge-navy">🚗 50 min drive</span>  <span class="badge badge-navy">🚗 Requires transport</span> <span class="price-tier">$<span class="price-dim">$$</span></span></div>
+    <span class="category-tag">Island / Nature</span>
+  </div>
+  <p class="card-desc">Scenic island with Deception Pass State Park, lavender farms, Ebey's Landing National Historical Reserve, and quaint seaside towns.</p>
+  <p class="card-addr">📍 Mukilteo Ferry Terminal, Mukilteo, WA 98275</p>
+  <a href="https://www.whidbeycamanoislands.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+<div class="card" data-lat="47.606028" data-lng="-120.64324">
+  <div class="card-header">
+    <h3 class="card-title">Leavenworth Bavarian Village</h3>
+    <div class="card-badges"><span class="badge badge-navy">🚗 120 min drive</span>  <span class="badge badge-navy">🚗 Requires transport</span> <span class="price-free">FREE</span></div>
+    <span class="category-tag">Town / Culture</span>
+  </div>
+  <p class="card-desc">Charming Bavarian-themed village in the Cascades. In November, the Christmas lighting festival begins — a magical experience with German food and holiday markets.</p>
+  <p class="card-addr">📍 Leavenworth, WA 98826</p>
+  <a href="https://leavenworth.org/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+  </div>
+</section>
+
+<!-- ═══ LIFE SCIENCES HERITAGE ═══ -->
+<section class="section section-navy" id="lifesciences">
+  <div class="section-header">
+    <h2>🧬 Seattle's Life Sciences Legacy</h2>
+    <div class="section-line"></div>
+    <p>Relevant to YOU — Seattle is a global epicenter for molecular pathology, immunology, and precision medicine</p>
+  </div>
+  <div class="card-grid">
+    <div class="card card-lifesci">
+  <h3 class="card-title">Fred Hutchinson Cancer Center</h3>
+  <span class="category-tag">Research / Cancer</span>
+  <span class="neighborhood-tag">📍 South Lake Union</span>
+  <p class="card-desc">World-class biomedical research hub for cancer, molecular pathology, and infectious diseases. Following 2022 merger with Seattle Cancer Care Alliance, features state-of-the-art laboratories with sustainable design. Lab tours require months of advance booking.</p>
+  <p class="card-note">🔬 Relevant to medical professionals — molecular pathology research</p>
+  <a href="https://www.fredhutch.org/" target="_blank" class="card-link">Learn More →</a>
+</div>
+<div class="card card-lifesci">
+  <h3 class="card-title">Allen Institute</h3>
+  <span class="category-tag">Research / Neuroscience</span>
+  <span class="neighborhood-tag">📍 South Lake Union</span>
+  <p class="card-desc">Founded by Microsoft co-founder Paul G. Allen. Operates under 'open science' philosophy sharing free data and tools globally. Research in neuroscience, immunology, and cell biology.</p>
+  
+  <a href="https://alleninstitute.org/" target="_blank" class="card-link">Learn More →</a>
+</div>
+<div class="card card-lifesci">
+  <h3 class="card-title">UW Medicine SLU Research Hub</h3>
+  <span class="category-tag">Academic / Research</span>
+  <span class="neighborhood-tag">📍 South Lake Union</span>
+  <p class="card-desc">University of Washington's research hub where scientists focus on molecular imaging, protein design, and translational medicine.</p>
+  
+  <a href="https://www.uwmedicine.org/" target="_blank" class="card-link">Learn More →</a>
+</div>
+<div class="card card-lifesci">
+  <h3 class="card-title">First Hill 'Pill Hill' Medical District</h3>
+  <span class="category-tag">Historic / Medical</span>
+  <span class="neighborhood-tag">📍 First Hill</span>
+  <p class="card-desc">Seattle's historic medical district known as 'Pill Hill.' Home to Swedish Medical Center (founded 1910). Walking tours available via HistoryLink showing the evolution from 1883 timber baron mansions to modern medical facilities.</p>
+  
+  
+</div>
+<div class="card card-lifesci">
+  <h3 class="card-title">South Lake Union Life Sciences Cluster</h3>
+  <span class="category-tag">Biotech Hub</span>
+  <span class="neighborhood-tag">📍 South Lake Union</span>
+  <p class="card-desc">Greater Seattle supports 1,180+ life science companies generating $13.7 billion in gross regional product. The SLU neighborhood houses Amazon HQ alongside Fred Hutch, Allen Institute, and UW Medicine — making it one of the world's most formidable life science clusters.</p>
+  
+  
+</div>
+  </div>
+</section>
+
+<!-- ═══ FAMILY ACTIVITIES ═══ -->
+<section class="section section-alt" id="family">
+  <div class="section-header">
+    <h2>👨‍👩‍👧‍👦 Family Activities</h2>
+    <div class="section-line"></div>
+    <p>Rainy-day-proof fun for families — indoor and outdoor options for all ages</p>
+  </div>
+  <div id="familyMap" class="map-wide"></div>
+  <div class="card-grid" id="familyCards">
+    <div class="card card-family">
+  <div class="card-header">
+    <h3 class="card-title">Artists at Play Playground</h3>
+    <div class="card-badges">
+      <span class="badge badge-blue">🚶 20 min walk</span> <span class="price-free">FREE</span>
+      <span class="badge badge-outdoor">🌳 Outdoor</span>
+      <span class="badge badge-age">Ages: All ages</span>
+    </div>
+  </div>
+  <p class="card-desc">Expansive outdoor playground at Seattle Center with massive climbing structures, 30-foot climbing tower, tube slides, and interactive musical instruments.</p>
+  
+</div>
+<div class="card card-family">
+  <div class="card-header">
+    <h3 class="card-title">Pacific Science Center</h3>
+    <div class="card-badges">
+      <span class="badge badge-blue">🚶 22 min walk</span> <span class="price-tier">$$<span class="price-dim">$</span></span>
+      <span class="badge badge-indoor">🏠 Indoor</span>
+      <span class="badge badge-age">Ages: All ages</span>
+    </div>
+  </div>
+  <p class="card-desc">Tropical Butterfly House, Tinker Tank makerspace, live science stages, dinosaur exhibits. $32–35 adults, $26–28 children. 'Exploration for All' sensory-friendly sessions.</p>
+  <a href="https://www.pacificsciencecenter.org/" target="_blank" class="card-link">Plan Visit →</a>
+</div>
+<div class="card card-family">
+  <div class="card-header">
+    <h3 class="card-title">Seattle Children's Museum</h3>
+    <div class="card-badges">
+      <span class="badge badge-blue">🚶 20 min walk</span> <span class="price-tier">$<span class="price-dim">$$</span></span>
+      <span class="badge badge-indoor">🏠 Indoor</span>
+      <span class="badge badge-age">Ages: 0–8 years</span>
+    </div>
+  </div>
+  <p class="card-desc">Interactive play zones in the Seattle Center Armory. $16–18 admission, under 1 free. 'Museums for All' program ($5 reduced).</p>
+  <a href="https://thechildrensmuseum.org/" target="_blank" class="card-link">Plan Visit →</a>
+</div>
+<div class="card card-family">
+  <div class="card-header">
+    <h3 class="card-title">Woodland Park Zoo — Zoomazium</h3>
+    <div class="card-badges">
+      <span class="badge badge-navy">🚗 15 min drive</span> <span class="price-tier">$$<span class="price-dim">$</span></span>
+      <span class="badge badge-indoor">🏠 Indoor</span>
+      <span class="badge badge-age">Ages: 0–8 years</span>
+    </div>
+  </div>
+  <p class="card-desc">Nature-themed indoor play space with mountain cave, rope bridge, and 20-foot climbing tree. Included with zoo admission.</p>
+  <a href="https://www.zoo.org/" target="_blank" class="card-link">Plan Visit →</a>
+</div>
+<div class="card card-family">
+  <div class="card-header">
+    <h3 class="card-title">PlayDate SEA</h3>
+    <div class="card-badges">
+      <span class="badge badge-navy">🚗 10 min drive</span> <span class="price-tier">$<span class="price-dim">$$</span></span>
+      <span class="badge badge-indoor">🏠 Indoor</span>
+      <span class="badge badge-age">Ages: 0–10 years</span>
+    </div>
+  </div>
+  <p class="card-desc">8,000 sq ft multi-level climbing structure with toddler zones. Attached café with pizza and espresso for parents.</p>
+  <a href="https://www.playdatesea.com/" target="_blank" class="card-link">Plan Visit →</a>
+</div>
+<div class="card card-family">
+  <div class="card-header">
+    <h3 class="card-title">KidsQuest Children's Museum</h3>
+    <div class="card-badges">
+      <span class="badge badge-blue">🚇 30 min transit</span> <span class="price-tier">$<span class="price-dim">$$</span></span>
+      <span class="badge badge-indoor">🏠 Indoor</span>
+      <span class="badge badge-age">Ages: 0–10 years</span>
+    </div>
+  </div>
+  <p class="card-desc">STEM-focused exhibits in Bellevue. Take the 2 Line + short walk from Bellevue Downtown Station. $5 parking.</p>
+  <a href="https://www.kidsquestmuseum.org/" target="_blank" class="card-link">Plan Visit →</a>
+</div>
+  </div>
+</section>
+
+<!-- ═══ SEASONAL EVENTS ═══ -->
+<section class="section">
+  <div class="section-header">
+    <h2>🎄 Seasonal Events</h2>
+    <div class="section-line"></div>
+    <p>November in Seattle means the start of holiday magic</p>
+  </div>
+  <div class="card-grid">
+    <div class="card card-seasonal">
+  <h3 class="card-title">🎄 WildLanterns at Woodland Park Zoo</h3>
+  <span class="category-tag">Light Festival</span>
+  <span class="badge badge-blue">📅 Opens mid-November through January 18</span>
+  <span class="price-tier">$$<span class="price-dim">$</span></span>
+  <p class="card-desc">Spectacular evening festival with massive animal and nature-themed lantern displays illuminating the zoo pathways. $39.95 adults, $34.95 children.</p>
+  <p class="card-tip">💡 Look for 'Night Owls' 21+ evenings — explore kid-free with holiday cocktails by fire pits and carousel rides.</p>
+  <a href="https://www.zoo.org/wildlanterns" target="_blank" class="card-link">Details →</a>
+</div>
+<div class="card card-seasonal">
+  <h3 class="card-title">🎄 Leavenworth Christmas Lighting Festival</h3>
+  <span class="category-tag">Holiday Festival</span>
+  <span class="badge badge-blue">📅 Weekends starting late November</span>
+  <span class="price-free">FREE</span>
+  <p class="card-desc">Bavarian village transformed with millions of lights, German food, glühwein, and holiday markets. Lighting ceremony at dusk.</p>
+  
+  <a href="https://leavenworth.org/" target="_blank" class="card-link">Details →</a>
+</div>
+<div class="card card-seasonal">
+  <h3 class="card-title">🎄 Seattle CityPASS</h3>
+  <span class="category-tag">Discount Pass</span>
+  
+  <span class="price-tier">$$<span class="price-dim">$</span></span>
+  <p class="card-desc">Save up to 47% on combined admissions to Space Needle, Seattle Aquarium, and choice of MoPOP, Woodland Park Zoo, or Argosy Cruises.</p>
+  
+  <a href="https://www.citypass.com/seattle" target="_blank" class="card-link">Details →</a>
+</div>
+  </div>
+</section>
+
+<!-- ═══ SHOPPING ═══ -->
+<section class="section section-alt" id="shopping">
+  <div class="section-header">
+    <h2>🛍️ Shopping</h2>
+    <div class="section-line"></div>
+  </div>
+  <div id="shoppingMap" class="map-wide"></div>
+  <div class="card-grid" id="shoppingCards">
+    <div class="card" data-lat="47.612883" data-lng="-122.335289">
+  <div class="card-header">
+    <h3 class="card-title">Pacific Place</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 3 min walk</span>  </div>
+  </div>
+  <p class="card-desc">Upscale downtown mall with dining, cinema, and retail. Connected to the convention center area.</p>
+  <p class="card-addr">📍 600 Pine St, Seattle, WA 98101</p>
+  <a href="https://www.pacificplaceseattle.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+<div class="card" data-lat="47.611921" data-lng="-122.336541">
+  <div class="card-header">
+    <h3 class="card-title">Nordstrom Flagship</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 4 min walk</span>  </div>
+  </div>
+  <p class="card-desc">Nordstrom's original flagship store — the company was founded in Seattle in 1901. Five stories of fashion, shoes, and cosmetics.</p>
+  <p class="card-addr">📍 500 Pine St, Seattle, WA 98101</p>
+  <a href="https://www.nordstrom.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+<div class="card" data-lat="47.611991" data-lng="-122.337391">
+  <div class="card-header">
+    <h3 class="card-title">Westlake Center</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 5 min walk</span>  </div>
+  </div>
+  <p class="card-desc">Downtown shopping center and Monorail terminal. Retail shops and food options.</p>
+  <p class="card-addr">📍 400 Pine St, Seattle, WA 98101</p>
+  <a href="https://www.westlakecenter.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+<div class="card" data-lat="47.608754" data-lng="-122.3402">
+  <div class="card-header">
+    <h3 class="card-title">Pike Place Market Shops</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 10 min walk</span>  </div>
+  </div>
+  <p class="card-desc">Handcrafted jewelry, local art, specialty foods, flowers, and unique Seattle souvenirs from independent vendors.</p>
+  <p class="card-addr">📍 85 Pike St, Seattle, WA 98101</p>
+</div>
+
+<div class="card" data-lat="47.662674" data-lng="-122.299114">
+  <div class="card-header">
+    <h3 class="card-title">University Village</h3>
+    <div class="card-badges"><span class="badge badge-navy">🚗 15 min drive</span>  </div>
+  </div>
+  <p class="card-desc">Upscale open-air shopping center with national brands, local boutiques, and excellent dining options.</p>
+  <p class="card-addr">📍 2623 NE University Village St, Seattle, WA 98105</p>
+  <a href="https://uvillage.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+<div class="card" data-lat="47.614666" data-lng="-122.319677">
+  <div class="card-header">
+    <h3 class="card-title">Elliott Bay Book Company</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 15 min walk</span>  </div>
+  </div>
+  <p class="card-desc">Massive, multi-level independent bookstore — Capitol Hill's literary soul. A must-visit for book lovers.</p>
+  <p class="card-addr">📍 1521 10th Ave, Seattle, WA 98122</p>
+  <a href="https://www.elliottbaybook.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+<div class="card" data-lat="47.615655" data-lng="-122.203677">
+  <div class="card-header">
+    <h3 class="card-title">Bellevue Square</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚇 30 min transit</span>  </div>
+  </div>
+  <p class="card-desc">Premium Eastside shopping via the new 2 Line light rail. High-end department stores adjacent to Bellevue Downtown Park.</p>
+  <p class="card-addr">📍 575 Bellevue Square, Bellevue, WA 98004</p>
+</div>
+
+  </div>
+</section>
+
+<!-- ═══ ENTERTAINMENT ═══ -->
+<section class="section" id="entertainment">
+  <div class="section-header">
+    <h2>🎭 Entertainment & Nightlife</h2>
+    <div class="section-line"></div>
+  </div>
+  <div id="entertainmentMap" class="map-wide"></div>
+  <div class="card-grid" id="entertainmentCards">
+    <div class="card" data-lat="47.608514" data-lng="-122.339473">
+  <div class="card-header">
+    <h3 class="card-title">The Showbox</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 8 min walk</span>  </div>
+  </div>
+  <p class="card-desc">Legendary music venue since 1939. Past performers include Duke Ellington, Muddy Waters, and Pearl Jam.</p>
+  <p class="card-addr">📍 1426 1st Ave, Seattle, WA 98101</p>
+  <a href="https://www.showboxpresents.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+<div class="card" data-lat="47.609168" data-lng="-122.333984">
+  <div class="card-header">
+    <h3 class="card-title">The 5th Avenue Theatre</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 4 min walk</span>  </div>
+  </div>
+  <p class="card-desc">Historic theater featuring Broadway-quality musicals and plays in a stunning Imperial Chinese-inspired interior.</p>
+  <p class="card-addr">📍 1308 5th Ave, Seattle, WA 98101</p>
+  <a href="https://www.5thavenue.org/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+<div class="card" data-lat="47.614581" data-lng="-122.339152">
+  <div class="card-header">
+    <h3 class="card-title">Dimitriou's Jazz Alley</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 10 min walk</span>  </div>
+  </div>
+  <p class="card-desc">Premier jazz venue with dinner-and-show packages. World-class jazz, blues, and R&B performances.</p>
+  <p class="card-addr">📍 2033 6th Ave, Seattle, WA 98121</p>
+  <a href="https://www.jazzalley.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+<div class="card" data-lat="47.595346" data-lng="-122.331644">
+  <div class="card-header">
+    <h3 class="card-title">Seattle Seahawks at Lumen Field</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 25 min walk</span>  </div>
+  </div>
+  <p class="card-desc">NFL games during the conference dates — check the schedule! The stadium is a 25-minute walk or short rideshare from the convention center.</p>
+  <p class="card-note">📌 Check schedule for November home games</p>
+  <p class="card-addr">📍 800 Occidental Ave S, Seattle, WA 98134</p>
+  <a href="https://www.seahawks.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+<div class="card" data-lat="47.621901" data-lng="-122.35399">
+  <div class="card-header">
+    <h3 class="card-title">Seattle Kraken at Climate Pledge Arena</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 22 min walk</span>  </div>
+  </div>
+  <p class="card-desc">Seattle's NHL team plays at the renovated Climate Pledge Arena at Seattle Center. Great atmosphere and close to the Space Needle.</p>
+  <p class="card-note">📌 Check schedule for November home games</p>
+  <p class="card-addr">📍 334 1st Ave N, Seattle, WA 98109</p>
+  <a href="https://www.nhl.com/kraken/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+  </div>
+</section>
+
+<!-- ═══ COFFEE & BARS ═══ -->
+<section class="section section-alt" id="coffee">
+  <div class="section-header">
+    <h2>☕ Coffee & Bars</h2>
+    <div class="section-line"></div>
+    <p>Seattle is the birthplace of Starbucks and the epicenter of American specialty coffee culture</p>
+  </div>
+  <div id="coffeeMap" class="map-wide"></div>
+  <div class="card-grid" id="coffeeCards">
+    <div class="card" data-lat="47.610008" data-lng="-122.34258">
+  <div class="card-header">
+    <h3 class="card-title">Original Starbucks</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 10 min walk</span>   <span class="price-tier">$<span class="price-dim">$$</span></span></div>
+  </div>
+  <p class="card-desc">The first Starbucks store, opened in 1971. Expect a line, but it's a must-visit Seattle experience.</p>
+  <p class="card-addr">📍 1912 Pike Pl, Seattle, WA 98101</p>
+</div>
+
+<div class="card" data-lat="47.613227" data-lng="-122.344667">
+  <div class="card-header">
+    <h3 class="card-title">Bathtub Gin & Co.</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 12 min walk</span>   <span class="price-tier">$$<span class="price-dim">$</span></span></div>
+  </div>
+  <p class="card-desc">Cozy speakeasy in Belltown with craft cocktails and a hidden underground vibe.</p>
+  <p class="card-addr">📍 2205 2nd Ave, Seattle, WA 98121</p>
+  <a href="https://bathtubginseattle.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+<div class="card" data-lat="47.600162" data-lng="-122.331341">
+  <div class="card-header">
+    <h3 class="card-title">Elm Coffee Roasters</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 15 min walk</span>   <span class="price-tier">$<span class="price-dim">$$</span></span></div>
+  </div>
+  <p class="card-desc">Minimalist specialty coffee shop in Pioneer Square. Excellent pour-overs and espresso drinks.</p>
+  <p class="card-addr">📍 240 2nd Ave S, Seattle, WA 98104</p>
+</div>
+
+<div class="card" data-lat="47.611273" data-lng="-122.316476">
+  <div class="card-header">
+    <h3 class="card-title">Canon</h3>
+    <div class="card-badges"><span class="badge badge-blue">🚶 20 min walk</span>   <span class="price-tier">$$<span class="price-dim">$</span></span></div>
+  </div>
+  <p class="card-desc">Award-winning cocktail bar on Capitol Hill with over 4,000 bottles of spirits. One of the best bars in America.</p>
+  <p class="card-addr">📍 928 12th Ave, Seattle, WA 98122</p>
+  <a href="https://www.canonseattle.com/" target="_blank" rel="noopener" class="card-link">Visit Website →</a>
+</div>
+
+  </div>
+</section>
+
+<!-- ═══ LOCAL INSIGHTS ═══ -->
+<section class="section">
+  <div class="section-header">
+    <h2>💡 Local Insights</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="insight-grid">
+    <div class="insight-box"><h4>🧬 Life Sciences</h4><p>Greater Seattle supports 1,180+ life science companies generating $13.7 billion GDP. The South Lake Union neighborhood houses Fred Hutch Cancer Center, Allen Institute, and UW Medicine alongside Amazon HQ.</p></div>
+<div class="insight-box"><h4>☕ Coffee Capital</h4><p>Seattle is the birthplace of Starbucks (1971) and the epicenter of America's specialty coffee culture. Don't miss the original Starbucks at Pike Place and the 15,000 sq ft Reserve Roastery.</p></div>
+<div class="insight-box"><h4>🎸 Grunge Heritage</h4><p>Seattle gave the world grunge music — Nirvana, Pearl Jam, Soundgarden, Alice in Chains. Visit MoPOP's music exhibits and the venue scene in Capitol Hill.</p></div>
+<div class="insight-box"><h4>💻 Tech Hub</h4><p>Home to Amazon, Microsoft (Redmond), Boeing, and thousands of startups. The new 2 Line light rail connects Seattle to the Eastside tech corridor.</p></div>
+<div class="insight-box"><h4>🐟 Pike Place Market</h4><p>Pike Place Market (1907) implemented a limited-access vehicle pilot for 2026 — pedestrian-only on Pike Place between 10 AM and 4 PM. Even more walkable than before!</p></div>
+<div class="insight-box"><h4>🛡️ Safety</h4><p>Downtown and tourist areas are generally safe during daylight. Standard urban awareness advised, especially around Pioneer Square at night.</p></div>
+  </div>
+</section>
+
+<!-- ═══ PRICE KEY ═══ -->
+<div class="section">
+  <div class="price-legend">
+    <strong>Price Key:</strong> <strong>Free</strong> = No charge | <strong>$</strong> = Under $15 | <strong>$$</strong> = $15–$40 | <strong>$$$</strong> = Over $40
+  </div>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<!-- TEMPLATE: Update org info, year, and contact emails -->
+<footer class="footer">
+  <h3>SEATTLE <span>GUIDE</span></h3>
+  <p><strong>Welcome to Seattle</strong></p>
+  <p>November 10–14, 2026 — Seattle, WA</p>
+  <p style="margin-top:1rem;">
+    <a href="https://visitseattle.org" target="_blank">Visit Seattle</a> |
+    <a href="https://seattleconventioncenter.com" target="_blank">Convention Center</a>
+  </p>
+  <p style="margin-top:1rem;font-size:0.75rem;opacity:0.5;">Seattle Guide 2026 — Your curated city companion</p>
+</footer>
+
+<!-- ═══ BACK TO TOP ═══ -->
+<button class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
+
+<script>
+// Back-to-top visibility
+const btn = document.querySelector('.back-to-top');
+window.addEventListener('scroll', () => {
+  btn.classList.toggle('visible', window.scrollY > 500);
+});
+
+// Scroll animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.card, .venue-card, .transport-card, .insight-box').forEach(el => {
+  el.classList.add('fade-in');
+  observer.observe(el);
+});
+
+// ─── LEAFLET MAPS ───
+const VENUE = [47.6117, -122.3321];
+const TILE_URL = 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}@2x.png';
+const TILE_ATTR = '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>';
+
+function venueIcon() {
+  return L.divIcon({
+    className: 'venue-marker',
+    html: '<div style="background:#D4A017;color:#1B2A4A;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;border:3px solid #1B2A4A;box-shadow:0 2px 8px rgba(0,0,0,0.4);">SCC</div>',
+    iconSize: [36, 36],
+    iconAnchor: [18, 18],
+    popupAnchor: [0, -20]
+  });
+}
+
+function placeIcon(color, label) {
+  return L.divIcon({
+    className: 'place-marker',
+    html: '<div style="background:' + color + ';color:#fff;min-width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:11px;border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,0.3);padding:0 4px;">' + label + '</div>',
+    iconSize: [24, 24],
+    iconAnchor: [12, 12],
+    popupAnchor: [0, -14]
+  });
+}
+
+function initMap(mapId, cardsId, markersData, color) {
+  const mapEl = document.getElementById(mapId);
+  if (!mapEl) return;
+
+  const map = L.map(mapId, { scrollWheelZoom: false }).setView(VENUE, 14);
+  L.tileLayer(TILE_URL, { attribution: TILE_ATTR, maxZoom: 18 }).addTo(map);
+
+  // Venue marker
+  L.marker(VENUE, { icon: venueIcon(), zIndexOffset: 1000 })
+    .addTo(map)
+    .bindPopup('<strong>Seattle Convention Center</strong><br>Arch + Summit Buildings');
+
+  const cards = document.querySelectorAll('#' + cardsId + ' .card');
+  const markers = [];
+
+  markersData.forEach((m, i) => {
+    const marker = L.marker([m.lat, m.lng], { icon: placeIcon(color, (i+1).toString()) })
+      .addTo(map)
+      .bindPopup('<strong>' + m.name + '</strong>' +
+        (m.walk ? '<br>🚶 ' + m.walk + ' min walk' : '') +
+        (m.price ? '<br>' + m.price : '') +
+        (m.cuisine ? '<br><em>' + m.cuisine + '</em>' : ''));
+
+    markers.push(marker);
+
+    // Click marker → highlight card
+    marker.on('click', () => {
+      cards.forEach(c => c.classList.remove('card-active'));
+      if (cards[m.idx]) {
+        cards[m.idx].classList.add('card-active');
+        cards[m.idx].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    });
+  });
+
+  // Click card → highlight marker + open popup
+  cards.forEach((card, i) => {
+    card.addEventListener('click', (e) => {
+      if (e.target.closest('a')) return; // don't hijack link clicks
+      cards.forEach(c => c.classList.remove('card-active'));
+      card.classList.add('card-active');
+      if (markers[i]) {
+        map.setView([markersData[i].lat, markersData[i].lng], 16, { animate: true });
+        markers[i].openPopup();
+      }
+    });
+    card.style.cursor = 'pointer';
+  });
+
+  // Fit bounds to show all markers
+  const allLatLngs = [VENUE, ...markersData.map(m => [m.lat, m.lng])];
+  map.fitBounds(allLatLngs, { padding: [30, 30] });
+
+  // Fix map rendering when section scrolls into view
+  new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) map.invalidateSize();
+  }).observe(mapEl);
+}
+
+// Initialize all maps
+const diningMarkers = [{"idx": 0, "name": "Alder & Ash", "lat": 47.611338, "lng": -122.333459, "walk": 2, "price": "$$", "cuisine": "PNW New American"}, {"idx": 1, "name": "Daawat Indian Grill & Bar", "lat": 47.6128, "lng": -122.3288, "walk": 2, "price": "$$", "cuisine": "Traditional Indian"}, {"idx": 2, "name": "Wild Ginger", "lat": 47.608782, "lng": -122.337196, "walk": 3, "price": "$$", "cuisine": "Pan-Asian"}, {"idx": 3, "name": "The Capital Grille", "lat": 47.608325, "lng": -122.335367, "walk": 4, "price": "$$$", "cuisine": "Steakhouse"}, {"idx": 4, "name": "Din Tai Fung", "lat": 47.6125, "lng": -122.3363, "walk": 5, "price": "$$", "cuisine": "Taiwanese / Dumplings"}, {"idx": 5, "name": "Purple Cafe and Wine Bar", "lat": 47.607951, "lng": -122.33506, "walk": 5, "price": "$$", "cuisine": "American / Wine Bar"}, {"idx": 6, "name": "T\u00e9rra Plata", "lat": 47.614387, "lng": -122.32808, "walk": 7, "price": "$$$", "cuisine": "Farm-to-Table / Pacific NW"}, {"idx": 7, "name": "Japonessa Sushi Cocina", "lat": 47.608052, "lng": -122.339037, "walk": 8, "price": "$$$", "cuisine": "Japanese / Sushi"}, {"idx": 8, "name": "Serious Pie", "lat": 47.612903, "lng": -122.340495, "walk": 8, "price": "$$", "cuisine": "Pizza / Italian"}, {"idx": 9, "name": "Shuckers", "lat": 47.6065, "lng": -122.335, "walk": 9, "price": "$$", "cuisine": "Seafood / Oyster Bar"}, {"idx": 10, "name": "Beecher's Handmade Cheese", "lat": 47.609582, "lng": -122.341816, "walk": 10, "price": "$", "cuisine": "Cheese / American"}, {"idx": 11, "name": "Pike Place Chowder", "lat": 47.609466, "lng": -122.34107, "walk": 10, "price": "$", "cuisine": "Seafood / Chowder"}, {"idx": 12, "name": "Matt's in the Market", "lat": 47.608856, "lng": -122.340566, "walk": 10, "price": "$$$", "cuisine": "Pacific Northwest / Seafood"}, {"idx": 13, "name": "Metropolitan Grill", "lat": 47.604426, "lng": -122.334189, "walk": 10, "price": "$$$", "cuisine": "Steakhouse"}, {"idx": 14, "name": "Canlis", "lat": 47.643053, "lng": -122.346736, "walk": null, "price": "$$$", "cuisine": "Fine Dining / Pacific Northwest"}, {"idx": 15, "name": "Taylor Shellfish Oyster Bar", "lat": 47.623437, "lng": -122.354405, "walk": 18, "price": "$$", "cuisine": "Seafood"}, {"idx": 16, "name": "Bombo Italian Kitchen", "lat": 47.614614, "lng": -122.331332, "walk": 0, "price": "$$", "cuisine": "Italian"}];
+const attractionMarkers = [{"idx": 0, "name": "Freeway Park", "lat": 47.609164, "lng": -122.330511, "walk": 3, "price": "Free", "cuisine": "Park"}, {"idx": 1, "name": "Seattle Art Museum (SAM)", "lat": 47.607701, "lng": -122.338557, "walk": 8, "price": "$$", "cuisine": "Museum"}, {"idx": 2, "name": "Pike Place Market", "lat": 47.608754, "lng": -122.3402, "walk": 10, "price": "Free", "cuisine": "Market / Landmark"}, {"idx": 3, "name": "Seattle Waterfront & Pier 57", "lat": 47.606043, "lng": -122.342167, "walk": 12, "price": "Free", "cuisine": "Waterfront / Entertainment"}, {"idx": 4, "name": "Seattle Great Wheel", "lat": 47.606043, "lng": -122.342167, "walk": 12, "price": "$$", "cuisine": "Attraction"}, {"idx": 5, "name": "Seattle Aquarium", "lat": 47.607625, "lng": -122.34322, "walk": 14, "price": "$$", "cuisine": "Aquarium"}, {"idx": 6, "name": "Pioneer Square", "lat": 47.602722, "lng": -122.331354, "walk": 15, "price": "Free", "cuisine": "Historic District"}, {"idx": 7, "name": "Bill Speidel's Underground Tour", "lat": 47.602335, "lng": -122.333779, "walk": 15, "price": "$$", "cuisine": "Tour / History"}, {"idx": 8, "name": "Capitol Hill", "lat": 47.623831, "lng": -122.318368, "walk": 15, "price": "Free", "cuisine": "Neighborhood"}, {"idx": 9, "name": "Olympic Sculpture Park", "lat": 47.616272, "lng": -122.353583, "walk": 18, "price": "Free", "cuisine": "Park / Art"}, {"idx": 10, "name": "Space Needle", "lat": 47.620513, "lng": -122.349304, "walk": 20, "price": "$$$", "cuisine": "Landmark / Observation"}, {"idx": 11, "name": "Chihuly Garden and Glass", "lat": 47.621462, "lng": -122.350989, "walk": 20, "price": "$$$", "cuisine": "Museum / Art"}, {"idx": 12, "name": "Bill & Melinda Gates Foundation Discovery Center", "lat": 47.623591, "lng": -122.34737, "walk": 20, "price": "Free", "cuisine": "Science / Global Health"}, {"idx": 13, "name": "Pacific Science Center", "lat": 47.619406, "lng": -122.350778, "walk": 22, "price": "$$", "cuisine": "Museum / Science"}, {"idx": 14, "name": "Museum of Pop Culture (MoPOP)", "lat": 47.621493, "lng": -122.348225, "walk": 22, "price": "$$$", "cuisine": "Museum"}, {"idx": 15, "name": "Kerry Park", "lat": 47.629477, "lng": -122.359935, "walk": 30, "price": "Free", "cuisine": "Viewpoint"}];
+const daytripsMarkers = [{"idx": 0, "name": "Hiram M. Chittenden Locks (Ballard Locks)", "lat": 47.664662, "lng": -122.39746, "walk": "", "price": "Free", "cuisine": "Engineering / Nature"}, {"idx": 1, "name": "Woodland Park Zoo", "lat": 47.666312, "lng": -122.349302, "walk": "", "price": "$$", "cuisine": "Zoo"}, {"idx": 2, "name": "Museum of Flight", "lat": 47.518359, "lng": -122.296496, "walk": "", "price": "$$", "cuisine": "Museum"}, {"idx": 3, "name": "Kirkland Waterfront", "lat": 47.675448, "lng": -122.209257, "walk": "", "price": "Free", "cuisine": "Waterfront / Town"}, {"idx": 4, "name": "Microsoft Visitor Center", "lat": 47.642492, "lng": -122.136927, "walk": "", "price": "Free", "cuisine": "Tech / Corporate Campus"}, {"idx": 5, "name": "Bellevue via 2 Line Light Rail", "lat": 47.614422, "lng": -122.192337, "walk": "", "price": "Free", "cuisine": "City / Shopping / Family"}, {"idx": 6, "name": "Woodinville Wine Country", "lat": 47.754583, "lng": -122.15889, "walk": "", "price": "$$", "cuisine": "Wine / Tasting"}, {"idx": 7, "name": "Bainbridge Island", "lat": 47.6027, "lng": -122.3389, "walk": "", "price": "$", "cuisine": "Island / Day Trip"}, {"idx": 8, "name": "Snoqualmie Falls", "lat": 47.542155, "lng": -121.836632, "walk": "", "price": "Free", "cuisine": "Nature / Waterfall"}, {"idx": 9, "name": "Future of Flight Aviation Center & Boeing Tour", "lat": 47.918494, "lng": -122.292439, "walk": "", "price": "$$", "cuisine": "Museum / Factory Tour"}, {"idx": 10, "name": "Whidbey Island", "lat": 47.95022, "lng": -122.297075, "walk": "", "price": "$", "cuisine": "Island / Nature"}, {"idx": 11, "name": "Leavenworth Bavarian Village", "lat": 47.606028, "lng": -120.64324, "walk": "", "price": "Free", "cuisine": "Town / Culture"}];
+const familyMarkers = [{"idx": 0, "name": "Artists at Play Playground", "lat": 47.621255, "lng": -122.349741, "walk": 20, "price": "Free", "cuisine": "Playground"}, {"idx": 1, "name": "Pacific Science Center", "lat": 47.619406, "lng": -122.350778, "walk": 22, "price": "$$", "cuisine": "Science Museum"}, {"idx": 2, "name": "Seattle Children's Museum", "lat": 47.621462, "lng": -122.350989, "walk": 20, "price": "$", "cuisine": "Children's Museum"}, {"idx": 3, "name": "Woodland Park Zoo \u2014 Zoomazium", "lat": 47.666312, "lng": -122.349302, "walk": "", "price": "$$", "cuisine": "Indoor Play / Zoo"}, {"idx": 4, "name": "PlayDate SEA", "lat": 47.623161, "lng": -122.338382, "walk": "", "price": "$", "cuisine": "Indoor Playground"}, {"idx": 5, "name": "KidsQuest Children's Museum", "lat": 47.620866, "lng": -122.195904, "walk": "", "price": "$", "cuisine": "Children's Museum"}];
+const shoppingMarkers = [{"idx": 0, "name": "Pacific Place", "lat": 47.612883, "lng": -122.335289, "walk": 3, "price": "", "cuisine": ""}, {"idx": 1, "name": "Nordstrom Flagship", "lat": 47.611921, "lng": -122.336541, "walk": 4, "price": "", "cuisine": ""}, {"idx": 2, "name": "Westlake Center", "lat": 47.611991, "lng": -122.337391, "walk": 5, "price": "", "cuisine": ""}, {"idx": 3, "name": "Pike Place Market Shops", "lat": 47.608754, "lng": -122.3402, "walk": 10, "price": "", "cuisine": ""}, {"idx": 4, "name": "University Village", "lat": 47.662674, "lng": -122.299114, "walk": "", "price": "", "cuisine": ""}, {"idx": 5, "name": "Elliott Bay Book Company", "lat": 47.614666, "lng": -122.319677, "walk": 15, "price": "", "cuisine": ""}, {"idx": 6, "name": "Bellevue Square", "lat": 47.615655, "lng": -122.203677, "walk": "", "price": "", "cuisine": ""}];
+const entertainmentMarkers = [{"idx": 0, "name": "The Showbox", "lat": 47.608514, "lng": -122.339473, "walk": 8, "price": "", "cuisine": ""}, {"idx": 1, "name": "The 5th Avenue Theatre", "lat": 47.609168, "lng": -122.333984, "walk": 4, "price": "", "cuisine": ""}, {"idx": 2, "name": "Dimitriou's Jazz Alley", "lat": 47.614581, "lng": -122.339152, "walk": 10, "price": "", "cuisine": ""}, {"idx": 3, "name": "Seattle Seahawks at Lumen Field", "lat": 47.595346, "lng": -122.331644, "walk": 25, "price": "", "cuisine": ""}, {"idx": 4, "name": "Seattle Kraken at Climate Pledge Arena", "lat": 47.621901, "lng": -122.35399, "walk": 22, "price": "", "cuisine": ""}];
+const coffeeMarkers = [{"idx": 0, "name": "Original Starbucks", "lat": 47.610008, "lng": -122.34258, "walk": 10, "price": "$", "cuisine": ""}, {"idx": 1, "name": "Bathtub Gin & Co.", "lat": 47.613227, "lng": -122.344667, "walk": 12, "price": "$$", "cuisine": ""}, {"idx": 2, "name": "Elm Coffee Roasters", "lat": 47.600162, "lng": -122.331341, "walk": 15, "price": "$", "cuisine": ""}, {"idx": 3, "name": "Canon", "lat": 47.611273, "lng": -122.316476, "walk": 20, "price": "$$", "cuisine": ""}];
+
+initMap('attractionsMap', 'attractionsCards', attractionMarkers, '#29B6F6');
+initMap('diningMap', 'diningCards', diningMarkers, '#B5294E');
+initMap('daytripsMap', 'daytripsCards', daytripsMarkers, '#4CAF50');
+initMap('familyMap', 'familyCards', familyMarkers, '#7B1FA2');
+initMap('shoppingMap', 'shoppingCards', shoppingMarkers, '#FF6F00');
+initMap('entertainmentMap', 'entertainmentCards', entertainmentMarkers, '#E91E63');
+initMap('coffeeMap', 'coffeeCards', coffeeMarkers, '#795548');
+</script>
+</body>
+</html>

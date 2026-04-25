@@ -1,0 +1,1061 @@
+{
+  "event": {
+    "name": "Seattle Guide 2026",
+    "organization": "",
+    "dates": "November 10–14, 2026",
+    "city": "Seattle",
+    "state": "WA",
+    "country": "USA",
+    "website": "",
+    "hashtag": "",
+    "contact": {
+      "meetings": "",
+      "exhibits": "",
+      "education": ""
+    }
+  },
+  "venue": {
+    "name": "Seattle Convention Center",
+    "shortName": "SCC",
+    "address": "705 Pike St, Seattle, WA 98101",
+    "website": "https://seattleconventioncenter.com",
+    "phone": "(206) 694-5000",
+    "latitude": 47.6117,
+    "longitude": -122.3321,
+    "description": "The first high-rise convention center in the United States, featuring an outdoor terrace garden, spacious ballroom, and sweeping views of Seattle.",
+    "gettingHere": "https://seattleconventioncenter.com/getting-here",
+    "parkingGarages": 3,
+    "archBuilding": {
+      "address": "705 Pike St, Seattle, WA 98101",
+      "sqft": 430000,
+      "description": "The original convention center since 1988. Bright, airy fourth-floor atrium connected to Freeway Park — a unique brutalist urban retreat suspended over Interstate 5. Features 205,700 sq ft of exhibit space with 25-foot ceilings."
+    },
+    "summitBuilding": {
+      "address": "900 Pine St, Seattle, WA 98101",
+      "opened": "January 2023",
+      "sqft": 570000,
+      "description": "The newer facility with expansive window walls and glass-enclosed 'Hillclimb' staircase offering views of Pike Place Market and Puget Sound. Each floor tells the story of PNW industry: timber (1st), maritime (2nd), aviation (3rd), and grunge music (4th)."
+    },
+    "totalSqft": 1000000
+  },
+  "headquarterHotel": {
+    "name": "Sheraton Grand Seattle",
+    "address": "1400 6th Ave, Seattle, WA 98101",
+    "website": "https://www.marriott.com/en-us/hotels/seasi-sheraton-grand-seattle/overview/",
+    "distanceToVenue": "0.3 blocks (0.14 mi, 3-minute walk)",
+    "rate": "$254/night",
+    "amenities": [
+      "Heated indoor pool",
+      "Two-level fitness center",
+      "Two onsite restaurants",
+      "Coffee shop",
+      "Wine bar"
+    ]
+  },
+  "weather": {
+    "month": "November",
+    "highF": 51,
+    "lowF": 40,
+    "highC": 10.5,
+    "lowC": 4,
+    "precipitation": "6.31–6.54 inches average (wettest month)",
+    "rainDays": 16.5,
+    "daylightHours": 9.4,
+    "sunrise": "7:24 AM",
+    "sunset": "4:48 PM",
+    "clearSkyProbability": "32%",
+    "conditions": "Expect overcast skies with frequent rain. Pack layers and a waterproof jacket with hood — locals skip umbrellas due to blustery winds. Occasional clear days offer stunning mountain views.",
+    "icon": "cloud-rain",
+    "tip": "Layer up: waterproof hooded jacket, insulated layers, waterproof footwear. Skip the umbrella — wind makes them useless here."
+  },
+  "transportation": [
+    {
+      "mode": "Link Light Rail",
+      "description": "Sound Transit's 1 Line runs from SEA to downtown. Exit at Westlake Station — 3 blocks from convention center. From baggage claim, proceed to 4th floor parking garage, cross Skybridge 4. Free 'Train-to-Plane' shuttle runs along the 0.4-mile walkway. Trains every 8–15 min. Youth 18 and under ride free. Seniors/disabled $1.00 with RRFP. Pay via ORCA card, Transit GO Ticket app, or station machines.",
+      "cost": "$3.00 one way from airport",
+      "duration": "~40 minutes from SEA",
+      "website": "https://www.soundtransit.org/"
+    },
+    {
+      "mode": "King County Metro Bus",
+      "description": "Extensive bus network throughout Seattle and surrounding areas. Many routes stop near the convention center.",
+      "cost": "$2.75 per ride",
+      "website": "https://kingcounty.gov/depts/transportation/metro.aspx"
+    },
+    {
+      "mode": "Seattle Monorail",
+      "description": "Connects Westlake Center (near convention center) to Seattle Center (Space Needle area) in 2 minutes. Trains every 10 minutes. Note: As of Jan 2026, no ORCA E-purse transfers — separate fare required. Youth 6–18 and seniors $2.00, under 5 free. Hours: 7:30 AM–9 PM Mon–Thu, extended to 11 PM Fri–Sat.",
+      "cost": "$4.00 one way",
+      "website": "https://www.seattlemonorail.com/"
+    },
+    {
+      "mode": "Link 2 Line (Crosslake Connection)",
+      "description": "Opened March 28, 2026. World's first light rail across a floating bridge! Connects Seattle's International District to Mercer Island, Bellevue, and Redmond. Bellevue Downtown to Westlake Station in 26 minutes. Trains every 8 min during peak hours. Combined with the 1 Line, downtown tunnel trains arrive every 4 minutes.",
+      "cost": "~$3.00 one way",
+      "duration": "26 min to Bellevue Downtown",
+      "website": "https://www.soundtransit.org/"
+    },
+    {
+      "mode": "Shuttle Express",
+      "description": "Shared and private van rides from the Ground Transportation Plaza at SEA airport. Less expensive alternative to taxis with direct hotel drop-offs.",
+      "cost": "From $25 shared, $55+ private",
+      "website": "https://www.shuttleexpress.com/"
+    },
+    {
+      "mode": "Rideshare (Uber/Lyft)",
+      "description": "Widely available. Airport to downtown typically $40–55. Pick-up from the 3rd floor of SEA airport parking garage.",
+      "cost": "$40–55 from airport"
+    },
+    {
+      "mode": "Taxis",
+      "description": "Available at the airport and throughout downtown. Yellow Cab and Orange Cab are major operators.",
+      "cost": "$40–55 from airport",
+      "phone": "(206) 622-6500"
+    },
+    {
+      "mode": "Lime Bikes & Scooters",
+      "description": "Electric bikes and scooters available throughout the city via the Lime app. Great for short trips around downtown and nearby neighborhoods.",
+      "cost": "$1 to unlock + $0.39/min",
+      "website": "https://www.li.me/"
+    },
+    {
+      "mode": "Washington State Ferries",
+      "description": "Ferries depart from Colman Dock (Pier 52) to Bainbridge Island and Bremerton. A scenic ride with skyline and mountain views.",
+      "cost": "$11.05 round trip walk-on (youth 18 and under free). Vehicle fares vary by length.",
+      "website": "https://wsdot.wa.gov/ferries"
+    },
+    {
+      "mode": "Water Taxi",
+      "description": "King County Water Taxi runs from Pier 50 to West Seattle (Alki Beach) — a fun alternative to driving.",
+      "cost": "$5.75 one way",
+      "website": "https://kingcounty.gov/depts/transportation/water-taxi.aspx"
+    }
+  ],
+  "dining": [
+    {
+      "name": "Bombo Italian Kitchen",
+      "cuisine": "Italian",
+      "address": "1600 9th Ave, Seattle, WA 98101",
+      "walkingMinutes": 0,
+      "distanceMiles": 0,
+      "priceTier": "$$",
+      "description": "Located ON the ground floor of the Summit convention center building itself. Pacific Northwest-inspired Italian dishes — delegates don't need to leave the facility for an excellent meal.",
+      "note": "On-site at SCC Summit Building",
+      "latitude": 47.614614,
+      "longitude": -122.331332
+    },
+    {
+      "name": "Alder & Ash",
+      "cuisine": "PNW New American",
+      "address": "629 Pike St, Seattle, WA 98101",
+      "walkingMinutes": 2,
+      "distanceMiles": 0.1,
+      "priceTier": "$$",
+      "description": "Stylish New American dining directly across from the Arch building's main entrance at 7th and Pike. Optimal for working lunches, breakfast, or post-conference craft cocktails.",
+      "latitude": 47.611338,
+      "longitude": -122.333459
+    },
+    {
+      "name": "Daawat Indian Grill & Bar",
+      "cuisine": "Traditional Indian",
+      "address": "Corner of 9th Ave & Pike St, Seattle, WA 98101",
+      "walkingMinutes": 2,
+      "distanceMiles": 0.1,
+      "priceTier": "$$",
+      "description": "Expansive lunch buffet and traditional Indian delicacies. Located directly between the Arch and Summit buildings. Classic family recipes.",
+      "latitude": 47.6128,
+      "longitude": -122.3288
+    },
+    {
+      "name": "Térra Plata",
+      "cuisine": "Farm-to-Table / Pacific NW",
+      "address": "1501 Melrose Ave, Seattle, WA 98101",
+      "walkingMinutes": 7,
+      "distanceMiles": 0.35,
+      "priceTier": "$$$",
+      "description": "Premier rooftop farm-to-table dining on Capitol Hill. Sustainably sourced Pacific Northwest ingredients with expertly roasted seasonal vegetables and locally sourced proteins.",
+      "latitude": 47.614387,
+      "longitude": -122.32808
+    },
+    {
+      "name": "Beecher's Handmade Cheese",
+      "cuisine": "Cheese / American",
+      "address": "1600 Pike Pl, Seattle, WA 98101",
+      "website": "https://beechershandmadecheese.com/",
+      "walkingMinutes": 10,
+      "distanceMiles": 0.5,
+      "priceTier": "$",
+      "description": "Watch artisan cheese being made through the viewing window at Pike Place Market. Famous for their 'World's Best' mac and cheese.",
+      "latitude": 47.609582,
+      "longitude": -122.341816
+    },
+    {
+      "name": "Wild Ginger",
+      "cuisine": "Pan-Asian",
+      "address": "1401 3rd Ave, Seattle, WA 98101",
+      "website": "https://www.wildginger.net/",
+      "walkingMinutes": 3,
+      "distanceMiles": 0.15,
+      "priceTier": "$$",
+      "description": "Acclaimed Pan-Asian restaurant with satay bar, fragrant curries, and craft cocktails. A Seattle institution.",
+      "latitude": 47.608782,
+      "longitude": -122.337196
+    },
+    {
+      "name": "The Capital Grille",
+      "cuisine": "Steakhouse",
+      "address": "1301 4th Ave, Seattle, WA 98101",
+      "website": "https://www.thecapitalgrille.com/",
+      "walkingMinutes": 4,
+      "distanceMiles": 0.2,
+      "priceTier": "$$$",
+      "description": "Upscale steakhouse with dry-aged steaks, fresh seafood, and an award-winning wine list.",
+      "latitude": 47.608325,
+      "longitude": -122.335367
+    },
+    {
+      "name": "Din Tai Fung",
+      "cuisine": "Taiwanese / Dumplings",
+      "address": "600 Pine St #310, Seattle, WA 98101 (Pacific Place)",
+      "website": "https://dintaifungusa.com/",
+      "walkingMinutes": 5,
+      "distanceMiles": 0.2,
+      "priceTier": "$$",
+      "description": "World-famous soup dumplings (xiao long bao) and Taiwanese specialties. Expect a wait — it's worth it.",
+      "latitude": 47.6125,
+      "longitude": -122.3363
+    },
+    {
+      "name": "Purple Cafe and Wine Bar",
+      "cuisine": "American / Wine Bar",
+      "address": "1225 4th Ave, Seattle, WA 98101",
+      "website": "https://www.purplecafe.com/",
+      "walkingMinutes": 5,
+      "distanceMiles": 0.25,
+      "priceTier": "$$",
+      "description": "Dramatic two-story wine tower, Pacific Northwest cuisine, and an extensive wine list in a stylish setting.",
+      "latitude": 47.607951,
+      "longitude": -122.33506
+    },
+    {
+      "name": "Japonessa Sushi Cocina",
+      "cuisine": "Japanese / Sushi",
+      "address": "1400 1st Ave, Seattle, WA 98101",
+      "website": "https://japonessa.com/",
+      "walkingMinutes": 8,
+      "distanceMiles": 0.4,
+      "priceTier": "$$$",
+      "description": "Creative sushi with Latin-inspired flavors. Vibrant atmosphere and inventive cocktails.",
+      "latitude": 47.608052,
+      "longitude": -122.339037
+    },
+    {
+      "name": "Serious Pie",
+      "cuisine": "Pizza / Italian",
+      "address": "316 Virginia St, Seattle, WA 98101",
+      "website": "https://www.seriouspieseattle.com/",
+      "walkingMinutes": 8,
+      "distanceMiles": 0.35,
+      "priceTier": "$$",
+      "description": "Tom Douglas' artisan wood-fired pizzas with locally sourced toppings. Casual and beloved.",
+      "latitude": 47.612903,
+      "longitude": -122.340495
+    },
+    {
+      "name": "Pike Place Chowder",
+      "cuisine": "Seafood / Chowder",
+      "address": "1530 Post Alley, Seattle, WA 98101",
+      "website": "https://pikeplacechowder.com/",
+      "walkingMinutes": 10,
+      "distanceMiles": 0.5,
+      "priceTier": "$",
+      "description": "Award-winning chowders and bisques at Pike Place Market. Try the New England clam chowder.",
+      "latitude": 47.609466,
+      "longitude": -122.34107
+    },
+    {
+      "name": "Matt's in the Market",
+      "cuisine": "Pacific Northwest / Seafood",
+      "address": "94 Pike St #32, Seattle, WA 98101",
+      "website": "https://www.mattsinthemarket.com/",
+      "walkingMinutes": 10,
+      "distanceMiles": 0.5,
+      "priceTier": "$$$",
+      "description": "Farm-to-table gem overlooking Pike Place Market. Seasonal seafood and locally sourced ingredients.",
+      "latitude": 47.608856,
+      "longitude": -122.340566
+    },
+    {
+      "name": "Metropolitan Grill",
+      "cuisine": "Steakhouse",
+      "address": "820 2nd Ave, Seattle, WA 98104",
+      "website": "https://www.themetropolitangrill.com/",
+      "walkingMinutes": 10,
+      "distanceMiles": 0.45,
+      "priceTier": "$$$",
+      "description": "Seattle's premier steakhouse since 1983. USDA Prime steaks and classic cocktails.",
+      "latitude": 47.604426,
+      "longitude": -122.334189
+    },
+    {
+      "name": "Shuckers",
+      "cuisine": "Seafood / Oyster Bar",
+      "address": "411 University St, Seattle, WA 98101 (Fairmont Olympic)",
+      "website": "https://www.fairmont.com/seattle/dining/shuckers/",
+      "walkingMinutes": 9,
+      "distanceMiles": 0.4,
+      "priceTier": "$$",
+      "description": "Iconic oyster bar in the Fairmont Olympic Hotel. Fresh Pacific Northwest seafood and craft cocktails.",
+      "latitude": 47.6065,
+      "longitude": -122.335
+    },
+    {
+      "name": "Taylor Shellfish Oyster Bar",
+      "cuisine": "Seafood",
+      "address": "124 Republican St, Seattle, WA 98109",
+      "website": "https://www.taylorshellfishfarms.com/",
+      "walkingMinutes": 18,
+      "distanceMiles": 0.9,
+      "priceTier": "$$",
+      "description": "Farm-direct shellfish from Taylor Shellfish Farms. Oysters, clams, geoduck, and more.",
+      "latitude": 47.623437,
+      "longitude": -122.354405
+    },
+    {
+      "name": "Canlis",
+      "cuisine": "Fine Dining / Pacific Northwest",
+      "address": "2576 Aurora Ave N, Seattle, WA 98109",
+      "website": "https://canlis.com/",
+      "walkingMinutes": null,
+      "drivingMinutes": 10,
+      "distanceMiles": 2.5,
+      "priceTier": "$$$",
+      "requiresTransport": true,
+      "description": "Seattle's legendary fine dining destination since 1950. Stunning lake views, impeccable service, and a world-class tasting menu. Reservations essential.",
+      "latitude": 47.643053,
+      "longitude": -122.346736
+    }
+  ],
+  "attractions": {
+    "walkable": [
+      {
+        "name": "Pike Place Market",
+        "category": "Market / Landmark",
+        "address": "85 Pike St, Seattle, WA 98101",
+        "website": "https://www.pikeplacemarket.org/",
+        "walkingMinutes": 10,
+        "distanceMiles": 0.5,
+        "priceTier": "Free",
+        "description": "Iconic public market since 1907. Watch fishmongers throw fish, visit the original Starbucks, browse local crafts, and sample artisan foods.",
+        "mustSee": true,
+        "latitude": 47.608754,
+        "longitude": -122.3402
+      },
+      {
+        "name": "Seattle Art Museum (SAM)",
+        "category": "Museum",
+        "address": "1300 1st Ave, Seattle, WA 98101",
+        "website": "https://www.seattleartmuseum.org/",
+        "walkingMinutes": 8,
+        "distanceMiles": 0.4,
+        "priceTier": "$$",
+        "description": "World-class art museum with collections spanning global cultures. The iconic Hammering Man sculpture marks the entrance.",
+        "latitude": 47.607701,
+        "longitude": -122.338557
+      },
+      {
+        "name": "Seattle Waterfront & Pier 57",
+        "category": "Waterfront / Entertainment",
+        "address": "1301 Alaskan Way, Seattle, WA 98101",
+        "website": "https://www.waterfrontseattle.org/",
+        "walkingMinutes": 12,
+        "distanceMiles": 0.6,
+        "priceTier": "Free",
+        "description": "Newly renovated waterfront with the Seattle Great Wheel, shops, restaurants, and stunning Elliott Bay views.",
+        "latitude": 47.606043,
+        "longitude": -122.342167
+      },
+      {
+        "name": "Seattle Great Wheel",
+        "category": "Attraction",
+        "address": "1301 Alaskan Way, Seattle, WA 98101",
+        "website": "https://seattlegreatwheel.com/",
+        "walkingMinutes": 12,
+        "distanceMiles": 0.6,
+        "priceTier": "$$",
+        "description": "175-foot Ferris wheel on Pier 57 with panoramic views of the skyline, Elliott Bay, and the Olympic Mountains.",
+        "latitude": 47.606043,
+        "longitude": -122.342167
+      },
+      {
+        "name": "Pioneer Square",
+        "category": "Historic District",
+        "address": "Pioneer Square, Seattle, WA 98104",
+        "website": "https://www.pioneersquare.org/",
+        "walkingMinutes": 15,
+        "distanceMiles": 0.7,
+        "priceTier": "Free",
+        "description": "Seattle's oldest neighborhood. Beautiful Romanesque architecture, art galleries, underground tours, and craft cocktail bars.",
+        "latitude": 47.602722,
+        "longitude": -122.331354
+      },
+      {
+        "name": "Bill Speidel's Underground Tour",
+        "category": "Tour / History",
+        "address": "614 1st Ave, Seattle, WA 98104",
+        "website": "https://www.undergroundtour.com/",
+        "walkingMinutes": 15,
+        "distanceMiles": 0.7,
+        "priceTier": "$$",
+        "description": "Walk beneath Seattle's streets to explore the buried city — a fascinating look at Seattle's post-fire rebuilding history.",
+        "latitude": 47.602335,
+        "longitude": -122.333779
+      },
+      {
+        "name": "Capitol Hill",
+        "category": "Neighborhood",
+        "address": "Capitol Hill, Seattle, WA 98102",
+        "website": "https://visitseattle.org/neighborhoods/capitol-hill/",
+        "walkingMinutes": 15,
+        "distanceMiles": 0.8,
+        "priceTier": "Free",
+        "description": "Seattle's vibrant cultural heart. Eclectic restaurants, live music venues, independent bookstores, and excellent coffee shops.",
+        "latitude": 47.623831,
+        "longitude": -122.318368
+      },
+      {
+        "name": "Olympic Sculpture Park",
+        "category": "Park / Art",
+        "address": "2901 Western Ave, Seattle, WA 98121",
+        "website": "https://www.seattleartmuseum.org/visit/olympic-sculpture-park",
+        "walkingMinutes": 18,
+        "distanceMiles": 0.9,
+        "priceTier": "Free",
+        "description": "Free outdoor sculpture park by the Seattle Art Museum with stunning waterfront views and large-scale contemporary art.",
+        "latitude": 47.616272,
+        "longitude": -122.353583
+      },
+      {
+        "name": "Space Needle",
+        "category": "Landmark / Observation",
+        "address": "400 Broad St, Seattle, WA 98109",
+        "website": "https://www.spaceneedle.com/",
+        "walkingMinutes": 20,
+        "distanceMiles": 1.0,
+        "priceTier": "$$$",
+        "description": "Seattle's defining landmark. The renovated observation deck features the world's first revolving glass floor at 520 feet. Purchase a combo ticket ($69) with Chihuly Garden and Glass for best value.",
+        "mustSee": true,
+        "tip": "Take the Monorail from Westlake Center (2 min ride) to get there quickly.",
+        "latitude": 47.620513,
+        "longitude": -122.349304
+      },
+      {
+        "name": "Chihuly Garden and Glass",
+        "category": "Museum / Art",
+        "address": "305 Harrison St, Seattle, WA 98109",
+        "website": "https://www.chihulygardenandglass.com/",
+        "walkingMinutes": 20,
+        "distanceMiles": 1.0,
+        "priceTier": "$$$",
+        "description": "Breathtaking exhibition of Dale Chihuly's glass sculptures in indoor galleries and an outdoor garden. Adjacent to the Space Needle.",
+        "mustSee": true,
+        "latitude": 47.621462,
+        "longitude": -122.350989
+      },
+      {
+        "name": "Freeway Park",
+        "category": "Park",
+        "address": "700 Seneca St, Seattle, WA 98101",
+        "walkingMinutes": 3,
+        "distanceMiles": 0.1,
+        "priceTier": "Free",
+        "description": "Unique brutalist urban retreat suspended directly over Interstate 5, connected to the Arch convention center. Cascading concrete fountains and evergreen landscaping — a quiet escape between sessions.",
+        "latitude": 47.609164,
+        "longitude": -122.330511
+      },
+      {
+        "name": "Bill & Melinda Gates Foundation Discovery Center",
+        "category": "Science / Global Health",
+        "address": "440 5th Ave N, Seattle, WA 98109",
+        "website": "https://www.discovergates.org/",
+        "walkingMinutes": 20,
+        "distanceMiles": 1.0,
+        "priceTier": "Free",
+        "description": "Free interactive exhibition on global health initiatives including efforts to eradicate polio and tackle tuberculosis. Highly relevant for medical professionals.",
+        "mustSee": true,
+        "tip": "Book tour reservations at least 2 weeks in advance — free but reservation required.",
+        "requiresReservation": true,
+        "latitude": 47.623591,
+        "longitude": -122.34737
+      },
+      {
+        "name": "Pacific Science Center",
+        "category": "Museum / Science",
+        "address": "200 2nd Ave N, Seattle, WA 98109",
+        "website": "https://www.pacificsciencecenter.org/",
+        "walkingMinutes": 22,
+        "distanceMiles": 1.1,
+        "priceTier": "$$",
+        "description": "Interactive science museum with Tropical Butterfly House, Tinker Tank makerspace, live science stages, and dinosaur exhibits. $32–35 adults, $26–28 children. Offers sensory-friendly 'Exploration for All' sessions.",
+        "latitude": 47.619406,
+        "longitude": -122.350778
+      },
+      {
+        "name": "Museum of Pop Culture (MoPOP)",
+        "category": "Museum",
+        "address": "325 5th Ave N, Seattle, WA 98109",
+        "website": "https://www.mopop.org/",
+        "walkingMinutes": 22,
+        "distanceMiles": 1.1,
+        "priceTier": "$$$",
+        "description": "Interactive museum celebrating music, science fiction, and pop culture. Designed by Frank Gehry. Guitar collections, Nirvana exhibits, and more.",
+        "latitude": 47.621493,
+        "longitude": -122.348225
+      },
+      {
+        "name": "Seattle Aquarium",
+        "category": "Aquarium",
+        "address": "1483 Alaskan Way, Seattle, WA 98101",
+        "website": "https://www.seattleaquarium.org/",
+        "walkingMinutes": 14,
+        "distanceMiles": 0.65,
+        "priceTier": "$$",
+        "description": "Recently expanded ocean pavilion on the waterfront. Pacific Northwest marine life, touch pools, and underwater dome.",
+        "latitude": 47.607625,
+        "longitude": -122.34322
+      },
+      {
+        "name": "Kerry Park",
+        "category": "Viewpoint",
+        "address": "211 W Highland Dr, Seattle, WA 98119",
+        "website": "https://www.seattle.gov/parks/allparks/kerry-park",
+        "walkingMinutes": 30,
+        "distanceMiles": 1.5,
+        "priceTier": "Free",
+        "description": "The postcard-perfect viewpoint of the Seattle skyline with Mount Rainier in the background. Best at sunset.",
+        "tip": "Rideshare recommended. 7-minute drive from convention center.",
+        "latitude": 47.629477,
+        "longitude": -122.359935
+      }
+    ],
+    "dayTrips": [
+      {
+        "name": "Hiram M. Chittenden Locks (Ballard Locks)",
+        "category": "Engineering / Nature",
+        "address": "3015 NW 54th St, Seattle, WA 98107",
+        "website": "https://www.ballardlocks.org/",
+        "drivingMinutes": 15,
+        "distanceMiles": 5.0,
+        "priceTier": "Free",
+        "requiresTransport": true,
+        "description": "Watch boats transit between Puget Sound and Lake Union. See salmon climbing the fish ladder (seasonal) and stroll the botanical gardens.",
+        "latitude": 47.664662,
+        "longitude": -122.39746
+      },
+      {
+        "name": "Woodland Park Zoo",
+        "category": "Zoo",
+        "address": "5500 Phinney Ave N, Seattle, WA 98103",
+        "website": "https://www.zoo.org/",
+        "drivingMinutes": 15,
+        "distanceMiles": 4.5,
+        "priceTier": "$$",
+        "requiresTransport": true,
+        "description": "Award-winning zoo with naturalistic habitats. Home to grizzly bears, penguins, gorillas, and more.",
+        "latitude": 47.666312,
+        "longitude": -122.349302
+      },
+      {
+        "name": "Museum of Flight",
+        "category": "Museum",
+        "address": "9404 E Marginal Way S, Seattle, WA 98108",
+        "website": "https://www.museumofflight.org/",
+        "drivingMinutes": 20,
+        "distanceMiles": 10.0,
+        "priceTier": "$$",
+        "requiresTransport": true,
+        "description": "World's largest private air and space museum. See the first Air Force One, a Concorde, space shuttle trainer, and 175+ aircraft.",
+        "latitude": 47.518359,
+        "longitude": -122.296496
+      },
+      {
+        "name": "Bainbridge Island",
+        "category": "Island / Day Trip",
+        "address": "Colman Dock, Pier 52, Seattle, WA 98104",
+        "website": "https://www.bainbridgeisland.com/",
+        "drivingMinutes": null,
+        "ferryMinutes": 35,
+        "distanceMiles": 8.0,
+        "priceTier": "$",
+        "requiresTransport": true,
+        "description": "Take the Washington State Ferry for a scenic 35-minute ride. Charming downtown Winslow has boutiques, wineries, and waterfront restaurants.",
+        "tip": "Walk-on the ferry from Colman Dock — no car needed for downtown Winslow.",
+        "latitude": 47.6027,
+        "longitude": -122.3389
+      },
+      {
+        "name": "Microsoft Visitor Center",
+        "category": "Tech / Corporate Campus",
+        "address": "15010 NE 36th St, Redmond, WA 98052",
+        "website": "https://www.microsoft.com/en-us/visitorcenter",
+        "drivingMinutes": 25,
+        "distanceMiles": 15.0,
+        "priceTier": "Free",
+        "requiresTransport": true,
+        "description": "Interactive exhibits showcasing Microsoft's latest technology, from HoloLens to Xbox. Located on the Redmond campus.",
+        "latitude": 47.642492,
+        "longitude": -122.136927
+      },
+      {
+        "name": "Future of Flight Aviation Center & Boeing Tour",
+        "category": "Museum / Factory Tour",
+        "address": "8415 Paine Field Blvd, Mukilteo, WA 98275",
+        "website": "https://www.futureofflight.org/",
+        "drivingMinutes": 40,
+        "distanceMiles": 30.0,
+        "priceTier": "$$",
+        "requiresTransport": true,
+        "description": "Tour the world's largest building by volume where Boeing 747s, 767s, 777s, and 787 Dreamliners are assembled. Advance booking required.",
+        "latitude": 47.918494,
+        "longitude": -122.292439
+      },
+      {
+        "name": "Snoqualmie Falls",
+        "category": "Nature / Waterfall",
+        "address": "6501 Railroad Ave SE, Snoqualmie, WA 98065",
+        "website": "https://www.snoqualmiefalls.com/",
+        "drivingMinutes": 35,
+        "distanceMiles": 30.0,
+        "priceTier": "Free",
+        "requiresTransport": true,
+        "description": "Stunning 268-foot waterfall — 100 feet taller than Niagara Falls. Easy viewpoint access from the parking area. Famous from Twin Peaks.",
+        "latitude": 47.542155,
+        "longitude": -121.836632
+      },
+      {
+        "name": "Kirkland Waterfront",
+        "category": "Waterfront / Town",
+        "address": "Marina Park, 25 Lakeshore Plaza, Kirkland, WA 98033",
+        "website": "https://www.explorekirkland.com/",
+        "drivingMinutes": 20,
+        "distanceMiles": 12.0,
+        "priceTier": "Free",
+        "requiresTransport": true,
+        "description": "Charming lakeside town with waterfront parks, public art, boutique shopping, and excellent restaurants along Lake Washington.",
+        "latitude": 47.675448,
+        "longitude": -122.209257
+      },
+      {
+        "name": "Whidbey Island",
+        "category": "Island / Nature",
+        "address": "Mukilteo Ferry Terminal, Mukilteo, WA 98275",
+        "website": "https://www.whidbeycamanoislands.com/",
+        "drivingMinutes": 50,
+        "distanceMiles": 35.0,
+        "priceTier": "$",
+        "requiresTransport": true,
+        "description": "Scenic island with Deception Pass State Park, lavender farms, Ebey's Landing National Historical Reserve, and quaint seaside towns.",
+        "latitude": 47.95022,
+        "longitude": -122.297075
+      },
+      {
+        "name": "Leavenworth Bavarian Village",
+        "category": "Town / Culture",
+        "address": "Leavenworth, WA 98826",
+        "website": "https://leavenworth.org/",
+        "drivingMinutes": 120,
+        "distanceMiles": 120.0,
+        "priceTier": "Free",
+        "requiresTransport": true,
+        "description": "Charming Bavarian-themed village in the Cascades. In November, the Christmas lighting festival begins — a magical experience with German food and holiday markets.",
+        "latitude": 47.606028,
+        "longitude": -120.64324
+      },
+      {
+        "name": "Woodinville Wine Country",
+        "category": "Wine / Tasting",
+        "address": "Woodinville, WA 98072",
+        "website": "https://woodinvillewinecountry.com/",
+        "drivingMinutes": 30,
+        "distanceMiles": 18,
+        "priceTier": "$$",
+        "requiresTransport": true,
+        "description": "Washington State's premier wine tasting hub — 130+ tasting rooms in 5.6 square miles. Visit Chateau Ste. Michelle (oldest winery), Novelty Hill-Januik (artisan pizzas), DeLille Cellars (90-min winery tour), or Two Vintners (family-friendly with kids' play area). Washington is the 2nd largest US wine producer.",
+        "tip": "Use rideshare or book a guided tour from Seattle to avoid driving between the Hollywood and Warehouse districts.",
+        "latitude": 47.754583,
+        "longitude": -122.15889
+      },
+      {
+        "name": "Bellevue via 2 Line Light Rail",
+        "category": "City / Shopping / Family",
+        "address": "Bellevue, WA 98004",
+        "transitMinutes": 26,
+        "distanceMiles": 10,
+        "priceTier": "Free",
+        "requiresTransport": true,
+        "description": "Take the brand-new 2 Line across the floating bridge to the Eastside. Bellevue Square shopping, Bellevue Downtown Park, KidsQuest Children's Museum, and the Crossroads food court with 15+ international kiosks, jumbo chess, and a public library.",
+        "tip": "The 2 Line opened March 2026 — first light rail across a floating bridge in the world. No car needed!",
+        "latitude": 47.614422,
+        "longitude": -122.192337
+      }
+    ]
+  },
+  "shopping": [
+    {
+      "name": "Pacific Place",
+      "type": "Shopping Mall",
+      "address": "600 Pine St, Seattle, WA 98101",
+      "website": "https://www.pacificplaceseattle.com/",
+      "walkingMinutes": 3,
+      "distanceMiles": 0.15,
+      "description": "Upscale downtown mall with dining, cinema, and retail. Connected to the convention center area.",
+      "latitude": 47.612883,
+      "longitude": -122.335289
+    },
+    {
+      "name": "Westlake Center",
+      "type": "Shopping Center",
+      "address": "400 Pine St, Seattle, WA 98101",
+      "website": "https://www.westlakecenter.com/",
+      "walkingMinutes": 5,
+      "distanceMiles": 0.2,
+      "description": "Downtown shopping center and Monorail terminal. Retail shops and food options.",
+      "latitude": 47.611991,
+      "longitude": -122.337391
+    },
+    {
+      "name": "Pike Place Market Shops",
+      "type": "Artisan / Local",
+      "address": "85 Pike St, Seattle, WA 98101",
+      "walkingMinutes": 10,
+      "distanceMiles": 0.5,
+      "description": "Handcrafted jewelry, local art, specialty foods, flowers, and unique Seattle souvenirs from independent vendors.",
+      "latitude": 47.608754,
+      "longitude": -122.3402
+    },
+    {
+      "name": "University Village",
+      "type": "Open-Air Shopping",
+      "address": "2623 NE University Village St, Seattle, WA 98105",
+      "website": "https://uvillage.com/",
+      "drivingMinutes": 15,
+      "distanceMiles": 5.0,
+      "requiresTransport": true,
+      "description": "Upscale open-air shopping center with national brands, local boutiques, and excellent dining options.",
+      "latitude": 47.662674,
+      "longitude": -122.299114
+    },
+    {
+      "name": "Nordstrom Flagship",
+      "type": "Department Store",
+      "address": "500 Pine St, Seattle, WA 98101",
+      "website": "https://www.nordstrom.com/",
+      "walkingMinutes": 4,
+      "distanceMiles": 0.15,
+      "description": "Nordstrom's original flagship store — the company was founded in Seattle in 1901. Five stories of fashion, shoes, and cosmetics.",
+      "latitude": 47.611921,
+      "longitude": -122.336541
+    },
+    {
+      "name": "Elliott Bay Book Company",
+      "type": "Independent Bookstore",
+      "address": "1521 10th Ave, Seattle, WA 98122",
+      "website": "https://www.elliottbaybook.com/",
+      "walkingMinutes": 15,
+      "distanceMiles": 0.7,
+      "description": "Massive, multi-level independent bookstore — Capitol Hill's literary soul. A must-visit for book lovers.",
+      "latitude": 47.614666,
+      "longitude": -122.319677
+    },
+    {
+      "name": "Bellevue Square",
+      "type": "Shopping Mall",
+      "address": "575 Bellevue Square, Bellevue, WA 98004",
+      "transitMinutes": 30,
+      "distanceMiles": 10,
+      "requiresTransport": true,
+      "description": "Premium Eastside shopping via the new 2 Line light rail. High-end department stores adjacent to Bellevue Downtown Park.",
+      "latitude": 47.615655,
+      "longitude": -122.203677
+    }
+  ],
+  "entertainment": [
+    {
+      "name": "The Showbox",
+      "type": "Live Music",
+      "address": "1426 1st Ave, Seattle, WA 98101",
+      "website": "https://www.showboxpresents.com/",
+      "walkingMinutes": 8,
+      "distanceMiles": 0.4,
+      "description": "Legendary music venue since 1939. Past performers include Duke Ellington, Muddy Waters, and Pearl Jam.",
+      "latitude": 47.608514,
+      "longitude": -122.339473
+    },
+    {
+      "name": "The 5th Avenue Theatre",
+      "type": "Broadway / Theatre",
+      "address": "1308 5th Ave, Seattle, WA 98101",
+      "website": "https://www.5thavenue.org/",
+      "walkingMinutes": 4,
+      "distanceMiles": 0.2,
+      "description": "Historic theater featuring Broadway-quality musicals and plays in a stunning Imperial Chinese-inspired interior.",
+      "latitude": 47.609168,
+      "longitude": -122.333984
+    },
+    {
+      "name": "Dimitriou's Jazz Alley",
+      "type": "Jazz Club",
+      "address": "2033 6th Ave, Seattle, WA 98121",
+      "website": "https://www.jazzalley.com/",
+      "walkingMinutes": 10,
+      "distanceMiles": 0.5,
+      "description": "Premier jazz venue with dinner-and-show packages. World-class jazz, blues, and R&B performances.",
+      "latitude": 47.614581,
+      "longitude": -122.339152
+    },
+    {
+      "name": "Seattle Seahawks at Lumen Field",
+      "type": "NFL Football",
+      "address": "800 Occidental Ave S, Seattle, WA 98134",
+      "website": "https://www.seahawks.com/",
+      "walkingMinutes": 25,
+      "distanceMiles": 1.2,
+      "description": "NFL games during the conference dates — check the schedule! The stadium is a 25-minute walk or short rideshare from the convention center.",
+      "note": "Check schedule for November home games",
+      "latitude": 47.595346,
+      "longitude": -122.331644
+    },
+    {
+      "name": "Seattle Kraken at Climate Pledge Arena",
+      "type": "NHL Hockey",
+      "address": "334 1st Ave N, Seattle, WA 98109",
+      "website": "https://www.nhl.com/kraken/",
+      "walkingMinutes": 22,
+      "distanceMiles": 1.1,
+      "description": "Seattle's NHL team plays at the renovated Climate Pledge Arena at Seattle Center. Great atmosphere and close to the Space Needle.",
+      "note": "Check schedule for November home games",
+      "latitude": 47.621901,
+      "longitude": -122.35399
+    }
+  ],
+  "coffeeAndBars": [
+    {
+      "name": "Original Starbucks",
+      "type": "Coffee",
+      "address": "1912 Pike Pl, Seattle, WA 98101",
+      "walkingMinutes": 10,
+      "distanceMiles": 0.5,
+      "priceTier": "$",
+      "description": "The first Starbucks store, opened in 1971. Expect a line, but it's a must-visit Seattle experience.",
+      "latitude": 47.610008,
+      "longitude": -122.34258
+    },
+    {
+      "name": "Elm Coffee Roasters",
+      "type": "Coffee",
+      "address": "240 2nd Ave S, Seattle, WA 98104",
+      "walkingMinutes": 15,
+      "distanceMiles": 0.7,
+      "priceTier": "$",
+      "description": "Minimalist specialty coffee shop in Pioneer Square. Excellent pour-overs and espresso drinks.",
+      "latitude": 47.600162,
+      "longitude": -122.331341
+    },
+    {
+      "name": "Canon",
+      "type": "Cocktail Bar",
+      "address": "928 12th Ave, Seattle, WA 98122",
+      "website": "https://www.canonseattle.com/",
+      "walkingMinutes": 20,
+      "distanceMiles": 1.0,
+      "priceTier": "$$",
+      "description": "Award-winning cocktail bar on Capitol Hill with over 4,000 bottles of spirits. One of the best bars in America.",
+      "latitude": 47.611273,
+      "longitude": -122.316476
+    },
+    {
+      "name": "Bathtub Gin & Co.",
+      "type": "Speakeasy",
+      "address": "2205 2nd Ave, Seattle, WA 98121",
+      "website": "https://bathtubginseattle.com/",
+      "walkingMinutes": 12,
+      "distanceMiles": 0.6,
+      "priceTier": "$$",
+      "description": "Cozy speakeasy in Belltown with craft cocktails and a hidden underground vibe.",
+      "latitude": 47.613227,
+      "longitude": -122.344667
+    }
+  ],
+  "priceKey": {
+    "Free": "No charge",
+    "$": "Under $15",
+    "$$": "$15–$40",
+    "$$$": "Over $40"
+  },
+  "lifeSciencesHeritage": [
+    {
+      "name": "Fred Hutchinson Cancer Center",
+      "category": "Research / Cancer",
+      "neighborhood": "South Lake Union",
+      "address": "1100 Fairview Ave N, Seattle, WA 98109",
+      "website": "https://www.fredhutch.org/",
+      "distanceMiles": 1.5,
+      "description": "World-class biomedical research hub for cancer, molecular pathology, and infectious diseases. Following 2022 merger with Seattle Cancer Care Alliance, features state-of-the-art laboratories with sustainable design. Lab tours require months of advance booking.",
+      "relevance": "Relevant to medical professionals — molecular pathology research"
+    },
+    {
+      "name": "Allen Institute",
+      "category": "Research / Neuroscience",
+      "neighborhood": "South Lake Union",
+      "address": "615 Westlake Ave N, Seattle, WA 98109",
+      "website": "https://alleninstitute.org/",
+      "distanceMiles": 1.2,
+      "description": "Founded by Microsoft co-founder Paul G. Allen. Operates under 'open science' philosophy sharing free data and tools globally. Research in neuroscience, immunology, and cell biology."
+    },
+    {
+      "name": "UW Medicine SLU Research Hub",
+      "category": "Academic / Research",
+      "neighborhood": "South Lake Union",
+      "address": "South Lake Union, Seattle, WA 98109",
+      "website": "https://www.uwmedicine.org/",
+      "distanceMiles": 1.5,
+      "description": "University of Washington's research hub where scientists focus on molecular imaging, protein design, and translational medicine."
+    },
+    {
+      "name": "First Hill 'Pill Hill' Medical District",
+      "category": "Historic / Medical",
+      "neighborhood": "First Hill",
+      "address": "First Hill, Seattle, WA 98104",
+      "distanceMiles": 0.8,
+      "description": "Seattle's historic medical district known as 'Pill Hill.' Home to Swedish Medical Center (founded 1910). Walking tours available via HistoryLink showing the evolution from 1883 timber baron mansions to modern medical facilities."
+    },
+    {
+      "name": "South Lake Union Life Sciences Cluster",
+      "category": "Biotech Hub",
+      "neighborhood": "South Lake Union",
+      "distanceMiles": 1.2,
+      "description": "Greater Seattle supports 1,180+ life science companies generating $13.7 billion in gross regional product. The SLU neighborhood houses Amazon HQ alongside Fred Hutch, Allen Institute, and UW Medicine — making it one of the world's most formidable life science clusters."
+    }
+  ],
+  "familyActivities": [
+    {
+      "name": "Artists at Play Playground",
+      "category": "Playground",
+      "address": "Seattle Center, Seattle, WA 98109",
+      "walkingMinutes": 20,
+      "priceTier": "Free",
+      "ageRange": "All ages",
+      "indoor": false,
+      "description": "Expansive outdoor playground at Seattle Center with massive climbing structures, 30-foot climbing tower, tube slides, and interactive musical instruments.",
+      "latitude": 47.621255,
+      "longitude": -122.349741
+    },
+    {
+      "name": "Pacific Science Center",
+      "category": "Science Museum",
+      "address": "200 2nd Ave N, Seattle, WA 98109",
+      "website": "https://www.pacificsciencecenter.org/",
+      "walkingMinutes": 22,
+      "priceTier": "$$",
+      "ageRange": "All ages",
+      "indoor": true,
+      "description": "Tropical Butterfly House, Tinker Tank makerspace, live science stages, dinosaur exhibits. $32–35 adults, $26–28 children. 'Exploration for All' sensory-friendly sessions.",
+      "latitude": 47.619406,
+      "longitude": -122.350778
+    },
+    {
+      "name": "Seattle Children's Museum",
+      "category": "Children's Museum",
+      "address": "305 Harrison St, Seattle, WA 98109 (Armory)",
+      "website": "https://thechildrensmuseum.org/",
+      "walkingMinutes": 20,
+      "priceTier": "$",
+      "ageRange": "0–8 years",
+      "indoor": true,
+      "description": "Interactive play zones in the Seattle Center Armory. $16–18 admission, under 1 free. 'Museums for All' program ($5 reduced).",
+      "latitude": 47.621462,
+      "longitude": -122.350989
+    },
+    {
+      "name": "Woodland Park Zoo — Zoomazium",
+      "category": "Indoor Play / Zoo",
+      "address": "5500 Phinney Ave N, Seattle, WA 98103",
+      "website": "https://www.zoo.org/",
+      "drivingMinutes": 15,
+      "priceTier": "$$",
+      "ageRange": "0–8 years",
+      "indoor": true,
+      "requiresTransport": true,
+      "description": "Nature-themed indoor play space with mountain cave, rope bridge, and 20-foot climbing tree. Included with zoo admission.",
+      "latitude": 47.666312,
+      "longitude": -122.349302
+    },
+    {
+      "name": "PlayDate SEA",
+      "category": "Indoor Playground",
+      "address": "South Lake Union, Seattle, WA 98109",
+      "website": "https://www.playdatesea.com/",
+      "drivingMinutes": 10,
+      "priceTier": "$",
+      "ageRange": "0–10 years",
+      "indoor": true,
+      "description": "8,000 sq ft multi-level climbing structure with toddler zones. Attached café with pizza and espresso for parents.",
+      "latitude": 47.623161,
+      "longitude": -122.338382
+    },
+    {
+      "name": "KidsQuest Children's Museum",
+      "category": "Children's Museum",
+      "address": "1116 108th Ave NE, Bellevue, WA 98004",
+      "website": "https://www.kidsquestmuseum.org/",
+      "transitMinutes": 30,
+      "priceTier": "$",
+      "ageRange": "0–10 years",
+      "indoor": true,
+      "requiresTransport": true,
+      "description": "STEM-focused exhibits in Bellevue. Take the 2 Line + short walk from Bellevue Downtown Station. $5 parking.",
+      "latitude": 47.620866,
+      "longitude": -122.195904
+    }
+  ],
+  "seasonalEvents": [
+    {
+      "name": "WildLanterns at Woodland Park Zoo",
+      "category": "Light Festival",
+      "address": "5500 Phinney Ave N, Seattle, WA 98103",
+      "website": "https://www.zoo.org/wildlanterns",
+      "dates": "Opens mid-November through January 18",
+      "hours": "4:00 PM – 9:00 PM",
+      "priceTier": "$$",
+      "requiresTransport": true,
+      "description": "Spectacular evening festival with massive animal and nature-themed lantern displays illuminating the zoo pathways. $39.95 adults, $34.95 children.",
+      "tip": "Look for 'Night Owls' 21+ evenings — explore kid-free with holiday cocktails by fire pits and carousel rides."
+    },
+    {
+      "name": "Leavenworth Christmas Lighting Festival",
+      "category": "Holiday Festival",
+      "address": "Leavenworth, WA 98826",
+      "website": "https://leavenworth.org/",
+      "dates": "Weekends starting late November",
+      "drivingMinutes": 120,
+      "priceTier": "Free",
+      "requiresTransport": true,
+      "description": "Bavarian village transformed with millions of lights, German food, glühwein, and holiday markets. Lighting ceremony at dusk."
+    },
+    {
+      "name": "Seattle CityPASS",
+      "category": "Discount Pass",
+      "website": "https://www.citypass.com/seattle",
+      "priceTier": "$$",
+      "description": "Save up to 47% on combined admissions to Space Needle, Seattle Aquarium, and choice of MoPOP, Woodland Park Zoo, or Argosy Cruises."
+    }
+  ],
+  "localInsights": {
+    "lifeSciences": "Greater Seattle supports 1,180+ life science companies generating $13.7 billion GDP. The South Lake Union neighborhood houses Fred Hutch Cancer Center, Allen Institute, and UW Medicine alongside Amazon HQ.",
+    "coffeeCapital": "Seattle is the birthplace of Starbucks (1971) and the epicenter of America's specialty coffee culture. Don't miss the original Starbucks at Pike Place and the 15,000 sq ft Reserve Roastery.",
+    "grunge": "Seattle gave the world grunge music — Nirvana, Pearl Jam, Soundgarden, Alice in Chains. Visit MoPOP's music exhibits and the venue scene in Capitol Hill.",
+    "techHub": "Home to Amazon, Microsoft (Redmond), Boeing, and thousands of startups. The new 2 Line light rail connects Seattle to the Eastside tech corridor.",
+    "pikePlace": "Pike Place Market (1907) implemented a limited-access vehicle pilot for 2026 — pedestrian-only on Pike Place between 10 AM and 4 PM. Even more walkable than before!",
+    "safetyTip": "Downtown and tourist areas are generally safe during daylight. Standard urban awareness advised, especially around Pioneer Square at night."
+  }
+}

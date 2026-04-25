@@ -1,0 +1,935 @@
+#!/usr/bin/env python3
+"""
+Generate the Welcome to Seattle website.
+Reads data from seattle-data.json and produces index.html.
+"""
+import json, os
+
+DATA_PATH = r"D:\prj\amp2026\website\data\seattle-data.json"
+OUTPUT_PATH = r"D:\prj\amp2026\website\index.html"
+
+with open(DATA_PATH, "r", encoding="utf-8") as f:
+    data = json.load(f)
+
+def price_dots(tier):
+    if tier == "Free":
+        return '<span class="price-free">FREE</span>'
+    count = tier.count("$") if tier else 0
+    return '<span class="price-tier">' + ("$" * count) + '<span class="price-dim">' + ("$" * (3 - count)) + '</span></span>'
+
+def walk_badge(item):
+    wm = item.get("walkingMinutes")
+    dm = item.get("drivingMinutes")
+    fm = item.get("ferryMinutes")
+    tm = item.get("transitMinutes")
+    if wm == 0:
+        return '<span class="badge badge-gold">📍 On-Site</span>'
+    if wm is not None:
+        return f'<span class="badge badge-blue">🚶 {wm} min walk</span>'
+    if dm is not None:
+        return f'<span class="badge badge-navy">🚗 {dm} min drive</span>'
+    if fm is not None:
+        return f'<span class="badge badge-navy">⛴️ {fm} min ferry</span>'
+    if tm is not None:
+        return f'<span class="badge badge-blue">🚇 {tm} min transit</span>'
+    return ''
+
+def must_see_badge(item):
+    if item.get("mustSee"):
+        return '<span class="badge badge-gold">⭐ Must See</span>'
+    return ''
+
+def new_badge():
+    return '<span class="badge badge-new">NEW!</span>'
+
+def card_html(item, extra_badges="", show_cuisine=False, show_category=False):
+    name = item.get("name", "")
+    desc = item.get("description", "")
+    addr = item.get("address", "")
+    website = item.get("website", "")
+    tip = item.get("tip", "")
+    note = item.get("note", "")
+    cuisine = item.get("cuisine", "")
+    category = item.get("category", "")
+    pt = item.get("priceTier", "")
+    lat = item.get("latitude", "")
+    lng = item.get("longitude", "")
+    
+    data_attrs = f' data-lat="{lat}" data-lng="{lng}"' if lat and lng else ''
+    html = f'<div class="card"{data_attrs}>\n'
+    html += f'  <div class="card-header">\n'
+    html += f'    <h3 class="card-title">{name}</h3>\n'
+    html += f'    <div class="card-badges">{walk_badge(item)} {must_see_badge(item)} {extra_badges}'
+    if pt:
+        html += f' {price_dots(pt)}'
+    html += '</div>\n'
+    if show_cuisine and cuisine:
+        html += f'    <span class="cuisine-tag">{cuisine}</span>\n'
+    if show_category and category:
+        html += f'    <span class="category-tag">{category}</span>\n'
+    html += f'  </div>\n'
+    html += f'  <p class="card-desc">{desc}</p>\n'
+    if tip:
+        html += f'  <p class="card-tip">💡 {tip}</p>\n'
+    if note:
+        html += f'  <p class="card-note">📌 {note}</p>\n'
+    if addr:
+        html += f'  <p class="card-addr">📍 {addr}</p>\n'
+    if website:
+        html += f'  <a href="{website}" target="_blank" rel="noopener" class="card-link">Visit Website →</a>\n'
+    html += '</div>\n'
+    return html
+
+# Build transport cards
+def transport_card(t):
+    icons = {"Link Light Rail": "🚇", "Link 2 Line": "🚇", "King County Metro Bus": "🚌",
+             "Seattle Monorail": "🚝", "Rideshare (Uber/Lyft)": "🚗", "Taxis": "🚕",
+             "Lime Bikes & Scooters": "🚲", "Washington State Ferries": "⛴️",
+             "Water Taxi": "🚢", "Shuttle Express": "🚐"}
+    mode = t.get("mode", "")
+    icon = "🚏"
+    for k, v in icons.items():
+        if k.lower() in mode.lower():
+            icon = v
+            break
+    is_new = "2 Line" in mode
+    new_tag = ' <span class="badge badge-new">NEW!</span>' if is_new else ''
+    cost = t.get("cost", "")
+    desc = t.get("description", "")
+    dur = t.get("duration", "")
+    
+    html = f'<div class="transport-card{"  transport-highlight" if is_new else ""}">\n'
+    html += f'  <div class="transport-icon">{icon}</div>\n'
+    html += f'  <div class="transport-info">\n'
+    html += f'    <h4>{mode}{new_tag}</h4>\n'
+    if cost:
+        html += f'    <span class="transport-cost">{cost}</span>\n'
+    if dur:
+        html += f'    <span class="transport-dur">{dur}</span>\n'
+    html += f'    <p>{desc}</p>\n'
+    html += f'  </div>\n</div>\n'
+    return html
+
+# ─── Assemble the full HTML ───
+
+weather = data["weather"]
+venue = data["venue"]
+hotel = data["headquarterHotel"]
+event = data["event"]
+
+# Navigation items
+nav_items = [
+    ("home", "Home"), ("venue", "Venue"), ("transport", "Weather & Getting Around"),
+    ("dining", "Dining"), ("attractions", "Attractions"), ("daytrips", "Day Trips"),
+    ("lifesciences", "Life Sciences"), ("family", "Family"),
+    ("shopping", "Shopping"), ("entertainment", "Entertainment"),
+    ("coffee", "Coffee & Bars")
+]
+
+nav_links = "\n".join(f'<a href="#{nid}" class="nav-link">{label}</a>' for nid, label in nav_items)
+
+# Dining cards
+dining_cards = "\n".join(
+    card_html(d, show_cuisine=True, 
+              extra_badges=('<span class="badge badge-gold">📍 ON-SITE</span>' if d.get("walkingMinutes") == 0 else ''))
+    for d in sorted(data["dining"], key=lambda x: x.get("walkingMinutes") or x.get("drivingMinutes") or 99)
+)
+
+# Walkable attraction cards
+attraction_cards = "\n".join(
+    card_html(a, show_category=True)
+    for a in sorted(data["attractions"]["walkable"], key=lambda x: x.get("walkingMinutes") or 99)
+)
+
+# Day trip cards
+daytrip_cards = "\n".join(
+    card_html(d, show_category=True,
+              extra_badges=('<span class="badge badge-navy">🚗 Requires transport</span>' if d.get("requiresTransport") else ''))
+    for d in sorted(data["attractions"]["dayTrips"], key=lambda x: x.get("drivingMinutes") or x.get("ferryMinutes") or x.get("transitMinutes") or 99)
+)
+
+# Transport cards
+transport_cards = "\n".join(transport_card(t) for t in data["transportation"])
+
+# Shopping cards
+shopping_cards = "\n".join(card_html(s) for s in sorted(data["shopping"], key=lambda x: x.get("walkingMinutes") or x.get("drivingMinutes") or x.get("transitMinutes") or 99))
+
+# Entertainment cards
+entertainment_cards = "\n".join(card_html(e) for e in data["entertainment"])
+
+# Coffee cards
+coffee_cards = "\n".join(card_html(c) for c in sorted(data["coffeeAndBars"], key=lambda x: x.get("walkingMinutes") or 99))
+
+# Life sciences cards
+lifesci_cards = "\n".join(
+    f'''<div class="card card-lifesci">
+  <h3 class="card-title">{ls["name"]}</h3>
+  <span class="category-tag">{ls.get("category","")}</span>
+  {f'<span class="neighborhood-tag">📍 {ls["neighborhood"]}</span>' if ls.get("neighborhood") else ""}
+  <p class="card-desc">{ls["description"]}</p>
+  {f'<p class="card-note">🔬 {ls["relevance"]}</p>' if ls.get("relevance") else ""}
+  {f'<a href="{ls["website"]}" target="_blank" class="card-link">Learn More →</a>' if ls.get("website") else ""}
+</div>'''
+    for ls in data["lifeSciencesHeritage"]
+)
+
+# Family activity cards
+family_cards = "\n".join(
+    f'''<div class="card card-family">
+  <div class="card-header">
+    <h3 class="card-title">{fa["name"]}</h3>
+    <div class="card-badges">
+      {walk_badge(fa)} {price_dots(fa.get("priceTier",""))}
+      {'<span class="badge badge-indoor">🏠 Indoor</span>' if fa.get("indoor") else '<span class="badge badge-outdoor">🌳 Outdoor</span>'}
+      {f'<span class="badge badge-age">Ages: {fa["ageRange"]}</span>' if fa.get("ageRange") else ""}
+    </div>
+  </div>
+  <p class="card-desc">{fa["description"]}</p>
+  {f'<a href="{fa["website"]}" target="_blank" class="card-link">Plan Visit →</a>' if fa.get("website") else ""}
+</div>'''
+    for fa in data["familyActivities"]
+)
+
+# Seasonal events
+seasonal_cards = "\n".join(
+    f'''<div class="card card-seasonal">
+  <h3 class="card-title">🎄 {se["name"]}</h3>
+  <span class="category-tag">{se.get("category","")}</span>
+  {f'<span class="badge badge-blue">📅 {se["dates"]}</span>' if se.get("dates") else ""}
+  {price_dots(se.get("priceTier",""))}
+  <p class="card-desc">{se["description"]}</p>
+  {f'<p class="card-tip">💡 {se["tip"]}</p>' if se.get("tip") else ""}
+  {f'<a href="{se["website"]}" target="_blank" class="card-link">Details →</a>' if se.get("website") else ""}
+</div>'''
+    for se in data["seasonalEvents"]
+)
+
+# Local insights
+insights = data.get("localInsights", {})
+insight_boxes = "\n".join(
+    f'<div class="insight-box"><h4>{k.replace("lifeSciences","🧬 Life Sciences").replace("coffeeCapital","☕ Coffee Capital").replace("grunge","🎸 Grunge Heritage").replace("techHub","💻 Tech Hub").replace("pikePlace","🐟 Pike Place Market").replace("safetyTip","🛡️ Safety")}</h4><p>{v}</p></div>'
+    for k, v in insights.items()
+)
+
+# Price key
+price_key = data.get("priceKey", {})
+price_legend = " | ".join(f'<strong>{k}</strong> = {v}' for k, v in price_key.items())
+
+# ─── Map marker data as JSON for Leaflet ───
+import html as html_mod
+
+venue_lat = data["venue"]["latitude"]
+venue_lng = data["venue"]["longitude"]
+
+def markers_json(items):
+    markers = []
+    for i, item in enumerate(items):
+        if "latitude" in item and "longitude" in item:
+            markers.append({
+                "idx": i,
+                "name": item["name"],
+                "lat": item["latitude"],
+                "lng": item["longitude"],
+                "walk": item.get("walkingMinutes", ""),
+                "price": item.get("priceTier", ""),
+                "cuisine": item.get("cuisine", item.get("category", "")),
+            })
+    return json.dumps(markers)
+
+dining_sorted = sorted(data["dining"], key=lambda x: x.get("walkingMinutes") or x.get("drivingMinutes") or 99)
+attractions_sorted = sorted(data["attractions"]["walkable"], key=lambda x: x.get("walkingMinutes") or 99)
+
+dining_markers_json = markers_json(dining_sorted)
+attraction_markers_json = markers_json(attractions_sorted)
+
+daytrips_sorted = sorted(data["attractions"]["dayTrips"], key=lambda x: x.get("drivingMinutes") or x.get("ferryMinutes") or x.get("transitMinutes") or 99)
+daytrip_markers_json = markers_json(daytrips_sorted)
+family_markers_json = markers_json(data["familyActivities"])
+shopping_sorted = sorted(data["shopping"], key=lambda x: x.get("walkingMinutes") or x.get("drivingMinutes") or x.get("transitMinutes") or 99)
+shopping_markers_json = markers_json(shopping_sorted)
+entertainment_markers_json = markers_json(data["entertainment"])
+coffee_sorted = sorted(data["coffeeAndBars"], key=lambda x: x.get("walkingMinutes") or 99)
+coffee_markers_json = markers_json(coffee_sorted)
+
+# ─── HTML Template ───
+html = f'''<!DOCTYPE html>
+<!-- TEMPLATE: Welcome to [CITY] -->
+<!-- TEMPLATE: Replace seattle-data.json with new city data to regenerate -->
+<!-- Generated from seattle-data.json — all content is data-driven -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Welcome to Seattle — Seattle Guide 2026</title>
+<meta name="description" content="Your guide to Seattle, November 10-14, 2026. Dining, attractions, day trips, and local insights centered on the Seattle Convention Center.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+/* ─── CSS Variables (Design Language) ─── */
+:root {{
+  --navy: #1B2A4A;
+  --sky: #29B6F6;
+  --gold: #D4A017;
+  --teal: #00ACC1;
+  --charcoal: #333333;
+  --light-gray: #E8E8E8;
+  --white: #FFFFFF;
+  --rose: #B5294E;
+  --success: #4CAF50;
+  --gradient-hero: linear-gradient(135deg, #FF6B35 0%, #C23B72 30%, #7B2D8E 60%, #1B2A4A 100%);
+}}
+
+/* ─── Reset & Base ─── */
+*, *::before, *::after {{ box-sizing: border-box; margin: 0; padding: 0; }}
+html {{ scroll-behavior: smooth; scroll-padding-top: 70px; }}
+body {{ font-family: 'Roboto', Arial, sans-serif; color: var(--charcoal); line-height: 1.6; background: var(--white); }}
+a {{ color: var(--sky); text-decoration: none; transition: color 0.2s; }}
+a:hover {{ color: var(--teal); }}
+img {{ max-width: 100%; height: auto; }}
+
+/* ─── Navigation ─── */
+.navbar {{
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: var(--navy); padding: 0 2rem; height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}}
+.nav-brand {{
+  font-weight: 900; font-size: 1.4rem; color: var(--white); letter-spacing: 1px;
+}}
+.nav-brand span {{ color: var(--gold); }}
+.nav-links {{ display: flex; gap: 0.2rem; }}
+.nav-link {{
+  color: rgba(255,255,255,0.85); padding: 0.5rem 0.8rem; font-size: 0.82rem;
+  font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+  border-radius: 4px; transition: all 0.2s;
+}}
+.nav-link:hover {{ color: var(--white); background: rgba(255,255,255,0.1); }}
+.hamburger {{
+  display: none; background: none; border: none; color: var(--white);
+  font-size: 1.5rem; cursor: pointer;
+}}
+
+/* ─── Hero ─── */
+.hero {{
+  margin-top: 64px; min-height: 85vh; display: flex; align-items: center;
+  justify-content: center; text-align: center; position: relative; overflow: hidden;
+  background: var(--gradient-hero);
+}}
+.hero::before {{
+  content: ''; position: absolute; inset: 0;
+  background: url('https://images.unsplash.com/photo-1502175353174-a7a70e73b362?w=1920&q=80') center/cover;
+  opacity: 0.3;
+}}
+.hero-content {{
+  position: relative; z-index: 2; padding: 2rem; max-width: 900px;
+}}
+.hero h1 {{
+  font-size: 3.5rem; font-weight: 900; color: var(--white);
+  letter-spacing: 4px; text-transform: uppercase; margin-bottom: 0.5rem;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+}}
+.hero .subtitle {{
+  font-size: 1.3rem; color: rgba(255,255,255,0.9); margin-bottom: 2rem;
+  font-weight: 400;
+}}
+.hero-buttons {{ display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }}
+.btn {{
+  display: inline-block; padding: 0.9rem 2rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1px; font-size: 0.95rem;
+  border: none; cursor: pointer; transition: all 0.3s; border-radius: 3px;
+}}
+.btn-primary {{ background: var(--sky); color: var(--white); }}
+.btn-primary:hover {{ background: var(--teal); color: var(--white); }}
+.btn-outline {{ background: transparent; color: var(--white); border: 2px solid var(--white); }}
+.btn-outline:hover {{ background: var(--white); color: var(--navy); }}
+
+/* ─── Info Bar ─── */
+.info-bar {{
+  background: var(--navy); padding: 1rem 2rem; display: flex;
+  justify-content: center; flex-wrap: wrap; gap: 2rem;
+}}
+.info-item {{ color: rgba(255,255,255,0.9); font-size: 0.9rem; white-space: nowrap; }}
+.info-item strong {{ color: var(--gold); }}
+
+/* ─── Sections ─── */
+.section {{
+  padding: 4rem 2rem; max-width: 1300px; margin: 0 auto;
+}}
+.section-header {{
+  text-align: center; margin-bottom: 3rem;
+}}
+.section-header h2 {{
+  font-size: 2rem; font-weight: 900; text-transform: uppercase;
+  letter-spacing: 2px; color: var(--navy); margin-bottom: 0.5rem;
+}}
+.section-header .section-line {{
+  width: 60px; height: 4px; background: var(--gold); margin: 0.8rem auto;
+}}
+.section-header p {{ color: #666; font-size: 1.05rem; max-width: 700px; margin: 0 auto; }}
+
+.section-alt {{ background: #F8F9FA; }}
+.section-navy {{ background: var(--navy); }}
+.section-navy .section-header h2 {{ color: var(--white); }}
+.section-navy .section-header p {{ color: rgba(255,255,255,0.7); }}
+
+/* ─── Card Grid ─── */
+.card-grid {{
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 1.5rem;
+}}
+.card {{
+  background: var(--white); border-radius: 8px; padding: 1.5rem;
+  border: 1px solid #E0E0E0; transition: transform 0.2s, box-shadow 0.2s;
+  display: flex; flex-direction: column;
+}}
+.card:hover {{ transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }}
+.card-header {{ margin-bottom: 0.8rem; }}
+.card-title {{ font-size: 1.15rem; font-weight: 700; color: var(--navy); margin-bottom: 0.4rem; }}
+.card-badges {{ display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; }}
+.card-desc {{ font-size: 0.9rem; color: #555; flex: 1; margin-bottom: 0.6rem; }}
+.card-tip {{ font-size: 0.85rem; color: var(--teal); font-style: italic; margin-bottom: 0.4rem; }}
+.card-note {{ font-size: 0.85rem; color: var(--rose); margin-bottom: 0.4rem; }}
+.card-addr {{ font-size: 0.8rem; color: #888; margin-bottom: 0.5rem; }}
+.card-link {{
+  font-size: 0.85rem; font-weight: 700; color: var(--sky);
+  text-transform: uppercase; letter-spacing: 0.5px; margin-top: auto;
+}}
+
+/* ─── Badges ─── */
+.badge {{
+  display: inline-block; padding: 0.2rem 0.6rem; border-radius: 12px;
+  font-size: 0.75rem; font-weight: 700; white-space: nowrap;
+}}
+.badge-blue {{ background: #E3F2FD; color: #1565C0; }}
+.badge-navy {{ background: #E8EAF6; color: var(--navy); }}
+.badge-gold {{ background: #FFF8E1; color: #F57F17; }}
+.badge-new {{ background: var(--rose); color: white; animation: pulse 2s infinite; }}
+.badge-indoor {{ background: #E8F5E9; color: #2E7D32; }}
+.badge-outdoor {{ background: #FFF3E0; color: #E65100; }}
+.badge-age {{ background: #F3E5F5; color: #7B1FA2; }}
+@keyframes pulse {{ 0%,100% {{ opacity: 1; }} 50% {{ opacity: 0.7; }} }}
+
+.cuisine-tag {{
+  display: inline-block; background: var(--sky); color: white;
+  padding: 0.15rem 0.6rem; border-radius: 12px; font-size: 0.75rem; font-weight: 700;
+}}
+.category-tag {{
+  display: inline-block; background: var(--navy); color: white;
+  padding: 0.15rem 0.6rem; border-radius: 12px; font-size: 0.75rem; font-weight: 700;
+}}
+.neighborhood-tag {{
+  display: inline-block; background: #E8F5E9; color: #2E7D32;
+  padding: 0.15rem 0.6rem; border-radius: 12px; font-size: 0.75rem;
+}}
+
+.price-tier {{ font-weight: 700; color: var(--gold); font-size: 0.9rem; }}
+.price-dim {{ opacity: 0.25; }}
+.price-free {{ font-weight: 700; color: var(--success); font-size: 0.8rem; }}
+
+/* ─── Transport Grid ─── */
+.transport-grid {{
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem;
+}}
+.transport-card {{
+  display: flex; gap: 1rem; background: var(--white); border-radius: 8px;
+  padding: 1.2rem; border: 1px solid #E0E0E0; transition: all 0.2s;
+}}
+.transport-card:hover {{ box-shadow: 0 4px 15px rgba(0,0,0,0.08); }}
+.transport-highlight {{ border: 2px solid var(--rose); background: #FFF5F5; }}
+.transport-icon {{ font-size: 2rem; flex-shrink: 0; }}
+.transport-info h4 {{ font-size: 0.95rem; color: var(--navy); margin-bottom: 0.3rem; }}
+.transport-cost {{ display: inline-block; background: #E8F5E9; color: #2E7D32; padding: 0.1rem 0.5rem; border-radius: 8px; font-size: 0.8rem; font-weight: 700; margin-right: 0.5rem; }}
+.transport-dur {{ font-size: 0.8rem; color: #888; }}
+.transport-info p {{ font-size: 0.82rem; color: #666; margin-top: 0.3rem; }}
+
+/* ─── Venue Cards ─── */
+.venue-grid {{ display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1.5rem; }}
+.venue-card {{
+  background: var(--white); border-radius: 8px; overflow: hidden;
+  border: 1px solid #E0E0E0;
+}}
+.venue-card-header {{
+  background: var(--navy); padding: 1rem 1.5rem; color: var(--white);
+}}
+.venue-card-header h3 {{ font-weight: 700; font-size: 1.1rem; }}
+.venue-card-body {{ padding: 1.5rem; }}
+.venue-card-body p {{ font-size: 0.9rem; color: #555; margin-bottom: 0.5rem; }}
+.venue-card-body .venue-detail {{ display: flex; gap: 0.5rem; align-items: baseline; margin-bottom: 0.3rem; }}
+.venue-card-body .venue-label {{ font-weight: 700; color: var(--navy); font-size: 0.85rem; min-width: 80px; }}
+
+/* ─── Weather ─── */
+.weather-transport {{ display: grid; grid-template-columns: 1fr 2fr; gap: 2rem; }}
+.weather-card {{
+  background: linear-gradient(135deg, #1B2A4A, #2D4A7A); border-radius: 12px;
+  padding: 2rem; color: white; text-align: center;
+}}
+.weather-card .temp {{ font-size: 3rem; font-weight: 900; }}
+.weather-card .temp-small {{ font-size: 1rem; opacity: 0.8; }}
+.weather-details {{ display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-top: 1rem; }}
+.weather-detail {{ background: rgba(255,255,255,0.1); padding: 0.5rem; border-radius: 6px; font-size: 0.8rem; }}
+.weather-tip {{ background: rgba(212,160,23,0.2); border: 1px solid var(--gold); padding: 0.8rem; border-radius: 6px; margin-top: 1rem; font-size: 0.85rem; color: var(--gold); }}
+
+/* ─── Life Sciences ─── */
+.card-lifesci {{ border-left: 4px solid var(--gold); }}
+.card-family {{ border-left: 4px solid var(--teal); }}
+.card-seasonal {{ border-left: 4px solid var(--rose); }}
+
+/* ─── Insight Boxes ─── */
+.insight-grid {{ display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem; }}
+.insight-box {{
+  background: var(--white); border-radius: 8px; padding: 1.2rem;
+  border: 1px solid var(--gold); border-top: 3px solid var(--gold);
+}}
+.insight-box h4 {{ font-size: 0.95rem; color: var(--navy); margin-bottom: 0.4rem; }}
+.insight-box p {{ font-size: 0.85rem; color: #555; }}
+
+/* ─── Price Legend ─── */
+.price-legend {{
+  text-align: center; background: #F8F9FA; padding: 1.5rem;
+  border-radius: 8px; font-size: 0.9rem; color: #666;
+}}
+
+/* ─── Footer ─── */
+.footer {{
+  background: var(--navy); color: rgba(255,255,255,0.7); text-align: center;
+  padding: 3rem 2rem;
+}}
+.footer h3 {{ color: var(--white); font-size: 1.3rem; margin-bottom: 0.3rem; }}
+.footer h3 span {{ color: var(--gold); }}
+.footer p {{ font-size: 0.85rem; margin-bottom: 0.3rem; }}
+.footer a {{ color: var(--sky); }}
+
+/* ─── Back to Top ─── */
+.back-to-top {{
+  position: fixed; bottom: 2rem; right: 2rem; width: 48px; height: 48px;
+  background: var(--sky); color: white; border: none; border-radius: 50%;
+  font-size: 1.2rem; cursor: pointer; opacity: 0; transition: all 0.3s;
+  z-index: 999; box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}}
+.back-to-top.visible {{ opacity: 1; }}
+.back-to-top:hover {{ background: var(--teal); transform: scale(1.1); }}
+
+/* ─── Scroll Animations ─── */
+.fade-in {{ opacity: 0; transform: translateY(20px); transition: all 0.6s ease-out; }}
+.fade-in.visible {{ opacity: 1; transform: translateY(0); }}
+
+/* ─── Responsive ─── */
+@media (max-width: 900px) {{
+  .nav-links {{ display: none; position: absolute; top: 64px; left: 0; right: 0;
+    background: var(--navy); flex-direction: column; padding: 1rem; }}
+  .nav-links.active {{ display: flex; }}
+  .hamburger {{ display: block; }}
+  .hero h1 {{ font-size: 2.2rem; }}
+  .card-grid {{ grid-template-columns: 1fr; }}
+  .weather-transport {{ grid-template-columns: 1fr; }}
+  .venue-grid {{ grid-template-columns: 1fr; }}
+  .info-bar {{ flex-direction: column; gap: 0.5rem; align-items: center; }}
+}}
+@media (max-width: 600px) {{
+  .hero h1 {{ font-size: 1.7rem; letter-spacing: 2px; }}
+  .section {{ padding: 2rem 1rem; }}
+  .transport-grid {{ grid-template-columns: 1fr; }}
+}}
+
+/* ─── Maps ─── */
+.map-container {{
+  width: 100%; height: 420px; border-radius: 12px; overflow: hidden;
+  border: 2px solid var(--gold); margin-bottom: 2rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}}
+.map-section-layout {{
+  display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
+}}
+.map-section-layout .card-grid {{
+  max-height: 600px; overflow-y: auto; padding-right: 0.5rem;
+  grid-template-columns: 1fr;
+}}
+.map-section-layout .card-grid::-webkit-scrollbar {{ width: 6px; }}
+.map-section-layout .card-grid::-webkit-scrollbar-thumb {{ background: var(--gold); border-radius: 3px; }}
+.card.card-active {{ border: 2px solid var(--sky); box-shadow: 0 0 15px rgba(41,182,246,0.3); transform: translateY(-2px); }}
+.map-wide {{ width: 100%; height: 350px; border-radius: 12px; overflow: hidden; border: 2px solid var(--gold); margin-bottom: 2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }}
+@media (max-width: 900px) {{
+  .map-section-layout {{ grid-template-columns: 1fr; }}
+  .map-container {{ height: 300px; }}
+  .map-section-layout .card-grid {{ max-height: none; }}
+}}
+</style>
+</head>
+<body>
+
+<!-- ═══ NAVIGATION ═══ -->
+<nav class="navbar">
+  <div class="nav-brand">SEATTLE <span>GUIDE</span></div>
+  <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('active')" aria-label="Menu">☰</button>
+  <div class="nav-links">{nav_links}</div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<!-- TEMPLATE: Replace hero background with [CITY] skyline image -->
+<section class="hero" id="home">
+  <div class="hero-content">
+    <h1>Welcome to {event["city"]}</h1>
+    <p class="subtitle">{event["name"]} | {event["dates"]}</p>
+    <div class="hero-buttons">
+      <a href="#attractions" class="btn btn-primary">Explore Attractions</a>
+      <a href="#transport" class="btn btn-outline">Getting Around</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ INFO BAR ═══ -->
+<!-- TEMPLATE: Update venue, dates, weather for new city -->
+<div class="info-bar">
+  <span class="info-item">📍 <strong>{venue["name"]}</strong> (Arch + Summit)</span>
+  <span class="info-item">📅 <strong>{event["dates"]}</strong></span>
+  <span class="info-item">🌡️ <strong>{weather["highF"]}°F / {weather["lowF"]}°F</strong> ({weather["highC"]}°C / {weather["lowC"]}°C)</span>
+  <span class="info-item">🌅 Sunrise {weather["sunrise"]} / Sunset {weather["sunset"]}</span>
+  <span class="info-item">☔ <strong>Skip the umbrella</strong> — pack a hooded rain jacket!</span>
+</div>
+
+<!-- ═══ VENUE SECTION ═══ -->
+<section class="section" id="venue">
+  <div class="section-header">
+    <h2>Venue & Hotel</h2>
+    <div class="section-line"></div>
+    <p>The convention center campus spans two buildings with over 1 million square feet of event space</p>
+  </div>
+  <div class="venue-grid">
+    <div class="venue-card">
+      <div class="venue-card-header"><h3>🏛️ SCC Arch Building</h3></div>
+      <div class="venue-card-body">
+        <p>{venue.get("archBuilding", {}).get("description", "")}</p>
+        <div class="venue-detail"><span class="venue-label">Address:</span> {venue.get("archBuilding", {}).get("address", venue["address"])}</div>
+        <div class="venue-detail"><span class="venue-label">Space:</span> {venue.get("archBuilding", {}).get("sqft", 0):,} sq ft</div>
+      </div>
+    </div>
+    <div class="venue-card">
+      <div class="venue-card-header"><h3>🏢 SCC Summit Building</h3></div>
+      <div class="venue-card-body">
+        <p>{venue.get("summitBuilding", {}).get("description", "")}</p>
+        <div class="venue-detail"><span class="venue-label">Address:</span> {venue.get("summitBuilding", {}).get("address", "")}</div>
+        <div class="venue-detail"><span class="venue-label">Opened:</span> {venue.get("summitBuilding", {}).get("opened", "")}</div>
+      </div>
+    </div>
+    <div class="venue-card">
+      <div class="venue-card-header"><h3>🏨 {hotel["name"]} (HQ Hotel)</h3></div>
+      <div class="venue-card-body">
+        <div class="venue-detail"><span class="venue-label">Distance:</span> {hotel["distanceToVenue"]}</div>
+        <div class="venue-detail"><span class="venue-label">Rate:</span> {hotel["rate"]}</div>
+        <div class="venue-detail"><span class="venue-label">Amenities:</span> {", ".join(hotel["amenities"])}</div>
+        <a href="{hotel["website"]}" target="_blank" class="card-link">Book Hotel →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WEATHER & TRANSPORT ═══ -->
+<section class="section section-alt" id="transport">
+  <div class="section-header">
+    <h2>Weather & Getting Around</h2>
+    <div class="section-line"></div>
+    <!-- TEMPLATE: Update weather and transport for new city -->
+  </div>
+  <div class="weather-transport">
+    <div class="weather-card">
+      <div style="font-size:3rem;">🌧️</div>
+      <div class="temp">{weather["highF"]}°<span class="temp-small">/{weather["lowF"]}°F</span></div>
+      <p style="opacity:0.8;margin:0.5rem 0;">November in {event["city"]}</p>
+      <div class="weather-details">
+        <div class="weather-detail">🌧️ {weather.get("rainDays","")} rain days</div>
+        <div class="weather-detail">☀️ {weather.get("daylightHours","")} hrs daylight</div>
+        <div class="weather-detail">🌅 Rise {weather["sunrise"]}</div>
+        <div class="weather-detail">🌇 Set {weather["sunset"]}</div>
+        <div class="weather-detail">☁️ {weather.get("clearSkyProbability","")} clear</div>
+        <div class="weather-detail">🌧️ {weather.get("precipitation","")}</div>
+      </div>
+      <div class="weather-tip">💡 {weather.get("tip","")}</div>
+    </div>
+    <div>
+      <div class="transport-grid">
+        {transport_cards}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ DINING ═══ -->
+<section class="section" id="dining">
+  <div class="section-header">
+    <h2>Dining & Drinks</h2>
+    <div class="section-line"></div>
+    <p>{len(data["dining"])} curated restaurants sorted by distance from the convention center</p>
+  </div>
+  <div class="map-section-layout">
+    <div id="diningMap" class="map-container"></div>
+    <div class="card-grid" id="diningCards">
+      {dining_cards}
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WALKABLE ATTRACTIONS ═══ -->
+<section class="section section-alt" id="attractions">
+  <div class="section-header">
+    <h2>Walkable Attractions</h2>
+    <div class="section-line"></div>
+    <p>{len(data["attractions"]["walkable"])} attractions within walking distance of the convention center</p>
+  </div>
+  <div class="map-section-layout">
+    <div id="attractionsMap" class="map-container"></div>
+    <div class="card-grid" id="attractionsCards">
+      {attraction_cards}
+    </div>
+  </div>
+</section>
+
+<!-- ═══ DAY TRIPS ═══ -->
+<section class="section" id="daytrips">
+  <div class="section-header">
+    <h2>Day Trips & Beyond</h2>
+    <div class="section-line"></div>
+    <p>Venture beyond downtown — {len(data["attractions"]["dayTrips"])} destinations within 2 hours</p>
+  </div>
+  <div id="daytripsMap" class="map-wide"></div>
+  <div class="card-grid" id="daytripsCards">
+    {daytrip_cards}
+  </div>
+</section>
+
+<!-- ═══ LIFE SCIENCES HERITAGE ═══ -->
+<section class="section section-navy" id="lifesciences">
+  <div class="section-header">
+    <h2>🧬 Seattle's Life Sciences Legacy</h2>
+    <div class="section-line"></div>
+    <p>Relevant to YOU — Seattle is a global epicenter for molecular pathology, immunology, and precision medicine</p>
+  </div>
+  <div class="card-grid">
+    {lifesci_cards}
+  </div>
+</section>
+
+<!-- ═══ FAMILY ACTIVITIES ═══ -->
+<section class="section section-alt" id="family">
+  <div class="section-header">
+    <h2>👨‍👩‍👧‍👦 Family Activities</h2>
+    <div class="section-line"></div>
+    <p>Rainy-day-proof fun for families — indoor and outdoor options for all ages</p>
+  </div>
+  <div id="familyMap" class="map-wide"></div>
+  <div class="card-grid" id="familyCards">
+    {family_cards}
+  </div>
+</section>
+
+<!-- ═══ SEASONAL EVENTS ═══ -->
+<section class="section">
+  <div class="section-header">
+    <h2>🎄 Seasonal Events</h2>
+    <div class="section-line"></div>
+    <p>November in Seattle means the start of holiday magic</p>
+  </div>
+  <div class="card-grid">
+    {seasonal_cards}
+  </div>
+</section>
+
+<!-- ═══ SHOPPING ═══ -->
+<section class="section section-alt" id="shopping">
+  <div class="section-header">
+    <h2>🛍️ Shopping</h2>
+    <div class="section-line"></div>
+  </div>
+  <div id="shoppingMap" class="map-wide"></div>
+  <div class="card-grid" id="shoppingCards">
+    {shopping_cards}
+  </div>
+</section>
+
+<!-- ═══ ENTERTAINMENT ═══ -->
+<section class="section" id="entertainment">
+  <div class="section-header">
+    <h2>🎭 Entertainment & Nightlife</h2>
+    <div class="section-line"></div>
+  </div>
+  <div id="entertainmentMap" class="map-wide"></div>
+  <div class="card-grid" id="entertainmentCards">
+    {entertainment_cards}
+  </div>
+</section>
+
+<!-- ═══ COFFEE & BARS ═══ -->
+<section class="section section-alt" id="coffee">
+  <div class="section-header">
+    <h2>☕ Coffee & Bars</h2>
+    <div class="section-line"></div>
+    <p>Seattle is the birthplace of Starbucks and the epicenter of American specialty coffee culture</p>
+  </div>
+  <div id="coffeeMap" class="map-wide"></div>
+  <div class="card-grid" id="coffeeCards">
+    {coffee_cards}
+  </div>
+</section>
+
+<!-- ═══ LOCAL INSIGHTS ═══ -->
+<section class="section">
+  <div class="section-header">
+    <h2>💡 Local Insights</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="insight-grid">
+    {insight_boxes}
+  </div>
+</section>
+
+<!-- ═══ PRICE KEY ═══ -->
+<div class="section">
+  <div class="price-legend">
+    <strong>Price Key:</strong> {price_legend}
+  </div>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<!-- TEMPLATE: Update org info, year, and contact emails -->
+<footer class="footer">
+  <h3>SEATTLE <span>GUIDE</span></h3>
+  <p><strong>Welcome to Seattle</strong></p>
+  <p>{event["dates"]} — {event["city"]}, {event["state"]}</p>
+  <p style="margin-top:1rem;">
+    <a href="https://visitseattle.org" target="_blank">Visit Seattle</a> |
+    <a href="https://seattleconventioncenter.com" target="_blank">Convention Center</a>
+  </p>
+  <p style="margin-top:1rem;font-size:0.75rem;opacity:0.5;">Seattle Guide 2026 — Your curated city companion</p>
+</footer>
+
+<!-- ═══ BACK TO TOP ═══ -->
+<button class="back-to-top" onclick="window.scrollTo({{top:0,behavior:'smooth'}})" aria-label="Back to top">↑</button>
+
+<script>
+// Back-to-top visibility
+const btn = document.querySelector('.back-to-top');
+window.addEventListener('scroll', () => {{
+  btn.classList.toggle('visible', window.scrollY > 500);
+}});
+
+// Scroll animations
+const observer = new IntersectionObserver((entries) => {{
+  entries.forEach(e => {{ if(e.isIntersecting) e.target.classList.add('visible'); }});
+}}, {{ threshold: 0.1 }});
+document.querySelectorAll('.card, .venue-card, .transport-card, .insight-box').forEach(el => {{
+  el.classList.add('fade-in');
+  observer.observe(el);
+}});
+
+// ─── LEAFLET MAPS ───
+const VENUE = [{venue_lat}, {venue_lng}];
+const TILE_URL = 'https://{{s}}.basemaps.cartocdn.com/rastertiles/voyager/{{z}}/{{x}}/{{y}}@2x.png';
+const TILE_ATTR = '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>';
+
+function venueIcon() {{
+  return L.divIcon({{
+    className: 'venue-marker',
+    html: '<div style="background:#D4A017;color:#1B2A4A;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;border:3px solid #1B2A4A;box-shadow:0 2px 8px rgba(0,0,0,0.4);">SCC</div>',
+    iconSize: [36, 36],
+    iconAnchor: [18, 18],
+    popupAnchor: [0, -20]
+  }});
+}}
+
+function placeIcon(color, label) {{
+  return L.divIcon({{
+    className: 'place-marker',
+    html: '<div style="background:' + color + ';color:#fff;min-width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:11px;border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,0.3);padding:0 4px;">' + label + '</div>',
+    iconSize: [24, 24],
+    iconAnchor: [12, 12],
+    popupAnchor: [0, -14]
+  }});
+}}
+
+function initMap(mapId, cardsId, markersData, color) {{
+  const mapEl = document.getElementById(mapId);
+  if (!mapEl) return;
+
+  const map = L.map(mapId, {{ scrollWheelZoom: false }}).setView(VENUE, 14);
+  L.tileLayer(TILE_URL, {{ attribution: TILE_ATTR, maxZoom: 18 }}).addTo(map);
+
+  // Venue marker
+  L.marker(VENUE, {{ icon: venueIcon(), zIndexOffset: 1000 }})
+    .addTo(map)
+    .bindPopup('<strong>Seattle Convention Center</strong><br>Arch + Summit Buildings');
+
+  const cards = document.querySelectorAll('#' + cardsId + ' .card');
+  const markers = [];
+
+  markersData.forEach((m, i) => {{
+    const marker = L.marker([m.lat, m.lng], {{ icon: placeIcon(color, (i+1).toString()) }})
+      .addTo(map)
+      .bindPopup('<strong>' + m.name + '</strong>' +
+        (m.walk ? '<br>🚶 ' + m.walk + ' min walk' : '') +
+        (m.price ? '<br>' + m.price : '') +
+        (m.cuisine ? '<br><em>' + m.cuisine + '</em>' : ''));
+
+    markers.push(marker);
+
+    // Click marker → highlight card
+    marker.on('click', () => {{
+      cards.forEach(c => c.classList.remove('card-active'));
+      if (cards[m.idx]) {{
+        cards[m.idx].classList.add('card-active');
+        cards[m.idx].scrollIntoView({{ behavior: 'smooth', block: 'nearest' }});
+      }}
+    }});
+  }});
+
+  // Click card → highlight marker + open popup
+  cards.forEach((card, i) => {{
+    card.addEventListener('click', (e) => {{
+      if (e.target.closest('a')) return; // don't hijack link clicks
+      cards.forEach(c => c.classList.remove('card-active'));
+      card.classList.add('card-active');
+      if (markers[i]) {{
+        map.setView([markersData[i].lat, markersData[i].lng], 16, {{ animate: true }});
+        markers[i].openPopup();
+      }}
+    }});
+    card.style.cursor = 'pointer';
+  }});
+
+  // Fit bounds to show all markers
+  const allLatLngs = [VENUE, ...markersData.map(m => [m.lat, m.lng])];
+  map.fitBounds(allLatLngs, {{ padding: [30, 30] }});
+
+  // Fix map rendering when section scrolls into view
+  new IntersectionObserver((entries) => {{
+    if (entries[0].isIntersecting) map.invalidateSize();
+  }}).observe(mapEl);
+}}
+
+// Initialize all maps
+const diningMarkers = {dining_markers_json};
+const attractionMarkers = {attraction_markers_json};
+const daytripsMarkers = {daytrip_markers_json};
+const familyMarkers = {family_markers_json};
+const shoppingMarkers = {shopping_markers_json};
+const entertainmentMarkers = {entertainment_markers_json};
+const coffeeMarkers = {coffee_markers_json};
+
+initMap('attractionsMap', 'attractionsCards', attractionMarkers, '#29B6F6');
+initMap('diningMap', 'diningCards', diningMarkers, '#B5294E');
+initMap('daytripsMap', 'daytripsCards', daytripsMarkers, '#4CAF50');
+initMap('familyMap', 'familyCards', familyMarkers, '#7B1FA2');
+initMap('shoppingMap', 'shoppingCards', shoppingMarkers, '#FF6F00');
+initMap('entertainmentMap', 'entertainmentCards', entertainmentMarkers, '#E91E63');
+initMap('coffeeMap', 'coffeeCards', coffeeMarkers, '#795548');
+</script>
+</body>
+</html>
+'''
+
+with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
+    f.write(html)
+
+print(f"✅ Website generated: {{len(html):,}} characters → {{OUTPUT_PATH}}")
