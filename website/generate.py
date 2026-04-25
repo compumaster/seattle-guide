@@ -11,6 +11,14 @@ OUTPUT_PATH = r"D:\prj\seattle-guide\docs\index.html"
 with open(DATA_PATH, "r", encoding="utf-8") as f:
     data = json.load(f)
 
+def sort_key_dist(x):
+    """Sort by best available time: walk > drive > ferry > transit, None last."""
+    for k in ("walkingMinutes", "drivingMinutes", "ferryMinutes", "transitMinutes"):
+        v = x.get(k)
+        if v is not None:
+            return v
+    return 9999
+
 def price_dots(tier):
     if tier == "Free":
         return '<span class="price-free">FREE</span>'
@@ -134,33 +142,33 @@ nav_links = "\n".join(f'<a href="#{nid}" class="nav-link">{label}</a>' for nid, 
 dining_cards = "\n".join(
     card_html(d, show_cuisine=True, 
               extra_badges=('<span class="badge badge-gold">📍 ON-SITE</span>' if d.get("walkingMinutes") == 0 else ''))
-    for d in sorted(data["dining"], key=lambda x: x.get("walkingMinutes") or x.get("drivingMinutes") or 99)
+    for d in sorted(data["dining"], key=sort_key_dist)
 )
 
 # Walkable attraction cards
 attraction_cards = "\n".join(
     card_html(a, show_category=True)
-    for a in sorted(data["attractions"]["walkable"], key=lambda x: x.get("walkingMinutes") or 99)
+    for a in sorted(data["attractions"]["walkable"], key=sort_key_dist)
 )
 
 # Day trip cards
 daytrip_cards = "\n".join(
     card_html(d, show_category=True,
               extra_badges=('<span class="badge badge-navy">🚗 Requires transport</span>' if d.get("requiresTransport") else ''))
-    for d in sorted(data["attractions"]["dayTrips"], key=lambda x: x.get("drivingMinutes") or x.get("ferryMinutes") or x.get("transitMinutes") or 99)
+    for d in sorted(data["attractions"]["dayTrips"], key=sort_key_dist)
 )
 
 # Transport cards
 transport_cards = "\n".join(transport_card(t) for t in data["transportation"])
 
 # Shopping cards
-shopping_cards = "\n".join(card_html(s) for s in sorted(data["shopping"], key=lambda x: x.get("walkingMinutes") or x.get("drivingMinutes") or x.get("transitMinutes") or 99))
+shopping_cards = "\n".join(card_html(s) for s in sorted(data["shopping"], key=sort_key_dist))
 
 # Entertainment cards
-entertainment_cards = "\n".join(card_html(e) for e in sorted(data["entertainment"], key=lambda x: x.get("walkingMinutes") or x.get("drivingMinutes") or 99))
+entertainment_cards = "\n".join(card_html(e) for e in sorted(data["entertainment"], key=sort_key_dist))
 
 # Coffee cards
-coffee_cards = "\n".join(card_html(c) for c in sorted(data["coffeeAndBars"], key=lambda x: x.get("walkingMinutes") or 99))
+coffee_cards = "\n".join(card_html(c) for c in sorted(data["coffeeAndBars"], key=sort_key_dist))
 
 # Life sciences cards
 lifesci_cards = "\n".join(
@@ -189,7 +197,7 @@ family_cards = "\n".join(
   <p class="card-desc">{fa["description"]}</p>
   {f'<a href="{fa["website"]}" target="_blank" class="card-link">Plan Visit →</a>' if fa.get("website") else ""}
 </div>'''
-    for fa in sorted(data["familyActivities"], key=lambda x: x.get("walkingMinutes") or x.get("drivingMinutes") or x.get("transitMinutes") or 99)
+    for fa in sorted(data["familyActivities"], key=sort_key_dist)
 )
 
 # Seasonal events
@@ -238,19 +246,19 @@ def markers_json(items):
             })
     return json.dumps(markers)
 
-dining_sorted = sorted(data["dining"], key=lambda x: x.get("walkingMinutes") or x.get("drivingMinutes") or 99)
-attractions_sorted = sorted(data["attractions"]["walkable"], key=lambda x: x.get("walkingMinutes") or 99)
+dining_sorted = sorted(data["dining"], key=sort_key_dist)
+attractions_sorted = sorted(data["attractions"]["walkable"], key=sort_key_dist)
 
 dining_markers_json = markers_json(dining_sorted)
 attraction_markers_json = markers_json(attractions_sorted)
 
-daytrips_sorted = sorted(data["attractions"]["dayTrips"], key=lambda x: x.get("drivingMinutes") or x.get("ferryMinutes") or x.get("transitMinutes") or 99)
+daytrips_sorted = sorted(data["attractions"]["dayTrips"], key=sort_key_dist)
 daytrip_markers_json = markers_json(daytrips_sorted)
 family_markers_json = markers_json(data["familyActivities"])
-shopping_sorted = sorted(data["shopping"], key=lambda x: x.get("walkingMinutes") or x.get("drivingMinutes") or x.get("transitMinutes") or 99)
+shopping_sorted = sorted(data["shopping"], key=sort_key_dist)
 shopping_markers_json = markers_json(shopping_sorted)
 entertainment_markers_json = markers_json(data["entertainment"])
-coffee_sorted = sorted(data["coffeeAndBars"], key=lambda x: x.get("walkingMinutes") or 99)
+coffee_sorted = sorted(data["coffeeAndBars"], key=sort_key_dist)
 coffee_markers_json = markers_json(coffee_sorted)
 
 # ─── Build location index ───
