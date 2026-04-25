@@ -290,17 +290,21 @@ geo_images = {
     "Elliott Bay": "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=600&q=80",
 }
 
-geo_cards = "\n".join(
-    f'''<div class="card geo-card" style="border-left:4px solid var(--teal);overflow:hidden;">
-  {'<div class="geo-img" style="height:180px;overflow:hidden;margin:-1.5rem -1.5rem 1rem -1.5rem;"><img src=&quot;' + geo_images.get(g["name"], "") + '&quot; alt=&quot;' + g["name"] + '&quot; style=&quot;width:100%;height:100%;object-fit:cover;&quot; loading=&quot;lazy&quot;></div>' if g["name"] in geo_images else ''}
+def geo_card(g):
+    img_url = geo_images.get(g["name"], "")
+    img_html = ""
+    if img_url:
+        img_html = f'<div style="height:180px;overflow:hidden;margin:-1.5rem -1.5rem 1rem -1.5rem;"><img src="{img_url}" alt="{g["name"]}" style="width:100%;height:100%;object-fit:cover;" loading="lazy"></div>'
+    return f'''<div class="card" style="border-left:4px solid var(--teal);overflow:hidden;">
+  {img_html}
   <div class="card-header">
     <h3 class="card-title">{g["name"]}</h3>
     <span class="category-tag">{g["type"]}</span>
   </div>
   <p class="card-desc">{g["description"]}</p>
 </div>'''
-    for g in data.get("geography", [])
-)
+
+geo_cards = "\n".join(geo_card(g) for g in data.get("geography", []))
 
 # Photo spots
 photo_cards = "\n".join(
