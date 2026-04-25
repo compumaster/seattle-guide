@@ -540,7 +540,7 @@ img {{ max-width: 100%; height: auto; }}
 .nav-link:hover {{ color: var(--white); background: rgba(255,255,255,0.1); }}
 .hamburger {{
   display: block; background: none; border: none;
-  color: var(--gold); padding: 0.4rem 0.5rem;
+  color: var(--gold); padding: 0.2rem 0.3rem;
   font-size: 0.85rem; font-weight: 700; cursor: pointer; letter-spacing: 1px;
   font-family: 'Roboto', sans-serif; text-transform: uppercase;
 }}
@@ -893,7 +893,7 @@ img {{ max-width: 100%; height: auto; }}
 .card {{ position: relative; }}
 .fav-nav-btn {{
   background: none; border: none;
-  color: var(--gold); padding: 0.4rem 0.5rem;
+  color: var(--gold); padding: 0.2rem 0.3rem;
   font-size: 0.85rem; font-weight: 700; cursor: pointer;
   font-family: 'Roboto', sans-serif; letter-spacing: 1px; text-transform: uppercase;
 }}
@@ -964,7 +964,7 @@ img {{ max-width: 100%; height: auto; }}
 <!-- ═══ NAVIGATION ═══ -->
 <nav class="navbar">
   <div class="nav-brand">SEATTLE <span>GUIDE</span></div>
-  <div style="display:flex;gap:0.3rem;align-items:center;flex-shrink:1;min-width:0;">
+  <div style="display:flex;gap:0.1rem;align-items:center;flex-shrink:1;min-width:0;">
     <button class="fav-nav-btn" onclick="toggleFavPanel()" aria-label="Favorites">❤️ <span id="favCount">0</span></button>
     <button class="hamburger" onclick="openLunchPicker()">🎰 LUNCH</button>
     <button class="hamburger" onclick="openTrivia()">🎯 TRIVIA</button>
