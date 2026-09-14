@@ -408,17 +408,6 @@
       "description": "A Seattle institution since 1982 in the International District / Little Saigon. Widely considered the city's best pho. Simple, authentic, no-frills — just outstanding Vietnamese soup. Open 10 AM–9 PM daily.",
       "latitude": 47.599479,
       "longitude": -122.315383
-    },
-    {
-      "name": "Mamnoon Street",
-      "cuisine": "Levantine / Middle Eastern",
-      "address": "1526 6th Ave, Seattle, WA 98101",
-      "walkingMinutes": 6,
-      "distanceMiles": 0.3,
-      "priceTier": "$$",
-      "description": "Modern Syrian and Lebanese street food in a quick-casual format downtown. Vibrant spices, fresh flatbreads, shawarma, and falafel. From the team behind the acclaimed Mamnoon restaurant (Capitol Hill location closed 2025, but this downtown spot carries the torch).",
-      "latitude": 47.611484,
-      "longitude": -122.334637
     }
   ],
   "attractions": {
